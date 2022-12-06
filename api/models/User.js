@@ -72,6 +72,12 @@ const UserSchema = new mongoose.Schema(
                 review_id: mongoose.Types.ObjectId,
             },
         ],
+
+        // "Flag" para el borrado lógico
+        deleted: {
+            type: Boolean,
+            default: false,
+        },
     },
     { timestamps: true }
 )
