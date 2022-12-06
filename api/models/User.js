@@ -2,6 +2,13 @@ const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema(
     {
+        // Id del usuario
+        id: {
+            type: UUID,
+            required: true,
+            unique: true,
+        },
+
         // Nombre de usuario (nick)
         username: {
             type: String,
@@ -51,6 +58,20 @@ const UserSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+
+        // Pedidos del usuario
+        orders_ids: [
+            {
+                order_id: mongoose.Types.ObjectId,
+            },
+        ],
+
+        // Valoraciones del usuario
+        reviews_ids: [
+            {
+                review_id: mongoose.Types.ObjectId,
+            },
+        ],
     },
     { timestamps: true }
 )
