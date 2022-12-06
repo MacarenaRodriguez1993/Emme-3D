@@ -42,6 +42,13 @@ const ProductSchema = new mongoose.Schema(
             },
         ],
 
+        // Reseñas del producto
+        reviews: [
+            {
+                review_id: mongoose.Types.ObjectId,
+            },
+        ],
+
         // URL de la imagen del producto
         img: {
             type: String,
