@@ -2,7 +2,14 @@ const mongoose = require("mongoose")
 
 const ProductSchema = new mongoose.Schema(
     {
-        // Nombre de la categoria
+        // Id del producto
+        id: {
+            type: UUID,
+            required: true,
+            unique: true,
+        },
+
+        // Nombre del producto
         name: {
             type: String,
             required: true,
@@ -27,6 +34,13 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+
+        // Categoria del producto
+        category: [
+            {
+                category_id: mongoose.Types.ObjectId,
+            },
+        ],
 
         // URL de la imagen del producto
         img: {
