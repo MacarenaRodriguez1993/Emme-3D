@@ -1,5 +1,9 @@
-/node_modules
+# Desarrollo #
 node_modules/
 package-lock.json
+
+# Producción #
 /build
+
+# Secretos #
 .env
