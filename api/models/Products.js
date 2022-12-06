@@ -54,6 +54,12 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+
+        // "Flag" para el borrado lógico
+        deleted: {
+            type: Boolean,
+            default: false,
+        },
     },
     { timestamps: true }
 )
