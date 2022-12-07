@@ -1,0 +1,14 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ffe3e3;
+    color: #262a53;
+
+    align-items: center;
+}
+p {
+    margin: 0.5em;
+}
+.redes {
+    margin: 2em;
+}
