@@ -33,12 +33,10 @@ const ProductSchema = new mongoose.Schema(
         },
 
         // Categoria del producto
-        categories_ids: [
-            {
-                category_id: mongoose.Types.ObjectId,
-                required: true,
-            },
-        ],
+        categories_ids: {
+            type: [mongoose.Types.ObjectId],
+            required: true,
+        },
 
         // Reseñas del producto
         reviews_ids: [
@@ -52,7 +50,7 @@ const ProductSchema = new mongoose.Schema(
             {
                 type: String,
                 required: true,
-                validate: (a = Array.isArray(a) && a.length > 0),
+                minItems: 1,
             },
         ],
 
