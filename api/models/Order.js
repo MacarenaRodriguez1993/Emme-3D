@@ -1,6 +1,11 @@
 const { UUID } = require("bson")
 const mongoose = require("mongoose")
 
+/*
+ * Una Order es cualquier pedido hecho por un usuario.
+ * Contiene una lista de detalles de pedido, un usuario y un estado.
+ */
+
 const OrderSchema = new mongoose.Schema(
     {
         // Id de la categoria

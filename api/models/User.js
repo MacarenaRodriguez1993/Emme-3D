@@ -1,5 +1,11 @@
 const mongoose = require("mongoose")
 
+/*
+ * Un User es cualquier usuario de la web.
+ * Pueden ser tanto clientes (en su mayoría) como administradores.
+ * Contiene varios pedidos y valoraciones
+ */
+
 const UserSchema = new mongoose.Schema(
     {
         // Id del usuario

@@ -1,5 +1,10 @@
 const mongoose = require("mongoose")
 
+/*
+ * Un Producto es cualquier cosa que se pueda vender en la tienda (y no sea un servicio).
+ * Puede contener varias categorías y valoraciones.
+ */
+
 const ProductSchema = new mongoose.Schema(
     {
         // Id del producto

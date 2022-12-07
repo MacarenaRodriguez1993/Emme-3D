@@ -1,5 +1,11 @@
 const { UUID } = require("bson")
 const mongoose = require("mongoose")
+
+/*
+ * Unos DetallesDeOrden es la información sobre un producto que se va a comprar (Que producto, cuántas unidades, etc).
+ * Contiene el producto y la orden a los que pertenece.
+ */
+
 const OrderDetailsSchema = new mongoose.Schema(
     {
         // Id de la orden
