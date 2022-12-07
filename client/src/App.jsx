@@ -1,15 +1,19 @@
 import React from "react"
-import { Route } from "react-router-dom"
-import Home from "./pages/Home/home"
 import "./App.css"
+import CrearProducto from "./components/CrearProducto"
+import { Route, Routes } from "react-router-dom"
+import Home from "./pages/Home/home"
 import Products from "./pages/Productos/products"
 
-const App = () => {
+function App() {
     return (
-        <div className="App">
-            <Route exact strict path="/" component={Home} />
-            <Route exact strict path="/products" component={Products} />
-        </div>
+        <>
+            <Routes>
+                <Route path="/crear-producto" element={<CrearProducto />} />
+                <Route exact strict path="/" element={<Home/>}/>
+                <Route exact strict path="/productos" element={<Products/>}/>
+            </Routes>
+        </>
     )
 }
 
