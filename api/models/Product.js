@@ -55,10 +55,13 @@ const ProductSchema = new mongoose.Schema(
         ],
 
         // URL de la imagen del producto
-        img: {
-            type: String,
-            required: true,
-        },
+        img: [
+            {
+                type: String,
+                required: true,
+                validate: (a = Array.isArray(a) && a.length > 0),
+            },
+        ],
 
         // "Flag" para el borrado lógico
         deleted: {
