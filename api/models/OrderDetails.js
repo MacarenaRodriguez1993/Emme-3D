@@ -16,7 +16,7 @@ const OrderDetailsSchema = new mongoose.Schema(
         },
 
         // Id del producto que se compra
-        id_producto: {
+        product_id: {
             type: mongoose.Types.ObjectId,
             required: true,
             unique: true,
@@ -35,7 +35,7 @@ const OrderDetailsSchema = new mongoose.Schema(
         },
 
         // Id de la orden a la que pertenece
-        id_order: {
+        order_id: {
             type: mongoose.Types.ObjectId,
             required: true,
         },

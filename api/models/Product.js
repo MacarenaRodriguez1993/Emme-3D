@@ -40,14 +40,15 @@ const ProductSchema = new mongoose.Schema(
         },
 
         // Categoria del producto
-        categories: [
+        categories_ids: [
             {
                 category_id: mongoose.Types.ObjectId,
+                required: true,
             },
         ],
 
         // Reseñas del producto
-        reviews: [
+        reviews_ids: [
             {
                 review_id: mongoose.Types.ObjectId,
             },
