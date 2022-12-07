@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar/NavBar"
 import Footer from "../components/Footer/Footer"
 
 import "./home.css"
-function Home() {
+const Home = () {
     return (
         <div className="home">
             <NavBar />
