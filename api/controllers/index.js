@@ -1,20 +1,11 @@
 const mongoose = require("mongoose")
 
-
-const listProducts = async ()=>{
-    const model = await  Product.find(
-        Product.ProductSchema
-    )
-    
+const listProducts = async () => {
+    const model = await Product.find(Product.ProductSchema)
 }
-const apidbid = ()=>{
-
-}
-
-
-
+const producdetails = (id) => {}
 
 module.exports = {
-    apidbid,
-    apidbinfo
+    producdetails,
+    listProducts,
 }
