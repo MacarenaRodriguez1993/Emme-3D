@@ -1,4 +1,3 @@
-const { UUID } = require("bson")
 const mongoose = require("mongoose")
 
 /*
@@ -8,13 +7,6 @@ const mongoose = require("mongoose")
 
 const ReviewSchema = new mongoose.Schema(
     {
-        // Id de la categoria
-        id: {
-            type: UUID,
-            required: true,
-            unique: true,
-        },
-
         // Id del producto que se valora
         product_id: {
             type: mongoose.Types.ObjectId,

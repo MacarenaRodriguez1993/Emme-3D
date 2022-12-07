@@ -1,4 +1,3 @@
-const { UUID } = require("bson")
 const mongoose = require("mongoose")
 
 /*
@@ -9,13 +8,6 @@ const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema(
     {
-        // Id del usuario
-        id: {
-            type: UUID,
-            required: true,
-            unique: true,
-        },
-
         // Nombre de usuario (nick)
         username: {
             type: String,

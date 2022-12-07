@@ -8,13 +8,6 @@ const mongoose = require("mongoose")
 
 const OrderSchema = new mongoose.Schema(
     {
-        // Id de la categoria
-        id: {
-            type: UUID,
-            required: true,
-            unique: true,
-        },
-
         // Detetalles de la orden
         order_details_id: {
             type: mongoose.Types.ObjectId,
