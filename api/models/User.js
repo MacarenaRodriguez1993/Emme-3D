@@ -53,12 +53,6 @@ const UserSchema = new mongoose.Schema(
             required: true,
         },
 
-        // País del usuario
-        country: {
-            type: String,
-            required: true,
-        },
-
         // Número de teléfono
         phone: {
             type: String,
