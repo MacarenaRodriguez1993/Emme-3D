@@ -1,17 +1,15 @@
+import "./App.css"
+import CrearProducto from "./components/CrearProducto"
+import { Route, Routes } from "react-router-dom"
 
-import React from 'react';
-import { Route } from "react-router-dom";
-import Home from './pages/home'
-import './App.css'
-
-const App = ()=> {
-
-  return (
-    <div className="App">
-      <Route path='/' component={Home} />
-    </div>
-  )
-  
+function App() {
+    return (
+        <>
+            <Routes>
+                <Route path="/crear-producto" element={<CrearProducto />} />
+            </Routes>
+        </>
+    )
 }
 
 export default App
