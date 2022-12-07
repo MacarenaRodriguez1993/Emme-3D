@@ -1,7 +1,12 @@
 import { Formik, Form, Field } from "formik"
 import { useState } from "react"
-
+import "./CrearProducto.css"
 const CrearProducto = () => {
+    // const [images, setImages] = useState([])
+    // const [imageToRemove, setImageToRemove] = useState(null)
+
+    /* Reescribir completamente este componenete y no usar formik */
+
     const [created, setCreated] = useState(false)
     //este arreglo hace de db por ahora
     let productos = []
@@ -10,26 +15,48 @@ const CrearProducto = () => {
     const categoriasArray = [
         {
             id: 1,
-            name: "mates",
+            name: "Mates",
         },
         {
             id: 2,
-            name: "lamparas",
+            name: "Lamparas",
         },
         {
             id: 3,
-            name: "vasos",
+            name: "Vasos",
         },
     ]
 
+    /* const handleOpenWidget = () => {
+        var myWidget = window.cloudinary.createUploadWidget(
+            {
+                cloudName: "emme3d",
+                uploadPreset: "igsag6pi",
+            },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log("Done! Here is the image info: ", result.info)
+                    setImages((prev) => [
+                        ...prev,
+                        {
+                            url: result.info.url,
+                            public_id: result.info.public_id,
+                        },
+                    ])
+                }
+            }
+        )
+        myWidget.open()
+    } */
+
     return (
-        <>
+        <div className="create-product-container">
             <Formik
                 initialValues={{
                     name: "",
-                    price: 0,
+                    price: "",
                     categorias: [],
-                    stock: 0,
+                    stock: "",
                     description: "",
                     img: "",
                 }}
@@ -42,11 +69,11 @@ const CrearProducto = () => {
                     //validaciones de precio
                     if (!data.price) {
                         errors.precio = "El producto debe tener un precio"
-                    } else if (data.price < 1) {
+                    } /*  else if (data.price < 1) {
                         errors.precio = "El precio debe ser mayor a 1"
                     } else if (typeof data.price !== "number") {
                         errors.precio = "El precio debe ser un numero"
-                    }
+                    } */
                     //validacion de categoria
                     if (!data.categorias) {
                         errors.categorias = "Elige una categoria"
@@ -54,11 +81,11 @@ const CrearProducto = () => {
                     //validacon de stock
                     if (!data.stock) {
                         errors.stock = "Ingresa las unidades disponibles"
-                    } else if (data.stock < 0) {
+                    } /*  else if (data.stock < 0) {
                         errors.stock = "El stock no puede ser negativo"
                     } else if (typeof data.stock !== "number") {
                         errors.stock = "El stock debe ser un numero"
-                    }
+                    } */
                     //validacion de descripcion
                     if (!data.description) {
                         errors.description = "Describe el producto"
@@ -93,57 +120,93 @@ const CrearProducto = () => {
                     touched,
                 }) => (
                     <Form onSubmit={handleSubmit}>
+                        <p className="crear-producto-title">
+                            Crear nuevo producto
+                        </p>
                         <div>
-                            <label htmlFor="nombre">Nombre</label>
-                            <Field
+                            {/* <label htmlFor="nombre">Nombre</label> */}
+                            <input
                                 type="text"
                                 name="name"
-                                placeholder="Ingresa el nombre del producto"
+                                placeholder="Nombre del producto"
+                                value={values.name}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="inputs"
                             />
                             {touched.name && errors.nombre && (
-                                <p>{errors.nombre}</p>
+                                <p className="create-product-error">
+                                    {errors.nombre}
+                                </p>
                             )}
                         </div>
                         <div>
-                            <label htmlFor="precio">Precio</label>
-                            <Field
-                                type="number"
+                            {/* <label htmlFor="precio">Precio</label> */}
+                            <input
+                                type="text"
                                 name="price"
-                                placeholder="Ingresa el nombre del producto"
+                                value={values.price}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                placeholder="Precio"
+                                className="inputs"
                             />
                             {touched.price && errors.precio && (
-                                <p>{errors.precio}</p>
+                                <p className="create-product-error">
+                                    {errors.precio}
+                                </p>
                             )}
                         </div>
                         <div>
-                            <label htmlFor="categoria">Categoria</label>
-                            <select name="categorias" onChange={handleChange}>
-                                <option disabled selected>
-                                    Seleccionar categoria
+                            {/* <label htmlFor="categoria">Categoria</label> */}
+                            <select
+                                name="categorias"
+                                onChange={handleChange}
+                                className="inputs"
+                            >
+                                <option
+                                    disabled
+                                    selected
+                                    className="select-options"
+                                >
+                                    <p className="select-cat">Categoria</p>
                                 </option>
                                 {categoriasArray.map((c) => {
                                     return (
-                                        <option value={c.name}>{c.name}</option>
+                                        <option
+                                            value={c.name}
+                                            className="select-options"
+                                        >
+                                            {c.name}
+                                        </option>
                                     )
                                 })}
                             </select>
                             {touched.categorias && errors.categorias && (
-                                <p>{errors.categorias}</p>
+                                <p className="create-product-error">
+                                    {errors.categorias}
+                                </p>
                             )}
                         </div>
                         <div>
-                            <label htmlFor="stock">Stock</label>
-                            <Field
-                                type="number"
+                            {/* <label htmlFor="stock">Stock</label> */}
+                            <input
+                                type="text"
                                 name="stock"
-                                placeholder="Cantidad de productos disponibles"
+                                placeholder="Stock"
+                                value={values.stock}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="inputs"
                             />
                             {touched.stock && errors.stock && (
-                                <p>{errors.stock}</p>
+                                <p className="create-product-error">
+                                    {errors.stock}
+                                </p>
                             )}
                         </div>
                         <div>
-                            <label htmlFor="description">Descripcion</label>
+                            {/* <label htmlFor="description">Descripcion</label> */}
                             <textarea
                                 style={{ resize: "none" }}
                                 name="description"
@@ -152,28 +215,73 @@ const CrearProducto = () => {
                                 value={values.description}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                placeholder="Descripcion"
+                                className="inputs"
                             >
-                                Descripcion del producto
+                                Descripcion
                             </textarea>
                             {touched.description && errors.description && (
-                                <p>{errors.description}</p>
+                                <p className="create-product-error">
+                                    {errors.description}
+                                </p>
                             )}
                         </div>
                         <div>
-                            <label htmlFor="imagen">Imagen</label>
-                            <Field
+                            {/* <label htmlFor="imagen">Imagen</label> */}
+                            <input
                                 type="text"
                                 name="img"
+                                value={values.img}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                                 placeholder="Url de la imagen"
+                                className="inputs"
                             />
-                            {touched.img && errors.img && <p>{errors.img}</p>}
+                            {touched.img && errors.img && (
+                                <p className="create-product-error">
+                                    {errors.img}
+                                </p>
+                            )}
                         </div>
-                        <button type="submit">Crear producto</button>
-                        {created && <p>Producto creado con exito!</p>}
+                        {/* inicio cloudinary */}
+
+                        {/* <div>
+                            <p>Imagenes</p>
+                            <button
+                                id="upload_widget"
+                                type="button"
+                                name="img"
+                                value={values.img}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                onClick={() => handleOpenWidget()}
+                            >
+                                Cargar imagenes
+                            </button>
+                            <img id="uploadedimage" src=""></img>
+                        </div> */}
+                        {/* fin cloudinary */}
+                        <button type="submit" className="btn-crear-producto">
+                            Crear producto
+                        </button>
+                        {created && (
+                            <p className="create-product-success">
+                                Producto creado con exito!
+                            </p>
+                        )}
                     </Form>
                 )}
             </Formik>
-        </>
+            {/* <div>
+                <p>Imagenes</p>
+                {images.map((img) => (
+                    <div>
+                        <img src={img.url} alt={img.public_id} />
+                        {console.log(img.url)}
+                    </div>
+                ))}
+            </div> */}
+        </div>
     )
 }
 
