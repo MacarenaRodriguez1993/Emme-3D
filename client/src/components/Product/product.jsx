@@ -1,13 +1,14 @@
 import React from "react"
+import "./product.css"
+import stitch from "../../assets/stitch.png"
 
-const Product = ({ name, image, desc }) => {
+const Product = ({ name, price }) => {
     return (
-        <>
-            <h1>Hola mundo</h1>
-            <p>{name}</p>
-            <img src={image} alt={name} />
-            <p>{desc}</p>
-        </>
+        <div className="card">
+            <img className="imageCard" src={stitch} alt={name} />
+            <h2>{name}</h2>
+            <p>$ {price}</p>
+        </div>
     )
 }
 

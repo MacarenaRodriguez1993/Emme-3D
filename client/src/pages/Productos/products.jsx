@@ -1,55 +1,46 @@
 import React from "react"
+import "./products.css"
 import Footer from "../../components/Footer/Footer"
 import NavBar from "../../components/NavBar/NavBar"
 import Product from "../../components/Product/product"
-import { image } from "../../assets/stitch.jpg"
-import { llavero } from "../../assets/letras.jpg"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
 const Products = () => {
     const producto = [
         {
-            id: 0,
-            name: "Set de mates Ángel",
-            price: 2500,
-            stock: 1,
-            description:
-                "Set de mates Ángel. Contiene mate - yerbero y azucarera con tapas a rosca - 2 cucharas.",
-            category_id: "0001",
-            review_id: "0001",
-            img: [image],
-            deleted: false,
+            name: "Mate Harry Potter",
+            price: 1500,
         },
         {
-            id: 1,
-            name: "Llavero remera de Messi",
+            name: "Lampara litofania",
+            price: 3500,
+        },
+        {
+            name: "Llavero camiseta Messi",
             price: 500,
-            stock: 10,
-            description:
-                "llavero reemra de messi con la 10, viene con cadena. Fabricados en impresion 3d con PLA",
-            category_id: "0002",
-            review_id: "0002",
-            img: [llavero],
-            deleted: false,
+        },
+        {
+            name: "Soporte para Notbook",
+            price: 1500,
         },
     ]
     return (
-        <>
+        <div className="productos">
             <NavBar />
-            <h1>PRODUCTOS</h1>
-            {producto.map((p) => {
-                return (
-                    <Product
-                        key={p.id}
-                        name={p.name}
-                        image={p.img}
-                        desc={p.description}
-                    />
-                )
-            })}
+
+            {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
+            <h5>Aqui van los filtros</h5>
+            <div className="cardProduct">
+                {producto.map((a) => {
+                    return <Product name={a.name} price={a.price} />
+                })}
+            </div>
+
+            {/* AQUI VA LA PAGINACION */}
+            <p>Aqui va la paginacion</p>
             <Footer />
-        </>
+        </div>
     )
 }
 
