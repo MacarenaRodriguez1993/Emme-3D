@@ -40,7 +40,7 @@ const ProductSchema = new mongoose.Schema(
         },
 
         // Categoria del producto
-        category: [
+        categories: [
             {
                 category_id: mongoose.Types.ObjectId,
             },
