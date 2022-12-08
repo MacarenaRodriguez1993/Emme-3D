@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="copyrigth">
                 <p>Equipo de desarrolo Henry FT-31a-04</p>
                 <p>
-                    <AiOutlineCopyright />
+           
                     Todos los derechos reservado
                 </p>
             </div>
