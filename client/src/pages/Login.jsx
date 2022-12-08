@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import logo from "../assets/logo1.png"
 import { useDispatch, useSelector } from "react-redux"
-import "./Login.css"
+import "./css/Login.css"
 import { Link } from "react-router-dom"
 
 export default function Login() {

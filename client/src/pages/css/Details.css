@@ -1,0 +1,37 @@
+:root {
+    --colorFondo: #262a53;
+}
+
+.container-details {
+    background: var(--colorFondo);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.img-details {
+    height: 400px;
+    width: 300px;
+    aspect-ratio: 16/9;
+}
+.container-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.container-header-left {
+    width: 50%;
+    justify-content: center;
+    display: flex;
+    flex: auto;
+}
+.conatainer-header-right {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
