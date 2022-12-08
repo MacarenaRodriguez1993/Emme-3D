@@ -4,6 +4,7 @@ const server = express()
 const mongoose = require("mongoose")
 const routes = require("./routes/index.js")
 
+
 const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, PORT } = process.env
 const DEFAULT_PORT = 3001
 
