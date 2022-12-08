@@ -1,7 +1,9 @@
-const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
+const ERROR = "ERROR"
 
 const initialState = {
-    allProducts: []
+    allProducts: [],
+    error: {},
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -9,9 +11,15 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
-                allProducts: action.payload
+                allProducts: action.payload,
             }
-
+        case ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            }
+        default:
+            return { ...state }
     }
 }
 
