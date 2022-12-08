@@ -6,9 +6,10 @@
 
     align-items: center;
 }
-p {
-    margin: 0.5em;
+.copyrigth{
+    padding: 0.5em;
 }
 .redes {
-    margin: 2em;
+    display: flex;
+    width: 50%;
 }
