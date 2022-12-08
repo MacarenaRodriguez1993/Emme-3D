@@ -10,7 +10,7 @@ const DEFAULT_PORT = 3001
 
 mongoose
     .connect(
-        `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority`
+        `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority&ssl=true`
     )
     .then(() => {
         console.log("DB connection Successfull")

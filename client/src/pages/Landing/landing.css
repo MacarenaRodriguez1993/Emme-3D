@@ -1,0 +1,16 @@
+.landing{
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.title{
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    font-size: xx-large;
+}
+.portada{
+    width: 30%;
+    margin: auto;
+}

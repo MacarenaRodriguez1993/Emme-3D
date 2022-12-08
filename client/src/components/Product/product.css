@@ -1,0 +1,11 @@
+.card {
+    border-radius: 1em;
+    background-color: #2a2f62;
+    padding: 0.5em;
+    text-align: start;
+    color: #FFE3E3;
+}
+.imageCard {
+    width: 100%;
+    border-radius: 1em;
+}
