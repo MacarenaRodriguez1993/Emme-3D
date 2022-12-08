@@ -3,6 +3,7 @@ import "./products.css"
 import Footer from "../../components/Footer/Footer"
 import NavBar from "../../components/NavBar/NavBar"
 import Product from "../../components/Product/product"
+import {Link} from "react-router-dom"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -30,13 +31,17 @@ const Products = () => {
             <NavBar />
 
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
-            <h5>Aqui van los filtros</h5>
+            <p>Aqui van los filtros</p>
             <div className="cardProduct">
                 {producto.map((a) => {
                     return <Product name={a.name} price={a.price} />
                 })}
             </div>
-
+            
+            <Link to='/crear-producto'>
+                <button className="addButton"> Crear Producto </button>
+            </Link>
+            
             {/* AQUI VA LA PAGINACION */}
             <p>Aqui va la paginacion</p>
             <Footer />
