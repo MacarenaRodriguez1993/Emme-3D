@@ -1,0 +1,47 @@
+.container-login {
+    background: #262a53;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 100vh;
+}
+.formulario-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input {
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 250px;
+}
+.btn-submit {
+    border: none;
+    margin: 10px;
+    background: #fe78cc;
+    color: #262a53;
+    padding: 10px;
+    width: 250px;
+    border-radius: 10px;
+    font-size: larger;
+}
+
+.btn-submit:hover {
+    border: 1px solid #fe78cc;
+    background: #262a53;
+    color: #fe78cc;
+    border-radius: 10px;
+}
+.forgot-password {
+    text-decoration: none;
+    color: #f2989b;
+}
+.link-registro {
+    color: white;
+    font-size: large;
+    padding: 10px;
+}
