@@ -73,7 +73,6 @@ async function updateProduct(id, body) {
         return errorReport
     }
 }
-function deleteProduct() {}
 
 module.exports = {
     getAllProducts,
@@ -81,5 +80,4 @@ module.exports = {
     getProductByQuery,
     createProduct,
     updateProduct,
-    deleteProduct,
 }

@@ -11,6 +11,7 @@ const DEFAULT_PORT = 3001
 mongoose
     .connect(
         `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority&ssl=true`
+        //"mongodb://127.0.0.1:27017/emme3D"
     )
     .then(() => {
         console.log("DB connection Successfull")

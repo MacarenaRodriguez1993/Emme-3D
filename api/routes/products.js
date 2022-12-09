@@ -5,9 +5,8 @@ const {
     getProductByQuery,
     createProduct,
     updateProduct,
-    deleteProduct,
 } = require("../middleware/middlewareProducts")
-const Product = require("../models/Product.js")
+const { deleteProduct } = require("../controllers/productController.js")
 
 // Get lista todas los productos (Admin)
 router.get("/", async (req, res) => {
@@ -61,5 +60,11 @@ router.put("/:id", async (req, res) => {
 })
 
 // Delete borrar producto (lógico)
+router.delete("/:id", async (req, res) => {
+    //borrado logico
+    let { id } = req.params
+    let response = await deleteProduct(id)
+    res.status(200).send(response.acknowledged)
+})
 
 module.exports = router

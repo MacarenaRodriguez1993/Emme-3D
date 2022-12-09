@@ -87,10 +87,20 @@ const findAndUpdate = async (id, obj, errors) => {
     }
     return errors
 }
+
+async function deleteProduct(id) {
+    let logicDelete = await Product.updateOne(
+        { id: id }, //busqueda
+        { deleted: true } //cambio
+    )
+    return logicDelete
+}
+
 module.exports = {
     listProducts,
     productId,
     producByQuery,
     newProduct,
     findAndUpdate,
+    deleteProduct,
 }
