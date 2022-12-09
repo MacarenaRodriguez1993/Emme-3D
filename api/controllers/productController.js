@@ -26,9 +26,18 @@ const productId = async (id) => {
         }
     )
 }
-
+const newProduct = async (data) => {
+    const newProduct = new Product(data)
+    try {
+        await newProduct.save()
+        return newProduct
+    } catch (err) {
+        throw new Error(err)
+    }
+}
 module.exports = {
     listProducts,
     productId,
     producByQuery,
+    newProduct,
 }

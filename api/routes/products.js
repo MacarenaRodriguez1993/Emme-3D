@@ -7,6 +7,7 @@ const {
     updateProduct,
     deleteProduct,
 } = require("../middleware/middlewareProducts")
+const Product = require("../models/Product.js")
 const product = require("../models/Product.js")
 
 // Get lista todas los productos (Admin)
@@ -43,6 +44,14 @@ router.get("/", async (req, res) => {
 })
 
 // Post crear nuevo producto
+router.post("/", async (req, res) => {
+    try {
+        const newProduct = await createProduct(req.body)
+        res.status(201).send(newProduct)
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
+})
 
 // Put editar producto existente
 router.put("/:id", async (req, res) => {
