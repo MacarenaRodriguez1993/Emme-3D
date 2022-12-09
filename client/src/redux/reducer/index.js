@@ -106,10 +106,17 @@ const rootReducer = (state = initialState, action) => {
             }
         /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_BY_CATEGORY:
-            let cat = all.filter(c => c.categoria.name === action.payload)
-            return {
-                ...state,
-                productsFiltered: [...cat]
+            if (pload === "categorias") {
+                return {
+                    ...state,
+                    productsFiltered: all
+                }
+            } else {
+                let cat = all.filter(c => c.categoria.name === action.payload)
+                return {
+                    ...state,
+                    productsFiltered: [...cat]
+                }
             }
         case GET_BY_PRICE:
             if (pload === 'menor') {
