@@ -5,7 +5,7 @@ async function getCategories() {
         const categories = await Category.find()
         if (categories.length < 1)
             throw new Error(
-                "Vaya, parece que no hay categorías en la base de datos"
+                "Vaya, parece que no hay categorías en la base de datos."
             )
         return categories
     } catch (error) {
