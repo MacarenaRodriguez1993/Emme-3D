@@ -5,7 +5,7 @@ const {
     createUsers,
     updateUsers,
     deleteUsers,
-} = require("../middleware/middlewareCategories")
+} = require("../middleware/middlewareUsers.js")
 
 // Get lista todas los usuarios (Admin)
 

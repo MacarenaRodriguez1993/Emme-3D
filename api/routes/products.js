@@ -6,7 +6,7 @@ const {
     createProduct,
     updateProduct,
     deleteProduct,
-} = require("../middleware/middlewareCategories")
+} = require("../middleware/middlewareProducts")
 const product = require("../models/Product.js")
 
 // Get lista todas los productos (Admin)
