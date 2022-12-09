@@ -3,7 +3,7 @@ const {
     getAllOrders,
     createOrders,
     updateOrders,
-} = require("../middleware/middlewareCategories")
+} = require("../middleware/middlewareOrders")
 
 // Get lista todas las ordenes
 
