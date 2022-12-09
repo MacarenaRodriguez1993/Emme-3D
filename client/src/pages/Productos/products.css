@@ -1,5 +1,6 @@
-.productos{
-   color: #ffe3e3;
+.productos {
+    color: #ffe3e3;
+    background-color: #262a53;
 }
 .cardProduct {
     width: 95%;
@@ -9,8 +10,6 @@
     gap: 2em;
     justify-content: center;
 }
-.addButton{
-    margin: 0 25%;
-    width: 50%;
-    background-color: #A34270;
+.addButton {
+    margin-left: 25%;
 }

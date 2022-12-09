@@ -1,16 +1,25 @@
-.landing{
-    color: aliceblue;
+.landing {
+    color: #ffe3e3;
     display: flex;
     align-items: center;
     height: 100vh;
+    background-color: #262a53;
 }
-.title{
+button {
+    background-color: #a34270;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 50%;
+    color: #ffe3e3;
+}
+.title {
     width: 60%;
     margin: auto;
     text-align: center;
     font-size: xx-large;
 }
-.portada{
+.portada {
     width: 30%;
     margin: auto;
 }

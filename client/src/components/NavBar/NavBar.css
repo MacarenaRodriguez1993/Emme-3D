@@ -23,6 +23,8 @@ a {
     font-size: larger;
     padding: 0.1em 0.3em;
 }
-.buttonLogin {
+
+.buttonLogin,
+.titleHome {
     margin: 0 0.5em;
 }

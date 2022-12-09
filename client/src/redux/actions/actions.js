@@ -1,29 +1,101 @@
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
-export const ERROR = "ERROR"
-export const GET_DETAILS = "GET_DETAILS"
+const GET_DETAILS = "GET_DETAILS"
+const GET_BY_CATEGORY = "GET_BY_CATEGORY"
+const GET_BY_PRICE = "GET_BY_PRICE"
+const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
+const GET_BY_SALES = "GET_BY_SALES"
+const GET_BY_LIKES = "GET_BY_LIKES"
+const ERROR = "ERROR"
+
+/*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
+export const filterByCategories = (value) => {
+    return (dispatch) => {
+        try {
+            dispatch({
+                type: GET_BY_CATEGORY,
+                payload: value,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+export const filterByPrice = (value) => {
+    return (dispatch) => {
+        try {
+            dispatch({
+                type: GET_BY_PRICE,
+                payload: value,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+export const filterByPriceRange = (value) => {
+    return (dispatch) => {
+        try {
+            dispatch({
+                type: GET_BY_PRICE_RANGE,
+                payload: value,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+export const filterBySales = (value) => {
+    return (dispatch) => {
+        try {
+            dispatch({
+                type: GET_BY_SALES,
+                payload: value,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+export const filterByLikes = (value) => {
+    return (dispatch) => {
+        try {
+            dispatch({
+                type: GET_BY_LIKES,
+                payload: value,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+/*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 
 //Aqui va la url base del back
 const url_api = ""
-
-const p = {
-    name: "prueba",
-    price: 1500,
-    stock: 50,
-    description:
-        "esta es una descripcion de prueba repdida muchas veces esta es una descripcion de prueba repdida muchas vecesesta es una descripcion de prueba repdida muchas vecesesta es una descripcion de prueba repdida muchas vecesesta es una descripcion de prueba repdida muchas vecesesta es una descripcion de prueba repdida muchas vecesesta es una descripcion de prueba repdida muchas vecesesta es una descripcion de prueba repdida muchas veces",
-    categories: 5,
-    reviews: 5,
-    img: "https://stpatrickspost.files.wordpress.com/2014/04/imagen-469-2.jpg",
-}
 
 //Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
 export const getProducts = () => {
     return async (dispatch) => {
         try {
-            // const products = await axios.get(`${url_api}/products`)
+            const products = await axios.get(`${url_api}/products`)
             dispatch({
                 type: GET_ALL_PRODUCTS,
-                payload: p,
+                payload: products,
             })
         } catch (err) {
             dispatch({

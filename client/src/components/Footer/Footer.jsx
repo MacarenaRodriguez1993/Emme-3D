@@ -1,7 +1,6 @@
 import React from "react"
 import "./footer.css"
 import {
-    AiOutlineCopyright,
     AiOutlineWhatsApp,
     AiOutlineFacebook,
     AiOutlineInstagram,
