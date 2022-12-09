@@ -22,7 +22,8 @@ router.get("/", async (req, res) => {
 
 // Get producto por param id (Detalles producto)
 router.get("/:id", async (req, res) => {
-    const { id } = req.params.id
+    const { id } = req.params
+
     try {
         res.status(200).json(productId(id))
     } catch (err) {
