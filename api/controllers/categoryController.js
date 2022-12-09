@@ -19,6 +19,9 @@ async function createCategory(category) {
         const createdCategory = await Category.create(category)
         return createdCategory
     } catch (error) {
+        // E11000 es el código de error cuando el elemento ya existe (duplicado)
+        if (error.message.includes("E11000"))
+            error.message = `Ya existe una categoría con nombre "${category.name}"`
         throw error
     }
 }
