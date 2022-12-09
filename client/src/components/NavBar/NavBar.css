@@ -19,6 +19,8 @@ a {
     color: #262a53;
     font-size: larger;
 }
-.buttonLogin {
+
+.buttonLogin,
+.titleHome {
     margin: 0 0.5em;
 }
