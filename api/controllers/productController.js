@@ -16,15 +16,13 @@ const producByQuery = async (name) => {
         }
     )
 }
-    Product.find(
-        {
-            id: id,
-        },
-        (err, quer) => {
-            return quer
-        }
-    )
+
 const productById = async (id) => {
+
+    const result = await Product.find({
+        _id: mongoose.Types.ObjectId(id),
+    }).clone() // Se necesita el .clone para que no de errores de queryes duplicadas
+    return result
 }
 
 module.exports = {
