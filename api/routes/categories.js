@@ -19,6 +19,15 @@ router.get("/", async (req, res) => {
 // Post crear nueva categoría
 
 // Put editar categoría existente
+router.put("/", async (req, res) => {
+    const category = req.body
+    try {
+        const updatedCategory = await updateCategories(category)
+        res.status(200).json(updatedCategory)
+    } catch (error) {
+        res.status(404).send(error.message)
+    }
+})
 
 // Delete borrar categoría
 

@@ -14,6 +14,23 @@ async function getCategories() {
     }
 }
 
+async function updateCategory(category) {
+    try {
+        const updatedCategory = await Category.updateOne(
+            { _id: category._id },
+            {
+                $set: { name: category.name },
+                $currentDate: { lastModified: true },
+            }
+        )
+
+        return `Categoría renombrada a ${category.name}`
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     getCategories,
+    updateCategory,
 }
