@@ -2,6 +2,7 @@ import React from "react"
 import "./App.css"
 import CrearProducto from "./components/CrearProducto"
 import { Route, Routes } from "react-router-dom"
+import ProductsContainer from "./components/ProductsContainer/ProductsContainer"
 import Home from "./pages/Home/home"
 import Products from "./pages/Productos/products"
 import Landing from "./pages/Landing/landing"
@@ -10,6 +11,8 @@ function App() {
     return (
         <>
             <Routes>
+                <Route path="/crear-producto" element={<CrearProducto />} />
+                <Route path="/productos" element={<ProductsContainer />} />
                 <Route
                     exact
                     strict
