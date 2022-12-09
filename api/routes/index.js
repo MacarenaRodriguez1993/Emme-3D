@@ -1,4 +1,9 @@
 const router = require("express").Router()
+const productsRoute = require("./productsRoute.js")
+
+// Routes
+// router.use("/productos", productsRoute) <--- Ejemplo de como debería ir
+router.use("/product", productsRoute)
 const products = require("./products.js")
 const users = require("./users")
 const orders = require("./orders")
