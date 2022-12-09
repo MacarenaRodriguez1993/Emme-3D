@@ -24,7 +24,12 @@ async function updateCategory(category) {
             }
         )
 
-        return `Categoría renombrada a ${category.name}`
+        // Si no se ha modificado nada asumimos que la categoría no existe
+        if (!updatedCategory.modifiedCount)
+            throw new Error(
+                `No existe ninguna categoría con id "${category._id}".`
+            )
+        return `Categoría renombrada a ${category.name}.`
     } catch (error) {
         throw error
     }
