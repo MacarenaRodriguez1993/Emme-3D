@@ -18,6 +18,9 @@ async function deleteCategory(id) {
     try {
         const deletedCategory = await Category.deleteOne({ _id: id })
 
+        if (!deletedCategory.deletedCount)
+            throw new Error(`No existe ninguna categoría con id "${id}".`)
+
         return `Categoría ${id} borrada.`
     } catch (error) {
         throw error
