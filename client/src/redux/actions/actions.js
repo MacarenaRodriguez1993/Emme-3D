@@ -6,7 +6,7 @@ const GET_BY_LIKES = 'GET_BY_LIKES'
 const ERROR = 'ERROR'
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
-const filterByCategories = value => {
+export const filterByCategories = value => {
     return dispatch => {
         try {
             dispatch({
@@ -21,7 +21,7 @@ const filterByCategories = value => {
         }
     }
 }
-const filterByPrice = value => {
+export const filterByPrice = value => {
     return dispatch => {
         try {
             dispatch({
@@ -36,7 +36,7 @@ const filterByPrice = value => {
         }
     }
 }
-const filterByPriceRange = value => {
+export const filterByPriceRange = value => {
     return dispatch => {
         try {
             dispatch({
@@ -51,7 +51,7 @@ const filterByPriceRange = value => {
         }
     }
 }
-const filterBySales = value => {
+export const filterBySales = value => {
     return dispatch => {
         try {
             dispatch({
@@ -66,7 +66,7 @@ const filterBySales = value => {
         }
     }
 }
-const filterByLikes = value => {
+export const filterByLikes = value => {
     return dispatch => {
         try {
             dispatch({

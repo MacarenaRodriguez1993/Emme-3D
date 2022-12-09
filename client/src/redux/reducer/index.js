@@ -1,9 +1,11 @@
+const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_BY_CATEGORY = 'GET_BY_CATEGORY'
 const GET_BY_PRICE = 'GET_BY_PRICE'
 const GET_BY_PRICE_RANGE = 'GET_BY_PRICE_RANGE'
 const GET_BY_SALES = 'GET_BY_SALES'
 const GET_BY_LIKES = 'GET_BY_LIKES'
 const ERROR = 'ERROR'
+import logo from '../../assets/emme3d-logo.png'
 
 const initialState = {
     allProducts: [{
@@ -22,7 +24,7 @@ const initialState = {
     {
         name: "Producto 2",
         price: 980,
-        categorias: {
+        categoria: {
             id: 1,
             name: "Veladores",
         },
@@ -35,7 +37,7 @@ const initialState = {
     {
         name: "Producto 3",
         price: 1250,
-        categorias: {
+        categoria: {
             id: 3,
             name: "Llaveros",
         },
@@ -48,7 +50,7 @@ const initialState = {
     {
         name: "Producto 4",
         price: 2680,
-        categorias: {
+        categoria: {
             id: 1,
             name: "Veladores",
         },
@@ -61,7 +63,7 @@ const initialState = {
     {
         name: "Producto 5",
         price: 4300,
-        categorias: {
+        categoria: {
             id: 2,
             name: "Mates",
         },
@@ -69,13 +71,9 @@ const initialState = {
         description: "Descripcion del producto 5",
         vendidos: 45,
         valoracion: 8.1,
-        img: "",
+        img: logo,
     }],
-    productsFilteredByCategory: [],
-    productsFilteredByPrice: [],
-    productsFilteredByPriceRange: [],
-    productsFilteredBySales: [],
-    productsFilteredByLikes: [],
+    productsFiltered: [],
     categories: [
         {
             id: 1,
@@ -94,6 +92,12 @@ const initialState = {
 }
 
 const rootReducer = (state = initialState, action) => {
+    /* variables utiles para los reducers */
+    const pload = action.payload
+    const all = state.allProducts
+    const filter = state.productsFiltered
+    const res = filter.length !== 0 ? filter : all
+    /* ---------------------------------- */
     switch (action.type) {
         case GET_ALL_PRODUCTS:
             return {
@@ -102,38 +106,127 @@ const rootReducer = (state = initialState, action) => {
             }
         /* INICIO FILTROS DE BUSQUEDA */
         case GET_BY_CATEGORY:
-            let cat = allProducts.filter(c => c.categoria.id === action.payload)
+            let cat = state.allProducts.filter(c => c.categoria.name === action.payload)
             return {
                 ...state,
-                productsFilteredByCategory: cat
+                productsFiltered: [...cat]
             }
         case GET_BY_PRICE:
-            const pload = action.payload
             if (pload === 'menor') {
-
+                let menor = res.sort((p1, p2) => {
+                    if (p1.price < p2.price) {
+                        return 1
+                    }
+                    return -1
+                })
+                return {
+                    ...state,
+                    productsFiltered: [...menor]
+                }
             } else if (pload === 'mayor') {
-
+                let mayor = res.sort((p1, p2) => {
+                    if (p1.price > p2.price) {
+                        return 1
+                    }
+                    return -1
+                })
+                return {
+                    ...state,
+                    productsFiltered: [...mayor]
+                }
             } else {
-                return allProducts
-            }
-            return {
-                ...state,
-                productsFilteredByPrice: state
+                return {
+                    ...state,
+                    productsFiltered: res
+                }
             }
         case GET_BY_PRICE_RANGE:
+            if (pload === "1a1000") {
+                let sub1000 = res.filter(p => p.price < 1000)
+                return {
+                    ...state,
+                    productsFiltered: sub1000
+                }
+            } else if (pload === "1000a2000") {
+                let sub2000 = res.filter(p => p.price > 1000 && p.price < 2000)
+                return {
+                    ...state,
+                    productsFiltered: sub2000
+                }
+            } else if (pload === "2000a4000") {
+                let sub4000 = res.filter(p => p.price > 2000 && p.price < 4000)
+                return {
+                    ...state,
+                    productsFiltered: sub4000
+                }
+            } else if (pload === "mas4000") {
+                let sup4000 = res.filter(p => p.price > 4000)
+                return {
+                    ...state,
+                    productsFiltered: sup4000
+                }
+            }
             return {
                 ...state,
-
+                productsFiltered: res
             }
         case GET_BY_SALES:
-            return {
-                ...state,
-
+            if (pload === "menosVendidos") {
+                let menor = res.sort((p1, p2) => {
+                    if (p1.vendidos > p2.vendidos) {
+                        return 1
+                    }
+                    return -1
+                })
+                return {
+                    ...state,
+                    productsFiltered: [...menor]
+                }
+            } else if (pload === "masVendidos") {
+                let mayor = res.sort((p1, p2) => {
+                    if (p1.vendidos < p2.vendidos) {
+                        return 1
+                    }
+                    return -1
+                })
+                return {
+                    ...state,
+                    productsFiltered: [...mayor]
+                }
+            } else {
+                return {
+                    ...state,
+                    productsFiltered: res
+                }
             }
         case GET_BY_LIKES:
-            return {
-                ...state,
-
+            if (pload === "menorValoracion") {
+                let menor = res.sort((p1, p2) => {
+                    if (p1.valoracion > p2.valoracion) {
+                        return 1
+                    }
+                    return -1
+                })
+                return {
+                    ...state,
+                    productsFiltered: [...menor]
+                }
+            } else if (pload === "mayorValoracion") {
+                let mayor = res.sort((p1, p2) => {
+                    if (p1.valoracion < p2.valoracion) {
+                        return 1
+                    }
+                    return -1
+                })
+                return {
+                    ...state,
+                    productsFiltered: [...mayor]
+                }
+            } else {
+                return {
+                    ...state,
+                    productsFiltered: res
+                }
             }
         /* FIN FILTROS DE BUSQUEDA */
         case ERROR:
