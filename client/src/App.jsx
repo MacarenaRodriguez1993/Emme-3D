@@ -5,7 +5,7 @@ import Login from "./pages/Login/Login"
 import Details from "./pages/Details/Details"
 import ProductsContainer from "./components/ProductsContainer/ProductsContainer"
 import Home from "./pages/Home/home"
-import Products from "./components/Product/product"
+import Productos from "./pages/Productos/products"
 import Landing from "./pages/Landing/landing"
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
                     element={<CrearProducto />}
                 />
                 <Route exact strict path="/home" element={<Home />} />
-                <Route exact strict path="/products" element={<Products />} />
+                <Route exact strict path="/products" element={<Productos />} />
                 <Route exact strict path="/" element={<Landing />} />
                 <Route exact strict path="/login" element={<Login />} />
                 <Route path="/details/:id" element={<Details />} />
