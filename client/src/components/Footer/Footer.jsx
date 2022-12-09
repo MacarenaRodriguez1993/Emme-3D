@@ -13,7 +13,10 @@ const Footer = () => {
         <div className="footer">
             <div className="copyrigth">
                 <p>Equipo de desarrolo Henry FT-31a-04</p>
-                <p>Todos los derechos reservado</p>
+                <p>
+                    <AiOutlineCopyright />
+                    Todos los derechos reservado
+                </p>
             </div>
 
             <div className="redes">
