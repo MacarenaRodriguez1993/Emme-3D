@@ -104,9 +104,9 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allProducts: action.payload
             }
-        /* INICIO FILTROS DE BUSQUEDA */
+        /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_BY_CATEGORY:
-            let cat = state.allProducts.filter(c => c.categoria.name === action.payload)
+            let cat = all.filter(c => c.categoria.name === action.payload)
             return {
                 ...state,
                 productsFiltered: [...cat]
@@ -142,25 +142,25 @@ const rootReducer = (state = initialState, action) => {
             }
         case GET_BY_PRICE_RANGE:
             if (pload === "1a1000") {
-                let sub1000 = res.filter(p => p.price < 1000)
+                let sub1000 = all.filter(p => p.price < 1000)
                 return {
                     ...state,
                     productsFiltered: sub1000
                 }
             } else if (pload === "1000a2000") {
-                let sub2000 = res.filter(p => p.price > 1000 && p.price < 2000)
+                let sub2000 = all.filter(p => p.price > 1000 && p.price < 2000)
                 return {
                     ...state,
                     productsFiltered: sub2000
                 }
             } else if (pload === "2000a4000") {
-                let sub4000 = res.filter(p => p.price > 2000 && p.price < 4000)
+                let sub4000 = all.filter(p => p.price > 2000 && p.price < 4000)
                 return {
                     ...state,
                     productsFiltered: sub4000
                 }
             } else if (pload === "mas4000") {
-                let sup4000 = res.filter(p => p.price > 4000)
+                let sup4000 = all.filter(p => p.price > 4000)
                 return {
                     ...state,
                     productsFiltered: sup4000
@@ -168,7 +168,7 @@ const rootReducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                productsFiltered: res
+                productsFiltered: all
             }
         case GET_BY_SALES:
             if (pload === "menosVendidos") {
@@ -228,7 +228,7 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: res
                 }
             }
-        /* FIN FILTROS DE BUSQUEDA */
+        /*----------- FIN FILTROS DE BUSQUEDA -----------*/
         case ERROR:
             return {
                 ...state,

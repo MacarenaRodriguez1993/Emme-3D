@@ -6,6 +6,8 @@ import "./ProductsContainer.css"
 const ProductsContainer = () => {
     /* hice este componente solamente para probar los filtros */
     const productos = useSelector((state) => state.allProducts)
+
+    //ESTE ES EL ESTADO QUE HAY QUE TRAER PARA MOSTRAR LOS PRODUCTOS FILTRADOS
     let filtros = useSelector((state) => state.productsFiltered)
     const error = useSelector((state) => state.error)
     console.log(`PRODUCTOS: ${productos.map((p) => p.name)}`)

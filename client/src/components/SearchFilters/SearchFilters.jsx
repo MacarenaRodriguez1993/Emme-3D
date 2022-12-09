@@ -33,9 +33,12 @@ const SearchFilters = () => {
     }
 
     return (
-        <div>
+        <div className="filters-container">
             {/* filtro de categorias */}
-            <select onChange={(e) => handleCategories(e)}>
+            <select
+                onChange={(e) => handleCategories(e)}
+                className="select-filters"
+            >
                 <option selected value="categorias">
                     Categorias
                 </option>
@@ -44,14 +47,20 @@ const SearchFilters = () => {
                 ))}
             </select>
             {/* filtro de precios */}
-            <select onChange={(e) => handlePrices(e)}>
+            <select
+                onChange={(e) => handlePrices(e)}
+                className="select-filters"
+            >
                 <option selected value="precio">
                     Precio
                 </option>
                 <option value="menor">Mayor precio</option>
                 <option value="mayor">Menor precio</option>
             </select>
-            <select onChange={(e) => handlePricesRange(e)}>
+            <select
+                onChange={(e) => handlePricesRange(e)}
+                className="select-filters"
+            >
                 <option selected value="rango">
                     Rango de precios
                 </option>
@@ -61,7 +70,7 @@ const SearchFilters = () => {
                 <option value="mas4000">Mas de $4000</option>
             </select>
             {/* mas o menos vendidos */}
-            <select onChange={(e) => handleSales(e)}>
+            <select onChange={(e) => handleSales(e)} className="select-filters">
                 <option selected value="ventas">
                     Por ventas
                 </option>
@@ -69,7 +78,7 @@ const SearchFilters = () => {
                 <option value="menosVendidos">Menos vendidos</option>
             </select>
             {/* mejores valorados */}
-            <select onChange={(e) => handleLikes(e)}>
+            <select onChange={(e) => handleLikes(e)} className="select-filters">
                 <option selected value="valoraciones">
                     Por valoraciones
                 </option>
