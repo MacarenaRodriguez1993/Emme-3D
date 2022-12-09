@@ -14,6 +14,17 @@ async function getCategories() {
     }
 }
 
+async function deleteCategory(id) {
+    try {
+        const deletedCategory = await Category.deleteOne({ _id: id })
+
+        return `Categoría ${id} borrada.`
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     getCategories,
+    deleteCategory,
 }
