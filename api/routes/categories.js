@@ -7,6 +7,14 @@ const {
 } = require("../middleware/middlewareCategories")
 
 // Get lista todas las categorias
+router.get("/", async (req, res) => {
+    try {
+        const categories = await getAllCategories()
+        res.status(200).json(categories)
+    } catch (error) {
+        res.status(404).send(error.message)
+    }
+})
 
 // Post crear nueva categoría
 
