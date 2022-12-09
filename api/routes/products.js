@@ -8,7 +8,6 @@ const {
     deleteProduct,
 } = require("../middleware/middlewareProducts")
 const Product = require("../models/Product.js")
-const product = require("../models/Product.js")
 
 // Get lista todas los productos (Admin)
 router.get("/", async (req, res) => {
@@ -55,25 +54,10 @@ router.post("/", async (req, res) => {
 
 // Put editar producto existente
 router.put("/:id", async (req, res) => {
-    //edita un producto
-    /*
-    objeto producto
-    {
-        name: vasito3d,
-        price: 230,
-        stock: 100,
-        description: "un vaso re piola",
-        categories: [ObjectId],
-        reviews: [ObjectId],
-        img: [string],
-    }
-    solo recibira las propiedades que quiera cambiar
-    el id es obligatorio para realizar la busqueda, asi se sabe que producto hay que cambiar
-    */
-    const { id } = req.params
-    const objectProduct = req.body
-    delete objectProduct.id
-    await product.updateOne({ id: id }, objectProduct)
+    let { id } = req.params
+    let body = req.body
+    let notification = await updateProduct(id, body)
+    res.status(200).send(notification)
 })
 
 // Delete borrar producto (lógico)
