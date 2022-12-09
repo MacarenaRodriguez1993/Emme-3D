@@ -14,6 +14,16 @@ async function getCategories() {
     }
 }
 
+async function createCategory(category) {
+    try {
+        const createdCategory = await Category.create(category)
+        return createdCategory
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     getCategories,
+    createCategory,
 }
