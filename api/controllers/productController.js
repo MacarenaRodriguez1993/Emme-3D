@@ -16,7 +16,6 @@ const producByQuery = async (name) => {
         }
     )
 }
-const productId = async (id) => {
     Product.find(
         {
             id: id,
@@ -25,10 +24,11 @@ const productId = async (id) => {
             return quer
         }
     )
+const productById = async (id) => {
 }
 
 module.exports = {
     listProducts,
-    productId,
+    productById,
     producByQuery,
 }

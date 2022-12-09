@@ -1,6 +1,11 @@
+const { productById } = require("../controllers/productController")
+
 // PRODUCTS
 function getAllProducts() {}
-function getProductById(id) {}
+
+async function getProductById(id) {
+}
+
 function getProductByQuery() {}
 function createProduct() {}
 function updateProduct() {}
