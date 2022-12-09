@@ -1,7 +1,6 @@
 import React from "react"
 import "./footer.css"
 import {
-    AiOutlineCopyright,
     AiOutlineWhatsApp,
     AiOutlineFacebook,
     AiOutlineInstagram,
@@ -14,10 +13,7 @@ const Footer = () => {
         <div className="footer">
             <div className="copyrigth">
                 <p>Equipo de desarrolo Henry FT-31a-04</p>
-                <p>
-                    <AiOutlineCopyright />
-                    Todos los derechos reservado
-                </p>
+                <p>Todos los derechos reservado</p>
             </div>
 
             <div className="redes">

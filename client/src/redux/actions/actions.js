@@ -1,3 +1,4 @@
+export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 const GET_BY_CATEGORY = 'GET_BY_CATEGORY'
 const GET_BY_PRICE = 'GET_BY_PRICE'
 const GET_BY_PRICE_RANGE = 'GET_BY_PRICE_RANGE'
@@ -82,3 +83,24 @@ export const filterByLikes = value => {
     }
 }
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
+
+//Aqui va la url base del back
+const url_api = '';
+
+//Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
+export const getProducts = () => {
+    return async (dispatch) => {
+        try {
+            const products = await axios.get(`${url_api}/products`);
+            dispatch({
+                type: GET_ALL_PRODUCTS,
+                payload: products
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message
+            })
+        }
+    }
+}

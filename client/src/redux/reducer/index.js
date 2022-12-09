@@ -102,7 +102,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
-                allProducts: action.payload
+                allProducts: action.payload,
             }
         /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_BY_CATEGORY:
