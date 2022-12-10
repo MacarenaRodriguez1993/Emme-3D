@@ -3,9 +3,12 @@ const Product = require("../models/Product.js")
 const ObjectId = mongoose.Types.ObjectId
 
 const listProducts = async () => {
-    const model = await Product.find({}, (err, total) => {
-        return total
-    })
+    const products = await Product.find()
+    if (products.length < 1)
+        throw new Error(
+            "Vaya, parece que no hay productos en la base de datos."
+        )
+    return products
 }
 const productByQuery = async (name) => {
     const byqu = await Product.findOne({ name: name }).exec()
@@ -31,8 +34,10 @@ const productById = async (id) => {
 const createNewProduct = async (product) => {
     try {
         const createdProduct = await Product.create(product)
+        console.log(createdProduct)
         return createdProduct
     } catch (err) {
+        console.log(err)
         if (err.message.includes("E11000")) {
             err.message = `Ya existe con producto con el nombre ${product.name}.`
             throw err
@@ -93,7 +98,7 @@ const findAndUpdate = async (id, obj, errors) => {
 
 async function eraseProduct(id) {
     let logicDelete = await Product.updateOne(
-        { id: id }, //busqueda
+        { _id: id }, //busqueda
         { deleted: true } //cambio
     )
     return logicDelete

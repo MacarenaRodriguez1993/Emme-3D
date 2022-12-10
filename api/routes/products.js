@@ -5,26 +5,34 @@ const {
     createProduct,
     updateProduct,
     deleteProduct,
-    productByQuery,
+    getProducByQuery,
 } = require("../middleware/middlewareProducts")
 
-// Get lista todas los productos (Admin)
-router.get("/", async (req, res) => {
-    let { name } = req.query
-    //console.log(typeof name) es un string
-    if (name) {
-        let getProduct = await productByQuery(name)
-        res.status(200).send(getProduct)
-    } else {
-        try {
-            res.status(200).json(listProducts())
-        } catch (err) {
-            res.status(402).send(err.message)
+// Get producto por query
+router.get("/", async (req, res, next) => {
+    const { name } = req.query
+    try {
+        if (name) {
+            const product = await getProducByQuery(name)
+            res.status(200).json(product)
+        } else {
+            next()
         }
+    } catch (err) {
+        res.status(404).send(err.message)
     }
 })
 
-// Get lista todos los productos (delete=false)
+// Get lista todas los productos (Admin)
+router.get("/", async (req, res) => {
+    try {
+        const productos = await getAllProducts()
+        res.status(200).json(productos)
+    } catch (err) {
+        res.status(402).send(err.message)
+    }
+    // }
+})
 
 // Get producto por param id (Detalles producto)
 router.get("/:id", async (req, res) => {
@@ -33,18 +41,6 @@ router.get("/:id", async (req, res) => {
     try {
         const product = await getProductById(id)
         res.status(200).json(product)
-    } catch (err) {
-        res.status(404).send(err.message)
-    }
-})
-
-// Get producto por query
-router.get("/", async (req, res) => {
-    const { name } = req.query
-    try {
-        if (name) {
-            res.status(200).json(productByQuery(name))
-        }
     } catch (err) {
         res.status(404).send(err.message)
     }
@@ -62,7 +58,6 @@ router.post("/", async (req, res) => {
 })
 
 // Put editar producto existente
-
 router.put("/:id", async (req, res) => {
     let { id } = req.params
     let body = req.body
