@@ -17,6 +17,15 @@ router.get("/", async (req, res) => {
 })
 
 // Post crear nueva categoría
+router.post("/", async (req, res) => {
+    const category = req.body
+    try {
+        const newCategory = await createCategories(category)
+        res.status(200).json(newCategory)
+    } catch (error) {
+        res.status(404).send(error.message)
+    }
+})
 
 // Put editar categoría existente
 
