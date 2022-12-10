@@ -10,8 +10,9 @@ const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 import logo from "../../assets/emme3d-logo.png"
 
 const initialState = {
-    allProducts: [
+    /* allProducts: [
         {
+            id: 1,
             name: "Producto 1",
             price: 1950,
             categoria: {
@@ -25,6 +26,7 @@ const initialState = {
             img: logo,
         },
         {
+            id: 2,
             name: "Producto 2",
             price: 980,
             categoria: {
@@ -38,6 +40,7 @@ const initialState = {
             img: logo,
         },
         {
+            id: 3,
             name: "Producto 3",
             price: 1250,
             categoria: {
@@ -51,6 +54,7 @@ const initialState = {
             img: logo,
         },
         {
+            id: 4,
             name: "Producto 4",
             price: 2680,
             categoria: {
@@ -64,6 +68,7 @@ const initialState = {
             img: logo,
         },
         {
+            id: 5,
             name: "Producto 5",
             price: 4300,
             categoria: {
@@ -76,7 +81,8 @@ const initialState = {
             valoracion: 8.1,
             img: logo,
         },
-    ],
+    ], */
+    allProducts: [],
     productsFiltered: [],
     categories: [
         {

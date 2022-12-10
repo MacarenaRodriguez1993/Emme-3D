@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.2.1",
+    "dotenv": "^16.0.3",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-awesome-stars-rating": "^0.13.1",

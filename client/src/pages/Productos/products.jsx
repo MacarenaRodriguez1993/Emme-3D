@@ -29,10 +29,18 @@ const Products = () => {
             <div className="cardProduct">
                 {productos.length === 0
                     ? allProducts.map((a) => {
-                          return <Product name={a.name} price={a.price} />
+                          return (
+                              <a href={`/details/${a.id}`}>
+                                  <Product name={a.name} price={a.price} />
+                              </a>
+                          )
                       })
                     : productos?.map((a) => {
-                          return <Product name={a.name} price={a.price} />
+                          return (
+                              <a href={`/details/${a.id}`}>
+                                  <Product name={a.name} price={a.price} />
+                              </a>
+                          )
                       })}
             </div>
 
