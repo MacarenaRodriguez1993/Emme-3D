@@ -3,6 +3,7 @@ const express = require("express")
 const server = express()
 const mongoose = require("mongoose")
 const routes = require("./routes/index.js")
+const morgan = require("morgan")
 
 const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, PORT } = process.env
 const DEFAULT_PORT = 3001
@@ -18,7 +19,9 @@ mongoose
         console.log(err)
     })
 
+server.use(morgan("dev"))
 server.use(express.json())
+server.use(morgan("dev")) //agrege morgan
 server.use("/", routes)
 
 // Si no tenemos un puerto especificado por variable global elegirá el puerto 3001 por defecto
