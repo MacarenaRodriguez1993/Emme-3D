@@ -45,9 +45,10 @@ router.get("/", async (req, res) => {
 
 // Post crear nuevo producto
 router.post("/", async (req, res) => {
+    const product = req.body
     try {
-        const newProduct = await createProduct(req.body)
-        res.status(201).send(newProduct)
+        const newProduct = await createProduct(product)
+        res.status(201).json(newProduct)
     } catch (err) {
         res.status(404).send(err.message)
     }

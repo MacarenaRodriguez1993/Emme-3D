@@ -33,13 +33,16 @@ const productById = async (id) => {
         throw new Error(`No existe ningún producto con id "${id}".`)
     return result
 }
-const newProduct = async (data) => {
-    const newProduct = new Product(data)
+
+const createNewProduct = async (product) => {
     try {
-        await newProduct.save()
-        return newProduct
+        const createdProduct = await Product.create(product)
+        return createdProduct
     } catch (err) {
-        throw new Error(err)
+        if (err.message.includes("E11000")) {
+            err.message = `Ya existe con producto con el nombre ${product.name}.`
+            throw err
+        }
     }
 }
 
@@ -107,6 +110,7 @@ module.exports = {
     listProducts,
     productById,
     producByQuery,
+    createNewProduct,
     newProduct,
     findAndUpdate,
     eraseProduct,

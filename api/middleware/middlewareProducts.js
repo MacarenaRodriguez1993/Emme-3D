@@ -1,9 +1,11 @@
 const {
-    newProduct,
+  newProduct,
     findAndUpdate,
     productById,
     eraseProduct
-} = require("../controllers/productController.js")
+    createNewProduct,
+    productById,
+} = require("../controllers/productController")
 
 // PRODUCTS
 function getAllProducts() {}
@@ -20,8 +22,13 @@ async function getProductById(id) {
 
 function getProductByQuery() {}
 
-function createProduct(product) {
-    return newProduct(product)
+async function createProduct(product) {
+    try {
+        const createdProduct = await createNewProduct(product)
+        return createdProduct
+    } catch (err) {
+        throw err
+    }
 }
 
 async function updateProduct(id, body) {
