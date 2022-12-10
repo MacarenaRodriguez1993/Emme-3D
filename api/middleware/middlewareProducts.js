@@ -1,7 +1,7 @@
 // PRODUCTS
 function getAllProducts() {}
 function getProductById(id) {}
-function getProductByQuery() {}
+function getProductByQuery(name) {}
 function createProduct() {}
 function updateProduct() {}
 function deleteProduct() {}

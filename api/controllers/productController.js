@@ -2,9 +2,8 @@ const mongoose = require("mongoose")
 const Product = require("../models/Product")
 
 const listProducts = async () => {
-    const model = await Product.find({}, (err, total) => {
-        return total
-    })
+    const model = await Product.find()
+    return total
 }
 const producByQuery = async (name) => {
     const byqu = Product.find(
