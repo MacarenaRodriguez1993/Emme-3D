@@ -1,16 +1,22 @@
 import { Formik, Form, Field } from "formik"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useState, useEffect } from "react"
+import { postProduct, getProducts } from "../redux/actions/actions"
 import "./CrearProducto.css"
+
 const CrearProducto = () => {
     // const [images, setImages] = useState([])
     // const [imageToRemove, setImageToRemove] = useState(null)
 
     /* Reescribir completamente este componenete y no usar formik */
-
+    const dispatch = useDispatch()
     const [created, setCreated] = useState(false)
     //este arreglo hace de db por ahora
-    let productos = []
-
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [])
+    let productos = useSelector((state) => state.allProducts)
+    console.log(productos)
     //reemplazar esta constante con las categorias que vienen del back
     const categoriasArray = [
         {
@@ -54,11 +60,11 @@ const CrearProducto = () => {
             <Formik
                 initialValues={{
                     name: "",
-                    price: "",
-                    categorias: [],
-                    stock: "",
+                    price: 0,
+                    stock: 0,
                     description: "",
-                    img: "",
+                    categories_ids: [],
+                    img: [],
                 }}
                 validate={(data) => {
                     let errors = {}
@@ -99,8 +105,7 @@ const CrearProducto = () => {
                 }}
                 onSubmit={(data, { resetForm }) => {
                     //reemplazar este push por el metodo post
-                    productos.push(data)
-                    console.log(productos)
+                    dispatch(postProduct(data))
                     //este metodo sirve para dejar el form en blanco cuando se hace submit
                     resetForm()
                     //seteo este estado para mostrar un mensaje cuando se crea un producto
@@ -143,7 +148,7 @@ const CrearProducto = () => {
                         <div>
                             {/* <label htmlFor="precio">Precio</label> */}
                             <input
-                                type="text"
+                                type="number"
                                 name="price"
                                 value={values.price}
                                 onChange={handleChange}
@@ -191,7 +196,7 @@ const CrearProducto = () => {
                         <div>
                             {/* <label htmlFor="stock">Stock</label> */}
                             <input
-                                type="text"
+                                type="number"
                                 name="stock"
                                 placeholder="Stock"
                                 value={values.stock}
