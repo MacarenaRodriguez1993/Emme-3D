@@ -17,15 +17,21 @@ const producByQuery = async (name) => {
         }
     )
 }
-const productId = async (id) => {
-    Product.find(
-        {
-            id: id,
-        },
-        (err, quer) => {
-            return quer
-        }
-    )
+
+const productById = async (id) => {
+    // Los IDs tienes que tener 24 carácteres
+    if (id.length !== 24)
+        throw new Error(`El id "${id}" no tiene 24 carácteres.`)
+
+    // Buscamos
+    const result = await Product.find({
+        _id: mongoose.Types.ObjectId(id),
+    }).clone() // Se necesita el .clone para que no de errores de queryes duplicadas
+
+    // Si el producto no se encuentra mandará el error
+    if (result.length < 1)
+        throw new Error(`No existe ningún producto con id "${id}".`)
+    return result
 }
 const newProduct = async (data) => {
     const newProduct = new Product(data)
@@ -88,7 +94,8 @@ const findAndUpdate = async (id, obj, errors) => {
     return errors
 }
 
-async function deleteProduct(id) {
+
+async function eraseProduct(id) {
     let logicDelete = await Product.updateOne(
         { id: id }, //busqueda
         { deleted: true } //cambio
@@ -98,9 +105,9 @@ async function deleteProduct(id) {
 
 module.exports = {
     listProducts,
-    productId,
+    productById,
     producByQuery,
     newProduct,
     findAndUpdate,
-    deleteProduct,
+    eraseProduct,
 }

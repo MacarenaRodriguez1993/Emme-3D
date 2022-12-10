@@ -20,6 +20,7 @@ mongoose
         console.log(err)
     })
 
+server.use(morgan("dev"))
 server.use(express.json())
 server.use(morgan("dev")) //agrege morgan
 server.use("/", routes)

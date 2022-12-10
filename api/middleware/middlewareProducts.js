@@ -1,14 +1,29 @@
 const {
     newProduct,
     findAndUpdate,
+    productById,
+    eraseProduct
 } = require("../controllers/productController.js")
+
 // PRODUCTS
 function getAllProducts() {}
-function getProductById(id) {}
+
+async function getProductById(id) {
+    try {
+        const product = await productById(id)
+        // TO-DO: Faltará añadirle las categorías y reseñas
+        return product
+    } catch (error) {
+        throw error
+    }
+}
+
 function getProductByQuery() {}
+
 function createProduct(product) {
     return newProduct(product)
 }
+
 async function updateProduct(id, body) {
     let errors = {}
     let obj = {
@@ -71,6 +86,15 @@ async function updateProduct(id, body) {
     } else {
         let errorReport = await findAndUpdate(id, obj, errors)
         return errorReport
+    }
+}
+
+async function deleteProduct(id) {
+     try {
+        const deteledProduct = await eraseProduct(id)
+        return deteledProduct
+    } catch (error) {
+        throw error
     }
 }
 
