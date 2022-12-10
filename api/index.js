@@ -22,6 +22,7 @@ mongoose
 
 server.use(morgan("dev"))
 server.use(express.json())
+server.use(morgan("dev")) //agrege morgan
 server.use("/", routes)
 
 // Si no tenemos un puerto especificado por variable global elegirá el puerto 3001 por defecto
