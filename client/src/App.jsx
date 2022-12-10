@@ -7,8 +7,15 @@ import ProductsContainer from "./components/ProductsContainer/ProductsContainer"
 import Home from "./pages/Home/home"
 import Productos from "./pages/Productos/products"
 import Landing from "./pages/Landing/landing"
+import { useEffect } from "react"
+import { getProducts } from "./redux/actions/actions"
+import { useDispatch } from "react-redux"
 
 function App() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getProducts())
+    })
     return (
         <>
             <Routes>

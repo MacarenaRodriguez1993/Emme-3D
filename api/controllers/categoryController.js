@@ -1,5 +1,12 @@
 const Category = require("../models/Category")
 
+const categoryNameById = async (id) => {
+    const byqu = await Category.findOne({ _id: id }).exec()
+    //console.log(byqu.name)
+    let name = byqu.name
+    return name
+}
+
 async function getCategories() {
     try {
         const categories = await Category.find()
@@ -66,4 +73,5 @@ module.exports = {
     deleteCategory,
     updateCategory,
     createCategory,
+    categoryNameById,
 }

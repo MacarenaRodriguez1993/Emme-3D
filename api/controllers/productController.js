@@ -1,13 +1,47 @@
 const mongoose = require("mongoose")
 const Product = require("../models/Product.js")
 const ObjectId = mongoose.Types.ObjectId
+const { categoryNameById } = require("./categoryController.js")
 
 const listProducts = async () => {
-    const products = await Product.find()
-    if (products.length < 1)
+    let products = await Product.find()
+    if (products.length < 1) {
         throw new Error(
             "Vaya, parece que no hay productos en la base de datos."
         )
+    }
+    /*
+    let categoria = products.categories_ids.map(async (id) => {
+        let name = await categoryNameById(id)
+        console.log(name)
+        let obj = { id, name }
+        return obj
+    })
+    */
+    products = products.map(async (product) => {
+        let obj = {
+            name: product.name,
+            price: product.price,
+            //categoria,
+            /* 
+            {
+                id: product.categories_ids.map((id) => {
+                    id
+                }),
+                name: "Mates",
+            },
+            */
+            stock: product.stock,
+            description: product.description,
+            vendidos: product.vendidos,
+            valoracion: 7.8,
+            img: "urlimage1",
+        }
+        //console.log(obj)
+        return obj
+    })
+
+    //console.log(products)
     return products
 }
 const productByQuery = async (name) => {

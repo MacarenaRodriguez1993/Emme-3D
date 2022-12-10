@@ -6,6 +6,12 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const ERROR = "ERROR"
+import axios from "axios"
+const axiosConfig = {
+    headers: {
+        "accept-encoding": null,
+    },
+}
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -86,16 +92,16 @@ export const filterByLikes = (value) => {
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 
 //Aqui va la url base del back
-const url_api = ""
+const url_api = "http://localhost:3001"
 
 //Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
 export const getProducts = () => {
     return async (dispatch) => {
         try {
-            const products = await axios.get(`${url_api}/products`)
+            const products = await axios.get(`${url_api}/products`, axiosConfig)
             dispatch({
                 type: GET_ALL_PRODUCTS,
-                payload: products,
+                payload: products.data,
             })
         } catch (err) {
             dispatch({
