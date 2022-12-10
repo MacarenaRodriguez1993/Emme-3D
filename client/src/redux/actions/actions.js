@@ -84,7 +84,7 @@ export const filterByLikes = (value) => {
         }
     }
 }
-/*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
+/*--------- FIN DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
