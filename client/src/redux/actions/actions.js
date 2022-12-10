@@ -6,6 +6,7 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const ERROR = "ERROR"
+import axios from 'axios'
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -85,8 +86,23 @@ export const filterByLikes = (value) => {
 }
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 
+
 //Aqui va la url base del back
-const url_api = ""
+const url_api = `http://localhost:3001`
+
+//Action para postear productos
+export const postProduct = product => {
+    return dispatch => {
+        try {
+            axios.post(url_api + '/products', product)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
 
 //Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
 export const getProducts = () => {
