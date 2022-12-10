@@ -26,6 +26,9 @@ const CrearProducto = () => {
         dispatch(getProducts())
     }, [])
     let cats = useSelector((state) => state.categories)
+    let catForm = cats.data
+    console.log(catForm)
+
     /* const handleOpenWidget = () => {
         var myWidget = window.cloudinary.createUploadWidget(
             {
