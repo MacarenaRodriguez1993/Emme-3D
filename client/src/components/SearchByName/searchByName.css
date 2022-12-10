@@ -1,0 +1,10 @@
+form {
+    display: flex;
+    width: 40%;
+    margin: auto;
+}
+.buttonSearch {
+    width: 20%;
+    padding: 0;
+    margin: 0 0.5em;
+}

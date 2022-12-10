@@ -6,6 +6,7 @@ import Product from "../../components/Product/product"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
+import SearchByName from "../../components/SearchByName/searchByName"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -24,6 +25,7 @@ const Products = () => {
 
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <SearchFilters />
+            <SearchByName />
             <div className="cardProduct">
                 {productos.length === 0
                     ? allProducts.map((a) => {
