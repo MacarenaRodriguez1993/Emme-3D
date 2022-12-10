@@ -1,10 +1,15 @@
-const { newProduct } = require("../controllers/productController")
+const { createNewProduct } = require("../controllers/productController")
 // PRODUCTS
 function getAllProducts() {}
 function getProductById(id) {}
 function getProductByQuery() {}
-function createProduct(product) {
-    return newProduct(product)
+async function createProduct(product) {
+    try {
+        const createdProduct = await createNewProduct(product)
+        return createdProduct
+    } catch (err) {
+        throw err
+    }
 }
 function updateProduct() {}
 function deleteProduct() {}
