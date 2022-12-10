@@ -74,7 +74,7 @@ export default function Details({ props }) {
                 <h2>Descripcion:</h2>
                 <p>{p.description}</p>
             </div>
-            <div className="container-opiniones">
+            {/* <div className="container-opiniones">
                 {p.reviews.map((r) => {
                     return (
                         <div style={{ marginBottom: 15 }}>
@@ -87,7 +87,7 @@ export default function Details({ props }) {
                         </div>
                     )
                 })}
-            </div>
+            </div> */}
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
