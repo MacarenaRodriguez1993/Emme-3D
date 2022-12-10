@@ -9,7 +9,7 @@ export default function Details({ props }) {
     const dispatch = useDispatch()
     const [rating, setRating] = useState(0)
     const [review, setReview] = useState("")
-    const id = 5
+    const id = 5 //props.match.params.id
     useEffect(() => {
         dispatch(getDetails(id))
     }, [id])
@@ -38,7 +38,7 @@ export default function Details({ props }) {
                             <span>
                                 Categoria
                                 <span className="valor-info">
-                                    {p.categories}
+                                    {p.categories.name}
                                 </span>
                             </span>
                         </div>
@@ -80,10 +80,6 @@ export default function Details({ props }) {
                         <div style={{ marginBottom: 15 }}>
                             <div className="header-opinion">
                                 <h2>{r.name}</h2>
-                                <ReactStarsRating
-                                    isEdit={false}
-                                    value={r.rating}
-                                />
                             </div>
                             <div className="opinion-reviews">
                                 <span>{r.reviews}</span>
@@ -95,7 +91,6 @@ export default function Details({ props }) {
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
-                    <ReactStarsRating value={rating} onChange={setRating} />
                 </div>
                 <textarea
                     className="input-opinion"

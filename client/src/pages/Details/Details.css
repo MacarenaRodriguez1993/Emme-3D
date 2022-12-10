@@ -18,16 +18,17 @@
 }
 .img-details {
     border-radius: 5px;
+    width: 400px;
     height: 400px;
     aspect-ratio: 1/1;
     object-fit: cover;
 }
 .container-header {
-    width: 100%;
+    width: 80%;
     margin-top: 40px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .container-header-left {
     width: 50%;
@@ -41,6 +42,7 @@
     padding: 20px;
     display: flex;
     min-width: 20%;
+    width: 400px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -95,6 +97,7 @@
     width: 200px;
 }
 .btn-compra {
+    width: 200px;
     border: none;
     cursor: pointer;
     background: #377d71;
@@ -180,6 +183,7 @@
     justify-content: flex-end;
 }
 .btn-valoracion button {
+    width: 80px;
     cursor: pointer;
     border: none;
     background: #a34270;
