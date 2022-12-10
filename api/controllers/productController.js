@@ -7,7 +7,7 @@ const listProducts = async () => {
         return total
     })
 }
-const producByQuery = async (name) => {
+const productByQuery = async (name) => {
     const byqu = await Product.findOne({ name: name }).exec()
     return byqu
 }
@@ -91,7 +91,6 @@ const findAndUpdate = async (id, obj, errors) => {
     return errors
 }
 
-
 async function eraseProduct(id) {
     let logicDelete = await Product.updateOne(
         { id: id }, //busqueda
@@ -103,9 +102,8 @@ async function eraseProduct(id) {
 module.exports = {
     listProducts,
     productById,
-    producByQuery,
+    productByQuery,
     createNewProduct,
-    newProduct,
     findAndUpdate,
     eraseProduct,
 }
