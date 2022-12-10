@@ -5,6 +5,7 @@ const {
     eraseProduct
     createNewProduct,
     productById,
+    productByQuery
 } = require("../controllers/productController")
 
 // PRODUCTS
@@ -20,7 +21,15 @@ async function getProductById(id) {
     }
 }
 
-function getProductByQuery() {}
+
+function getProducByQuery() {
+    try {
+        const queryProduct = await producByQuery(product)
+        return queryProduct
+    } catch (err) {
+        throw err
+    }
+}
 
 async function createProduct(product) {
     try {
@@ -108,7 +117,6 @@ async function deleteProduct(id) {
 module.exports = {
     getAllProducts,
     getProductById,
-    getProductByQuery,
     createProduct,
     updateProduct,
 }

@@ -5,15 +5,23 @@ const {
     getProductByQuery,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    producByQuery,
 } = require("../middleware/middlewareProducts")
 
 // Get lista todas los productos (Admin)
 router.get("/", async (req, res) => {
-    try {
-        res.status(200).json(listProducts())
-    } catch (err) {
-        res.status(402).send(err.message)
+    let { name } = req.query
+    //console.log(typeof name) es un string
+    if (name) {
+        let getProduct = await producByQuery(name)
+        res.status(200).send(getProduct)
+    } else {
+        try {
+            res.status(200).json(listProducts())
+        } catch (err) {
+            res.status(402).send(err.message)
+        }
     }
 })
 
@@ -36,7 +44,7 @@ router.get("/", async (req, res) => {
     const { name } = req.query
     try {
         if (name) {
-            res.status(200).json(ProducByQuery(name))
+            res.status(200).json(producByQuery(name))
         }
     } catch (err) {
         res.status(404).send(err.message)
