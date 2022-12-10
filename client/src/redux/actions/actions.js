@@ -6,7 +6,7 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const ERROR = "ERROR"
-import axios from 'axios'
+import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -91,10 +91,10 @@ export const filterByLikes = (value) => {
 const url_api = `http://localhost:3001`
 
 //Action para postear productos
-export const postProduct = product => {
-    return dispatch => {
+export const postProduct = (product) => {
+    return (dispatch) => {
         try {
-            axios.post(url_api + '/products', product)
+            axios.post(url_api + "/products", product)
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -104,10 +104,10 @@ export const postProduct = product => {
     }
 }
 
-export const postCategory = category => {
-    return dispatch => {
+export const postCategory = (category) => {
+    return (dispatch) => {
         try {
-            axios.post(url_api + '/categories', category)
+            axios.post(url_api + "/categories", category)
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -126,7 +126,7 @@ export const getProducts = () => {
             const products = await axios.get(`${url_api}/products`)
             dispatch({
                 type: GET_ALL_PRODUCTS,
-                payload: products,
+                payload: products.data,
             })
         } catch (err) {
             dispatch({
