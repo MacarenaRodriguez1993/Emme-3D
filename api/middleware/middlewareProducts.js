@@ -18,7 +18,6 @@ function createProduct(product) {
     return newProduct(product)
 }
 function updateProduct() {}
-function deleteProduct() {}
 
 module.exports = {
     getAllProducts,
@@ -26,5 +25,4 @@ module.exports = {
     getProductByQuery,
     createProduct,
     updateProduct,
-    deleteProduct,
 }
