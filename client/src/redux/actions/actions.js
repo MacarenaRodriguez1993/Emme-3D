@@ -1,11 +1,12 @@
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
-const GET_DETAILS = "GET_DETAILS"
+const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 const GET_BY_CATEGORY = "GET_BY_CATEGORY"
 const GET_BY_PRICE = "GET_BY_PRICE"
 const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
+const GET_DETAILS = "GET_DETAILS"
 const ERROR = "ERROR"
+const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -113,6 +114,23 @@ export const getDetails = () => {
             dispatch({
                 type: GET_DETAILS,
                 paiload: detalle,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+/* Action para SEARCH BY NAME */
+export const searchByName = (name) => {
+    return async (dispatch) => {
+        const searchByName = await axios.get(`${url_api}/products?name=${name}`)
+        try {
+            dispatch({
+                type: SEARCH_BY_NAME,
+                payload: searchByName.data,
             })
         } catch (err) {
             dispatch({

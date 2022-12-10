@@ -1,7 +1,10 @@
 import React, { useState } from "react"
 import "./searchByName.css"
 import { AiOutlineSearch } from "react-icons/ai"
+import { useDispatch } from "react-redux"
+import { searchByName } from "../../redux/actions/actions"
 const SearchByName = () => {
+    const dispatch = useDispatch()
     let [state, setState] = useState({
         search: "",
     })
@@ -13,7 +16,8 @@ const SearchByName = () => {
     }
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(state.search)
+        let name = state.search
+        dispatch(searchByName(name))
         setState({
             search: "",
         })

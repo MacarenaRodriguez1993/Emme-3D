@@ -4,8 +4,9 @@ const GET_BY_PRICE = "GET_BY_PRICE"
 const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
-const GET_DETAILS = 'GET_DETAILS'
+const GET_DETAILS = "GET_DETAILS"
 const ERROR = "ERROR"
+const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 import logo from "../../assets/emme3d-logo.png"
 
 const initialState = {
@@ -259,6 +260,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 detail: action.payload,
+            }
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                productsFiltered: action.payload,
             }
         default:
             return state
