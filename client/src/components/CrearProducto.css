@@ -1,64 +1,68 @@
-.create-product-container{
-    background-color: #262A53;
-    color: #D4BEC6;
+.create-product-container {
+    background-color: #262a53;
+    color: #d4bec6;
     padding: 10px;
-    width: fit-content;
-    
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    align-items: center;
 }
-.crear-producto-title{
+.crear-producto-title {
     font-size: 25px;
-    color: #D4BEC6;
+    color: #d4bec6;
     margin-bottom: 10px;
 }
 .create-product-container label {
     padding-right: 15px;
 }
 
-.inputs{
-    background-color: #D4BEC6;
+.inputs {
+    background-color: #d4bec6;
     padding: 10px;
     border: none;
     border-radius: 5px;
     width: 300px;
     margin-bottom: 10px;
-
 }
-.inputs::placeholder{
-    color: #262A53;
+.inputs::placeholder {
+    color: #262a53;
     font-weight: bold;
     font-weight: bold;
-
 }
-.select-options{
-    color: #262A53;
+.select-options {
+    color: #262a53;
     font-weight: bold;
 }
-.select-cat{
-    color: #262A53;
+.select-cat {
+    color: #262a53;
     font-weight: bold;
 }
-.btn-crear-producto{
-    background-color: #A34270;
-    color: #D4BEC6;
+.btn-crear-producto {
+    background-color: #a34270;
+    color: #d4bec6;
+    width: 300px;
     border: none;
     border-radius: 5px;
     padding: 10px;
     font-weight: bold;
 }
-.create-product-error{
-    color: #D4BEC6;
+.create-product-error {
+    color: #d4bec6;
     background-color: rgb(184, 0, 0);
     margin-bottom: 10px;
     padding: 3px;
     padding-left: 10px;
     border-radius: 5px;
 }
-.create-product-success{
+.create-product-success {
     color: black;
-        background-color: rgb(0, 184, 0);
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding: 3px;
-        padding-left: 10px;
-        border-radius: 5px;
+    background-color: rgb(0, 184, 0);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+    padding-left: 10px;
+    border-radius: 5px;
 }

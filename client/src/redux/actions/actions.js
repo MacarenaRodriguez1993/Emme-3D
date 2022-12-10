@@ -86,6 +86,7 @@ export const filterByLikes = (value) => {
 }
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 
+/*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
 const url_api = `http://localhost:3001`
 
@@ -102,6 +103,21 @@ export const postProduct = (product) => {
         }
     }
 }
+
+export const postCategory = (category) => {
+    return (dispatch) => {
+        try {
+            axios.post(url_api + "/categories", category)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+/*--------- FIN ACTIONS POST -------------*/
 
 //Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
 export const getProducts = () => {
