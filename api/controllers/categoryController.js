@@ -14,6 +14,27 @@ async function getCategories() {
     }
 }
 
+
+async function updateCategory(category) {
+    try {
+        const updatedCategory = await Category.updateOne(
+            { _id: category._id },
+            {
+                $set: { name: category.name },
+                $currentDate: { lastModified: true },
+            }
+        )
+
+        // Si no se ha modificado nada asumimos que la categoría no existe
+        if (!updatedCategory.modifiedCount)
+            throw new Error(
+                `No existe ninguna categoría con id "${category._id}".`
+            )
+        return `Categoría renombrada a ${category.name}.`
+    } catch (error) {
+        throw error
+    }
+
 async function createCategory(category) {
     try {
         const createdCategory = await Category.create(category)
@@ -28,5 +49,7 @@ async function createCategory(category) {
 
 module.exports = {
     getCategories,
+    updateCategory,
     createCategory,
+
 }
