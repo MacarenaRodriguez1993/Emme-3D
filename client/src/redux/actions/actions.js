@@ -5,6 +5,7 @@ const GET_BY_PRICE = "GET_BY_PRICE"
 const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
+const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 const ERROR = "ERROR"
 import axios from 'axios'
 
@@ -119,6 +120,8 @@ export const postCategory = category => {
 
 /*--------- FIN ACTIONS POST -------------*/
 
+/*--------- ACTIONS GET -------------*/
+
 //Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
 export const getProducts = () => {
     return async (dispatch) => {
@@ -127,6 +130,23 @@ export const getProducts = () => {
             dispatch({
                 type: GET_ALL_PRODUCTS,
                 payload: products,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const getCategories = () => {
+    return async (dispatch) => {
+        try {
+            const categories = await axios.get(`${url_api}/categories`)
+            dispatch({
+                type: GET_ALL_CATEGORIES,
+                payload: categories,
             })
         } catch (err) {
             dispatch({
@@ -153,3 +173,4 @@ export const getDetails = () => {
         }
     }
 }
+/*--------- FIN ACTIONS GET -------------*/

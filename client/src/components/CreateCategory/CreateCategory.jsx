@@ -1,6 +1,7 @@
-import { useDispatch } from "react-redux"
-import { postCategory } from "../../redux/actions/actions"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { postCategory, getCategories } from "../../redux/actions/actions"
+import { useState, useEffect } from "react"
+import validations from "../../validations/validations-form.js"
 import "./CreateCategory.css"
 
 const CreateCategory = () => {
@@ -9,11 +10,20 @@ const CreateCategory = () => {
     const [category, setCategory] = useState({
         name: "",
     })
+    /* Este estado sirve para mostrar un mensaje cuando se crea un producto */
+    const [categoryCreated, setCategoryCreated] = useState(false)
+    /* Este estado sirve para guardar los erroresd de las validaciones */
+    const [categoryError, setCategoryError] = useState({})
 
     const handleSubmitCategory = (e) => {
         e.preventDefault
         dispatch(postCategory(category))
     }
+    //console.log(types);
+    useEffect(() => {
+        //setCategoryError(validations(category))
+        dispatch(getCategories())
+    }, [category, dispatch])
 
     const handleChangeCategory = (e) => {
         setCategory({

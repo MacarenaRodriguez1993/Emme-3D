@@ -1,8 +1,13 @@
 import { Formik, Form, Field } from "formik"
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { postProduct, getProducts } from "../redux/actions/actions"
+import {
+    postProduct,
+    getCategories,
+    getProducts,
+} from "../redux/actions/actions"
 import CreateCategory from "./CreateCategory/CreateCategory"
+import validate from "../validations/validations-form.js"
 import "./CrearProducto.css"
 
 const CrearProducto = () => {
@@ -11,29 +16,16 @@ const CrearProducto = () => {
 
     /* Reescribir completamente este componenete y no usar formik */
     const dispatch = useDispatch()
+    /* Este estado sirve para mostrar un mensaje cuando se crea un producto */
     const [created, setCreated] = useState(false)
-    //este arreglo hace de db por ahora
+    /* Este estado sirve para guardar los erroresd de las validaciones */
+    const [error, setError] = useState({})
+
     useEffect(() => {
+        dispatch(getCategories())
         dispatch(getProducts())
     }, [])
-    let productos = useSelector((state) => state.allProducts)
-    console.log(productos)
-    //reemplazar esta constante con las categorias que vienen del back
-    const categoriasArray = [
-        {
-            id: 1,
-            name: "Mates",
-        },
-        {
-            id: 2,
-            name: "Lamparas",
-        },
-        {
-            id: 3,
-            name: "Vasos",
-        },
-    ]
-
+    let cats = useSelector((state) => state.categories)
     /* const handleOpenWidget = () => {
         var myWidget = window.cloudinary.createUploadWidget(
             {
@@ -177,10 +169,10 @@ const CrearProducto = () => {
                                 >
                                     <p className="select-cat">Categoria</p>
                                 </option>
-                                {categoriasArray.map((c) => {
+                                {catForm?.map((c) => {
                                     return (
                                         <option
-                                            value={c.name}
+                                            value={c._id}
                                             className="select-options"
                                         >
                                             {c.name}
