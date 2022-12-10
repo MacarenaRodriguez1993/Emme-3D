@@ -6,14 +6,24 @@ const {
     createProduct,
     updateProduct,
 } = require("../middleware/middlewareProducts")
-const { deleteProduct } = require("../controllers/productController.js")
+const {
+    deleteProduct,
+    producByQuery,
+} = require("../controllers/productController.js")
 
 // Get lista todas los productos (Admin)
 router.get("/", async (req, res) => {
-    try {
-        res.status(200).json(listProducts())
-    } catch (err) {
-        res.status(402).send(err.message)
+    let { name } = req.query
+    //console.log(typeof name) es un string
+    if (name) {
+        let getProduct = await producByQuery(name)
+        res.status(200).send(getProduct)
+    } else {
+        try {
+            res.status(200).json(listProducts())
+        } catch (err) {
+            res.status(402).send(err.message)
+        }
     }
 })
 

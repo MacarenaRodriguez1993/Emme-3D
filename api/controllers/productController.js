@@ -7,14 +7,8 @@ const listProducts = async () => {
     })
 }
 const producByQuery = async (name) => {
-    const byqu = Product.find(
-        {
-            name: name,
-        },
-        (err, data) => {
-            return data
-        }
-    )
+    const byqu = await Product.findOne({ name: name }).exec()
+    return byqu
 }
 
 const productById = async (id) => {
