@@ -3,7 +3,6 @@ const {
     productById,
     eraseProduct,
     createNewProduct,
-    productById,
     productByQuery,
 } = require("../controllers/productController")
 

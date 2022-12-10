@@ -15,15 +15,14 @@ async function getAllCategories() {
     }
 }
 
-
 async function deleteCategories(id) {
-     try {
-         const deletedCategory = await deleteCategory(id)
-         return deletedCategory
-     } catch (error) {
-         throw error
-     }
- }
+    try {
+        const deletedCategory = await deleteCategory(id)
+        return deletedCategory
+    } catch (error) {
+        throw error
+    }
+}
 
 async function updateCategories(category) {
     try {
@@ -32,7 +31,8 @@ async function updateCategories(category) {
     } catch (error) {
         throw error
     }
-        
+}
+
 async function createCategories(category) {
     try {
         const createdCategory = await createCategory(category)
@@ -41,7 +41,6 @@ async function createCategories(category) {
         throw error
     }
 }
-
 
 module.exports = {
     getAllCategories,

@@ -14,7 +14,6 @@ async function getCategories() {
     }
 }
 
-
 async function deleteCategory(id) {
     try {
         const deletedCategory = await Category.deleteOne({ _id: id })
@@ -26,7 +25,7 @@ async function deleteCategory(id) {
     } catch (error) {
         throw error
     }
-
+}
 
 async function updateCategory(category) {
     try {
@@ -47,6 +46,7 @@ async function updateCategory(category) {
     } catch (error) {
         throw error
     }
+}
 
 async function createCategory(category) {
     try {
