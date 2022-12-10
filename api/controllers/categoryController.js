@@ -15,6 +15,19 @@ async function getCategories() {
 }
 
 
+async function deleteCategory(id) {
+    try {
+        const deletedCategory = await Category.deleteOne({ _id: id })
+
+        if (!deletedCategory.deletedCount)
+            throw new Error(`No existe ninguna categoría con id "${id}".`)
+
+        return `Categoría ${id} borrada.`
+    } catch (error) {
+        throw error
+    }
+
+
 async function updateCategory(category) {
     try {
         const updatedCategory = await Category.updateOne(
@@ -43,13 +56,14 @@ async function createCategory(category) {
         // E11000 es el código de error cuando el elemento ya existe (duplicado)
         if (error.message.includes("E11000"))
             error.message = `Ya existe una categoría con nombre "${category.name}".`
+
         throw error
     }
 }
 
 module.exports = {
     getCategories,
+    deleteCategory,
     updateCategory,
     createCategory,
-
 }

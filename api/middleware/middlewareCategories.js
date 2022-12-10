@@ -1,5 +1,6 @@
 const {
     getCategories,
+    deleteCategory,
     updateCategory,
     createCategory,
 } = require("../controllers/categoryController")
@@ -14,6 +15,16 @@ async function getAllCategories() {
     }
 }
 
+
+async function deleteCategories(id) {
+     try {
+         const deletedCategory = await deleteCategory(id)
+         return deletedCategory
+     } catch (error) {
+         throw error
+     }
+ }
+
 async function updateCategories(category) {
     try {
         const updatedCategory = await updateCategory(category)
@@ -26,13 +37,11 @@ async function createCategories(category) {
     try {
         const createdCategory = await createCategory(category)
         return createdCategory
-
     } catch (error) {
         throw error
     }
 }
 
-function deleteCategories() {}
 
 module.exports = {
     getAllCategories,
