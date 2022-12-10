@@ -35,9 +35,19 @@ const newProduct = async (data) => {
         throw new Error(err)
     }
 }
+
+async function deleteProduct(id) {
+    let logicDelete = await Product.updateOne(
+        { id: id }, //busqueda
+        { deleted: true } //cambio
+    )
+    return logicDelete
+}
+
 module.exports = {
     listProducts,
     productId,
     producByQuery,
     newProduct,
+    deleteProduct,
 }
