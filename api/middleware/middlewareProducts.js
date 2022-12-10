@@ -1,7 +1,18 @@
-const { newProduct } = require("../controllers/productController")
+const { newProduct, productById } = require("../controllers/productController")
+
 // PRODUCTS
 function getAllProducts() {}
-function getProductById(id) {}
+
+async function getProductById(id) {
+    try {
+        const product = await productById(id)
+        // TO-DO: Faltará añadirle las categorías y reseñas
+        return product
+    } catch (error) {
+        throw error
+    }
+}
+
 function getProductByQuery() {}
 function createProduct(product) {
     return newProduct(product)
