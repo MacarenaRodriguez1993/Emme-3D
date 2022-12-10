@@ -2,6 +2,7 @@ import { Formik, Form, Field } from "formik"
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { postProduct, getProducts } from "../redux/actions/actions"
+import CreateCategory from "./CreateCategory/CreateCategory"
 import "./CrearProducto.css"
 
 const CrearProducto = () => {
@@ -277,6 +278,7 @@ const CrearProducto = () => {
                     </Form>
                 )}
             </Formik>
+            <CreateCategory />
             {/* <div>
                 <p>Imagenes</p>
                 {images.map((img) => (
