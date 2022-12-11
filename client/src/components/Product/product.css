@@ -2,10 +2,14 @@
     border-radius: 1em;
     background-color: #2a2f62;
     padding: 0.5em;
-    text-align: start;
-    color: #FFE3E3;
+    text-align: center;
+    color: #ffe3e3;
 }
 .imageCard {
-    width: 100%;
+    width: 85%;
     border-radius: 1em;
+}
+.contentCard {
+    text-align: start;
+    padding: 0 0.2em;
 }

@@ -31,21 +31,13 @@ const Products = () => {
             <SearchByName />
             <div className="cardProduct">
                 {error}
-                {productos.length === 0
-                    ? allProducts.map((a) => {
-                          return (
-                              <a href={`/details/${a._id}`}>
-                                  <Product name={a.name} price={a.price} />
-                              </a>
-                          )
-                      })
-                    : productos?.map((a) => {
-                          return (
-                              <a href={`/details/${a._id}`}>
-                                  <Product name={a.name} price={a.price} />
-                              </a>
-                          )
-                      })}
+                {productos?.map((a) => {
+                    return (
+                        <a className="linkDetails" href={`/details/${a._id}`}>
+                            <Product name={a.name} price={a.price} />
+                        </a>
+                    )
+                })}
             </div>
 
             <Link to="/crear-producto">
