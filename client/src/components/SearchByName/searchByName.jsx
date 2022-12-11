@@ -27,7 +27,7 @@ const SearchByName = () => {
     }
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form className="formSearchName" onSubmit={(e) => handleSubmit(e)}>
                 <input
                     type="text"
                     name="product"

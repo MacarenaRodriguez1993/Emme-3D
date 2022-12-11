@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { getDetails } from "../../redux/actions/actions"
 import ReactStarsRating from "react-awesome-stars-rating"
 import { useParams } from "react-router-dom"
+import NavBar from "../../components/NavBar/NavBar"
+import Footer from "../../components/Footer/Footer"
 
 export default function Details({ props }) {
     const { id } = useParams()
@@ -22,6 +24,7 @@ export default function Details({ props }) {
 
     return (
         <div className="container-details">
+            <NavBar />
             <div className="container-header">
                 <div className="conatainer-header-left">
                     <img
@@ -117,6 +120,7 @@ export default function Details({ props }) {
                     <button>Enviar</button>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
