@@ -1,6 +1,7 @@
 .productos {
     color: #ffe3e3;
     background-color: #262a53;
+    min-height: 100vh;
 }
 .cardProduct {
     width: 95%;
@@ -12,4 +13,12 @@
 }
 .addButton {
     margin-left: 25%;
+}
+.product-btn {
+    background-color: #a34270;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 50%;
+    color: #ffe3e3;
 }

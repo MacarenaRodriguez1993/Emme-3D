@@ -16,71 +16,76 @@ export default function Details({ props }) {
         dispatch(getDetails(_id))
     }, [dispatch])
 
-    const p = useSelector((state) => state.detail)
-    const a = p?.data
-    console.log(a)
-    console.log(_id)
+    const productDetail = useSelector((state) => state.detail)
+    let p = productDetail?.data
+    console.log(p)
 
-    return {
-        /* <div className="container-details">
+    return (
+        <div className="container-details">
             <div className="container-header">
                 <div className="conatainer-header-left">
-                    {p.img.map((e) => (
-                        <img className="img-details" src={e} />
-                    ))}
+                    <img
+                        className="img-details"
+                        src={p?.map((a) => a.img)}
+                        alt={p?.map((a) => a.img)}
+                    />
                 </div>
                 <div className="conatainer-header-right">
                     <div className="title-detail">
-                        <h2>{p.name}</h2>
+                        <h2>{p?.map((n) => n.name)}</h2>
                     </div>
                     <div className="container-info-detail">
-                        <div className="info-detail">
-                            <text>
+                        <div className="info-detail buttons-details">
+                            <div>
                                 Precio
-                                <span className="valor-info">${p.price}</span>
-                            </text>
+                                <span className="valor-info">
+                                    ${p?.map((p) => p.price)}
+                                </span>
+                            </div>
                         </div>
-                        <div className="info-detail">
+                        <div className="info-detail buttons-details">
                             <span>
                                 Categoria
                                 <span className="valor-info">
-                                    {p.categories_ids}
+                                    {p?.map((c) => c.categories_ids)}
                                 </span>
                             </span>
                         </div>
-                        <div className="info-detail">
-                            <text>
+                        <div className="info-detail buttons-details">
+                            <div>
                                 Stock
                                 <span className="valor-info">
                                     {" "}
-                                    {p.stock} unidades
+                                    {p?.map((s) => s.stock)} unidades
                                 </span>
-                            </text>
+                            </div>
                         </div>
                     </div>
                     <div className="container-btn-detail">
-                        <button className="btn-detail">
+                        <button className="btn-detail buttons-details">
                             Seleccionar color
                         </button>
-                        <button className="btn-detail">
+                        <button className="btn-detail buttons-details">
                             Ver medios de pagos
                         </button>
-                        <button className="btn-agregar-carro">
+                        <button className="btn-agregar-carro buttons-details">
                             Agregar al carrito{" "}
                             <img
                                 style={{ width: 20, height: 20 }}
                                 src={carrito}
                             />
                         </button>
-                        <button className="btn-compra">Comprar ahora</button>
+                        <button className="btn-compra buttons-details">
+                            Comprar ahora
+                        </button>
                     </div>
                 </div>
             </div>
             <div className="container-descripcion">
                 <h2>Descripcion:</h2>
-                <p>{p.description}</p>
+                <p>{p?.map((d) => d.description)}</p>
             </div>
-             <div className="container-opiniones">
+            {/* <div className="container-opiniones">
                 {p.reviews.map((r) => {
                     return (
                         <div style={{ marginBottom: 15 }}>
@@ -94,11 +99,10 @@ export default function Details({ props }) {
                         </div>
                     )
                 })}
-            </div> 
+            </div> */}
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
-                    <StarRating value={rating} onChange={setRating} />
                 </div>
                 <textarea
                     className="input-opinion"
@@ -109,6 +113,6 @@ export default function Details({ props }) {
                     <button>Enviar</button>
                 </div>
             </div>
-        </div> */
-    }
+        </div>
+    )
 }

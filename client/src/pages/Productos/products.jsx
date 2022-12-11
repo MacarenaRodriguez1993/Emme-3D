@@ -6,6 +6,8 @@ import Product from "../../components/Product/product"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
+import SearchByName from "../../components/SearchByName/searchByName"
+
 import { getProducts } from "../../redux/actions/actions"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
@@ -15,21 +17,20 @@ const Products = () => {
     /*Aqui tomo el estado global de allProducts*/
     const allProducts = useSelector((state) => state.allProducts)
     let productos = useSelector((state) => state.productsFiltered)
-    console.log(allProducts)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
-
     return (
         <div className="productos">
             <NavBar />
-
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <SearchFilters />
+            <SearchByName />
             <div className="cardProduct">
+                {error}
                 {productos.length === 0
                     ? allProducts.map((a) => {
                           return (
@@ -48,7 +49,10 @@ const Products = () => {
             </div>
 
             <Link to="/crear-producto">
-                <button className="addButton"> Crear Producto </button>
+                <button className="addButton product-btn">
+                    {" "}
+                    Crear Producto{" "}
+                </button>
             </Link>
 
             {/* AQUI VA LA PAGINACION */}

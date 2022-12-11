@@ -5,7 +5,9 @@ const GET_BY_PRICE = "GET_BY_PRICE"
 const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
+const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const ERROR = "ERROR"
+const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -84,8 +86,9 @@ export const filterByLikes = (value) => {
         }
     }
 }
-/*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
+/*--------- FIN DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 
+/*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
 const url_api = `http://localhost:3001`
 
@@ -102,6 +105,23 @@ export const postProduct = (product) => {
         }
     }
 }
+
+export const postCategory = (category) => {
+    return (dispatch) => {
+        try {
+            axios.post(url_api + "/categories", category)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+/*--------- FIN ACTIONS POST -------------*/
+
+/*--------- ACTIONS GET -------------*/
 
 //Action para traer todos los productos  - preparada para cuando tengamos la conexion con el back
 export const getProducts = () => {
@@ -121,14 +141,13 @@ export const getProducts = () => {
     }
 }
 
-export const getDetails = (id) => {
+export const getCategories = () => {
     return async (dispatch) => {
         try {
-            const products = await axios.get(`${url_api}/products/${id}`)
-
+            const categories = await axios.get(`${url_api}/categories`)
             dispatch({
-                type: GET_DETAILS,
-                payload: products.data,
+                type: GET_ALL_CATEGORIES,
+                payload: categories,
             })
         } catch (err) {
             dispatch({
@@ -138,3 +157,50 @@ export const getDetails = (id) => {
         }
     }
 }
+
+export const getDetails = (id) => {
+    return async (dispatch) => {
+        const detalle = await axios.get(`${url_api}/products/${id}`)
+        try {
+            dispatch({
+                type: GET_DETAILS,
+                payload: detalle,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+/* Action para SEARCH BY NAME */
+export const searchByName = (name) => {
+    return async (dispatch) => {
+        const searchByName = await axios.get(`${url_api}/products?name=${name}`)
+        try {
+            if (searchByName.data === null) {
+                dispatch({
+                    type: ERROR,
+                    payload: "No se encontraton resultados",
+                })
+            } else if (searchByName.data.length === undefined) {
+                dispatch({
+                    type: SEARCH_BY_NAME,
+                    payload: [searchByName.data],
+                })
+            } else {
+                dispatch({
+                    type: SEARCH_BY_NAME,
+                    payload: searchByName.data,
+                })
+            }
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+/*--------- FIN ACTIONS GET -------------*/
