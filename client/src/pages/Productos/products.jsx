@@ -34,33 +34,15 @@ const Products = () => {
                 {productos.length === 0
                     ? allProducts.map((a) => {
                           return (
-<<<<<<< HEAD
-                              <a href={`/details/${a.id}`}>
-                                  <Product
-                                      key={a.id}
-                                      name={a.name}
-                                      price={a.price}
-                                  />
-=======
                               <a href={`/details/${a._id}`}>
                                   <Product name={a.name} price={a.price} />
->>>>>>> df47e0e00e3e157f0c210e7fdb486cb6995620c1
                               </a>
                           )
                       })
                     : productos?.map((a) => {
                           return (
-<<<<<<< HEAD
-                              <a href={`/details/${a.id}`}>
-                                  <Product
-                                      key={a.id}
-                                      name={a.name}
-                                      price={a.price}
-                                  />
-=======
                               <a href={`/details/${a._id}`}>
                                   <Product name={a.name} price={a.price} />
->>>>>>> df47e0e00e3e157f0c210e7fdb486cb6995620c1
                               </a>
                           )
                       })}
