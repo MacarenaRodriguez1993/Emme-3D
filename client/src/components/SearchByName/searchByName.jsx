@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import "./searchByName.css"
 import { AiOutlineSearch } from "react-icons/ai"
 import { useDispatch } from "react-redux"
-import { searchByName } from "../../redux/actions/actions"
+import { getProducts, searchByName } from "../../redux/actions/actions"
 const SearchByName = () => {
     const dispatch = useDispatch()
     let [state, setState] = useState({
@@ -18,9 +18,12 @@ const SearchByName = () => {
         event.preventDefault()
         let name = state.search
         dispatch(searchByName(name))
+    }
+    const click = () => {
         setState({
             search: "",
         })
+        dispatch(getProducts())
     }
     return (
         <>
@@ -34,6 +37,9 @@ const SearchByName = () => {
                 />
                 <button type="submit" className="buttonSearch">
                     <AiOutlineSearch size="1.3em" />
+                </button>
+                <button className="buttonSearch" onClick={click}>
+                    X
                 </button>
             </form>
         </>

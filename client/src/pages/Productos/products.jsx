@@ -17,7 +17,6 @@ const Products = () => {
     /*Aqui tomo el estado global de allProducts*/
     const allProducts = useSelector((state) => state.allProducts)
     let productos = useSelector((state) => state.productsFiltered)
-    console.log(productos)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
 
@@ -27,23 +26,31 @@ const Products = () => {
     return (
         <div className="productos">
             <NavBar />
-
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <SearchFilters />
             <SearchByName />
             <div className="cardProduct">
+                {error}
                 {productos.length === 0
                     ? allProducts.map((a) => {
                           return (
                               <a href={`/details/${a.id}`}>
-                                  <Product name={a.name} price={a.price} />
+                                  <Product
+                                      key={a.id}
+                                      name={a.name}
+                                      price={a.price}
+                                  />
                               </a>
                           )
                       })
                     : productos?.map((a) => {
                           return (
                               <a href={`/details/${a.id}`}>
-                                  <Product name={a.name} price={a.price} />
+                                  <Product
+                                      key={a.id}
+                                      name={a.name}
+                                      price={a.price}
+                                  />
                               </a>
                           )
                       })}

@@ -179,10 +179,22 @@ export const searchByName = (name) => {
     return async (dispatch) => {
         const searchByName = await axios.get(`${url_api}/products?name=${name}`)
         try {
-            dispatch({
-                type: SEARCH_BY_NAME,
-                payload: searchByName.data,
-            })
+            if (searchByName.data === null) {
+                dispatch({
+                    type: ERROR,
+                    payload: "No se encontraton resultados",
+                })
+            } else if (searchByName.data.length === undefined) {
+                dispatch({
+                    type: SEARCH_BY_NAME,
+                    payload: [searchByName.data],
+                })
+            } else {
+                dispatch({
+                    type: SEARCH_BY_NAME,
+                    payload: searchByName.data,
+                })
+            }
         } catch (err) {
             dispatch({
                 type: ERROR,

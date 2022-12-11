@@ -30,6 +30,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allProducts: action.payload,
+                productsFiltered: action.payload,
             }
 
         case GET_DETAILS:
@@ -182,6 +183,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
+                productsFiltered: [],
             }
         case GET_DETAILS:
             return {
@@ -192,6 +194,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsFiltered: action.payload,
+                error: "",
             }
         default:
             return state
