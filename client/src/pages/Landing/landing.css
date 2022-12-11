@@ -17,9 +17,12 @@
     width: 60%;
     margin: auto;
     text-align: center;
-    font-size: xx-large;
+    font-size: x-large;
 }
 .portada {
     width: 30%;
     margin: auto;
+}
+.imageLanding {
+    width: 100%;
 }

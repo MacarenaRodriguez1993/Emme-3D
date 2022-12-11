@@ -14,7 +14,7 @@ const Landing = () => {
                 </Link>
             </div>
             <div className="portada">
-                <img src={logo} alt="" />
+                <img className="imageLanding" src={logo} alt="" />
             </div>
         </div>
     )
