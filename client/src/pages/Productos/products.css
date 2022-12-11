@@ -1,13 +1,14 @@
 .productos {
     color: #ffe3e3;
     background-color: #262a53;
+    min-height: 100vh;
 }
 .cardProduct {
-    width: 95%;
+    width: 100%;
     margin: 0.5em auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    gap: 2em;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 1em;
     justify-content: center;
 }
 .addButton {
@@ -19,5 +20,18 @@
     border-radius: 1em;
     padding: 0.5em;
     width: 50%;
+    color: #ffe3e3;
+}
+.contenido {
+    display: flex;
+    justify-content: space-between;
+}
+.linkDetails {
+    font-size: smaller;
+}
+.buttonActions {
+    margin: 0.1em;
+    background-color: #2a2f62;
+    border: none;
     color: #ffe3e3;
 }
