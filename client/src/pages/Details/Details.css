@@ -30,7 +30,7 @@
     justify-content: space-around;
 }
 .container-header-left {
-    width: 50%;
+    width: 50vw;
     justify-content: center;
     display: flex;
     flex: auto;
@@ -41,6 +41,8 @@
     padding: 20px;
     display: flex;
     min-width: 20%;
+    width: 50vw;
+    height: fit-content;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -192,4 +194,7 @@
 
 ::-webkit-scrollbar {
     display: none;
+}
+.buttons-details {
+    margin-bottom: 10px;
 }

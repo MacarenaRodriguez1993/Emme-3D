@@ -33,14 +33,14 @@ const Products = () => {
                 {productos.length === 0
                     ? allProducts.map((a) => {
                           return (
-                              <a href={`/details/${a.id}`}>
+                              <a href={`/details/${a._id}`}>
                                   <Product name={a.name} price={a.price} />
                               </a>
                           )
                       })
                     : productos?.map((a) => {
                           return (
-                              <a href={`/details/${a.id}`}>
+                              <a href={`/details/${a._id}`}>
                                   <Product name={a.name} price={a.price} />
                               </a>
                           )
@@ -48,7 +48,10 @@ const Products = () => {
             </div>
 
             <Link to="/crear-producto">
-                <button className="addButton"> Crear Producto </button>
+                <button className="addButton product-btn">
+                    {" "}
+                    Crear Producto{" "}
+                </button>
             </Link>
 
             {/* AQUI VA LA PAGINACION */}

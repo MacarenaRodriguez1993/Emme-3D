@@ -157,13 +157,13 @@ export const getCategories = () => {
     }
 }
 
-export const getDetails = () => {
+export const getDetails = (id) => {
     return async (dispatch) => {
-        const detalle = await axios.get(`${url_api}/detalles`)
+        const detalle = await axios.get(`${url_api}/products/${id}`)
         try {
             dispatch({
                 type: GET_DETAILS,
-                paiload: detalle,
+                payload: detalle,
             })
         } catch (err) {
             dispatch({
