@@ -18,10 +18,6 @@ const CreateProduct = () => {
     const [imageToRemove, setImageToRemove] = useState(null)
     /* ---------- FIN DE LOS ESTADOS ---------- */
     /****************************************************/
-    /* ---------- INICIO ---------- */
-
-    /* ---------- FIN DE LOS ESTADOS ---------- */
-    /****************************************************/
     /* ---------- INICIO DE LOS HANDLERS ---------- */
     const handleChange = (e) => {
         setProducto({
