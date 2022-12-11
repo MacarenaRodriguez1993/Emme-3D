@@ -34,9 +34,9 @@ const CreateProduct = () => {
     /* ---------- FIN DE LOS HANDLERS ---------- */
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
-    const handleOpenWidget = () => {
+    const handleOpenWidget = async () => {
         //var myWidget = window.cloudinary.createUploadWidget(
-        var myWidget = window.cloudinary.createUploadWidget(
+        var myWidget = await window.cloudinary.createUploadWidget(
             {
                 cloudName: "emme3d",
                 uploadPreset: "igsag6pi",
@@ -53,7 +53,7 @@ const CreateProduct = () => {
                     ]) */
                     setProducto({
                         ...producto,
-                        img: [...result.info.url],
+                        img: { ...result.info.url },
                     })
                 }
             }
