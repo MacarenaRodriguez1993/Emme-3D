@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./products.css"
 import Footer from "../../components/Footer/Footer"
 import NavBar from "../../components/NavBar/NavBar"
@@ -6,6 +6,7 @@ import Product from "../../components/Product/product"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
+import { getProducts } from "../../redux/actions/actions"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -14,9 +15,13 @@ const Products = () => {
     /*Aqui tomo el estado global de allProducts*/
     const allProducts = useSelector((state) => state.allProducts)
     let productos = useSelector((state) => state.productsFiltered)
-    console.log(productos)
+    console.log(allProducts)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch])
 
     return (
         <div className="productos">
@@ -28,14 +33,14 @@ const Products = () => {
                 {productos.length === 0
                     ? allProducts.map((a) => {
                           return (
-                              <a href={`/details/${a.id}`}>
+                              <a href={`/details/${a._id}`}>
                                   <Product name={a.name} price={a.price} />
                               </a>
                           )
                       })
                     : productos?.map((a) => {
                           return (
-                              <a href={`/details/${a.id}`}>
+                              <a href={`/details/${a._id}`}>
                                   <Product name={a.name} price={a.price} />
                               </a>
                           )

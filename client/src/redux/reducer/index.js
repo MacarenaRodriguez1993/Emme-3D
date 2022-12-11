@@ -97,25 +97,7 @@ const initialState = {
             name: "Llaveros",
         },
     ],
-    detail: {
-        name: "Producto 4",
-        price: 2680,
-        categories: {
-            id: 1,
-            name: "Veladores",
-        },
-        stock: 5,
-        description: "Descripcion del producto 4",
-        vendidos: 7,
-        reviews: [
-            {
-                rating: 9.2,
-                name: "juanito",
-                reviews: "este es un text ode prueba ",
-            },
-        ],
-        img: logo,
-    },
+    detail: [],
     error: "",
 }
 
