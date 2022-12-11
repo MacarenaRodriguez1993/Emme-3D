@@ -7,6 +7,8 @@ import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
 import SearchByName from "../../components/SearchByName/searchByName"
+import { useEffect } from "react"
+import { getProducts } from "../../redux/actions/actions"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -19,6 +21,9 @@ const Products = () => {
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [dispatch])
     return (
         <div className="productos">
             <NavBar />
