@@ -7,7 +7,6 @@ const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_DETAILS = "GET_DETAILS"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
-import logo from "../../assets/emme3d-logo.png"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 
 const initialState = {
