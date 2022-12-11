@@ -4,9 +4,10 @@ const GET_BY_PRICE = "GET_BY_PRICE"
 const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
-const GET_DETAILS = 'GET_DETAILS'
-const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
+const GET_DETAILS = "GET_DETAILS"
 const ERROR = "ERROR"
+const SEARCH_BY_NAME = "SEARCH_BY_NAME"
+const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 
 const initialState = {
     allProducts: [],
@@ -28,6 +29,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allProducts: action.payload,
+                productsFiltered: action.payload,
             }
 
         case GET_DETAILS:
@@ -38,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                categories: pload
+                categories: pload,
             }
         /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_BY_CATEGORY:
@@ -180,11 +182,18 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
+                productsFiltered: [],
             }
         case GET_DETAILS:
             return {
                 ...state,
                 detail: action.payload,
+            }
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                productsFiltered: action.payload,
+                error: "",
             }
         default:
             return state

@@ -1,6 +1,7 @@
 .productos {
     color: #ffe3e3;
     background-color: #262a53;
+    min-height: 100vh;
 }
 .cardProduct {
     width: 95%;
