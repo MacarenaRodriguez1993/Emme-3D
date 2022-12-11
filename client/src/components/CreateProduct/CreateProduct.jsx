@@ -4,6 +4,7 @@ import { postProduct } from "../../redux/actions/actions"
 import "./CreateProduct.css"
 
 const CreateProduct = () => {
+    const dispatch = useDispatch()
     /* ---------- INICIO DE LOS ESTADOS ---------- */
     const [images, setImages] = useState([])
     const [producto, setProducto] = useState({
@@ -12,7 +13,7 @@ const CreateProduct = () => {
         stock: 0,
         description: "",
         categories_ids: [],
-        img: [images],
+        img: [],
     })
     //console.log(producto)
     const [imageToRemove, setImageToRemove] = useState(null)
@@ -21,13 +22,14 @@ const CreateProduct = () => {
     /* ---------- INICIO DE LOS HANDLERS ---------- */
     const handleChange = (e) => {
         setProducto({
+            ...producto,
             [e.target.name]: e.target.value,
         })
     }
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatchEvent(postProduct(producto))
+        console.log(producto)
+        dispatch(postProduct(producto))
     }
     /* ---------- FIN DE LOS HANDLERS ---------- */
     /****************************************************/
@@ -42,13 +44,17 @@ const CreateProduct = () => {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info)
-                    setImages((prev) => [
+                    /* setImages((prev) => [
                         ...prev,
                         {
                             url: result.info.url,
                             public_id: result.info.public_id,
                         },
-                    ])
+                    ]) */
+                    setProducto({
+                        ...producto,
+                        img: [...result.info.url],
+                    })
                 }
             }
         )
