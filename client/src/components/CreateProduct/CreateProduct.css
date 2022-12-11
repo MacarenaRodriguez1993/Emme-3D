@@ -1,0 +1,8 @@
+.create-product-container {
+    display: flex;
+    flex-direction: column;
+}
+.form-create-product-container {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { postProduct } from "../../redux/actions/actions"
+import "./CreateProduct.css"
 
 const CreateProduct = () => {
     /* ---------- INICIO DE LOS ESTADOS ---------- */
@@ -60,27 +61,45 @@ const CreateProduct = () => {
     /* ---------- FIN DE LA FUNCION DE CLOUDINARY ---------- */
     /****************************************************/
     return (
-        <div>
-            <form action="" onSubmit={(e) => handleSubmit(e)}>
+        <div className="create-product-container">
+            <form
+                action=""
+                onSubmit={(e) => handleSubmit(e)}
+                className="form-create-product-container"
+            >
                 <input
                     type="text"
                     name="name"
                     id=""
                     placeholder="Nombre del producto"
+                    onChange={(e) => handleChange(e)}
                 />
-                <input type="text" name="price" id="" placeholder="Precio" />
+                <input
+                    type="text"
+                    name="price"
+                    id=""
+                    placeholder="Precio"
+                    onChange={(e) => handleChange(e)}
+                />
                 <select name="categories" id="">
                     <option value="categorias" selected>
                         Categorias
                     </option>
                 </select>
-                <input type="text" name="stock" id="" placeholder="Stock" />
+                <input
+                    type="text"
+                    name="stock"
+                    id=""
+                    placeholder="Stock"
+                    onChange={(e) => handleChange(e)}
+                />
                 <textarea
                     name="description"
                     id=""
                     cols="30"
                     rows="10"
                     placeholder="Descripcion del producto"
+                    onChange={(e) => handleChange(e)}
                 ></textarea>
                 <button type="submit">Crear producto</button>
             </form>
@@ -94,6 +113,7 @@ const CreateProduct = () => {
                 >
                     Cargar imagenes
                 </button>
+                {images && images.length !== 0 && <p>Imagen cargada!</p>}
                 <img id="uploadedimage" src=""></img>
             </div>
             <div>
