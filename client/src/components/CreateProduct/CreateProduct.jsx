@@ -28,6 +28,10 @@ const CreateProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        setProducto({
+            ...producto,
+            img: [...images],
+        })
         console.log(producto)
         dispatch(postProduct(producto))
     }
@@ -44,17 +48,19 @@ const CreateProduct = () => {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info)
-                    /* setImages((prev) => [
+                    setImages((prev) => [
                         ...prev,
                         {
                             url: result.info.url,
                             public_id: result.info.public_id,
                         },
-                    ]) */
+                    ])
+                    /* let image = []
+                    image.push(result.info.url)
                     setProducto({
                         ...producto,
-                        img: { ...result.info.url },
-                    })
+                        img: [...image],
+                    }) */
                 }
             }
         )
