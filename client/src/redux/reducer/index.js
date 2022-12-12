@@ -8,6 +8,7 @@ const GET_DETAILS = "GET_DETAILS"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
+const DELETE_PRODUCT = "DELETE_PRODUCT"
 
 const initialState = {
     allProducts: [],
@@ -15,6 +16,7 @@ const initialState = {
     categories: [],
     detail: {},
     error: "",
+    inactiveProducts: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -30,6 +32,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allProducts: action.payload,
                 productsFiltered: action.payload,
+                inactiveProducts: [],
             }
 
         case GET_DETAILS:
@@ -194,6 +197,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 productsFiltered: action.payload,
                 error: "",
+            }
+        case DELETE_PRODUCT:
+            return {
+                ...state,
+                inactiveProducts: action.payload,
+                productsFiltered: state.productsFiltered,
             }
         default:
             return state
