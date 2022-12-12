@@ -19,6 +19,7 @@ const CreateProduct = () => {
     const [imageToRemove, setImageToRemove] = useState(null)
     /* ---------- FIN DE LOS ESTADOS ---------- */
     /****************************************************/
+    let imagenes
     /* ---------- INICIO DE LOS HANDLERS ---------- */
     const handleChange = (e) => {
         setProducto({
@@ -28,9 +29,10 @@ const CreateProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(images)
         setProducto({
             ...producto,
-            img: [...images],
+            img: imagenes,
         })
         console.log(producto)
         dispatch(postProduct(producto))
