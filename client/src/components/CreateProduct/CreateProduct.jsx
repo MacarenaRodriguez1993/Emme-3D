@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { postProduct } from "../../redux/actions/actions"
+import { postProduct, getCategories } from "../../redux/actions/actions"
 import "./CreateProduct.css"
 
 const CreateProduct = () => {
@@ -15,6 +15,10 @@ const CreateProduct = () => {
         categories_ids: [],
         img: [],
     })
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [dispatch])
+    let cat = useSelector((state) => state.categories)
     //console.log(producto)
     const [imageToRemove, setImageToRemove] = useState(null)
     /* ---------- FIN DE LOS ESTADOS ---------- */
@@ -29,11 +33,6 @@ const CreateProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(images)
-        setProducto({
-            ...producto,
-            img: imagenes,
-        })
         console.log(producto)
         dispatch(postProduct(producto))
     }
@@ -50,19 +49,17 @@ const CreateProduct = () => {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info)
-                    setImages((prev) => [
+                    /* setImages((prev) => [
                         ...prev,
                         {
                             url: result.info.url,
                             public_id: result.info.public_id,
                         },
-                    ])
-                    /* let image = []
-                    image.push(result.info.url)
+                    ]) */
                     setProducto({
                         ...producto,
-                        img: [...image],
-                    }) */
+                        img: result.info.url,
+                    })
                 }
             }
         )
@@ -95,6 +92,9 @@ const CreateProduct = () => {
                     <option value="categorias" selected>
                         Categorias
                     </option>
+                    {cat?.map((e) => (
+                        <option value={e._id}>{e.name}</option>
+                    ))}
                 </select>
                 <input
                     type="text"
