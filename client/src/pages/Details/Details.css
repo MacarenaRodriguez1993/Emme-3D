@@ -175,7 +175,7 @@
     display: flex;
     color: white;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .btn-valoracion {
     padding: 10px;

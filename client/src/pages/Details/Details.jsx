@@ -86,7 +86,7 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {/* <div className="container-opiniones">
-                {p.reviews.map((r) => {
+                {p.reviews_ids?.map((r) => {
                     return (
                         <div style={{ marginBottom: 15 }}>
                             <div className="header-opinion">
@@ -103,6 +103,8 @@ export default function Details({ props }) {
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
+
+                    <StarRating onChange={setRating} value={rating} />
                 </div>
                 <textarea
                     className="input-opinion"
