@@ -7,7 +7,7 @@ const NavBar = () => {
         <div className="navBar">
             <ul>
                 <Link to="/">
-                    <h2>Emme 3D</h2>
+                    <h2 className="titleHome">Emme 3D</h2>
                 </Link>
                 <div className="items">
                     <Link to="/products">
@@ -19,7 +19,7 @@ const NavBar = () => {
                     <Link to="/contact">
                         <h4>Contacto</h4>
                     </Link>
-                    <button className="buttonLogin">LogIn</button>
+                    <button className="buttonLogin login-btn">LogIn</button>
                 </div>
             </ul>
         </div>

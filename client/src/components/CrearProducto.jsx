@@ -1,31 +1,33 @@
 import { Formik, Form, Field } from "formik"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useState, useEffect } from "react"
+import {
+    postProduct,
+    getCategories,
+    getProducts,
+} from "../redux/actions/actions"
+import CreateCategory from "./CreateCategory/CreateCategory"
+import validate from "../validations/validations-form.js"
 import "./CrearProducto.css"
+
 const CrearProducto = () => {
     // const [images, setImages] = useState([])
     // const [imageToRemove, setImageToRemove] = useState(null)
 
     /* Reescribir completamente este componenete y no usar formik */
-
+    const dispatch = useDispatch()
+    /* Este estado sirve para mostrar un mensaje cuando se crea un producto */
     const [created, setCreated] = useState(false)
-    //este arreglo hace de db por ahora
-    let productos = []
+    /* Este estado sirve para guardar los erroresd de las validaciones */
+    const [error, setError] = useState({})
 
-    //reemplazar esta constante con las categorias que vienen del back
-    const categoriasArray = [
-        {
-            id: 1,
-            name: "Mates",
-        },
-        {
-            id: 2,
-            name: "Lamparas",
-        },
-        {
-            id: 3,
-            name: "Vasos",
-        },
-    ]
+    useEffect(() => {
+        dispatch(getCategories())
+        dispatch(getProducts())
+    }, [])
+    let cats = useSelector((state) => state.categories)
+    let catForm = cats.data
+    console.log(catForm)
 
     /* const handleOpenWidget = () => {
         var myWidget = window.cloudinary.createUploadWidget(
@@ -54,11 +56,11 @@ const CrearProducto = () => {
             <Formik
                 initialValues={{
                     name: "",
-                    price: "",
-                    categorias: [],
-                    stock: "",
+                    price: 0,
+                    stock: 0,
                     description: "",
-                    img: "",
+                    categories_ids: [],
+                    img: [],
                 }}
                 validate={(data) => {
                     let errors = {}
@@ -99,8 +101,7 @@ const CrearProducto = () => {
                 }}
                 onSubmit={(data, { resetForm }) => {
                     //reemplazar este push por el metodo post
-                    productos.push(data)
-                    console.log(productos)
+                    dispatch(postProduct(data))
                     //este metodo sirve para dejar el form en blanco cuando se hace submit
                     resetForm()
                     //seteo este estado para mostrar un mensaje cuando se crea un producto
@@ -143,7 +144,7 @@ const CrearProducto = () => {
                         <div>
                             {/* <label htmlFor="precio">Precio</label> */}
                             <input
-                                type="text"
+                                type="number"
                                 name="price"
                                 value={values.price}
                                 onChange={handleChange}
@@ -171,10 +172,10 @@ const CrearProducto = () => {
                                 >
                                     <p className="select-cat">Categoria</p>
                                 </option>
-                                {categoriasArray.map((c) => {
+                                {catForm?.map((c) => {
                                     return (
                                         <option
-                                            value={c.name}
+                                            value={c._id}
                                             className="select-options"
                                         >
                                             {c.name}
@@ -191,7 +192,7 @@ const CrearProducto = () => {
                         <div>
                             {/* <label htmlFor="stock">Stock</label> */}
                             <input
-                                type="text"
+                                type="number"
                                 name="stock"
                                 placeholder="Stock"
                                 value={values.stock}
@@ -272,6 +273,7 @@ const CrearProducto = () => {
                     </Form>
                 )}
             </Formik>
+            <CreateCategory />
             {/* <div>
                 <p>Imagenes</p>
                 {images.map((img) => (

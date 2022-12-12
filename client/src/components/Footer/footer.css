@@ -1,15 +1,12 @@
 .footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #ffe3e3;
     color: #262a53;
-
     align-items: center;
-}
-.copyrigth{
     padding: 0.5em;
+    width: 100%;
 }
 .redes {
     display: flex;
-    width: 50%;
 }

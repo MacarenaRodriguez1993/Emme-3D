@@ -1,7 +1,9 @@
 .navBar {
+    width: 100%;
     background-color: #ffe3e3;
     color: #262a53;
-    padding: 0.5em 0;
+    margin: 0;
+    padding: 0.5em;
 }
 
 ul {
@@ -17,8 +19,19 @@ ul {
 a {
     text-decoration: none;
     color: #262a53;
-    font-size: larger;
+    font-size: medium;
+    padding: 0.1em 0.3em;
 }
-.buttonLogin {
+
+.buttonLogin,
+.titleHome {
     margin: 0 0.5em;
+}
+.login-btn {
+    background-color: #a34270;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 50%;
+    color: #ffe3e3;
 }
