@@ -27,8 +27,10 @@ const Products = () => {
         <div className="productos">
             <NavBar />
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
-            <SearchFilters />
-            <SearchByName />
+            <div className="barContainer">
+                <SearchFilters />
+                <SearchByName />
+            </div>
             {error}
             <h4 className="textTitle">Productos Activos</h4>
             <div className="cardProduct">
