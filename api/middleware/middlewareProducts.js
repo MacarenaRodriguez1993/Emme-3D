@@ -17,7 +17,6 @@ async function getAllProducts() {
         let productsList = []
         for (let i = 0; i < products.length; i++) {
             let prodCat = []
-            console.log(products[i].categories_ids)
             for (let j = 0; j < products[i].categories_ids.length; j++) {
                 cat = categories.find(function (category, index) {
                     if (
@@ -41,7 +40,7 @@ async function getAllProducts() {
                 img: products[i].img,
                 deleted: products[i].deleted,
             }
-            console.log(product)
+
             productsList.push(product)
         }
 
