@@ -37,7 +37,7 @@ async function getAllProducts() {
                 description: products[i].description,
                 categories_ids: prodCat,
                 reviews_ids: products[i].reviews_ids,
-                img: products[i].img.join(),
+                img: products[i].img,
                 deleted: products[i].deleted,
             }
 
