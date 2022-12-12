@@ -8,6 +8,7 @@ const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
+const DELETE_PRODUCT = "DELETE_PRODUCT"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -204,3 +205,22 @@ export const searchByName = (name) => {
     }
 }
 /*--------- FIN ACTIONS GET -------------*/
+/*---------ACTION DELETE PRODUCT-----------*/
+export const deleteProduct = (id) => {
+    return async (dispatch) => {
+        try {
+            const productDelete = await axios.delete(
+                `${url_api}/products/${id}`
+            )
+            dispatch({
+                type: DELETE_PRODUCT,
+                payload: productDelete.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
