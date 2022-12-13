@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { postProduct } from "../../redux/actions/actions"
+import { postProduct, getCategories } from "../../redux/actions/actions"
+import "./CreateProduct.css"
 
 const CreateProduct = () => {
+    const dispatch = useDispatch()
     /* ---------- INICIO DE LOS ESTADOS ---------- */
     const [images, setImages] = useState([])
     const [producto, setProducto] = useState({
@@ -11,33 +13,35 @@ const CreateProduct = () => {
         stock: 0,
         description: "",
         categories_ids: [],
-        img: [images],
+        img: [],
     })
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [dispatch])
+    let cat = useSelector((state) => state.categories)
     //console.log(producto)
     const [imageToRemove, setImageToRemove] = useState(null)
     /* ---------- FIN DE LOS ESTADOS ---------- */
     /****************************************************/
-    /* ---------- INICIO ---------- */
-
-    /* ---------- FIN DE LOS ESTADOS ---------- */
-    /****************************************************/
+    let imagenes
     /* ---------- INICIO DE LOS HANDLERS ---------- */
     const handleChange = (e) => {
         setProducto({
+            ...producto,
             [e.target.name]: e.target.value,
         })
     }
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatchEvent(postProduct(producto))
+        console.log(producto)
+        dispatch(postProduct(producto))
     }
     /* ---------- FIN DE LOS HANDLERS ---------- */
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
-    const handleOpenWidget = () => {
+    const handleOpenWidget = async () => {
         //var myWidget = window.cloudinary.createUploadWidget(
-        var myWidget = window.cloudinary.createUploadWidget(
+        var myWidget = await window.cloudinary.createUploadWidget(
             {
                 cloudName: "emme3d",
                 uploadPreset: "igsag6pi",
@@ -45,13 +49,17 @@ const CreateProduct = () => {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info)
-                    setImages((prev) => [
+                    /* setImages((prev) => [
                         ...prev,
                         {
                             url: result.info.url,
                             public_id: result.info.public_id,
                         },
-                    ])
+                    ]) */
+                    setProducto({
+                        ...producto,
+                        img: result.info.url,
+                    })
                 }
             }
         )
@@ -60,27 +68,48 @@ const CreateProduct = () => {
     /* ---------- FIN DE LA FUNCION DE CLOUDINARY ---------- */
     /****************************************************/
     return (
-        <div>
-            <form action="" onSubmit={(e) => handleSubmit(e)}>
+        <div className="create-product-container">
+            <form
+                action=""
+                onSubmit={(e) => handleSubmit(e)}
+                className="form-create-product-container"
+            >
                 <input
                     type="text"
                     name="name"
                     id=""
                     placeholder="Nombre del producto"
+                    onChange={(e) => handleChange(e)}
                 />
-                <input type="text" name="price" id="" placeholder="Precio" />
+                <input
+                    type="text"
+                    name="price"
+                    id=""
+                    placeholder="Precio"
+                    onChange={(e) => handleChange(e)}
+                />
                 <select name="categories" id="">
                     <option value="categorias" selected>
                         Categorias
                     </option>
+                    {cat?.map((e) => (
+                        <option value={e._id}>{e.name}</option>
+                    ))}
                 </select>
-                <input type="text" name="stock" id="" placeholder="Stock" />
+                <input
+                    type="text"
+                    name="stock"
+                    id=""
+                    placeholder="Stock"
+                    onChange={(e) => handleChange(e)}
+                />
                 <textarea
                     name="description"
                     id=""
                     cols="30"
                     rows="10"
                     placeholder="Descripcion del producto"
+                    onChange={(e) => handleChange(e)}
                 ></textarea>
                 <button type="submit">Crear producto</button>
             </form>
@@ -94,6 +123,7 @@ const CreateProduct = () => {
                 >
                     Cargar imagenes
                 </button>
+                {images && images.length !== 0 && <p>Imagen cargada!</p>}
                 <img id="uploadedimage" src=""></img>
             </div>
             <div>
