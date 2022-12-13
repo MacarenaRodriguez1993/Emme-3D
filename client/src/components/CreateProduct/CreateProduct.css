@@ -42,6 +42,12 @@
     background-color: rgb(126, 54, 126);
     color: white;
 }
+.not-allow {
+    cursor: not-allowed;
+    background-color: rgb(95, 94, 94);
+    color: rgb(168, 168, 168);
+    border: 1px solid rgb(168, 168, 168);
+}
 /* div para agregar imagenes */
 .add-img-box {
     background-color: #d4bec6;
@@ -99,6 +105,7 @@
     cursor: pointer;
 }
 .img-success {
+    font-size: 13px;
     margin-top: 10px;
     border: 1px solid white;
     color: white;
@@ -109,4 +116,22 @@
     padding: 10px;
     width: fit-content;
     box-shadow: 0px 1px 3px 0px black;
+}
+/* errores */
+
+.crt-errors {
+    color: red;
+    font-size: 10px;
+    font-weight: bolder;
+    width: fit-content;
+    position: relative;
+    top: -25px;
+    left: 11px;
+}
+.crt-errors-img {
+    color: red;
+    font-size: 10px;
+    font-weight: bolder;
+    margin-top: 3px;
+    width: fit-content;
 }

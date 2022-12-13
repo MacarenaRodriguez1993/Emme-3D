@@ -2,10 +2,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { postProduct, getCategories } from "../../redux/actions/actions"
 import "./CreateProduct.css"
+import validations from "../../validations/validations-form"
 
 const CreateProduct = () => {
     const dispatch = useDispatch()
     /* ---------- INICIO DE LOS ESTADOS ---------- */
+    const [error, setError] = useState({})
     const [producto, setProducto] = useState({
         name: "",
         price: 0,
@@ -16,16 +18,25 @@ const CreateProduct = () => {
     })
     useEffect(() => {
         dispatch(getCategories())
-    }, [producto.img])
+        setError(validations(producto))
+    }, [dispatch, producto])
     let cat = useSelector((state) => state.categories)
     /* ---------- FIN DE LOS ESTADOS ---------- */
     /****************************************************/
     /* ---------- INICIO DE LOS HANDLERS ---------- */
 
     const handleChange = (e) => {
+        setError(validations(producto))
         setProducto({
             ...producto,
             [e.target.name]: e.target.value,
+        })
+    }
+    const handleChangeCategory = (e) => {
+        setError(validations(producto))
+        setProducto({
+            ...producto,
+            categories_ids: [{ id: e.target.value, name: e.target.name }],
         })
     }
     const handleSubmit = (e) => {
@@ -82,34 +93,41 @@ const CreateProduct = () => {
                         placeholder="Nombre del producto"
                         onChange={(e) => handleChange(e)}
                     />
+                    {error.name && <p className="crt-errors">{error.name}</p>}
                     <input
                         className="create-product-input"
-                        type="text"
+                        type="number"
                         name="price"
                         id=""
                         placeholder="Precio"
                         onChange={(e) => handleChange(e)}
                     />
+                    {error.price && <p className="crt-errors">{error.price}</p>}
                     <select
                         name="categories_ids"
                         id=""
                         className="create-product-input crt-cats"
+                        onChange={(e) => handleChangeCategory(e)}
                     >
-                        <option value="categories_ids" selected>
-                            Categorias
-                        </option>
+                        <option selected>Categorias</option>
                         {cat?.map((e) => (
-                            <option value={e._id}>{e.name}</option>
+                            <option value={e._id} name={e.name}>
+                                {e.name}
+                            </option>
                         ))}
                     </select>
+                    {error.categories_ids && (
+                        <p className="crt-errors">{error.categories_ids}</p>
+                    )}
                     <input
                         className="create-product-input"
-                        type="text"
+                        type="number"
                         name="stock"
                         id=""
                         placeholder="Stock"
                         onChange={(e) => handleChange(e)}
                     />
+                    {error.stock && <p className="crt-errors">{error.stock}</p>}
                     <textarea
                         className="create-product-input"
                         name="description"
@@ -119,12 +137,24 @@ const CreateProduct = () => {
                         placeholder="Descripcion del producto"
                         onChange={(e) => handleChange(e)}
                     ></textarea>
-                    <button
-                        type="submit"
-                        className="create-product-input createpr"
-                    >
-                        Crear producto
-                    </button>
+                    {error.description && (
+                        <p className="crt-errors">{error.description}</p>
+                    )}
+                    {Object.entries(error).length ? (
+                        <button
+                            type="button"
+                            className="create-product-input createpr not-allow"
+                        >
+                            Crear producto
+                        </button>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="create-product-input createpr"
+                        >
+                            Crear producto
+                        </button>
+                    )}
                 </form>
                 <div className="add-img-box">
                     <div className="crt-img-box">
@@ -150,6 +180,9 @@ const CreateProduct = () => {
                         >
                             Cargar imagenes
                         </button>
+                        {error.img && (
+                            <p className="crt-errors-img">{error.img}</p>
+                        )}
                         {producto.img && producto.img.length !== 0 && (
                             <p className="img-success">
                                 {producto.img.length} imagenes cargadas!

@@ -1,24 +1,36 @@
 const validations = data => {
     const error = {}
-    //Expresion regular para nombres
-    let regexp = /^[a-z\s]*$/
+    //Expresion regular para nombres con numeros
+    let regexp = /^[a-zA-Z0-9\s]*$/
     //Expresion regular imagenes
     let regexpImg = /.*(png|jpg|jpeg|gif)$/
 
-    if (!data.name) {
+    if (!data.name.length) {
         error.name = 'El nombre es necesario'
     }
     if (!regexp.test(data.name)) {
-        error.name = 'Solo minusculas y sin numeros'
+        error.name = 'Solo letras y numeros '
     }
-    if (!data.img) {
-        error.img = "Subir una imagen";
+    if (!data.price) {
+        error.price = 'Indica el precio'
     }
-    if (!regexpImg.test(data.img)) {
-        error.image = "Url is required";
+    if (data.price < 1) {
+        error.price = 'El precio debe ser mayor a cero'
     }
-    if (!data.types.length) {
-        error.types = "Types is required";
+    if (data.categories_ids.length === 0) {
+        error.categories_ids = 'Selecciona una cateogoria'
+    }
+    if (!data.stock) {
+        error.stock = 'Ingresa las unidades disponibles'
+    }
+    if (data.stock < 1) {
+        error.stock = 'Las unidades deben ser mayor a cero'
+    }
+    if (!data.description) {
+        error.description = 'Describi tu producto'
+    }
+    if (data.img.length === 0) {
+        error.img = 'Subi al menos una imagen'
     }
     return error
 }
