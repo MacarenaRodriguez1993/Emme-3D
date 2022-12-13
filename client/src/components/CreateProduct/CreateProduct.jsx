@@ -17,14 +17,17 @@ const CreateProduct = () => {
     })
     useEffect(() => {
         dispatch(getCategories())
-    }, [dispatch])
+    }, [])
     let cat = useSelector((state) => state.categories)
     //console.log(producto)
     const [imageToRemove, setImageToRemove] = useState(null)
     /* ---------- FIN DE LOS ESTADOS ---------- */
+
     /****************************************************/
-    let imagenes
+    console.log("producto img -> ", producto.img)
+
     /* ---------- INICIO DE LOS HANDLERS ---------- */
+
     const handleChange = (e) => {
         setProducto({
             ...producto,
@@ -33,6 +36,7 @@ const CreateProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+
         console.log(producto)
         dispatch(postProduct(producto))
     }
@@ -40,7 +44,6 @@ const CreateProduct = () => {
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
     const handleOpenWidget = async () => {
-        //var myWidget = window.cloudinary.createUploadWidget(
         var myWidget = await window.cloudinary.createUploadWidget(
             {
                 cloudName: "emme3d",
@@ -49,16 +52,9 @@ const CreateProduct = () => {
             (error, result) => {
                 if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info)
-                    /* setImages((prev) => [
-                        ...prev,
-                        {
-                            url: result.info.url,
-                            public_id: result.info.public_id,
-                        },
-                    ]) */
                     setProducto({
                         ...producto,
-                        img: result.info.url,
+                        img: [...producto.img, result.info.url],
                     })
                 }
             }
@@ -75,6 +71,7 @@ const CreateProduct = () => {
                 className="form-create-product-container"
             >
                 <input
+                    className="create-product-input"
                     type="text"
                     name="name"
                     id=""
@@ -82,14 +79,19 @@ const CreateProduct = () => {
                     onChange={(e) => handleChange(e)}
                 />
                 <input
+                    className="create-product-input"
                     type="text"
                     name="price"
                     id=""
                     placeholder="Precio"
                     onChange={(e) => handleChange(e)}
                 />
-                <select name="categories" id="">
-                    <option value="categorias" selected>
+                <select
+                    name="categories_ids"
+                    id=""
+                    className="create-product-input crt-cats"
+                >
+                    <option value="categories_ids" selected>
                         Categorias
                     </option>
                     {cat?.map((e) => (
@@ -97,6 +99,7 @@ const CreateProduct = () => {
                     ))}
                 </select>
                 <input
+                    className="create-product-input"
                     type="text"
                     name="stock"
                     id=""
@@ -104,6 +107,7 @@ const CreateProduct = () => {
                     onChange={(e) => handleChange(e)}
                 />
                 <textarea
+                    className="create-product-input"
                     name="description"
                     id=""
                     cols="30"
@@ -111,10 +115,20 @@ const CreateProduct = () => {
                     placeholder="Descripcion del producto"
                     onChange={(e) => handleChange(e)}
                 ></textarea>
-                <button type="submit">Crear producto</button>
+                <button type="submit" className="create-product-input createpr">
+                    Crear producto
+                </button>
             </form>
-            <div>
-                <p>Agregar imagen</p>
+            <div className="add-img-box">
+                <div className="crt-img-box">
+                    {producto.img?.map((img) => (
+                        <div>
+                            <img src={img} className="loaded-img" />
+                            <p className="img-delete">X</p>
+                            {console.log("imagenes cargadas ->", img.url)}
+                        </div>
+                    ))}
+                </div>
                 <button
                     id="upload_widget"
                     type="button"
@@ -123,17 +137,9 @@ const CreateProduct = () => {
                 >
                     Cargar imagenes
                 </button>
-                {images && images.length !== 0 && <p>Imagen cargada!</p>}
-                <img id="uploadedimage" src=""></img>
-            </div>
-            <div>
-                <p>Imagenes cargadas</p>
-                {images?.map((img) => (
-                    <div>
-                        <img src={img.url} alt={img.public_id} />
-                        {console.log(img.url)}
-                    </div>
-                ))}
+                {producto.img && producto.img.length !== 0 && (
+                    <p>Imagen cargada!</p>
+                )}
             </div>
         </div>
     )
