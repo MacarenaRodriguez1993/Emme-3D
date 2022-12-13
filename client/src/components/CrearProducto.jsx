@@ -77,8 +77,8 @@ const CrearProducto = () => {
                         errors.precio = "El precio debe ser un numero"
                     } */
                     //validacion de categoria
-                    if (!data.categorias) {
-                        errors.categorias = "Elige una categoria"
+                    if (!data.categories_ids) {
+                        errors.categories_ids = "Elige una categoria"
                     }
                     //validacon de stock
                     if (!data.stock) {
@@ -161,7 +161,7 @@ const CrearProducto = () => {
                         <div>
                             {/* <label htmlFor="categoria">Categoria</label> */}
                             <select
-                                name="categorias"
+                                name="categories_ids"
                                 onChange={handleChange}
                                 className="inputs"
                             >
@@ -183,11 +183,12 @@ const CrearProducto = () => {
                                     )
                                 })}
                             </select>
-                            {touched.categorias && errors.categorias && (
-                                <p className="create-product-error">
-                                    {errors.categorias}
-                                </p>
-                            )}
+                            {touched.categories_ids &&
+                                errors.categories_ids && (
+                                    <p className="create-product-error">
+                                        {errors.categories_ids}
+                                    </p>
+                                )}
                         </div>
                         <div>
                             {/* <label htmlFor="stock">Stock</label> */}
