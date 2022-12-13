@@ -36,7 +36,7 @@ const CreateProduct = () => {
         setError(validations(producto))
         setProducto({
             ...producto,
-            categories_ids: [{ id: e.target.value, name: e.target.name }],
+            categories_ids: [e.target.value],
         })
     }
     const handleSubmit = (e) => {
