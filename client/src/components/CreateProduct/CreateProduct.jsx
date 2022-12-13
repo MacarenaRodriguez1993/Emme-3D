@@ -6,7 +6,6 @@ import "./CreateProduct.css"
 const CreateProduct = () => {
     const dispatch = useDispatch()
     /* ---------- INICIO DE LOS ESTADOS ---------- */
-    const [images, setImages] = useState([])
     const [producto, setProducto] = useState({
         name: "",
         price: 0,
@@ -17,15 +16,10 @@ const CreateProduct = () => {
     })
     useEffect(() => {
         dispatch(getCategories())
-    }, [])
+    }, [producto.img])
     let cat = useSelector((state) => state.categories)
-    //console.log(producto)
-    const [imageToRemove, setImageToRemove] = useState(null)
     /* ---------- FIN DE LOS ESTADOS ---------- */
-
     /****************************************************/
-    console.log("producto img -> ", producto.img)
-
     /* ---------- INICIO DE LOS HANDLERS ---------- */
 
     const handleChange = (e) => {
@@ -39,6 +33,14 @@ const CreateProduct = () => {
 
         console.log(producto)
         dispatch(postProduct(producto))
+    }
+    const handleDelete = (e) => {
+        //producto.img.pop(e.target.value)
+        //console.log(producto.img.pop(e.target.value))
+        /* setProducto({
+            ...producto,
+            img: producto.img.pop(e.target.value),
+        }) */
     }
     /* ---------- FIN DE LOS HANDLERS ---------- */
     /****************************************************/
@@ -64,82 +66,97 @@ const CreateProduct = () => {
     /* ---------- FIN DE LA FUNCION DE CLOUDINARY ---------- */
     /****************************************************/
     return (
-        <div className="create-product-container">
-            <form
-                action=""
-                onSubmit={(e) => handleSubmit(e)}
-                className="form-create-product-container"
-            >
-                <input
-                    className="create-product-input"
-                    type="text"
-                    name="name"
-                    id=""
-                    placeholder="Nombre del producto"
-                    onChange={(e) => handleChange(e)}
-                />
-                <input
-                    className="create-product-input"
-                    type="text"
-                    name="price"
-                    id=""
-                    placeholder="Precio"
-                    onChange={(e) => handleChange(e)}
-                />
-                <select
-                    name="categories_ids"
-                    id=""
-                    className="create-product-input crt-cats"
+        <div className="general-box-ctr">
+            <p className="create-product-title">Crear un producto</p>
+            <div className="create-product-container">
+                <form
+                    action=""
+                    onSubmit={(e) => handleSubmit(e)}
+                    className="form-create-product-container"
                 >
-                    <option value="categories_ids" selected>
-                        Categorias
-                    </option>
-                    {cat?.map((e) => (
-                        <option value={e._id}>{e.name}</option>
-                    ))}
-                </select>
-                <input
-                    className="create-product-input"
-                    type="text"
-                    name="stock"
-                    id=""
-                    placeholder="Stock"
-                    onChange={(e) => handleChange(e)}
-                />
-                <textarea
-                    className="create-product-input"
-                    name="description"
-                    id=""
-                    cols="30"
-                    rows="10"
-                    placeholder="Descripcion del producto"
-                    onChange={(e) => handleChange(e)}
-                ></textarea>
-                <button type="submit" className="create-product-input createpr">
-                    Crear producto
-                </button>
-            </form>
-            <div className="add-img-box">
-                <div className="crt-img-box">
-                    {producto.img?.map((img) => (
-                        <div>
-                            <img src={img} className="loaded-img" />
-                            <p className="img-delete">X</p>
-                            {console.log("imagenes cargadas ->", img.url)}
-                        </div>
-                    ))}
+                    <input
+                        className="create-product-input"
+                        type="text"
+                        name="name"
+                        id=""
+                        placeholder="Nombre del producto"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <input
+                        className="create-product-input"
+                        type="text"
+                        name="price"
+                        id=""
+                        placeholder="Precio"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <select
+                        name="categories_ids"
+                        id=""
+                        className="create-product-input crt-cats"
+                    >
+                        <option value="categories_ids" selected>
+                            Categorias
+                        </option>
+                        {cat?.map((e) => (
+                            <option value={e._id}>{e.name}</option>
+                        ))}
+                    </select>
+                    <input
+                        className="create-product-input"
+                        type="text"
+                        name="stock"
+                        id=""
+                        placeholder="Stock"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <textarea
+                        className="create-product-input"
+                        name="description"
+                        id=""
+                        cols="30"
+                        rows="10"
+                        placeholder="Descripcion del producto"
+                        onChange={(e) => handleChange(e)}
+                    ></textarea>
+                    <button
+                        type="submit"
+                        className="create-product-input createpr"
+                    >
+                        Crear producto
+                    </button>
+                </form>
+                <div className="add-img-box">
+                    <div className="crt-img-box">
+                        {producto.img?.map((img) => (
+                            <div>
+                                <img src={img} className="loaded-img" />
+                                <p
+                                    className="img-delete"
+                                    onClick={(e) => handleDelete(e)}
+                                >
+                                    X
+                                </p>
+                                {console.log("imagenes cargadas ->", img.url)}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="imgs-buttons">
+                        <button
+                            id="upload_widget"
+                            type="button"
+                            name="img"
+                            onClick={() => handleOpenWidget()}
+                        >
+                            Cargar imagenes
+                        </button>
+                        {producto.img && producto.img.length !== 0 && (
+                            <p className="img-success">
+                                {producto.img.length} imagenes cargadas!
+                            </p>
+                        )}
+                    </div>
                 </div>
-                <button
-                    id="upload_widget"
-                    type="button"
-                    name="img"
-                    onClick={() => handleOpenWidget()}
-                >
-                    Cargar imagenes
-                </button>
-                {producto.img && producto.img.length !== 0 && (
-                    <p>Imagen cargada!</p>
-                )}
             </div>
         </div>
     )
