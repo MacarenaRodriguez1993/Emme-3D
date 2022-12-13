@@ -53,7 +53,7 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = all.filter((c) => c.categoria.name === action.payload)
+                let cat = state.categories.filter((c) => c.categoria.name === action.payload)
                 return {
                     ...state,
                     productsFiltered: [...cat],
