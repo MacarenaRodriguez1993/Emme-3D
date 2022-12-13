@@ -3,6 +3,12 @@
     background-color: #262a53;
     min-height: 100vh;
 }
+
+.barContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
 .cardProduct {
     width: 100%;
     margin: 0.5em auto;
@@ -11,9 +17,11 @@
     gap: 1em;
     justify-content: center;
 }
+
 .addButton {
     margin-left: 25%;
 }
+
 .product-btn {
     background-color: #a34270;
     border: none;
@@ -22,13 +30,16 @@
     width: 50%;
     color: #ffe3e3;
 }
+
 .contenido {
     display: flex;
     justify-content: space-between;
 }
+
 .linkDetails {
     font-size: smaller;
 }
+
 .buttonActions {
     margin: 0.1em;
     background-color: #2a2f62;
@@ -38,3 +49,4 @@
 .textTitle {
     padding-left: 2em;
 }
+
