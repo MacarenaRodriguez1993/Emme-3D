@@ -21,7 +21,7 @@ const listProducts = async () => {
                 price: { $first: "$price" },
                 stock: { $first: "$stock" },
                 description: { $first: "$description" },
-                categories_ids: { $addToSet: "$categories_ids" },
+                category: { $first: "$categories_ids" },
                 img: { $first: "$img" },
                 deleted: { $first: "$deleted" },
                 reviews_ids: { $first: "$reviews_ids" },
