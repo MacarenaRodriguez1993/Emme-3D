@@ -1,11 +1,13 @@
 import "./SearchFilters.css"
 import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
 import {
     filterByCategories,
     filterByPrice,
     filterByPriceRange,
     filterBySales,
     filterByLikes,
+    getCategories,
 } from "../../redux/actions/actions"
 
 const SearchFilters = () => {
@@ -15,7 +17,15 @@ const SearchFilters = () => {
     const dispatch = useDispatch()
     const categorias = useSelector((state) => state.categories)
     let filtrados = useSelector((state) => state.productsFiltered)
+    /* *************************************************** */
+    /* *************************************************** */
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [dispatch])
+    //console.log(`categorias ---> ${categorias.map((e) => e.name)}`)
 
+    /* *************************************************** */
+    /* *************************************************** */
     const handleCategories = (e) => {
         dispatch(filterByCategories(e.target.value))
     }
@@ -42,8 +52,8 @@ const SearchFilters = () => {
                 <option selected value="categorias">
                     Categorias
                 </option>
-                {categorias?.map((cat) => (
-                    <option value={cat.name}>{cat.name}</option>
+                {categorias?.map((c) => (
+                    <option value={c.name}>{c.name}</option>
                 ))}
             </select>
             {/* filtro de precios */}
