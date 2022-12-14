@@ -3,7 +3,33 @@ const Product = require("../models/Product.js")
 const ObjectId = mongoose.Types.ObjectId
 
 const listProducts = async () => {
-    const products = await Product.find()
+    const products = await Product.aggregate([
+        { $unwind: "$categories_ids" },
+        {
+            $lookup: {
+                from: "categories",
+                localField: "categories_ids",
+                foreignField: "_id",
+                as: "categories_ids",
+            },
+        },
+        { $unwind: "$categories_ids" },
+        {
+            $group: {
+                _id: "$_id",
+                name: { $first: "$name" },
+                price: { $first: "$price" },
+                stock: { $first: "$stock" },
+                description: { $first: "$description" },
+                categories_ids: { $addToSet: "$categories_ids" },
+                img: { $first: "$img" },
+                deleted: { $first: "$deleted" },
+                reviews_ids: { $first: "$reviews_ids" },
+                createdAt: { $first: "$createdAt" },
+                updatedAt: { $first: "$updatedAt" },
+            },
+        },
+    ])
     if (products.length < 1)
         throw new Error(
             "Vaya, parece que no hay productos en la base de datos."
@@ -34,7 +60,6 @@ const productById = async (id) => {
 const createNewProduct = async (product) => {
     try {
         const createdProduct = await Product.create(product)
-        console.log(createdProduct)
         return createdProduct
     } catch (err) {
         console.log(err)

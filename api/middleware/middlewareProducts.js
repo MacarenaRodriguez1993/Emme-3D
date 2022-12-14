@@ -6,45 +6,13 @@ const {
     productByQuery,
     listProducts,
 } = require("../controllers/productController")
-const { getCategories } = require("../controllers/categoryController")
 
 // PRODUCTS
 async function getAllProducts() {
     try {
         const products = await listProducts()
-        const categories = await getCategories()
 
-        let productsList = []
-        for (let i = 0; i < products.length; i++) {
-            let prodCat = []
-            for (let j = 0; j < products[i].categories_ids.length; j++) {
-                cat = categories.find(function (category, index) {
-                    if (
-                        category._id.toString() ==
-                        products[i].categories_ids[j].toString()
-                    ) {
-                        return category
-                    } else return ""
-                })
-                prodCat.push(cat)
-            }
-
-            let product = {
-                _id: products[i]._id,
-                name: products[i].name,
-                price: products[i].price,
-                stock: products[i].stock,
-                description: products[i].description,
-                categories_ids: prodCat,
-                reviews_ids: products[i].reviews_ids,
-                img: products[i].img,
-                deleted: products[i].deleted,
-            }
-
-            productsList.push(product)
-        }
-
-        return productsList
+        return products
     } catch (error) {
         throw error
     }
