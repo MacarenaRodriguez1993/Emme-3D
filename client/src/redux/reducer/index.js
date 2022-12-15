@@ -9,6 +9,7 @@ const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 
 const initialState = {
     allProducts: [],
@@ -203,6 +204,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 inactiveProducts: action.payload,
                 productsFiltered: state.productsFiltered,
+            }
+        case UPDATE_PRODUCTO:
+            return {
+                ...state,
+                productsFiltered: [...state.productsFiltered, action.payload],
             }
         default:
             return state

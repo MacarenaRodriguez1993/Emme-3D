@@ -1,24 +1,37 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { postProduct, getCategories } from "../../redux/actions/actions"
+import {
+    postProduct,
+    getCategories,
+    getProducts,
+} from "../../redux/actions/actions"
 import "./CreateProduct.css"
 import validations from "../../validations/validations-form"
 import NavBar from "../NavBar/NavBar"
 import Footer from "../Footer/Footer"
 import CreateCategory from "../CreateCategory/CreateCategory"
+import { useNavigate, useParams } from "react-router-dom"
+import { updateProducto } from "../../redux/actions/actions"
 
 const CreateProduct = () => {
     const dispatch = useDispatch()
+    const update_ID = useParams()
+    const navigate = useNavigate()
+    const allProduct = useSelector((state) => state.productsFiltered)
+    const err = useSelector((state) => state.error)
+    const updateProduct = allProduct.find((a) => a._id === update_ID.id)
+
     /* ---------- INICIO DE LOS ESTADOS ---------- */
     const [created, setCreated] = useState(false)
+    const [update, setUpdate] = useState(false)
     const [error, setError] = useState({})
     const [producto, setProducto] = useState({
-        name: "",
-        price: 0,
-        stock: 0,
-        description: "",
-        categories_ids: [],
-        img: [],
+        name: updateProduct ? updateProduct.name : "",
+        price: updateProduct ? updateProduct.price : 0,
+        stock: updateProduct ? updateProduct.stock : 0,
+        description: updateProduct ? updateProduct.description : "",
+        categories_ids: updateProduct ? updateProduct.categories_ids : [],
+        img: updateProduct ? updateProduct.img : [],
     })
     useEffect(() => {
         dispatch(getCategories())
@@ -45,12 +58,21 @@ const CreateProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(postProduct(producto))
-        setCreated(true)
-        setTimeout(() => {
-            setCreated(false)
-        }, 3000)
-        console.log(producto)
+        if (update_ID) {
+            dispatch(updateProducto(update_ID.id, producto))
+            setUpdate(true)
+            setTimeout(() => {
+                setUpdate(false)
+                navigate("/products")
+            }, 3000)
+        } else {
+            dispatch(postProduct(producto))
+            setCreated(true)
+            setTimeout(() => {
+                setCreated(false)
+            }, 3000)
+            console.log(producto)
+        }
     }
     const handleDelete = (e) => {
         //producto.img.pop(e.target.value)
@@ -101,6 +123,7 @@ const CreateProduct = () => {
                             id=""
                             placeholder="Nombre del producto"
                             onChange={(e) => handleChange(e)}
+                            value={producto.name}
                         />
                         {error.name && (
                             <p className="crt-errors">{error.name}</p>
@@ -112,6 +135,7 @@ const CreateProduct = () => {
                             id=""
                             placeholder="Precio"
                             onChange={(e) => handleChange(e)}
+                            value={producto.price}
                         />
                         {error.price && (
                             <p className="crt-errors">{error.price}</p>
@@ -121,6 +145,7 @@ const CreateProduct = () => {
                             id=""
                             className="create-product-input crt-cats"
                             onChange={(e) => handleChange(e)}
+                            value={producto.categories_ids}
                         >
                             <option selected>Categorias</option>
                             {cat?.map((e) => (
@@ -139,6 +164,7 @@ const CreateProduct = () => {
                             id=""
                             placeholder="Stock"
                             onChange={(e) => handleChange(e)}
+                            value={producto.stock}
                         />
                         {error.stock && (
                             <p className="crt-errors">{error.stock}</p>
@@ -151,6 +177,7 @@ const CreateProduct = () => {
                             rows="10"
                             placeholder="Descripcion del producto"
                             onChange={(e) => handleChange(e)}
+                            value={producto.description}
                         ></textarea>
                         {error.description && (
                             <p className="crt-errors">{error.description}</p>
@@ -161,6 +188,13 @@ const CreateProduct = () => {
                                 className="create-product-input createpr not-allow"
                             >
                                 Crear producto
+                            </button>
+                        ) : update_ID ? (
+                            <button
+                                type="submit"
+                                className="create-product-input createpr"
+                            >
+                                Editar Producto
                             </button>
                         ) : (
                             <button
@@ -173,6 +207,11 @@ const CreateProduct = () => {
                         {created && (
                             <p className="create-product-success">
                                 Producto creado con exito!
+                            </p>
+                        )}
+                        {update && (
+                            <p className="create-product-success">
+                                Producto actualziado con exito!
                             </p>
                         )}
                     </form>

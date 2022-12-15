@@ -9,6 +9,7 @@ const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -215,6 +216,26 @@ export const deleteProduct = (id) => {
             dispatch({
                 type: DELETE_PRODUCT,
                 payload: productDelete.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+/*---------ACTION PUT PRODUCT-----------*/
+export const updateProducto = (product_id, producto) => {
+    return async (dispatch) => {
+        try {
+            const productUpdate = await axios.put(
+                `${url_api}/products/${product_id}`,
+                producto
+            )
+            dispatch({
+                type: UPDATE_PRODUCTO,
+                payload: productUpdate.data,
             })
         } catch (err) {
             dispatch({
