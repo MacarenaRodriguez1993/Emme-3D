@@ -148,7 +148,7 @@ export const getCategories = () => {
             const categories = await axios.get(`${url_api}/categories`)
             dispatch({
                 type: GET_ALL_CATEGORIES,
-                payload: categories,
+                payload: categories.data,
             })
         } catch (err) {
             dispatch({
