@@ -13,7 +13,7 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/crear-producto" element={<CrearProducto />} />
+                <Route path="/crear-producto" element={<CreateProduct />} />
                 <Route path="/productos" element={<ProductsContainer />} />
                 <Route
                     exact
@@ -21,12 +21,17 @@ function App() {
                     path="/crear-producto"
                     element={<CrearProducto />}
                 />
-                <Route path="/create-product" element={<CreateProduct />} />
                 <Route exact strict path="/home" element={<Home />} />
                 <Route exact strict path="/products" element={<Productos />} />
                 <Route exact strict path="/" element={<Landing />} />
                 <Route exact strict path="/login" element={<Login />} />
                 <Route path="/details/:id" element={<Details />} />
+                <Route
+                    exact
+                    strict
+                    path="/updateproduct/:id"
+                    element={<CreateProduct />}
+                />
             </Routes>
         </>
     )
