@@ -4,6 +4,7 @@ import stitch from "../../assets/stitch.png"
 import { AiFillEdit, AiFillDelete, AiOutlineHeart } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { deleteProduct, getProducts } from "../../redux/actions/actions"
+import { Link } from "react-router-dom"
 const Product = ({ id, name, price }) => {
     const dispatch = useDispatch()
     const onClickDelete = (id) => {
@@ -24,9 +25,11 @@ const Product = ({ id, name, price }) => {
                 <div className="contenido">
                     <p>$ {price}</p>
                     <div>
-                        <button className="buttonActions">
-                            <AiFillEdit size="1.5em" />
-                        </button>
+                        <Link to={`/updateproduct/${id}`}>
+                            <button className="buttonActions">
+                                <AiFillEdit size="1.5em" />
+                            </button>
+                        </Link>
                         <button
                             className="buttonActions"
                             onClick={() => onClickDelete(id)}
