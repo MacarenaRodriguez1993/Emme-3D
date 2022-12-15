@@ -13,6 +13,8 @@
     "cloudinary": "^1.32.0",
     "dotenv": "^16.0.3",
     "formik": "^2.2.9",
+    "mercadopago": "^1.5.14",
+    "node-fetch": "^3.3.0",
     "react": "^18.2.0",
     "react-awesome-stars-rating": "^0.13.1",
     "react-dom": "^18.2.0",

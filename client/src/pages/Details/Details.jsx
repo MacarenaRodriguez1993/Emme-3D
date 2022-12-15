@@ -7,6 +7,7 @@ import ReactStarsRating from "react-awesome-stars-rating"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
+import Mercado_Pago from "../../components/MercadoPago/mercadoPago"
 
 export default function Details({ props }) {
     const { id } = useParams()
@@ -79,7 +80,7 @@ export default function Details({ props }) {
                             />
                         </button>
                         <button className="btn-compra buttons-details">
-                            Comprar ahora
+                            <Mercado_Pago />
                         </button>
                     </div>
                 </div>
