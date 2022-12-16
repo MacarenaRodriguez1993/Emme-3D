@@ -9,8 +9,6 @@ const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
-const GET_USERS = "GET_USERS"
-import { async } from "@firebase/util"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -150,7 +148,7 @@ export const getCategories = () => {
             const categories = await axios.get(`${url_api}/categories`)
             dispatch({
                 type: GET_ALL_CATEGORIES,
-                payload: categories,
+                payload: categories.data,
             })
         } catch (err) {
             dispatch({
@@ -217,6 +215,26 @@ export const deleteProduct = (id) => {
             dispatch({
                 type: DELETE_PRODUCT,
                 payload: productDelete.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+/*---------ACTION PUT PRODUCT-----------*/
+export const updateProducto = (product_id, producto) => {
+    return async (dispatch) => {
+        try {
+            const productUpdate = await axios.put(
+                `${url_api}/products/${product_id}`,
+                producto
+            )
+            dispatch({
+                type: UPDATE_PRODUCTO,
+                payload: productUpdate.data,
             })
         } catch (err) {
             dispatch({

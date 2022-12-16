@@ -60,7 +60,9 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = all.filter((c) => c.categoria.name === action.payload)
+                let cat = state.categories.filter(
+                    (c) => c.categoria.name === action.payload
+                )
                 return {
                     ...state,
                     productsFiltered: [...cat],
@@ -210,6 +212,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 inactiveProducts: action.payload,
                 productsFiltered: state.productsFiltered,
+            }
+        case UPDATE_PRODUCTO:
+            return {
+                ...state,
+                productsFiltered: [...state.productsFiltered, action.payload],
             }
         default:
             return state
