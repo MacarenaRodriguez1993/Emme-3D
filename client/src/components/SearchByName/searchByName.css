@@ -1,0 +1,29 @@
+.formSearchName {
+    display: flex;
+    position: relative;
+    justify-content: end;
+    width: 25%;
+}
+
+.buttonSearch {
+    width: 10%;
+    padding: 0;
+    margin: 2%;
+    border-radius: 10px;
+}
+
+.input {
+    color: #ffe3e3;
+    font-size: 0.9rem;
+    background-color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+    border-bottom: 3px solid #a34270;
+}
+
+input:hover {
+    background: rgba(189, 77, 129, 0.253)
+}

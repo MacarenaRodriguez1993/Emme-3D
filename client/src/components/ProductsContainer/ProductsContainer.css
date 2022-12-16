@@ -1,0 +1,16 @@
+.products-container {
+    background-color: rgb(255, 137, 161);
+    height: auto;
+}
+.p-container {
+    display: flex;
+    flex-direction: row;
+}
+#pr-img {
+    width: 100px;
+}
+.product {
+    background-color: rgb(253, 214, 114);
+    padding: 10px;
+    margin: 10px;
+}

@@ -1,0 +1,37 @@
+.navBar {
+    width: 100%;
+    background-color: #ffe3e3;
+    color: #262a53;
+    margin: 0;
+    padding: 0.5em;
+}
+
+ul {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.items {
+    display: flex;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+    color: #262a53;
+    font-size: medium;
+    padding: 0.1em 0.3em;
+}
+
+.buttonLogin,
+.titleHome {
+    margin: 0 0.5em;
+}
+.login-btn {
+    background-color: #a34270;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 50%;
+    color: #ffe3e3;
+}

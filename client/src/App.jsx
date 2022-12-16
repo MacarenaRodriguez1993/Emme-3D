@@ -1,34 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import "./App.css"
+import CrearProducto from "./components/CrearProducto"
+import { Route, Routes } from "react-router-dom"
+import Login from "./pages/Login/Login"
+import Details from "./pages/Details/Details"
+import ProductsContainer from "./components/ProductsContainer/ProductsContainer"
+import Home from "./pages/Home/home"
+import Productos from "./pages/Productos/products"
+import Landing from "./pages/Landing/landing"
+import CreateProduct from "./components/CreateProduct/CreateProduct"
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    return (
+        <>
+            <Routes>
+                <Route path="/crear-producto" element={<CreateProduct />} />
+                <Route path="/productos" element={<ProductsContainer />} />
+                <Route
+                    exact
+                    strict
+                    path="/crear-producto"
+                    element={<CrearProducto />}
+                />
+                <Route exact strict path="/home" element={<Home />} />
+                <Route exact strict path="/products" element={<Productos />} />
+                <Route exact strict path="/" element={<Landing />} />
+                <Route exact strict path="/login" element={<Login />} />
+                <Route path="/details/:id" element={<Details />} />
+                <Route
+                    exact
+                    strict
+                    path="/updateproduct/:id"
+                    element={<CreateProduct />}
+                />
+            </Routes>
+        </>
+    )
 }
 
 export default App
