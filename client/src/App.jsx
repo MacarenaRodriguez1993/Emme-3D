@@ -8,6 +8,7 @@ import Home from "./pages/Home/home"
 import Productos from "./pages/Productos/products"
 import Landing from "./pages/Landing/landing"
 import CreateProduct from "./components/CreateProduct/CreateProduct"
+import Register from "./pages/register/Register"
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                 <Route exact strict path="/products" element={<Productos />} />
                 <Route exact strict path="/" element={<Landing />} />
                 <Route exact strict path="/login" element={<Login />} />
+                <Route exact strict path="/register" element={<Register />} />
                 <Route path="/details/:_id" element={<Details />} />
             </Routes>
         </>

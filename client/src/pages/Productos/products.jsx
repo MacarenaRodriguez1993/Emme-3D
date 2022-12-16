@@ -19,6 +19,8 @@ const Products = () => {
     let productos = useSelector((state) => state.productsFiltered)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.users)
+    console.log(user)
 
     useEffect(() => {
         dispatch(getProducts())
@@ -27,19 +29,31 @@ const Products = () => {
         <div className="productos">
             <NavBar />
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
-            <SearchFilters />
-            <SearchByName />
+            <div className="barContainer">
+                <SearchFilters />
+                <SearchByName />
+            </div>
+            {error}
+            <h4 className="textTitle">Productos Activos</h4>
             <div className="cardProduct">
-                {error}
                 {productos?.map((a) => {
-                    return (
-                        <a className="linkDetails" href={`/details/${a._id}`}>
-                            <Product name={a.name} price={a.price} />
-                        </a>
-                    )
+                    if (a.deleted === false) {
+                        return (
+                            <Product id={a._id} name={a.name} price={a.price} />
+                        )
+                    }
                 })}
             </div>
-
+            <h4 className="textTitle">Productos inactivos</h4>
+            <div className="cardProduct">
+                {productos?.map((a) => {
+                    if (a.deleted === true) {
+                        return (
+                            <Product id={a._id} name={a.name} price={a.price} />
+                        )
+                    }
+                })}
+            </div>
             <Link to="/crear-producto">
                 <button className="addButton product-btn">
                     {" "}

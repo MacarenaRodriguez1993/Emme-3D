@@ -4,6 +4,8 @@ import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
 import { getDetails } from "../../redux/actions/actions"
 import { useParams } from "react-router-dom"
+import NavBar from "../../components/NavBar/NavBar"
+import Footer from "../../components/Footer/Footer"
 import StarRating from "star-rating-react"
 
 export default function Details({ props }) {
@@ -22,6 +24,7 @@ export default function Details({ props }) {
 
     return (
         <div className="container-details">
+            <NavBar />
             <div className="container-header">
                 <div className="conatainer-header-left">
                     <img
@@ -115,6 +118,7 @@ export default function Details({ props }) {
                     <button>Enviar</button>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
