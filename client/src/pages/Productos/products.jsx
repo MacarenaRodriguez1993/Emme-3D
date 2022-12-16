@@ -9,7 +9,7 @@ import SearchFilters from "../../components/SearchFilters/SearchFilters"
 import SearchByName from "../../components/SearchByName/searchByName"
 import { useEffect } from "react"
 import { getProducts } from "../../redux/actions/actions"
-import Mercado_Pago from "../../components/MercadoPago/mercadoPago"
+import MercadoPago from "../../components/MercadoPago/mercadoPago"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -59,7 +59,7 @@ const Products = () => {
                     Crear Producto{" "}
                 </button>
             </Link>
-            <Mercado_Pago />
+            <MercadoPago />
 
             {/* AQUI VA LA PAGINACION */}
             <p>Aqui va la paginacion</p>
