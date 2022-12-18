@@ -1,5 +1,4 @@
 const { createUser, getUsers } = require("../controllers/userController")
-const { createUser } = require("../controllers/userController")
 
 // USERS
 async function getAllUsers() {

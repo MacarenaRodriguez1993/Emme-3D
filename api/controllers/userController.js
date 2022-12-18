@@ -6,10 +6,10 @@ async function getUsers() {
         if (users.length < 1)
             throw new Error("NO HAY USUARIOS EN LA BASE DE DATOS")
         return users
-         } catch (err) {
+    } catch (err) {
         throw err
     }
-
+}
 
 async function createUser(user) {
     const { email, password } = user
