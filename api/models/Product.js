@@ -20,10 +20,9 @@ const ProductSchema = new mongoose.Schema(
         },
 
         // Cantidad de unidades del producto (1 por defecto)
-        stock: {
+        sold: {
             type: Number,
-            required: true,
-            default: 1,
+            default: 0,
         },
 
         // Descripción del producto
