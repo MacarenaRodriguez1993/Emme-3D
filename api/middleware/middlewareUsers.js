@@ -1,4 +1,6 @@
-const { getUsers } = require("../controllers/userController")
+const { createUser, getUsers } = require("../controllers/userController")
+const { createUser } = require("../controllers/userController")
+
 // USERS
 async function getAllUsers() {
     try {
@@ -9,7 +11,14 @@ async function getAllUsers() {
     }
 }
 function getUsersById(id) {}
-function createUsers() {}
+async function createUsers(user) {
+    try {
+        const createdUser = await createUser(user)
+        return createdUser
+    } catch (err) {
+        throw err
+    }
+}
 function updateUsers() {}
 function deleteUsers() {}
 
