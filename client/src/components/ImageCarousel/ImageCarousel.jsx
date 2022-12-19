@@ -1,16 +1,43 @@
+import { useEffect } from "react"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import {
+    getCarouselImgs,
+    carouselUpload,
+    carouselDelete,
+} from "../../redux/actions/actions"
 import "./ImageCarousel.css"
 
 const ImageCarousel = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getCarouselImgs())
+    }, [dispatch])
+    /*--------------- ESTADOS ---------------*/
     const [images, setImages] = useState({
         name: "",
         img: "",
     })
-
+    const [deleteImg, setDelteImg] = useState({
+        imgId: "",
+    })
+    /*--------------- HANDLERS ---------------*/
     const handleChange = (e) => {
-        setImages({
+        if (e.target.name === "name" || e.target.name === "name") {
+            setImages({
+                [e.target.name]: e.target.value,
+            })
+        }
+        setDelteImg({
             [e.target.name]: e.target.value,
         })
+    }
+    const handleUploadSubmit = (e) => {
+        dispatch(carouselUpload(images))
+    }
+    const handleDeleteSubmit = (e) => {
+        dispatch(carouselDelete(deleteImg))
     }
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
@@ -36,7 +63,7 @@ const ImageCarousel = () => {
     /****************************************************/
     return (
         <div>
-            <form className="">
+            <form className="carousel-upload-img" onSubmit={handleUploadSubmit}>
                 <label>Carga una nueva imagen en el carrusel</label>
                 <label htmlFor="nombre">Nombre</label>
                 <input
@@ -58,17 +85,21 @@ const ImageCarousel = () => {
                 <label>
                     La resolucion maxima de las imagenes es de 1280px de ancho.
                 </label>
+                <button type="submit">Subir imagen</button>
             </form>
-            <form action="">
+            <form className="carousel-delete-img" onSubmit={handleDeleteSubmit}>
                 <div>
                     <label htmlFor="">Eliminar una imagen</label>
                     <select name="" id="">
                         <option selected>Elegi una imagen</option>
                     </select>
                     {images?.map((img) => (
-                        <option value={img._id}>{img.name}</option>
+                        <option value={img._id} name="imgId">
+                            {img.name}
+                        </option>
                     ))}
                 </div>
+                <button type="submit">Eliminar imagen</button>
             </form>
         </div>
     )

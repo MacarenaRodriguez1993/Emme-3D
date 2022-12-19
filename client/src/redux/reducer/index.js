@@ -5,6 +5,7 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_DETAILS = "GET_DETAILS"
+const GET_CAROUSEL = 'GET_CAROUSEL'
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
@@ -17,6 +18,7 @@ const initialState = {
     detail: {},
     error: "",
     inactiveProducts: [],
+    carouselImages: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -191,6 +193,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 detail: action.payload,
+            }
+        case GET_CAROUSEL:
+            return {
+                ...state,
+                carouselImages: pload
             }
         case SEARCH_BY_NAME:
             return {

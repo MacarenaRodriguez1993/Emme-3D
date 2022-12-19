@@ -6,6 +6,7 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
+const GET_CAROUSEL = 'GET_CAROUSEL'
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
@@ -122,6 +123,19 @@ export const postCategory = (category) => {
     }
 }
 
+export const carouselUpload = image => {
+    return dispatch => {
+        try {
+            axios.post(url_api + "/carousel", image)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
 /*--------- FIN ACTIONS POST -------------*/
 
 /*--------- ACTIONS GET -------------*/
@@ -206,6 +220,26 @@ export const searchByName = (name) => {
         }
     }
 }
+
+export const getCarouselImgs = () => {
+    return async dispatch => {
+        try {
+            const carouselImgs = await axios.get(
+                `${url_api}/carousel`
+            )
+            dispatch({
+                type: GET_CAROUSEL,
+                payload: carouselImgs.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
 /*--------- FIN ACTIONS GET -------------*/
 /*---------ACTION DELETE PRODUCT-----------*/
 export const deleteProduct = (id) => {
@@ -222,6 +256,21 @@ export const deleteProduct = (id) => {
             dispatch({
                 type: ERROR,
                 payload: err.message,
+            })
+        }
+    }
+}
+
+export const carouselDelete = image => {
+    return dispatch => {
+        try {
+            axios.delete(
+                `${url_api}/carousel/${image}`
+            )
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
             })
         }
     }
