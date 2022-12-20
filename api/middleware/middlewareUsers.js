@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 const { createUser } = require("../controllers/userController")
-=======
 const { getUsers } = require("../controllers/userController")
->>>>>>> dev
 // USERS
 async function getAllUsers() {
     try {

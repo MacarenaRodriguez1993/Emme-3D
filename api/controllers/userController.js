@@ -1,5 +1,4 @@
 const User = require("../models/User")
-<<<<<<< HEAD
 
 async function createUser(user) {
     const { email, password } = user
@@ -17,23 +16,22 @@ async function createUser(user) {
             )
         const createdUser = await User.create(user)
         return createdUser
-=======
+    } catch (err) {
+        throw err
+    }
+}
 async function getUsers() {
     try {
         const users = await User.find()
         if (users.length < 1)
             throw new Error("NO HAY USUARIOS EN LA BASE DE DATOS")
         return users
->>>>>>> dev
     } catch (err) {
         throw err
     }
 }
 
 module.exports = {
-<<<<<<< HEAD
     createUser,
-=======
     getUsers,
->>>>>>> dev
 }
