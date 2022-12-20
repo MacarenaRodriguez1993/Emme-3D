@@ -11,7 +11,14 @@ async function getAllUsers() {
         throw err
     }
 }
-async function getUsersById(id) {}
+async function getUsersById(id) {
+    try {
+        const user = await usersId(id)
+        return user
+    } catch (err) {
+        throw err
+    }
+}
 async function createUsers(user) {
     try {
         const createdUser = await createUser(user)

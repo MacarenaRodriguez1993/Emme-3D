@@ -10,7 +10,9 @@ const usersId = async (id) => {
         if (userId.length < 1)
             throw new Error(`No existe usuario con id "${id}".`)
         return userId
-    } catch (err) {}
+    } catch (err) {
+        throw err
+    }
 }
 
 async function createUser(user) {
