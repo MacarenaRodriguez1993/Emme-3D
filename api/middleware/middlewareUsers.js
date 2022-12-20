@@ -1,5 +1,9 @@
-const { createUser } = require("../controllers/userController")
-const { getUsers } = require("../controllers/userController")
+const {
+    createUser,
+    getUsers,
+    deletedUser,
+} = require("../controllers/userController")
+
 // USERS
 async function getAllUsers() {
     try {
@@ -19,7 +23,14 @@ async function createUsers(user) {
     }
 }
 function updateUsers() {}
-function deleteUsers() {}
+async function deleteUsers(id) {
+    try {
+        const deleted = await deletedUser(id)
+        return deleted
+    } catch (err) {
+        throw err
+    }
+}
 
 module.exports = {
     getAllUsers,

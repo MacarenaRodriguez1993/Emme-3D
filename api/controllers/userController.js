@@ -31,7 +31,16 @@ async function getUsers() {
     }
 }
 
+async function deletedUser(id) {
+    try {
+        const deleteUser = await User.updateOne({ _id: id }, { deleted: true })
+        return deleteUser
+    } catch (err) {
+        throw err
+    }
+}
 module.exports = {
     createUser,
     getUsers,
+    deletedUser,
 }
