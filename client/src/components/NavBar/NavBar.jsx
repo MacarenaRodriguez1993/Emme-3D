@@ -19,7 +19,9 @@ const NavBar = () => {
                     <Link to="/contact">
                         <h4>Contacto</h4>
                     </Link>
-                    <button className="buttonLogin login-btn">LogIn</button>
+                    <button className="buttonLogin login-btn">
+                        <Link to="/login"> LogIn </Link>{" "}
+                    </button>
                 </div>
             </ul>
         </div>

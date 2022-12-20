@@ -10,6 +10,7 @@ const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 const GET_USERS = "GET_USERS"
+const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 
 const initialState = {
     allProducts: [],
