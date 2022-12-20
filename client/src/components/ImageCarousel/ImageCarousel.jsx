@@ -24,19 +24,17 @@ const ImageCarousel = () => {
     })
     /*--------------- HANDLERS ---------------*/
     const handleChange = (e) => {
-        if (e.target.name === "name" || e.target.name === "name") {
-            setImages({
-                [e.target.name]: e.target.value,
-            })
-        }
-        setDelteImg({
-            [e.target.name]: e.target.value,
+        setImages({
+            name: e.target.value,
         })
     }
     const handleUploadSubmit = (e) => {
+        e.preventDefault()
+        console.log(images)
         dispatch(carouselUpload(images))
     }
     const handleDeleteSubmit = (e) => {
+        e.preventDefault()
         dispatch(carouselDelete(deleteImg))
     }
     /****************************************************/
@@ -63,9 +61,13 @@ const ImageCarousel = () => {
     /****************************************************/
     return (
         <div>
-            <form className="carousel-upload-img" onSubmit={handleUploadSubmit}>
+            <form
+                className="carousel-upload-img"
+                onSubmit={(e) => handleUploadSubmit(e)}
+            >
                 <label>Carga una nueva imagen en el carrusel</label>
                 <label htmlFor="nombre">Nombre</label>
+
                 <input
                     type="text"
                     name="name"
@@ -77,10 +79,9 @@ const ImageCarousel = () => {
                     id="upload_widget"
                     type="button"
                     name="img"
-                    onChange={(e) => handleChange(e)}
                     onClick={() => handleOpenWidget()}
                 >
-                    Cargar imagene
+                    Cargar imagen
                 </button>
                 <label>
                     La resolucion maxima de las imagenes es de 1280px de ancho.
@@ -93,11 +94,11 @@ const ImageCarousel = () => {
                     <select name="" id="">
                         <option selected>Elegi una imagen</option>
                     </select>
-                    {images?.map((img) => (
+                    {/* {images?.map((img) => (
                         <option value={img._id} name="imgId">
                             {img.name}
                         </option>
-                    ))}
+                    ))} */}
                 </div>
                 <button type="submit">Eliminar imagen</button>
             </form>

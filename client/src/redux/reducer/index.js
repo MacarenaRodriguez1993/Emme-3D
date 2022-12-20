@@ -10,6 +10,8 @@ const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+//eliminar esta variable cuando se creen las rutas
+const POST_CAROUSEL = 'POST_CAROUSEL'
 
 const initialState = {
     allProducts: [],
@@ -198,6 +200,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 carouselImages: pload
+            }
+        case POST_CAROUSEL:
+            return {
+                ...state,
+                carouselImages: [...pload]
             }
         case SEARCH_BY_NAME:
             return {

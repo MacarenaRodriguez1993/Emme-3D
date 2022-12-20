@@ -6,6 +6,8 @@ import validations from "../../validations/validations-form"
 import NavBar from "../NavBar/NavBar"
 import Footer from "../Footer/Footer"
 import CreateCategory from "../CreateCategory/CreateCategory"
+import ImageCarousel from "../ImageCarousel/ImageCarousel"
+import Carousel from "../Carousel/Carousel"
 
 const CreateProduct = () => {
     const dispatch = useDispatch()
@@ -216,6 +218,8 @@ const CreateProduct = () => {
                     <CreateCategory />
                 </div>
             </div>
+            <ImageCarousel />
+            <Carousel />
             <Footer />
         </>
     )

@@ -10,6 +10,8 @@ const GET_CAROUSEL = 'GET_CAROUSEL'
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+//eliminar esta const cuando se creen las rutas
+const POST_CAROUSEL = 'POST_CAROUSEL'
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -92,8 +94,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = process.env.REACT_APP_API || "http://localhost:3001"
-let url_api = "https://emme-3d-production.up.railway.app"
+let url_api = "http://localhost:3001"
+//let url_api = "https://emme-3d-production.up.railway.app"
 
 
 //Action para postear productos
@@ -126,7 +128,11 @@ export const postCategory = (category) => {
 export const carouselUpload = image => {
     return dispatch => {
         try {
-            axios.post(url_api + "/carousel", image)
+            //axios.post(url_api + "/carousel", image)
+            dispatch({
+                type: POST_CAROUSEL,
+                payload: image,
+            })
         } catch (error) {
             dispatch({
                 type: ERROR,
