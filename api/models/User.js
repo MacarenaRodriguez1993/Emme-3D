@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema(
         // Nombre de usuario (nick)
         username: {
             type: String,
-            required: true,
+            //required: true,
             unique: true,
         },
 
@@ -31,31 +31,31 @@ const UserSchema = new mongoose.Schema(
         // Nombre del cliente
         name: {
             type: String,
-            required: true,
+            //required: true,
         },
 
         // Apellido/s del cliente
         surname: {
             type: String,
-            required: true,
+            //required: true,
         },
 
         // Dirección de envío
         address: {
             type: String,
-            required: true,
+            //required: true,
         },
 
         // Provincia del usuario
         province: {
             type: String,
-            required: true,
+            //required: true,
         },
 
         // Número de teléfono
         phone: {
             type: String,
-            required: true,
+            //required: true,
             // unique: true, Debería ser único?
         },
 
