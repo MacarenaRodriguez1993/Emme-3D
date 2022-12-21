@@ -2,6 +2,7 @@ const {
     createUser,
     getUsers,
     deletedUser,
+    userUpdate,
 } = require("../controllers/userController")
 
 // USERS
@@ -22,7 +23,14 @@ async function createUsers(user) {
         throw err
     }
 }
-function updateUsers() {}
+async function updateUsers(id, user) {
+    try {
+        const updateUser = await userUpdate(id, user)
+        return updateUser
+    } catch (err) {
+        throw err
+    }
+}
 async function deleteUsers(id) {
     try {
         const deleted = await deletedUser(id)

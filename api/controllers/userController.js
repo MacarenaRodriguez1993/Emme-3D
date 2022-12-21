@@ -39,8 +39,20 @@ async function deletedUser(id) {
         throw err
     }
 }
+async function userUpdate(id, user) {
+    try {
+        const update = await User.findOneAndUpdate(
+            { _id: id },
+            { email: user.email, password: user.password }
+        )
+        if (update) return "El usuario fue actualizado con exito"
+    } catch (err) {
+        throw err
+    }
+}
 module.exports = {
     createUser,
     getUsers,
     deletedUser,
+    userUpdate,
 }
