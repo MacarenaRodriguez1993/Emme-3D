@@ -17,7 +17,15 @@ router.get("/", async (req, res) => {
     }
 })
 // Get detalles del usuario /:id
-
+router.get("/:id", async (req, res) => {
+    const { id } = req.params
+    try {
+        const userId = await getUsersById(id)
+        res.status(200).json(userId)
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
+})
 // Post crear nueva usuario
 router.post("/", async (req, res) => {
     const user = req.body
