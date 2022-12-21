@@ -4,7 +4,7 @@ const ObjectId = mongoose.Types.ObjectId
 const usersId = async (id) => {
     try {
         const userId = await User.find({
-            _id: mongoose.Types.ObjectId(id),
+            _id: ObjectId(id),
         }).clone()
 
         if (userId.length < 1)
