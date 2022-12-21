@@ -10,3 +10,13 @@
 .redes {
     display: flex;
 }
+.whatsapp {
+    position: fixed;
+    background-color: #25d366;
+    border-radius: 100%;
+    right: 0;
+    bottom: 0.2em;
+    padding: 0.2em;
+    margin-top: -4em;
+    margin-right: 1em;
+}
