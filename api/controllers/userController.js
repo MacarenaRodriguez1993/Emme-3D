@@ -20,6 +20,7 @@ async function createUser(user) {
         throw err
     }
 }
+
 async function getUsers() {
     try {
         const users = await User.find()
@@ -39,6 +40,7 @@ async function deletedUser(id) {
         throw err
     }
 }
+
 async function userUpdate(id, user) {
     try {
         const update = await User.findOneAndUpdate(
@@ -50,6 +52,7 @@ async function userUpdate(id, user) {
         throw err
     }
 }
+
 module.exports = {
     createUser,
     getUsers,
