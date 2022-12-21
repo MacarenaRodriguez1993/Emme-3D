@@ -35,6 +35,7 @@ async function createUser(user) {
         throw err
     }
 }
+
 async function getUsers() {
     try {
         const users = await User.find()
@@ -46,8 +47,31 @@ async function getUsers() {
     }
 }
 
+async function deletedUser(id) {
+    try {
+        const deleteUser = await User.updateOne({ _id: id }, { deleted: true })
+        return deleteUser
+    } catch (err) {
+        throw err
+    }
+}
+
+async function userUpdate(id, user) {
+    try {
+        const update = await User.findOneAndUpdate(
+            { _id: id },
+            { email: user.email, password: user.password }
+        )
+        if (update) return "El usuario fue actualizado con exito"
+    } catch (err) {
+        throw err
+    }
+}
+
 module.exports = {
     createUser,
     getUsers,
-    usersId,
+    deletedUser,
+    userUpdate,
+    usersId
 }
