@@ -14,7 +14,9 @@ async function getAllUsers() {
         throw err
     }
 }
+
 function getUsersById(id) {}
+
 async function createUsers(user) {
     try {
         const createdUser = await createUser(user)
@@ -23,6 +25,7 @@ async function createUsers(user) {
         throw err
     }
 }
+
 async function updateUsers(id, user) {
     try {
         const updateUser = await userUpdate(id, user)
@@ -31,6 +34,7 @@ async function updateUsers(id, user) {
         throw err
     }
 }
+
 async function deleteUsers(id) {
     try {
         const deleted = await deletedUser(id)
