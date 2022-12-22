@@ -11,6 +11,7 @@ const {
 async function getAllProducts() {
     try {
         const products = await listProducts()
+
         return products
     } catch (error) {
         throw error
