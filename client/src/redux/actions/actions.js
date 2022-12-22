@@ -9,6 +9,7 @@ const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+const GET_USERS = "GET_USERS"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/

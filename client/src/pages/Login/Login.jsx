@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { app } from "../../components/firebase/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { getUsers } from "../../redux/actions/actions"
+import LoginGoogle from "./LoginGoogle"
 
 export default function Login() {
     const navigate = useNavigate()
@@ -13,10 +14,12 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const user = useSelector((state) => state.users)
+    console.log(user)
 
+    const auth = getAuth(app)
     const onSubmit = (e) => {
         e.preventDefault()
-        const auth = getAuth(app)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
@@ -51,9 +54,7 @@ export default function Login() {
                             <input
                                 name="email"
                                 type="email"
-                                autocomplete="email"
                                 value={email}
-                                required
                                 className="input"
                                 placeholder="Email address"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -63,9 +64,7 @@ export default function Login() {
                             <input
                                 name="password"
                                 type="password"
-                                autocomplete="current-password"
                                 value={password}
-                                required
                                 className="input"
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
@@ -82,7 +81,7 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <button type="submit" className="btn-submit">
+                        <button className="btn-submit">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <svg
                                     style={{
@@ -104,6 +103,7 @@ export default function Login() {
                             Inicia sesion
                         </button>
                     </div>
+                    <LoginGoogle />
                     <span className="link-registro">
                         No tienes una cuenta?{" "}
                         <Link className="forgot-password" to="#">
