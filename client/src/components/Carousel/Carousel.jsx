@@ -31,23 +31,28 @@ const Carousel = () => {
  */
     return (
         <div className="slide-container">
-            <div className="img-container" style={{ width: `${imgWidth}%` }}>
-                {carouselImages &&
-                    carouselImages.map((i) => (
-                        <img
-                            src={i.img}
-                            alt={i.name}
-                            className="carousel-imgs"
-                            style={{ width: `${imgSegmento}%` }}
-                        />
-                    ))}
+            <div>
+                <div
+                    className="img-container"
+                    style={{ width: `${imgWidth}%` }}
+                >
+                    {carouselImages &&
+                        carouselImages.map((i) => (
+                            <img
+                                src={i.img}
+                                alt={i.name}
+                                className="carousel-imgs"
+                                style={{ width: `${imgSegmento}%` }}
+                            />
+                        ))}
+                </div>
+                <ul className="img-ul">
+                    {carouselImages.length &&
+                        carouselImages?.map((e) => (
+                            <li className="img-li img-active"></li>
+                        ))}
+                </ul>
             </div>
-            <ul className="img-ul">
-                {carouselImages.length &&
-                    carouselImages?.map((e) => (
-                        <li className="img-li img-active"></li>
-                    ))}
-            </ul>
         </div>
     )
 }
