@@ -12,6 +12,7 @@ const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta const cuando se creen las rutas
 const POST_CAROUSEL = 'POST_CAROUSEL'
+const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -277,6 +278,27 @@ export const carouselDelete = image => {
             dispatch({
                 type: ERROR,
                 payload: error.message,
+            })
+        }
+    }
+}
+
+/*---------ACTION PUT PRODUCT-----------*/
+export const updateProducto = (product_id, producto) => {
+    return async (dispatch) => {
+        try {
+            const productUpdate = await axios.put(
+                `${url_api}/products/${product_id}`,
+                producto
+            )
+            dispatch({
+                type: UPDATE_PRODUCTO,
+                payload: productUpdate.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
             })
         }
     }

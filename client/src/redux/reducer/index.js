@@ -12,6 +12,7 @@ const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta variable cuando se creen las rutas
 const POST_CAROUSEL = 'POST_CAROUSEL'
+const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 
 const initialState = {
     allProducts: [],
@@ -230,6 +231,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 inactiveProducts: action.payload,
                 productsFiltered: state.productsFiltered,
+            }
+        case UPDATE_PRODUCTO:
+            return {
+                ...state,
+                productsFiltered: [...state.productsFiltered, action.payload],
             }
         default:
             return state
