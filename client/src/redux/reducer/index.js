@@ -20,7 +20,20 @@ const initialState = {
     detail: {},
     error: "",
     inactiveProducts: [],
-    carouselImages: []
+    carouselImages: [
+        {
+            name: 'prueba',
+            img: 'http://res.cloudinary.com/emme3d/image/upload/v1671502080/xiftivayhplad0j88s6j.jpg'
+        },
+        {
+            name: 'vaporwave',
+            img: 'https://tecnovortex.com/wp-content/uploads/2019/04/wallpaper-engine.jpg'
+        },
+        {
+            name: 'impresion',
+            img: 'https://d100mj7v0l85u5.cloudfront.net/s3fs-public/2022-09/impresion-3d-empaques.png'
+        }
+    ]
 }
 
 const rootReducer = (state = initialState, action) => {

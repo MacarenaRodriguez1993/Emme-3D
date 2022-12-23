@@ -25,6 +25,7 @@ const ImageCarousel = () => {
     /*--------------- HANDLERS ---------------*/
     const handleChange = (e) => {
         setImages({
+            ...images,
             name: e.target.value,
         })
     }
