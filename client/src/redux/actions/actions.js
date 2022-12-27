@@ -10,6 +10,8 @@ const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
+const ADD_CART = "ADD_CART"
+const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -92,9 +94,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = process.env.REACT_APP_API || "http://localhost:3001"
+//let url_api = "https://emme-3d-production.up.railway.app" || "http://localhost:3001"
 let url_api = "https://emme-3d-production.up.railway.app"
-
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -245,5 +246,23 @@ export const updateProducto = (product_id, producto) => {
                 payload: err.message,
             })
         }
+    }
+}
+
+export const addToCart = (product) => {
+    return async (dispatch) => {
+        dispatch({
+            type: ADD_CART,
+            payload: product,
+        })
+    }
+}
+
+export const deleteToCart = (name) => {
+    return async (dispatch) => {
+        dispatch({
+            type: DELETE_CART_PRODUCT,
+            payload: name,
+        })
     }
 }

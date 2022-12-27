@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
+import { FaShoppingCart } from "react-icons/fa"
 
 const NavBar = () => {
     return (
@@ -10,6 +11,11 @@ const NavBar = () => {
                     <h2 className="titleHome">Emme 3D</h2>
                 </Link>
                 <div className="items">
+                    <Link to="/cart">
+                        <div className="cart">
+                            <FaShoppingCart />
+                        </div>
+                    </Link>
                     <Link to="/products">
                         <h4>Productos</h4>
                     </Link>

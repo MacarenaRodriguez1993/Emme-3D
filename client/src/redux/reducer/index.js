@@ -10,6 +10,8 @@ const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
+const ADD_CART = "ADD_CART"
+const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 
 const initialState = {
     allProducts: [],
@@ -18,6 +20,7 @@ const initialState = {
     detail: {},
     error: "",
     inactiveProducts: [],
+    shoppingCart: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -54,7 +57,9 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = state.categories.filter((c) => c.categoria.name === action.payload)
+                let cat = state.categories.filter(
+                    (c) => c.categoria.name === action.payload
+                )
                 return {
                     ...state,
                     productsFiltered: [...cat],
@@ -209,6 +214,20 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsFiltered: [...state.productsFiltered, action.payload],
+            }
+        case ADD_CART:
+            return {
+                ...state,
+                shoppingCart: [...state.shoppingCart, action.payload],
+            }
+        case DELETE_CART_PRODUCT:
+            return {
+                ...state,
+                shoppingCart: [
+                    ...state.shoppingCart.filter(
+                        (p) => p[0].name !== action.payload
+                    ),
+                ],
             }
         default:
             return state

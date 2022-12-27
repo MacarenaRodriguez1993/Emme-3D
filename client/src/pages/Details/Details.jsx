@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import "./Details.css"
 import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
-import { getDetails } from "../../redux/actions/actions"
+import { getDetails, addToCart } from "../../redux/actions/actions"
 import ReactStarsRating from "react-awesome-stars-rating"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
@@ -22,6 +22,10 @@ export default function Details({ props }) {
     let p = productDetail?.data
     console.log(p)
 
+    const handleShopCar = (e) => {
+        e.preventDefault()
+        dispatch(addToCart(p))
+    }
     return (
         <div className="container-details">
             <NavBar />
@@ -71,7 +75,10 @@ export default function Details({ props }) {
                         <button className="btn-detail buttons-details">
                             Ver medios de pagos
                         </button>
-                        <button className="btn-agregar-carro buttons-details">
+                        <button
+                            className="btn-agregar-carro buttons-details"
+                            onClick={handleShopCar}
+                        >
                             Agregar al carrito{" "}
                             <img
                                 style={{ width: 20, height: 20 }}
