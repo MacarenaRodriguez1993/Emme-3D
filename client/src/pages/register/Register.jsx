@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { app } from "../../components/firebase/firebase"
+import { getUsers } from "../../redux/actions/actions"
 
 export default function register() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -20,6 +23,8 @@ export default function register() {
                 // Signed in
                 const user = userCredential.user
                 console.log(user)
+                dispatch(getUsers(user))
+                navigate("/products")
                 // ...
             })
             .catch((error) => {

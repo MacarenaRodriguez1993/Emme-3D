@@ -106,7 +106,7 @@ export default function Login() {
                     <LoginGoogle />
                     <span className="link-registro">
                         No tienes una cuenta?{" "}
-                        <Link className="forgot-password" to="#">
+                        <Link to="/register" className="forgot-password">
                             Registrate
                         </Link>
                     </span>

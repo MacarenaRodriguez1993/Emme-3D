@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 export default function LoginGoogle() {
     const navigate = useNavigate()
+
     const provider = new GoogleAuthProvider()
     const auth = getAuth(app)
     const loginGoogle = () => {
@@ -24,6 +25,7 @@ export default function LoginGoogle() {
                     // The signed-in user info.
                     const user = result.user
                     dispatch(getUsers(user))
+                    console.log(user)
                     navigate("/products")
                     // ...
                 })
@@ -34,6 +36,7 @@ export default function LoginGoogle() {
                     // The email of the user's account used.
                     const email = error.customData.email
                     // The AuthCredential type that was used.
+                    console.log(email)
                     const credential =
                         GoogleAuthProvider.credentialFromError(error)
                     // ...
