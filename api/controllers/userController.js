@@ -1,3 +1,5 @@
+const mongoose = require("mongoose")
+const ObjectId = mongoose.Types.ObjectId
 const User = require("../models/User")
 
 async function getUsers() {
@@ -6,6 +8,20 @@ async function getUsers() {
         if (users.length < 1)
             throw new Error("NO HAY USUARIOS EN LA BASE DE DATOS")
         return users
+    } catch (err) {
+        throw err
+    }
+}
+
+async function usersId(id) {
+    try {
+        const userId = await User.find({
+            _id: ObjectId(id),
+        }).clone()
+
+        if (userId.length < 1)
+            throw new Error(`No existe usuario con id "${id}".`)
+        return userId
     } catch (err) {
         throw err
     }
@@ -32,7 +48,42 @@ async function createUser(user) {
     }
 }
 
+async function getUsers() {
+    try {
+        const users = await User.find()
+        if (users.length < 1)
+            throw new Error("NO HAY USUARIOS EN LA BASE DE DATOS")
+        return users
+    } catch (err) {
+        throw err
+    }
+}
+
+async function deletedUser(id) {
+    try {
+        const deleteUser = await User.updateOne({ _id: id }, { deleted: true })
+        return deleteUser
+    } catch (err) {
+        throw err
+    }
+}
+
+async function userUpdate(id, user) {
+    try {
+        const update = await User.findOneAndUpdate(
+            { _id: id },
+            { email: user.email, password: user.password }
+        )
+        if (update) return "El usuario fue actualizado con exito"
+    } catch (err) {
+        throw err
+    }
+}
+
 module.exports = {
-    getUsers,
     createUser,
+    getUsers,
+    deletedUser,
+    userUpdate,
+    usersId,
 }

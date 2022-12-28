@@ -1,4 +1,10 @@
-const { createUser, getUsers } = require("../controllers/userController")
+const {
+    createUser,
+    getUsers,
+    deletedUser,
+    userUpdate,
+    usersId,
+} = require("../controllers/userController")
 
 // USERS
 async function getAllUsers() {
@@ -9,7 +15,16 @@ async function getAllUsers() {
         throw err
     }
 }
-function getUsersById(id) {}
+
+async function getUsersById(id) {
+    try {
+        const user = await usersId(id)
+        return user
+    } catch (err) {
+        throw err
+    }
+}
+
 async function createUsers(user) {
     try {
         const createdUser = await createUser(user)
@@ -18,8 +33,24 @@ async function createUsers(user) {
         throw err
     }
 }
-function updateUsers() {}
-function deleteUsers() {}
+
+async function updateUsers(id, user) {
+    try {
+        const updateUser = await userUpdate(id, user)
+        return updateUser
+    } catch (err) {
+        throw err
+    }
+}
+
+async function deleteUsers(id) {
+    try {
+        const deleted = await deletedUser(id)
+        return deleted
+    } catch (err) {
+        throw err
+    }
+}
 
 module.exports = {
     getAllUsers,
