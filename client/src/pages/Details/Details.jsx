@@ -3,20 +3,20 @@ import "./Details.css"
 import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
 import { getDetails } from "../../redux/actions/actions"
-import ReactStarsRating from "react-awesome-stars-rating"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
+import StarRating from "star-rating-react"
 
 export default function Details({ props }) {
-    const { id } = useParams()
+    let { _id } = useParams()
     const dispatch = useDispatch()
     const [rating, setRating] = useState(0)
     const [review, setReview] = useState("")
 
     useEffect(() => {
-        dispatch(getDetails(id))
-    }, [id])
+        dispatch(getDetails(_id))
+    }, [dispatch])
 
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
@@ -89,15 +89,12 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {/* <div className="container-opiniones">
-                {p.reviews.map((r) => {
+                {p.reviews_ids?.map((r) => {
                     return (
                         <div style={{ marginBottom: 15 }}>
                             <div className="header-opinion">
                                 <h2>{r.name}</h2>
-                                <ReactStarsRating
-                                    isEdit={false}
-                                    value={r.rating}
-                                />
+                                <StarRating value={r.rating} />
                             </div>
                             <div className="opinion-reviews">
                                 <span>{r.reviews}</span>
@@ -109,7 +106,8 @@ export default function Details({ props }) {
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
-                    {/* <ReactStarsRating value={rating} onChange={setRating} /> */}
+
+                    <StarRating onChange={setRating} value={rating} />
                 </div>
                 <textarea
                     className="input-opinion"
