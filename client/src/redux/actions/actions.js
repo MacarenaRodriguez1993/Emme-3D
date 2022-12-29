@@ -92,9 +92,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = process.env.REACT_APP_API || "http://localhost:3001"
-let url_api = "https://emme-3d-production.up.railway.app"
-
+let url_api = "http://localhost:3001"
+//let url_api = "https://emme-3d-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {

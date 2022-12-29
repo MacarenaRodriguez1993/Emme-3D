@@ -1,7 +1,8 @@
 const router = require("express").Router()
-const nodemailer = require("nodemailer")
 const { info } = require("../controllers/emailController")
+
 router.post("/", async (req, res) => {
+    //Nombre y mail del destinatario
     const { name, email } = req.body
     try {
         const data = await info(name, email)
