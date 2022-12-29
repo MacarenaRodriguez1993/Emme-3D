@@ -36,7 +36,7 @@ export default function LoginGoogle() {
                     dispatch(getUsers(user))
                     navigate("/products")
 
-                    i /* f (user == token) {
+                    /* if (user == token) {
                         dispatch(getUsers(user))
                         console.log(user)
                         navigate("/products")
