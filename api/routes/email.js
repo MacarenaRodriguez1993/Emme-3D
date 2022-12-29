@@ -1,15 +1,25 @@
 const router = require("express").Router()
-const { info } = require("../controllers/emailController")
+const { pago, newUser } = require("../controllers/emailController")
 
-router.post("/", async (req, res) => {
-    //Nombre y mail del destinatario
+//Envia mail cuando el pago fue exitoso
+router.post("/pagado", async (req, res) => {
     const { name, email } = req.body
     try {
-        const data = await info(name, email)
+        const data = await pago(name, email)
         res.status(200).json(data)
     } catch (err) {
         res.status(404).send(err.message)
     }
 })
 
+//Envia mail cuando se crea usuario
+router.post("/usuario", async (req, res) => {
+    const { name, email } = req.body
+    try {
+        const data = await newUser(name, email)
+        res.status(200).json(data)
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
+})
 module.exports = router
