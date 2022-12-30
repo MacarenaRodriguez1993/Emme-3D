@@ -1,4 +1,4 @@
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
+const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 const GET_DETAILS = "GET_DETAILS"
 const GET_BY_CATEGORY = "GET_BY_CATEGORY"
 const GET_BY_PRICE = "GET_BY_PRICE"
@@ -95,8 +95,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = "https://emme-3d-production.up.railway.app" || "http://localhost:3001"
-let url_api = "https://emme-3d-production.up.railway.app"
+let url_api = "http://localhost:3001"
+//let url_api = "https://emme-3d-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -250,7 +250,6 @@ export const updateProducto = (product_id, producto) => {
     }
 }
 
-
 export const addToCart = (product) => {
     return async (dispatch) => {
         dispatch({
@@ -266,7 +265,8 @@ export const deleteToCart = (name) => {
             type: DELETE_CART_PRODUCT,
             payload: name,
         })
-
+    }
+}
 export const getUsers = (data) => {
     return async (dispatch) => {
         try {
