@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./products.css"
 import Footer from "../../components/Footer/Footer"
 import NavBar from "../../components/NavBar/NavBar"
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
 import SearchByName from "../../components/SearchByName/searchByName"
-import { useEffect } from "react"
+
 import { getProducts } from "../../redux/actions/actions"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
@@ -19,6 +19,8 @@ const Products = () => {
     let productos = useSelector((state) => state.productsFiltered)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.users)
+    console.log(user)
 
     useEffect(() => {
         dispatch(getProducts())

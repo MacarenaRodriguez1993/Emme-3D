@@ -12,6 +12,7 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
+const GET_USERS = "GET_USERS"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -249,6 +250,7 @@ export const updateProducto = (product_id, producto) => {
     }
 }
 
+
 export const addToCart = (product) => {
     return async (dispatch) => {
         dispatch({
@@ -264,5 +266,19 @@ export const deleteToCart = (name) => {
             type: DELETE_CART_PRODUCT,
             payload: name,
         })
+
+export const getUsers = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: GET_USERS,
+                payload: data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
     }
 }
