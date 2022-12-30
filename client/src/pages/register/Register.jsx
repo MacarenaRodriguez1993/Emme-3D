@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
 import { useDispatch, useSelector } from "react-redux"
-import "./Login.css"
 import { Link, useNavigate } from "react-router-dom"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { app } from "../../components/firebase/firebase"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { getUsers } from "../../redux/actions/actions"
-import LoginGoogle from "./LoginGoogle"
 
-export default function Login() {
-    const navigate = useNavigate()
+export default function register() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const user = useSelector((state) => state.users)
-    console.log(user)
+    const [rPassword, setRpassword] = useState("")
 
     const auth = getAuth(app)
-    const onSubmit = (e) => {
+
+    const register = (e) => {
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
-                navigate("/products")
                 console.log(user)
                 dispatch(getUsers(user))
+                navigate("/products")
                 // ...
             })
             .catch((error) => {
                 const errorCode = error.code
                 const errorMessage = error.message
+                // ..
             })
     }
 
@@ -45,16 +44,15 @@ export default function Login() {
                 />
             </div>
             <div>
-                <form className="formulario-login" onSubmit={onSubmit}>
-                    <h2 style={{ color: "white", fontSize: 30 }}>
-                        Inicia sesion en tu cuenta
-                    </h2>
+                <form className="formulario-login" onSubmit={register}>
+                    <h2 style={{ color: "white", fontSize: 30 }}>Registrate</h2>
                     <div style={{ flexDirection: "column" }}>
                         <div>
                             <input
                                 name="email"
                                 type="email"
                                 value={email}
+                                required
                                 className="input"
                                 placeholder="Email address"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -65,23 +63,31 @@ export default function Login() {
                                 name="password"
                                 type="password"
                                 value={password}
+                                required
                                 className="input"
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                    </div>
-
-                    <div className="recuperar-password">
-                        <div class="text-sm">
-                            <a href="#" className="forgot-password">
-                                Forgot your password?
-                            </a>
+                        <div>
+                            <input
+                                name="repeatPassword"
+                                type="password"
+                                value={rPassword}
+                                required
+                                className="input"
+                                placeholder="Password"
+                                onChange={(e) => setRpassword(e.target.value)}
+                            />
                         </div>
                     </div>
 
+                    <div className="recuperar-password">
+                        <div class="text-sm"></div>
+                    </div>
+
                     <div>
-                        <button className="btn-submit">
+                        <button type="submit" className="btn-submit">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <svg
                                     style={{
@@ -100,17 +106,10 @@ export default function Login() {
                                     />
                                 </svg>
                             </span>
-                            Inicia sesion
+                            Registrarse
                         </button>
                     </div>
                 </form>
-                <LoginGoogle />
-                <span className="link-registro">
-                    No tienes una cuenta?{" "}
-                    <Link to="/register" className="forgot-password">
-                        Registrate
-                    </Link>
-                </span>
             </div>
         </div>
     )
