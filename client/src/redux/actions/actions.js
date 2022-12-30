@@ -9,6 +9,9 @@ const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
+const ADD_CART = "ADD_CART"
+const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 import axios from "axios"
 
@@ -92,9 +95,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = process.env.REACT_APP_API || "http://localhost:3001"
+//let url_api = "https://emme-3d-production.up.railway.app" || "http://localhost:3001"
 let url_api = "https://emme-3d-production.up.railway.app"
-
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -247,6 +249,23 @@ export const updateProducto = (product_id, producto) => {
         }
     }
 }
+
+
+export const addToCart = (product) => {
+    return async (dispatch) => {
+        dispatch({
+            type: ADD_CART,
+            payload: product,
+        })
+    }
+}
+
+export const deleteToCart = (name) => {
+    return async (dispatch) => {
+        dispatch({
+            type: DELETE_CART_PRODUCT,
+            payload: name,
+        })
 
 export const getUsers = (data) => {
     return async (dispatch) => {

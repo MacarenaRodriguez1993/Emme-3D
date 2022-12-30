@@ -8,6 +8,7 @@ import Home from "./pages/Home/home"
 import Productos from "./pages/Productos/products"
 import Landing from "./pages/Landing/landing"
 import CreateProduct from "./components/CreateProduct/CreateProduct"
+import Cart from "./pages/Cart/Cart"
 import Register from "./pages/register/Register"
 import Perfil from "./pages/perfil/Perfil"
 
@@ -16,6 +17,7 @@ function App() {
         <>
             <Routes>
                 <Route path="/crear-producto" element={<CreateProduct />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/productos" element={<ProductsContainer />} />
                 <Route
                     exact
