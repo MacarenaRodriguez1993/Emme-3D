@@ -46,7 +46,7 @@ async function newUser(name, email) {
         from: `"Emme3D-Diseños e impresión en 3D 👾⚒️" <${GMAIL_ADMIN}>`, // sender address
         to: email, // list of receivers
         subject: " BIENVENID@ AL MUNDO DE LA IMPRESION 3D ", // Subject line
-        html: `Hola ${name} . Muchas gracias por sumarte a Emme-3D 👏. <br></br> Te invitamos a recorrer nuestra pagina y encontrar el producto ideal para regalar
+        html: `Hola ${email} . Muchas gracias por sumarte a Emme-3D 👏. <br></br> Te invitamos a recorrer nuestra pagina y encontrar el producto ideal para regalar
          o regalarte.<br></br> Recordá que tambien podes hacer tus pedidos personalizados ✍️📉 <br></br>
          <a href='http://127.0.0.1:5173/products'>Ingresa aqui para regresar al sitio</a> - <br></br>
          Nuestras redes <a href='http://www.instagram.com/emme.3d'>Instagram</a>`, // html body
