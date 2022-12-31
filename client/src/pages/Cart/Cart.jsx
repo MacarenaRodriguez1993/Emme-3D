@@ -12,16 +12,23 @@ const Cart = () => {
         dispatch(deleteToCart(name))
     }
     const buy = () => {
-        axios
-            .post("https://localhost:3001/mercadopago", productosCart)
-            .then(function (response) {
-                window.location.replace(response.data)
+        fetch("http://localhost:3001/mercadopago", {
+            method: "POST",
+            body: JSON.stringify(productosCart),
+            headers: {
+                "Content-type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                window.location.href = data
             })
     }
     return (
         <div>
             <NavBar />
             <div className="products-container">
+                <h2 className="titleCart">Carrito de Compras 🔖</h2>
                 <div className="p-container">
                     {productosCart.map((p) => (
                         <div className="product">
@@ -48,8 +55,9 @@ const Cart = () => {
                         </div>
                     ))}
                 </div>
-                <div className="compra">
+                <div>
                     <button
+                        className="compra"
                         onClick={() => {
                             buy()
                         }}

@@ -1,21 +1,28 @@
 .products-container {
-    background-color: rgb(255, 137, 161);
-    height: 92vh;
+    background-color: #262a53;
+    color: #ffe3e3;
+    padding: 1em;
+}
+.titleCart {
+    text-align: center;
 }
 .p-container {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 #pr-img {
     width: 100px;
 }
 .product {
-    background-color: rgb(253, 214, 114);
-    padding: 10px;
-    margin: 10px;
+    background-color: rgba(239, 233, 218, 0.292);
+    border-radius: 1em;
 }
 
 .compra {
-    display: flex;
-    flex-direction: row;
+    background-color: #a34270;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 50%;
+    color: #ffe3e3;
+    margin: 0 25%;
 }
