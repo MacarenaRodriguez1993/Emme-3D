@@ -2,6 +2,7 @@
     background-color: #262a53;
     color: #ffe3e3;
     padding: 1em;
+    height: 100vh;
 }
 .titleCart {
     text-align: center;
@@ -11,10 +12,39 @@
 }
 #pr-img {
     width: 100px;
+    border-radius: 1em;
+}
+#contenidoCart {
+    margin: 0 1em;
+    width: 100%;
+}
+#favo {
+    background-color: rgba(239, 233, 218, 0.292);
+    border: none;
+}
+#cantidad {
+    width: 50%;
+    text-align: center;
+}
+#cant {
+    color: #ffe3e3;
+    background-color: rgba(239, 233, 218, 0.292);
+    width: 20%;
+    margin: 0.2em;
+}
+#deleteCart {
+    background-color: red;
+    border: none;
+    padding: 0.5em;
+    margin: 0.2em;
+    color: #ffe3e3;
+    border-radius: 0.5em;
 }
 .product {
     background-color: rgba(239, 233, 218, 0.292);
     border-radius: 1em;
+    display: flex;
+    align-items: center;
 }
 
 .compra {

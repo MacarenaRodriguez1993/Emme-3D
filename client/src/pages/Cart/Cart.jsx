@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar/NavBar"
 import "./Cart.css"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteToCart } from "../../redux/actions/actions"
-import axios from "axios"
+import { AiOutlineHeart } from "react-icons/ai"
 
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
@@ -32,25 +32,28 @@ const Cart = () => {
                 <div className="p-container">
                     {productosCart.map((p) => (
                         <div className="product">
-                            <h3>Nombre</h3>
-                            <p>{p[0].name}</p>
-                            <h3>Precio</h3>
-                            <p>{p[0].price}</p>
-                            <h3>Categoria</h3>
-                            <p>{p[0].categories_ids[0]}</p>
-                            <h3>Stock</h3>
-                            <p>{p[0].stock}</p>
-                            <h3>Descripcion</h3>
-                            <p>{p[0].description}</p>
-                            <img src={p[0].img[0]} id="pr-img" />
-                            <p>
+                            <div>
+                                <img src={p[0].img[0]} id="pr-img" />
+                            </div>
+                            <div id="contenidoCart">
+                                <p>{p[0].name}</p>
+                                <p>$ {p[0].price}</p>
+                                <p>{p[0].description}</p>
+                            </div>
+                            <div id="cantidad">
+                                <span>Cantidad</span>
+                                <input type="number" id="cant" />
+                            </div>
+                            <p className="botonesCart">
                                 <button
+                                    id="deleteCart"
                                     onClick={() => {
                                         deleteCart(p[0].name)
                                     }}
                                 >
-                                    Sacar del carrito
+                                    x
                                 </button>
+                                <AiOutlineHeart size="1.5em" />
                             </p>
                         </div>
                     ))}
