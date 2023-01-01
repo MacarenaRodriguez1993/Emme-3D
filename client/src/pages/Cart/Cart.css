@@ -2,7 +2,7 @@
     background-color: #262a53;
     color: #ffe3e3;
     padding: 1em;
-    height: 100vh;
+    min-height: 100vh;
 }
 .titleCart {
     text-align: center;

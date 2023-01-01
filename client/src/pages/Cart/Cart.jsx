@@ -4,25 +4,36 @@ import "./Cart.css"
 import { useSelector, useDispatch } from "react-redux"
 import { deleteToCart } from "../../redux/actions/actions"
 import { AiOutlineHeart } from "react-icons/ai"
-
+import { Navigate, useNavigate } from "react-router-dom"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
+    let user = useSelector((state) => state.users)
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
     }
+    const navigate = useNavigate()
     const buy = () => {
-        fetch("http://localhost:3001/mercadopago", {
-            method: "POST",
-            body: JSON.stringify(productosCart),
-            headers: {
-                "Content-type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                window.location.href = data
+        if (user.length === 0) {
+            alert(
+                "Para poder comprar debe iniciar sesion o registrarse. Te redirigimos a Login"
+            )
+            setTimeout(() => {
+                navigate("/login")
+            }, 1000)
+        } else {
+            fetch("http://localhost:3001/mercadopago", {
+                method: "POST",
+                body: JSON.stringify(productosCart),
+                headers: {
+                    "Content-type": "application/json",
+                },
             })
+                .then((res) => res.json())
+                .then((data) => {
+                    window.location.href = data
+                })
+        }
     }
     return (
         <div>
