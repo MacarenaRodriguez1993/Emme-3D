@@ -1,4 +1,4 @@
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
+const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 const GET_DETAILS = "GET_DETAILS"
 const GET_BY_CATEGORY = "GET_BY_CATEGORY"
 const GET_BY_PRICE = "GET_BY_PRICE"
@@ -13,6 +13,7 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
+const CREATE_USER = "CREATE_USER"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -95,8 +96,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = "https://emme-3d-production.up.railway.app" || "http://localhost:3001"
-let url_api = "https://emme-3d-production.up.railway.app"
+let url_api = "http://localhost:3001"
+//let url_api = "https://emme-3d-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -250,7 +251,6 @@ export const updateProducto = (product_id, producto) => {
     }
 }
 
-
 export const addToCart = (product) => {
     return async (dispatch) => {
         dispatch({
@@ -266,14 +266,30 @@ export const deleteToCart = (name) => {
             type: DELETE_CART_PRODUCT,
             payload: name,
         })
+    }
+}
 
-export const getUsers = (data) => {
+export const getUsers = (id) => {
     return async (dispatch) => {
         try {
+            const user = await axios.get(url_api + `/users/${id}`)
             dispatch({
                 type: GET_USERS,
-                payload: data,
+                payload: user,
             })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const createUsers = (user) => {
+    return async (dispatch) => {
+        try {
+            axios.post(url_api + "/users", user)
         } catch (err) {
             dispatch({
                 type: ERROR,
