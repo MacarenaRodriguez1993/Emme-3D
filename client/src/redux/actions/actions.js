@@ -285,11 +285,27 @@ export const getUsers = (id) => {
         }
     }
 }
-
 export const createUsers = (user) => {
     return async (dispatch) => {
         try {
             axios.post(url_api + "/users", user)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+export const emailBienvenido = (user) => {
+    return async (dispatch) => {
+        try {
+            console.log(user)
+            const statusMail = await axios.post(
+                `${url_api}/email/usuario`,
+                user
+            )
+            console.log(statusMail)
         } catch (err) {
             dispatch({
                 type: ERROR,
