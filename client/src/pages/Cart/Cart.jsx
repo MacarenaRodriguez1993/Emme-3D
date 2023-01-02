@@ -13,10 +13,7 @@ const Cart = () => {
     }
     const buy = () => {
         axios
-            .post(
-                "https://emme-3d-production.up.railway.app/mercadopago",
-                productosCart
-            )
+            .post("https://localhost:3001/mercadopago", productosCart)
             .then(function (response) {
                 window.location.replace(response.data)
             })
