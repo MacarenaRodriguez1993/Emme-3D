@@ -1,4 +1,4 @@
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
+const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 const GET_DETAILS = "GET_DETAILS"
 const GET_BY_CATEGORY = "GET_BY_CATEGORY"
 const GET_BY_PRICE = "GET_BY_PRICE"
@@ -266,7 +266,8 @@ export const deleteToCart = (name) => {
             type: DELETE_CART_PRODUCT,
             payload: name,
         })
-
+    }
+}
 export const getUsers = (data) => {
     return async (dispatch) => {
         try {
