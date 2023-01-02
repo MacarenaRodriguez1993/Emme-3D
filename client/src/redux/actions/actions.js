@@ -282,3 +282,20 @@ export const getUsers = (data) => {
         }
     }
 }
+export const emailBienvenido = (user) => {
+    return async (dispatch) => {
+        try {
+            console.log(user)
+            const statusMail = await axios.post(
+                `${url_api}/email/usuario`,
+                user
+            )
+            console.log(statusMail)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
