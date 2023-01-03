@@ -53,7 +53,7 @@ export default function Details({ props }) {
                             <span>
                                 Categoria
                                 <span className="valor-info">
-                                    {p?.map((c) => c.categories_ids)}
+                                    {p?.map((c) => c.category)}
                                 </span>
                             </span>
                         </div>
