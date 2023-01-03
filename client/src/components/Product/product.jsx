@@ -5,7 +5,7 @@ import { AiFillEdit, AiFillDelete, AiOutlineHeart } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { deleteProduct, getProducts } from "../../redux/actions/actions"
 import { Link } from "react-router-dom"
-const Product = ({ id, name, price }) => {
+const Product = ({ id, name, price, image }) => {
     const dispatch = useDispatch()
     const onClickDelete = (id) => {
         if (
@@ -18,7 +18,7 @@ const Product = ({ id, name, price }) => {
     return (
         <div className="card">
             <a href={`/details/${id}`}>
-                <img className="imageCard" src={stitch} alt={name} />
+                <img className="imageCard" src={image} alt={name} />
             </a>
             <div className="contentCard">
                 <h5>{name}</h5>
