@@ -47,9 +47,36 @@ const productById = async (id) => {
         throw new Error(`El id "${id}" no tiene 24 carácteres.`)
 
     // Buscamos
-    const result = await Product.find({
-        _id: mongoose.Types.ObjectId(id),
-    }).clone() // Se necesita el .clone para que no de errores de queryes duplicadas
+    const result = await Product.aggregate([
+        {
+            $match: { _id: mongoose.Types.ObjectId(id) },
+        },
+        { $unwind: "$categories_ids" },
+        {
+            $lookup: {
+                from: "categories",
+                localField: "categories_ids",
+                foreignField: "_id",
+                as: "categories_ids",
+            },
+        },
+        { $unwind: "$categories_ids" },
+        {
+            $group: {
+                _id: "$_id",
+                name: { $first: "$name" },
+                price: { $first: "$price" },
+                stock: { $first: "$stock" },
+                description: { $first: "$description" },
+                category: { $first: "$categories_ids.name" },
+                img: { $first: "$img" },
+                deleted: { $first: "$deleted" },
+                reviews_ids: { $first: "$reviews_ids" },
+                createdAt: { $first: "$createdAt" },
+                updatedAt: { $first: "$updatedAt" },
+            },
+        },
+    ]) // Se necesita el .clone para que no de errores de queryes duplicadas
 
     // Si el producto no se encuentra mandará el error
     if (result.length < 1)
