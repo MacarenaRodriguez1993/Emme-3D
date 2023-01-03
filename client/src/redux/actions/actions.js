@@ -6,9 +6,12 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
+const GET_CAROUSEL = 'GET_CAROUSEL'
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+//eliminar esta const cuando se creen las rutas
+const POST_CAROUSEL = 'POST_CAROUSEL'
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
@@ -100,6 +103,7 @@ export const filterByLikes = (value) => {
 //let url_api = "https://emme-3d-production.up.railway.app"
 let url_api = "https://emme-3d-backend-production.up.railway.app"
 
+
 //Action para postear productos
 export const postProduct = (product) => {
     return (dispatch) => {
@@ -118,6 +122,23 @@ export const postCategory = (category) => {
     return (dispatch) => {
         try {
             axios.post(url_api + "/categories", category)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+export const carouselUpload = image => {
+    return dispatch => {
+        try {
+            //axios.post(url_api + "/carousel", image)
+            dispatch({
+                type: POST_CAROUSEL,
+                payload: image,
+            })
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -211,6 +232,26 @@ export const searchByName = (name) => {
         }
     }
 }
+
+export const getCarouselImgs = () => {
+    return async dispatch => {
+        try {
+            const carouselImgs = await axios.get(
+                `${url_api}/carousel`
+            )
+            dispatch({
+                type: GET_CAROUSEL,
+                payload: carouselImgs.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
 /*--------- FIN ACTIONS GET -------------*/
 /*---------ACTION DELETE PRODUCT-----------*/
 export const deleteProduct = (id) => {
@@ -231,6 +272,22 @@ export const deleteProduct = (id) => {
         }
     }
 }
+
+export const carouselDelete = image => {
+    return dispatch => {
+        try {
+            axios.delete(
+                `${url_api}/carousel/${image}`
+            )
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
 /*---------ACTION PUT PRODUCT-----------*/
 export const updateProducto = (product_id, producto) => {
     return async (dispatch) => {
