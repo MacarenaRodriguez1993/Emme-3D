@@ -16,7 +16,7 @@ const Cart = () => {
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {
-                p[0].quality = e.target.value
+                p[0].quantity = e.target.value
             }
         })
     }
@@ -63,7 +63,7 @@ const Cart = () => {
                                 <input
                                     type="number"
                                     id="cant"
-                                    defaultValue={1}
+                                    defaultValue={0}
                                     onChange={(e) => handlerChange(e, p[0])}
                                 />
                             </div>
