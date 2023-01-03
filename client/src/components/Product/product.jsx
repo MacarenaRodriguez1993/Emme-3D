@@ -5,7 +5,7 @@ import { AiFillEdit, AiFillDelete, AiOutlineHeart } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteProduct, getProducts } from "../../redux/actions/actions"
 import { Link } from "react-router-dom"
-const Product = ({ id, name, price }) => {
+const Product = ({ id, name, price, img }) => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.users)
     const onClickDelete = (id) => {

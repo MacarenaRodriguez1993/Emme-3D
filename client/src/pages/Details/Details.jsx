@@ -16,7 +16,7 @@ export default function Details({ props }) {
 
     useEffect(() => {
         dispatch(getDetails(_id))
-    }, [dispatch])
+    }, [])
 
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
