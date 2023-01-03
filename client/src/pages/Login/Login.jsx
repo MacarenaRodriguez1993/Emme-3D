@@ -24,9 +24,9 @@ export default function Login() {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
+                navigate("/products")
                 console.log(user)
                 dispatch(getUsers(user))
-                navigate("/products")
                 // ...
             })
             .catch((error) => {
@@ -103,14 +103,14 @@ export default function Login() {
                             Inicia sesion
                         </button>
                     </div>
-                    <LoginGoogle />
-                    <span className="link-registro">
-                        No tienes una cuenta?{" "}
-                        <Link to="/register" className="forgot-password">
-                            Registrate
-                        </Link>
-                    </span>
                 </form>
+                <LoginGoogle />
+                <span className="link-registro">
+                    No tienes una cuenta?{" "}
+                    <Link to="/register" className="forgot-password">
+                        Registrate
+                    </Link>
+                </span>
             </div>
         </div>
     )
