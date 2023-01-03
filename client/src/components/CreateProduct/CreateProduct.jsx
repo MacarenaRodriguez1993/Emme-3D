@@ -10,12 +10,10 @@ import validations from "../../validations/validations-form"
 import NavBar from "../NavBar/NavBar"
 import Footer from "../Footer/Footer"
 import CreateCategory from "../CreateCategory/CreateCategory"
-<<<<<<< HEAD
 import ImageCarousel from "../ImageCarousel/ImageCarousel"
-=======
 import { useNavigate, useParams } from "react-router-dom"
 import { updateProducto } from "../../redux/actions/actions"
->>>>>>> 1edd33d987ccc837254b423b7c106621fe2faaf5
+
 
 const CreateProduct = () => {
     const dispatch = useDispatch()
