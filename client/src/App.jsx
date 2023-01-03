@@ -56,6 +56,7 @@ function App() {
                 <Route exact strict path="/register" element={<Register />} />
                 <Route path="/details/:_id" element={<Details />} />
                 <Route path="/profile" element={<Perfil />} />
+                <Route path="/updateproduct/:id" element={<CreateProduct />} />
             </Routes>
         </>
     )

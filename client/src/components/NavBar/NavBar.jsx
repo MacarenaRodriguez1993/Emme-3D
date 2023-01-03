@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 
 const NavBar = () => {
     const user = useSelector((state) => state.users)
-    console.log(user.length)
+    let productosCart = useSelector((state) => state.shoppingCart)
     return (
         <div className="navBar">
             <ul>
@@ -17,6 +17,7 @@ const NavBar = () => {
                     <Link to="/cart">
                         <div className="cart">
                             <FaShoppingCart />
+                            <p id="indexCart"> {productosCart.length}</p>
                         </div>
                     </Link>
                     <Link to="/products">

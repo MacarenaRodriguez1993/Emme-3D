@@ -58,7 +58,7 @@ const CreateProduct = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (update_ID) {
+        if (updateProduct) {
             dispatch(updateProducto(update_ID.id, producto))
             setUpdate(true)
             setTimeout(() => {
@@ -66,10 +66,12 @@ const CreateProduct = () => {
                 navigate("/products")
             }, 3000)
         } else {
+            console.log("estoy en crear")
             dispatch(postProduct(producto))
             setCreated(true)
             setTimeout(() => {
                 setCreated(false)
+                navigate("/products")
             }, 3000)
             console.log(producto)
         }
@@ -109,7 +111,12 @@ const CreateProduct = () => {
         <>
             <NavBar />
             <div className="general-box-ctr">
-                <p className="create-product-title">Crear un producto</p>
+                {updateProduct ? (
+                    <p className="create-product-title">Editar un producto</p>
+                ) : (
+                    <p className="create-product-title">Crear un producto</p>
+                )}
+
                 <div className="create-product-container">
                     <form
                         action=""
@@ -182,14 +189,7 @@ const CreateProduct = () => {
                         {error.description && (
                             <p className="crt-errors">{error.description}</p>
                         )}
-                        {Object.entries(error).length ? (
-                            <button
-                                type="button"
-                                className="create-product-input createpr not-allow"
-                            >
-                                Crear producto
-                            </button>
-                        ) : update_ID ? (
+                        {updateProduct ? (
                             <button
                                 type="submit"
                                 className="create-product-input createpr"
