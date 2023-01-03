@@ -20,30 +20,23 @@ export default function Login() {
     const auth = getAuth(app)
     const onSubmit = (e) => {
         e.preventDefault()
-
-        const user = {
-            //token: user.accessToken,
-            username: user.email,
-            name: user.displayName,
-            surname: "",
-            email: user.email,
-            phone: user.phoneNumber,
-            //img: user.photoURL
-        }
-        dispatch(createUsers(user))
-
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
-                const users = userCredential.user
-                dispatch(getUsers(users))
+                const user = userCredential.user
                 console.log(user)
                 navigate("/products")
+                dispatch(createUsers({
+                    "email": user.email,
+                    "password": password
+                }))
+                dispatch(getUsers(user))
                 // ...
             })
             .catch((error) => {
                 const errorCode = error.code
-                const rrorMessage = error.message
+                const errorMessage = error.message
+                console.error(`Error ${errorCode}: ${errorMessage}`)
             })
     }
 

@@ -29,7 +29,7 @@ const NavBar = () => {
                         <h4>Contacto</h4>
                     </Link>
                     <button className="buttonLogin login-btn">
-                        {user.accessToken ? (
+                        {user ? (
                             <Link to="/profile">Perfil </Link>
                         ) : (
                             <Link to="/login"> LogIn </Link>

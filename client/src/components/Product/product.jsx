@@ -16,6 +16,7 @@ const Product = ({ id, name, price }) => {
             dispatch(getProducts())
         }
     }
+    console.log(user)
     return (
         <div className="card">
             <a href={`/details/${id}`}>
