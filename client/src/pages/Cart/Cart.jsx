@@ -13,6 +13,13 @@ const Cart = () => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
+    const handlerChange = (e, product) => {
+        productosCart.map((p) => {
+            if (p[0]._id === product._id) {
+                p[0].quantity = e.target.value
+            }
+        })
+    }
     const buy = () => {
         if (user.length === 0) {
             alert(
@@ -53,7 +60,12 @@ const Cart = () => {
                             </div>
                             <div id="cantidad">
                                 <span>Cantidad</span>
-                                <input type="number" id="cant" />
+                                <input
+                                    type="number"
+                                    id="cant"
+                                    defaultValue={0}
+                                    onChange={(e) => handlerChange(e, p[0])}
+                                />
                             </div>
                             <p className="botonesCart">
                                 <button
