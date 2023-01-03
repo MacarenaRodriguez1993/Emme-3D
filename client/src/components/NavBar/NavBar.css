@@ -35,3 +35,13 @@ a {
     width: 50%;
     color: #ffe3e3;
 }
+.cart {
+    display: flex;
+}
+#indexCart {
+    background-color: #262a53;
+    color: #ffe3e3;
+    padding: 0.3em;
+    font-size: x-small;
+    border-radius: 2em;
+}

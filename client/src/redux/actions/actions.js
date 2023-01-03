@@ -1,4 +1,4 @@
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
+const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 const GET_DETAILS = "GET_DETAILS"
 const GET_BY_CATEGORY = "GET_BY_CATEGORY"
 const GET_BY_PRICE = "GET_BY_PRICE"
@@ -13,6 +13,9 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta const cuando se creen las rutas
 const POST_CAROUSEL = 'POST_CAROUSEL'
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
+const ADD_CART = "ADD_CART"
+const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
+const GET_USERS = "GET_USERS"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -295,6 +298,56 @@ export const updateProducto = (product_id, producto) => {
                 type: UPDATE_PRODUCTO,
                 payload: productUpdate.data,
             })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const addToCart = (product) => {
+    return async (dispatch) => {
+        dispatch({
+            type: ADD_CART,
+            payload: product,
+        })
+    }
+}
+
+export const deleteToCart = (name) => {
+    return async (dispatch) => {
+        dispatch({
+            type: DELETE_CART_PRODUCT,
+            payload: name,
+        })
+    }
+}
+export const getUsers = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: GET_USERS,
+                payload: data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+export const emailBienvenido = (user) => {
+    return async (dispatch) => {
+        try {
+            console.log(user)
+            const statusMail = await axios.post(
+                `${url_api}/email/usuario`,
+                user
+            )
+            console.log(statusMail)
         } catch (err) {
             dispatch({
                 type: ERROR,
