@@ -18,6 +18,8 @@ const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 import axios from "axios"
 
+
+
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
     return (dispatch) => {
@@ -98,8 +100,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-let url_api = "http://localhost:3001"
-//let url_api = "https://emme-3d-production.up.railway.app"
+//let url_api = "http://localhost:3001"
+let url_api = "https://emme-3d-backend-production.up.railway.app"
 
 
 //Action para postear productos

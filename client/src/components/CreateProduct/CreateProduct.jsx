@@ -14,7 +14,6 @@ import ImageCarousel from "../ImageCarousel/ImageCarousel"
 import { useNavigate, useParams } from "react-router-dom"
 import { updateProducto } from "../../redux/actions/actions"
 
-
 const CreateProduct = () => {
     const dispatch = useDispatch()
     const update_ID = useParams()

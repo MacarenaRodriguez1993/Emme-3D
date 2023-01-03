@@ -10,12 +10,9 @@ const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
-
 //eliminar esta variable cuando se creen las rutas
 const POST_CAROUSEL = 'POST_CAROUSEL'
-
 const GET_USERS = "GET_USERS"
-
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
@@ -28,7 +25,6 @@ const initialState = {
     detail: {},
     error: "",
     inactiveProducts: [],
-
     carouselImages: [
         {
             name: 'prueba',
@@ -43,9 +39,7 @@ const initialState = {
             img: 'https://d100mj7v0l85u5.cloudfront.net/s3fs-public/2022-09/impresion-3d-empaques.png'
         }
     ],
-
     shoppingCart: [],
-
 }
 
 const rootReducer = (state = initialState, action) => {
