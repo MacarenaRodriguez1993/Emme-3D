@@ -15,12 +15,12 @@ router.post("/", (req, res) => {
                 return {
                     ...item,
                     currency_id: "ARS",
-                    quantity: 1,
+                    quantity: parseInt(item[0].quantity),
                     unit_price: item[0].price,
                 }
             }),
             back_urls: {
-                success: "https://www.emme3d.com",
+                success: "http://127.0.0.1:5173/products",
                 failure: "http://www.failure.com",
                 pending: "http://www.pending.com",
             },

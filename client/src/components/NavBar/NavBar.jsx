@@ -6,7 +6,6 @@ import { useSelector } from "react-redux"
 
 const NavBar = () => {
     const user = useSelector((state) => state.users)
-    console.log(user.length)
     let productosCart = useSelector((state) => state.shoppingCart)
     return (
         <div className="navBar">
@@ -31,7 +30,7 @@ const NavBar = () => {
                         <h4>Contacto</h4>
                     </Link>
                     <button className="buttonLogin login-btn">
-                        {user.accessToken ? (
+                        {user ? (
                             <Link to="/profile">Perfil </Link>
                         ) : (
                             <Link to="/login"> LogIn </Link>
