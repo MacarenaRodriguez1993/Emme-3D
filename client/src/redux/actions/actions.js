@@ -16,8 +16,12 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
+const GET_USER = "GET_USER"
 const CREATE_USER = "CREATE_USER"
 import axios from "axios"
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../components/firebase/firebase"
+
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -327,12 +331,28 @@ export const deleteToCart = (name) => {
     }
 }
 
-export const getUsers = (id) => {
+export const getUsers = () => {
+    return async (dispatch) => {
+        try {
+            const user = await axios.get(url_api + `/users`)
+            dispatch({
+                type: GET_USERS,
+                payload: user,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+export const getUser = (id) => {
     return async (dispatch) => {
         try {
             const user = await axios.get(url_api + `/users/${id}`)
             dispatch({
-                type: GET_USERS,
+                type: GET_USER,
                 payload: user,
             })
         } catch (err) {
@@ -346,7 +366,7 @@ export const getUsers = (id) => {
 export const createUsers = (user) => {
     return async (dispatch) => {
         try {
-            axios.post(url_api + "/users", user)
+         await axios.post(url_api + "/users", user);
         } catch (err) {
             dispatch({
                 type: ERROR,

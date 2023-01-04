@@ -6,7 +6,6 @@ import { getDetails, addToCart } from "../../redux/actions/actions"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
-import StarRating from "star-rating-react"
 
 export default function Details({ props }) {
     let { _id } = useParams()
@@ -113,8 +112,6 @@ export default function Details({ props }) {
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
-
-                    <StarRating onChange={setRating} value={rating} />
                 </div>
                 <textarea
                     className="input-opinion"

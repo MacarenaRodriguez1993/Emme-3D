@@ -5,7 +5,8 @@ import { FaShoppingCart } from "react-icons/fa"
 import { useSelector } from "react-redux"
 
 const NavBar = () => {
-    const user = useSelector((state) => state.users)
+    const user = useSelector((state) => state.user)
+    console.log('usernav', user.length)
     let productosCart = useSelector((state) => state.shoppingCart)
     return (
         <div className="navBar">

@@ -1,5 +1,5 @@
 import React from "react"
-import { app } from "../../components/firebase/firebase"
+import { app, db } from "../../components/firebase/firebase"
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -9,9 +9,10 @@ import {
 } from "firebase/auth"
 import "./Login.css"
 import { Link, useNavigate } from "react-router-dom"
-import { getUsers } from "../../redux/actions/actions"
+import { createUsers, getUser, getUsers } from "../../redux/actions/actions"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { collection, addDoc } from "firebase/firestore"; 
 
 export default function LoginGoogle() {
     const navigate = useNavigate()
@@ -19,6 +20,9 @@ export default function LoginGoogle() {
 
     const provider = new GoogleAuthProvider()
     const auth = getAuth(app)
+    const user = useSelector(state => state.user)
+
+    console.log('user de store',user)
 
     const loginGoogle = () => {
         try {
@@ -30,11 +34,11 @@ export default function LoginGoogle() {
                     const token = credential.accessToken
                     // The signed-in user info.
                     const user = result.user
-
-                    console.log(user)
-                    console.log(token)
-                    dispatch(getUsers(user))
+            
+                    dispatch(createUsers(user))
+                  
                     navigate("/products")
+                    createDoc()
 
                     /* if (user == token) {
                         dispatch(getUsers(user))
@@ -59,6 +63,25 @@ export default function LoginGoogle() {
                 })
         } catch (error) {
             errorMessage
+        }
+
+        const createDoc = async() => {
+            try {
+                const docRef = await addDoc(collection(db, "users"),{
+                    token: user.accessToken,
+                    name: user.displayName,
+                    email: user.email,
+                    phone: user.phoneNumber,
+                    photo: user.photoURL,
+                    isAdmin: 'false'
+                   
+                });
+                dispatch(getUser())
+                console.log("Document written with ID: ", docRef);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+            
         }
     }
     return (

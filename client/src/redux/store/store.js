@@ -18,7 +18,7 @@ const persistConfig = {
     key: "root",
     storage: storage,
     stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
-    whitelist: ["shoppingCart", "users"],
+    whitelist: ["shoppingCart"],
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const pReducer = persistReducer(persistConfig, rootReducer)

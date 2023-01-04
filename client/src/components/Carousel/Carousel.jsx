@@ -6,7 +6,6 @@ import "./Carousel.css"
 const Carousel = () => {
     /* Este componente crea un carrusel con las imagenes que haya en el estado carouselImages */
     const dispatch = useDispatch()
-    console.log("hola")
     const carouselImages = useSelector((state) => state.carouselImages)
     let imgWidth = carouselImages.length * 100
     let imgSegmento = 100 / carouselImages.length
