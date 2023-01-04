@@ -16,6 +16,7 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
+import Dashboard from "./Dashboard/Dashboard"
 
 function App() {
     const dispatch = useDispatch()
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/details/:_id" element={<Details />} />
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/updateproduct/:id" element={<CreateProduct />} />
+                <Route exact path="/dashboard" element={<Dashboard />} />
             </Routes>
         </>
     )
