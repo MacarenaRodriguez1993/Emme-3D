@@ -13,6 +13,7 @@ const Cart = () => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
+    const url_api = "https://emme-3d-backend-production.up.railway.app/"
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {
@@ -29,7 +30,7 @@ const Cart = () => {
                 navigate("/login")
             }, 1000)
         } else {
-            fetch("http://localhost:3001/mercadopago", {
+            fetch(`${url_api}mercadopago`, {
                 method: "POST",
                 body: JSON.stringify(productosCart),
                 headers: {
