@@ -9,6 +9,7 @@ import SearchFilters from "../../components/SearchFilters/SearchFilters"
 import SearchByName from "../../components/SearchByName/searchByName"
 
 import { getProducts } from "../../redux/actions/actions"
+import Carousel from "../../components/Carousel/Carousel"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -28,6 +29,7 @@ const Products = () => {
     return (
         <div className="productos">
             <NavBar />
+            <Carousel className="carrusel" />
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <div className="barContainer">
                 <SearchFilters />
@@ -39,7 +41,12 @@ const Products = () => {
                 {productos?.map((a) => {
                     if (a.deleted === false) {
                         return (
-                            <Product id={a._id} name={a.name} price={a.price} />
+                            <Product
+                                id={a._id}
+                                name={a.name}
+                                price={a.price}
+                                image={a.img}
+                            />
                         )
                     }
                 })}
@@ -49,7 +56,12 @@ const Products = () => {
                 {productos?.map((a) => {
                     if (a.deleted === true) {
                         return (
-                            <Product id={a._id} name={a.name} price={a.price} />
+                            <Product
+                                id={a._id}
+                                name={a.name}
+                                price={a.price}
+                                image={a.img}
+                            />
                         )
                     }
                 })}
