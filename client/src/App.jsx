@@ -16,7 +16,7 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
-import Dashboard from "./Dashboard/Dashboard"
+import Dashboard from "./Admin/Dashboard"
 
 function App() {
     const dispatch = useDispatch()

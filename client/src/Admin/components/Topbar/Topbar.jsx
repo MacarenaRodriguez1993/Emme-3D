@@ -16,6 +16,11 @@ export default function Topbar() {
                         <BsFillGearFill />
                         <span className="bellNumber">2</span>
                     </div>
+                    <img
+                        src="https://previews.123rf.com/images/metelsky/metelsky1904/metelsky190400021/121859823-male-avatar-icon-or-portrait-handsome-young-man-face-with-beard-vector-illustration-.jpg"
+                        alt="admin"
+                        className="adminAvatar"
+                    />
                 </div>
             </div>
         </div>
