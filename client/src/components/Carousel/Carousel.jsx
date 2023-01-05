@@ -24,10 +24,10 @@ const Carousel = () => {
         })
     })
 
-    /* useEffect(() => {
+    useEffect(() => {
         dispatch(getCarouselImgs())
     }, [])
- */
+
     return (
         <div className="slide-container">
             <div>

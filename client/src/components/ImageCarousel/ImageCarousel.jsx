@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {
     getCarouselImgs,
     carouselUpload,
@@ -10,7 +10,7 @@ import "./ImageCarousel.css"
 
 const ImageCarousel = () => {
     const dispatch = useDispatch()
-
+    const carouselImages = useSelector((state) => state.carouselImages)
     useEffect(() => {
         dispatch(getCarouselImgs())
     }, [dispatch])
@@ -36,7 +36,13 @@ const ImageCarousel = () => {
     }
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
-        dispatch(carouselDelete(deleteImg))
+        dispatch(carouselDelete(deleteImg.imgId))
+    }
+    const handleChangeDel = (e) => {
+        setDelteImg({
+            ...deleteImg,
+            imgId: e.target.value,
+        })
     }
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
@@ -101,21 +107,24 @@ const ImageCarousel = () => {
             </form>
             <hr />
             <form className="carousel-delete-img" onSubmit={handleDeleteSubmit}>
+
                 <label htmlFor="" className="carrusel-p carr-labels carr-title">
                     Eliminar una imagen
                 </label>
-                <select name="" id="" className="create-product-input">
+                <select className="create-product-input" onChange={(e) => handleChangeDel(e)}>
                     <option selected>Elegi una imagen</option>
-                </select>
-                {/* {images?.map((img) => (
-                        <option value={img._id} name="imgId">
-                            {img.name}
+                {carouselImages?.map((i) => (
+                        <option value={i._id} name="i.name">
+                            {i.name}
                         </option>
-                    ))} */}
+                    ))}
 
+                </select>
+                
                 <button type="submit" className="create-product-input createpr">
                     Eliminar imagen
                 </button>
+
             </form>
         </div>
     )
