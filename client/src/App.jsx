@@ -51,7 +51,7 @@ function App() {
                 />
                 <Route exact strict path="/home" element={<Home />} />
                 <Route exact strict path="/products" element={<Productos />} />
-                <Route exact strict path="/" element={<Landing />} />
+                <Route exact strict path="/" element={<Home />} />
                 <Route exact strict path="/login" element={<Login />} />
                 <Route exact strict path="/register" element={<Register />} />
                 <Route path="/details/:_id" element={<Details />} />
