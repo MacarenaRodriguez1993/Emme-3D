@@ -36,7 +36,11 @@
     background-color: white;
 }
 .user-data {
-    background-color: #ffe3e3;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 227, 227, 1) 0%,
+        rgb(255, 255, 255) 100%
+    );
     padding: 10px;
     border-radius: 3px;
     margin-bottom: 10px;
@@ -44,4 +48,18 @@
 .user-data-fields {
     margin-left: 10px;
     margin-bottom: 10px;
+}
+.user-edit {
+    margin-left: 0;
+    font-size: 16px;
+}
+.img-edit-icon {
+    position: relative;
+    left: -20px;
+    background-color: #ffe3e3;
+    border: 1px solid white;
+    border-radius: 99px;
+    padding: 3px;
+    font-size: 30px;
+    cursor: pointer;
 }
