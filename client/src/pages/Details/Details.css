@@ -166,7 +166,8 @@
     resize: none;
     border-radius: 5px;
     background: #c8cad6;
-    height: 200px;
+    min-height: 120px;
+    height: min-content;
     padding: 20px;
     width: 100%;
 }

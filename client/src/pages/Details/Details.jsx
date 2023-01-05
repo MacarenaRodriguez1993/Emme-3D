@@ -15,17 +15,21 @@ export default function Details({ props }) {
         rating: 0,
         opinion: ''
     })
-
+    const id = 'dasfsf6sf46df46sdg'
   const  handleRating=(rate)=>{
     setReviews({...reviews, rating: rate})
   }
 
   const handleReviws = () => {
-    dispatch(postReviews(reviews))
+    dispatch(postReviews(reviews + id))
     dispatch(getReviews())
   }
   
-  console.log(reviews)
+  console.log({
+    'rating': reviews.rating,
+    'opinion': reviews.opinion,
+    'userId': id
+  })
   //const onPointerEnter = () => console.log('Enter')
   //const onPointerLeave = () => console.log('Leave')
   //const onPointerMove = (value: , index: number) => console.log(value, index)
@@ -145,6 +149,7 @@ export default function Details({ props }) {
                     placeholder="ingrea una opinion sobre el producto"
                     onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                 />
+                <span>el mensaje tiene que ser mayor a 5 plabras</span>
                 <div className="btn-valoracion">
                     <button>Enviar</button>
                 </div>

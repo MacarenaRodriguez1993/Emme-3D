@@ -392,6 +392,22 @@ export const emailBienvenido = (user) => {
 /*----------GET Y POST DE REVIEWS-------------*/
 
 
-export const getReviews =() => {}
+export const getReviews =(reviws) => {
+    return async (dispatch) => {
+        try {
+            console.log(user)
+            const statusMail = await axios.post(
+                `${url_api}/email/usuario`,
+                user
+            )
+            console.log(statusMail)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
 
 export const postReviews =() => {}

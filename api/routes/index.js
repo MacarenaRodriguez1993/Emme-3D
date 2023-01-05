@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-// Routes
+// Routes 
 // router.use("/productos", productsRoute) <--- Ejemplo de como debería ir
 const products = require("./products.js")
 const users = require("./users")
@@ -8,12 +8,8 @@ const orders = require("./orders")
 const categories = require("./categories")
 //const email = require("./email")
 const mercadopago = require("./mercadopago")
-<<<<<<< HEAD
-//const productsRoute = require("./products") <--- Ejemplo de como debería ir
-=======
 const carousel = require("./carousel")
 // const productsRoute = require("./products") <--- Ejemplo de como debería ir
->>>>>>> 70177029e24e36f032eb8b2684d3c3f327bfa543
 
 // Routes
 // router.use("/productos", productsRoute) <--- Ejemplo de como debería ir
