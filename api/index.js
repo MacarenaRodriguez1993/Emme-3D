@@ -2,17 +2,18 @@ require("dotenv").config()
 const express = require("express")
 const server = express()
 const mongoose = require("mongoose")
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false)
 const routes = require("./routes/index.js")
 const morgan = require("morgan")
-const cors = require('cors')
+const cors = require("cors")
 
-const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, PORT } = process.env
+const { MONGO_USER, MONGO_PASSWORD, MONGO_HOST, PORT, TEST_HOST } = process.env
 const DEFAULT_PORT = 3001
 
 mongoose
     .connect(
-        `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority&ssl=true`
+        TEST_HOST ||
+            `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority&ssl=true`
     )
     .then(() => {
         console.log("DB connection Successfull")
