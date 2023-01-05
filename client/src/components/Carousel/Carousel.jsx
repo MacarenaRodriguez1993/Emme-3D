@@ -40,6 +40,7 @@ const Carousel = () => {
                             <img
                                 src={i.img}
                                 alt={i.name}
+                                key={i.name}
                                 className="carousel-imgs"
                                 style={{ width: `${imgSegmento}%` }}
                             />
