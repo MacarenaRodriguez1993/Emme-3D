@@ -101,9 +101,9 @@ const ImageCarousel = () => {
                 <label className="carrusel-p carr-labels">
                     La resolucion maxima de las imagenes es de 1280px de ancho.
                 </label>
-                {/* <button type="submit" className="create-product-input createpr">
-                    Subir imagen
-                </button> */}
+                <button type="submit" className="create-product-input createpr">
+                    Subir imagen al carrusel
+                </button>
             </form>
             <hr />
             <form className="carousel-delete-img" onSubmit={handleDeleteSubmit}>
