@@ -1,0 +1,27 @@
+.form-carrusel-container {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: #262a53;
+    align-items: center;
+    justify-content: center;
+}
+.carr-title {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.carrusel-p {
+    color: white;
+}
+.carr-labels {
+    margin-bottom: 10px;
+}
+.carousel-upload-img {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 40%;
+}
+.carousel-delete-img {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 40%;
+}
