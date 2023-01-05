@@ -2,26 +2,29 @@ import React, { useState, useEffect } from "react"
 import "./Details.css"
 import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
-import { getDetails } from "../../redux/actions/actions"
-import ReactStarsRating from "react-awesome-stars-rating"
+import { getDetails, addToCart } from "../../redux/actions/actions"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
 
 export default function Details({ props }) {
-    const { id } = useParams()
+    let { _id } = useParams()
     const dispatch = useDispatch()
     const [rating, setRating] = useState(0)
     const [review, setReview] = useState("")
 
     useEffect(() => {
-        dispatch(getDetails(id))
-    }, [id])
+        dispatch(getDetails(_id))
+    }, [dispatch])
 
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
     console.log(p)
 
+    const handleShopCar = (e) => {
+        e.preventDefault()
+        dispatch(addToCart(p))
+    }
     return (
         <div className="container-details">
             <NavBar />
@@ -50,7 +53,7 @@ export default function Details({ props }) {
                             <span>
                                 Categoria
                                 <span className="valor-info">
-                                    {p?.map((c) => c.categories_ids)}
+                                    {p?.map((c) => c.category)}
                                 </span>
                             </span>
                         </div>
@@ -71,7 +74,10 @@ export default function Details({ props }) {
                         <button className="btn-detail buttons-details">
                             Ver medios de pagos
                         </button>
-                        <button className="btn-agregar-carro buttons-details">
+                        <button
+                            className="btn-agregar-carro buttons-details"
+                            onClick={handleShopCar}
+                        >
                             Agregar al carrito{" "}
                             <img
                                 style={{ width: 20, height: 20 }}
@@ -89,15 +95,12 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {/* <div className="container-opiniones">
-                {p.reviews.map((r) => {
+                {p.reviews_ids?.map((r) => {
                     return (
                         <div style={{ marginBottom: 15 }}>
                             <div className="header-opinion">
                                 <h2>{r.name}</h2>
-                                <ReactStarsRating
-                                    isEdit={false}
-                                    value={r.rating}
-                                />
+                                <StarRating value={r.rating} />
                             </div>
                             <div className="opinion-reviews">
                                 <span>{r.reviews}</span>
@@ -109,7 +112,6 @@ export default function Details({ props }) {
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
-                    {/* <ReactStarsRating value={rating} onChange={setRating} /> */}
                 </div>
                 <textarea
                     className="input-opinion"

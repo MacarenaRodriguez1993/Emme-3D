@@ -5,19 +5,41 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_DETAILS = "GET_DETAILS"
+const GET_CAROUSEL = 'GET_CAROUSEL'
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+//eliminar esta variable cuando se creen las rutas
+const POST_CAROUSEL = 'POST_CAROUSEL'
+const GET_USERS = "GET_USERS"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
+const ADD_CART = "ADD_CART"
+const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 
 const initialState = {
     allProducts: [],
+    users: [],
     productsFiltered: [],
     categories: [],
     detail: {},
     error: "",
     inactiveProducts: [],
+    carouselImages: [
+        {
+            name: 'prueba',
+            img: 'http://res.cloudinary.com/emme3d/image/upload/v1671502080/xiftivayhplad0j88s6j.jpg'
+        },
+        {
+            name: 'vaporwave',
+            img: 'https://tecnovortex.com/wp-content/uploads/2019/04/wallpaper-engine.jpg'
+        },
+        {
+            name: 'impresion',
+            img: 'https://d100mj7v0l85u5.cloudfront.net/s3fs-public/2022-09/impresion-3d-empaques.png'
+        }
+    ],
+    shoppingCart: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -41,6 +63,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload,
             }
+        case GET_USERS:
+            return {
+                ...state,
+                users: action.payload,
+            }
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
@@ -54,7 +81,9 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = state.categories.filter((c) => c.categoria.name === action.payload)
+                let cat = state.categories.filter(
+                    (c) => c.categoria.name === action.payload
+                )
                 return {
                     ...state,
                     productsFiltered: [...cat],
@@ -193,6 +222,16 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload,
             }
+        case GET_CAROUSEL:
+            return {
+                ...state,
+                carouselImages: pload
+            }
+        case POST_CAROUSEL:
+            return {
+                ...state,
+                carouselImages: [...pload]
+            }
         case SEARCH_BY_NAME:
             return {
                 ...state,
@@ -209,6 +248,20 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsFiltered: [...state.productsFiltered, action.payload],
+            }
+        case ADD_CART:
+            return {
+                ...state,
+                shoppingCart: [...state.shoppingCart, action.payload],
+            }
+        case DELETE_CART_PRODUCT:
+            return {
+                ...state,
+                shoppingCart: [
+                    ...state.shoppingCart.filter(
+                        (p) => p[0].name !== action.payload
+                    ),
+                ],
             }
         default:
             return state

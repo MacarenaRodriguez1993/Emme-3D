@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./products.css"
 import Footer from "../../components/Footer/Footer"
 import NavBar from "../../components/NavBar/NavBar"
@@ -7,8 +7,9 @@ import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
 import SearchByName from "../../components/SearchByName/searchByName"
-import { useEffect } from "react"
+
 import { getProducts } from "../../redux/actions/actions"
+import Carousel from "../../components/Carousel/Carousel"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -19,6 +20,8 @@ const Products = () => {
     let productos = useSelector((state) => state.productsFiltered)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.users)
+    console.log(user)
 
     useEffect(() => {
         dispatch(getProducts())
@@ -26,6 +29,7 @@ const Products = () => {
     return (
         <div className="productos">
             <NavBar />
+            <Carousel className="carrusel" />
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <div className="barContainer">
                 <SearchFilters />
@@ -37,7 +41,12 @@ const Products = () => {
                 {productos?.map((a) => {
                     if (a.deleted === false) {
                         return (
-                            <Product id={a._id} name={a.name} price={a.price} />
+                            <Product
+                                id={a._id}
+                                name={a.name}
+                                price={a.price}
+                                image={a.img}
+                            />
                         )
                     }
                 })}
@@ -47,7 +56,12 @@ const Products = () => {
                 {productos?.map((a) => {
                     if (a.deleted === true) {
                         return (
-                            <Product id={a._id} name={a.name} price={a.price} />
+                            <Product
+                                id={a._id}
+                                name={a.name}
+                                price={a.price}
+                                image={a.img}
+                            />
                         )
                     }
                 })}
