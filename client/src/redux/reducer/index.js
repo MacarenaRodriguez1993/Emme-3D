@@ -5,13 +5,13 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_DETAILS = "GET_DETAILS"
-const GET_CAROUSEL = 'GET_CAROUSEL'
+const GET_CAROUSEL = "GET_CAROUSEL"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta variable cuando se creen las rutas
-const POST_CAROUSEL = 'POST_CAROUSEL'
+const POST_CAROUSEL = "POST_CAROUSEL"
 const GET_USERS = "GET_USERS"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
@@ -28,20 +28,7 @@ const initialState = {
     detail: {},
     error: "",
     inactiveProducts: [],
-    carouselImages: [
-        {
-            name: 'prueba',
-            img: 'http://res.cloudinary.com/emme3d/image/upload/v1671502080/xiftivayhplad0j88s6j.jpg'
-        },
-        {
-            name: 'vaporwave',
-            img: 'https://tecnovortex.com/wp-content/uploads/2019/04/wallpaper-engine.jpg'
-        },
-        {
-            name: 'impresion',
-            img: 'https://d100mj7v0l85u5.cloudfront.net/s3fs-public/2022-09/impresion-3d-empaques.png'
-        }
-    ],
+    carouselImages: [],
     shoppingCart: [],
 }
 
@@ -238,12 +225,12 @@ const rootReducer = (state = initialState, action) => {
         case GET_CAROUSEL:
             return {
                 ...state,
-                carouselImages: pload
+                carouselImages: pload,
             }
         case POST_CAROUSEL:
             return {
                 ...state,
-                carouselImages: [...pload]
+                carouselImages: [...pload],
             }
         case SEARCH_BY_NAME:
             return {

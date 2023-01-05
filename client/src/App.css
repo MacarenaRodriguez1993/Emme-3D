@@ -1,6 +1,12 @@
+@font-face {
+    font-family: "poppins";
+    src: url("./assets/fonts/poppins/Poppins-Regular.ttf") format("woff");
+}
 *,
 body {
     font-family: cursive;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: poppins;
 }

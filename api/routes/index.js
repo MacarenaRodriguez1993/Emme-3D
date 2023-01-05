@@ -8,7 +8,12 @@ const orders = require("./orders")
 const categories = require("./categories")
 //const email = require("./email")
 const mercadopago = require("./mercadopago")
+<<<<<<< HEAD
 //const productsRoute = require("./products") <--- Ejemplo de como debería ir
+=======
+const carousel = require("./carousel")
+// const productsRoute = require("./products") <--- Ejemplo de como debería ir
+>>>>>>> 70177029e24e36f032eb8b2684d3c3f327bfa543
 
 // Routes
 // router.use("/productos", productsRoute) <--- Ejemplo de como debería ir
@@ -18,5 +23,6 @@ router.use("/orders", orders) // Ver lista de todas las ordenes (lista de ordene
 router.use("/categories", categories) // Ver lista de categorias (lista de categorías, Admin: crear, editar)
 //router.use("/email", email) // plantilla para envio de notificaciones por mail
 router.use("/mercadopago", mercadopago)
+router.use("/carousel", carousel)
 
 module.exports = router
