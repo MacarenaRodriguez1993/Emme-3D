@@ -13,7 +13,7 @@ const Cart = () => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
-    const url_api = "https://emme-3d-backend-production.up.railway.app/"
+    const url_api = "https://emme-3d-production-c491.up.railway.app/"
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {

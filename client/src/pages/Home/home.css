@@ -1,4 +1,72 @@
 .home {
     width: 100%;
-    color:#ffe3e3 ;
+    color: #ffe3e3;
+    background-color: #262a53;
+    min-height: 100vh;
+}
+.divContain {
+    padding: 1em;
+    display: flex;
+    justify-content: space-around;
+}
+.cardHome {
+    background-color: rgba(162, 159, 204, 0.281);
+    width: 30%;
+    height: auto;
+    border-radius: 1em;
+    text-align: center;
+    padding: 1em;
+}
+.cardHome:hover {
+    transform: scale(1.05);
+    transition: 0.8s;
+}
+#titleCard {
+    padding: 0.2em 0.5em;
+    text-align: center;
+    font-size: x-large;
+    align-items: center;
+}
+#contentCard {
+    padding: 0.5em;
+    font-size: large;
+}
+#buttonHome {
+    background-color: #a34270;
+    padding: 0.7em 1em;
+    color: #ffe3e3;
+    border-radius: 1em;
+    border: none;
+    font-size: large;
+    cursor: pointer;
+}
+#buttonHome:hover {
+    box-shadow: 1px 1px #ffe3e3;
+    transition: 0.6s;
+}
+.preguntas {
+    width: 80%;
+    margin: auto;
+}
+.item {
+    background-color: rgba(162, 159, 204, 0.281);
+    margin: 1em;
+    padding: 0.5em 1em;
+}
+.pregunta {
+    padding: 0.5em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.respuesta {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+    cursor: pointer;
+}
+.show {
+    height: auto;
+    max-height: 99999px;
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
 }

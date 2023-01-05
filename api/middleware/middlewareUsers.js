@@ -3,9 +3,8 @@ const {
     getUsers,
     deletedUser,
     userUpdate,
-    usersId
+    usersId,
 } = require("../controllers/userController")
-
 
 // USERS
 async function getAllUsers() {
