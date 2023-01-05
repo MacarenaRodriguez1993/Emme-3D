@@ -2,16 +2,34 @@ import React, { useState, useEffect } from "react"
 import "./Details.css"
 import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
-import { getDetails, addToCart } from "../../redux/actions/actions"
+import { getDetails, addToCart, getReviews, postReviews } from "../../redux/actions/actions"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
+import {Rating} from 'react-simple-star-rating'
 
 export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
-    const [rating, setRating] = useState(0)
-    const [review, setReview] = useState("")
+    const [reviews, setReviews] = useState({
+        rating: 0,
+        opinion: ''
+    })
+
+  const  handleRating=(rate)=>{
+    setReviews({...reviews, rating: rate})
+  }
+
+  const handleReviws = () => {
+    dispatch(postReviews(reviews))
+    dispatch(getReviews())
+  }
+  
+  console.log(reviews)
+  //const onPointerEnter = () => console.log('Enter')
+  //const onPointerLeave = () => console.log('Leave')
+  //const onPointerMove = (value: , index: number) => console.log(value, index)
+
 
     useEffect(() => {
         dispatch(getDetails(_id))
@@ -112,11 +130,20 @@ export default function Details({ props }) {
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
+                            <Rating
+                onClick={handleRating}
+                /* onPointerEnter={onPointerEnter}
+                onPointerLeave={onPointerLeave} */
+                initialValue={reviews.rating}
+
+                //onPointerMove={onPointerMove}
+                
+                  />
                 </div>
                 <textarea
                     className="input-opinion"
                     placeholder="ingrea una opinion sobre el producto"
-                    onChange={(e) => setReview(e.target.value)}
+                    onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                 />
                 <div className="btn-valoracion">
                     <button>Enviar</button>
