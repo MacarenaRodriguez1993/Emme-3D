@@ -6,19 +6,17 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
-const GET_CAROUSEL = 'GET_CAROUSEL'
+const GET_CAROUSEL = "GET_CAROUSEL"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta const cuando se creen las rutas
-const POST_CAROUSEL = 'POST_CAROUSEL'
+const POST_CAROUSEL = "POST_CAROUSEL"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 import axios from "axios"
-
-
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -131,10 +129,11 @@ export const postCategory = (category) => {
     }
 }
 
-export const carouselUpload = image => {
-    return dispatch => {
+export const carouselUpload = (image) => {
+    return async (dispatch) => {
         try {
-            //axios.post(url_api + "/carousel", image)
+            const img = await axios.post(url_api + "/carousel", image)
+            console.log(img)
             dispatch({
                 type: POST_CAROUSEL,
                 payload: image,
@@ -234,11 +233,9 @@ export const searchByName = (name) => {
 }
 
 export const getCarouselImgs = () => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
-            const carouselImgs = await axios.get(
-                `${url_api}/carousel`
-            )
+            const carouselImgs = await axios.get(`${url_api}/carousel`)
             dispatch({
                 type: GET_CAROUSEL,
                 payload: carouselImgs.data,
@@ -273,12 +270,10 @@ export const deleteProduct = (id) => {
     }
 }
 
-export const carouselDelete = image => {
-    return dispatch => {
+export const carouselDelete = (image) => {
+    return (dispatch) => {
         try {
-            axios.delete(
-                `${url_api}/carousel/${image}`
-            )
+            axios.delete(`${url_api}/carousel/${image}`)
         } catch (error) {
             dispatch({
                 type: ERROR,

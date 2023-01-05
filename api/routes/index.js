@@ -8,6 +8,7 @@ const orders = require("./orders")
 const categories = require("./categories")
 const email = require("./email")
 const mercadopago = require("./mercadopago")
+const carousel = require("./carousel")
 // const productsRoute = require("./products") <--- Ejemplo de como debería ir
 
 // Routes
@@ -18,5 +19,6 @@ router.use("/orders", orders) // Ver lista de todas las ordenes (lista de ordene
 router.use("/categories", categories) // Ver lista de categorias (lista de categorías, Admin: crear, editar)
 router.use("/email", email) // plantilla para envio de notificaciones por mail
 router.use("/mercadopago", mercadopago)
+router.use("/carousel", carousel)
 
 module.exports = router
