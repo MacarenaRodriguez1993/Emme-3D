@@ -28,26 +28,18 @@ export default function LoginGoogle() {
         try {
             signInWithPopup(auth, provider)
                 .then((result) => {
-                    // This gives you a Google Access Token. You can use it to access the Google API.
                     const credential =
                         GoogleAuthProvider.credentialFromResult(result)
                     const token = credential.accessToken
                     // The signed-in user info.
                     const user = result.user
             
-                    dispatch(createUsers(user))
+                   
                   
                     navigate("/products")
                     createDoc()
 
-                    /* if (user == token) {
-                        dispatch(getUsers(user))
-                        console.log(user)
-                        navigate("/products")
-                    } else {
-                        alert("error")
-                    } */
-                    // ...
+                  
                 })
                 .catch((error) => {
                     // Handle Errors here.
@@ -64,26 +56,10 @@ export default function LoginGoogle() {
         } catch (error) {
             errorMessage
         }
-
-        const createDoc = async() => {
-            try {
-                const docRef = await addDoc(collection(db, "users"),{
-                    token: user.accessToken,
-                    name: user.displayName,
-                    email: user.email,
-                    phone: user.phoneNumber,
-                    photo: user.photoURL,
-                    isAdmin: 'false'
-                   
-                });
-                dispatch(getUser())
-                console.log("Document written with ID: ", docRef);
-            } catch (e) {
-                console.error("Error adding document: ", e);
-            }
-            
-        }
     }
+
+      
+    
     return (
         <div>
             <button className="btn-submit" onClick={() => loginGoogle()}>

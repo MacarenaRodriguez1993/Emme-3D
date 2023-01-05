@@ -40,7 +40,12 @@ const Products = () => {
                 {productos?.map((a) => {
                     if (a.deleted === false) {
                         return (
-                            <Product id={a._id} name={a.name} img={a.img} price={a.price} />
+                            <Product
+                                id={a._id}
+                                name={a.name}
+                                price={a.price}
+                                image={a.img}
+                            />
                         )
                     }
                 })}
@@ -50,7 +55,12 @@ const Products = () => {
                 {productos?.map((a) => {
                     if (a.deleted === true) {
                         return (
-                            <Product id={a._id} name={a.name} price={a.price} />
+                            <Product
+                                id={a._id}
+                                name={a.name}
+                                price={a.price}
+                                image={a.img}
+                            />
                         )
                     }
                 })}
