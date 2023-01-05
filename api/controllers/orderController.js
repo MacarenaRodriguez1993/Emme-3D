@@ -14,6 +14,12 @@ async function createOrder(order) {
 }
 
 async function getOrders() {
+    try {
+        const orders = Order.find()
+        return orders
+    } catch (error) {
+        throw error
+    }
 }
 
 async function getUserOrders(id) {}
