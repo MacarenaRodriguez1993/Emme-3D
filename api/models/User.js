@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
         // Contraseña, se encripta al recibirla
         password: {
             type: String,
-            required: true,
+            //required: true,
         },
 
         // Nombre del cliente
@@ -83,6 +83,9 @@ const UserSchema = new mongoose.Schema(
         deleted: {
             type: Boolean,
             default: false,
+        },
+        uid: {
+            type: String,
         },
     },
     { timestamps: true }

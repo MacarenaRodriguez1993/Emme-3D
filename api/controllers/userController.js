@@ -28,10 +28,10 @@ async function usersId(id) {
 }
 
 async function createUser(user) {
-    const { email, password } = user
+    const { uid, email, password } = user
     //Quizas esta validacion esté de mas
     if (!email) throw new Error("Falta email")
-    if (!password) throw new Error("Falta contraseña")
+    //    if (!password) throw new Error("Falta contraseña")
     try {
         // verifico si el usuario ya existe
         const emailExist = await User.findOne({
