@@ -32,22 +32,22 @@ const CreateCategory = () => {
     }
 
     return (
-        <div>
+        <div className="create-category-container">
             <form
                 onSubmit={(e) => handleSubmitCategory(e)}
                 className="form-create-category"
             >
-                <label className="crear-producto-title">Crear categoria</label>
+                <label className="carrusel-p carr-title">Crear categoria</label>
                 <input
                     type="text"
                     name="name"
                     id=""
-                    className="inputs"
+                    className="create-product-input"
                     value={category.name}
                     onChange={(e) => handleChangeCategory(e)}
                     placeholder="Nombre de la categoria"
                 />
-                <button type="submit" className="btn-crear-producto">
+                <button type="submit" className="create-product-input createpr">
                     Crear categoria
                 </button>
             </form>
