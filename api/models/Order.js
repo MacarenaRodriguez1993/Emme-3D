@@ -7,22 +7,28 @@ const mongoose = require("mongoose")
 
 const OrderSchema = new mongoose.Schema(
     {
-        // Detetalles de la orden
-        order_details_id: {
-            type: mongoose.Types.ObjectId,
-            required: true,
-            unique: true, // Creo que debería ser único por haber solo un pedido por cada detalles de pedido?
-        },
-
         // Usuario al que pertenece la orden
         user_id: {
             type: mongoose.Types.ObjectId,
             required: true,
         },
 
+        // Detetalles de la orden
+        products: [
+            {
+                productId: {
+                    type: String,
+                },
+                quantity: {
+                    type: Number,
+                    default: 1,
+                },
+            },
+        ],
+
         // Estado del pedido
         state: {
-            type: mongoose.Types.ObjectId,
+            type: String,
             required: true,
         },
     },
