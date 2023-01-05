@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {
     getCarouselImgs,
     carouselUpload,
@@ -10,7 +10,7 @@ import "./ImageCarousel.css"
 
 const ImageCarousel = () => {
     const dispatch = useDispatch()
-
+    const carouselImages = useSelector((state) => state.carouselImages)
     useEffect(() => {
         dispatch(getCarouselImgs())
     }, [dispatch])
@@ -36,7 +36,13 @@ const ImageCarousel = () => {
     }
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
-        dispatch(carouselDelete(deleteImg))
+        dispatch(carouselDelete(deleteImg.imgId))
+    }
+    const handleChangeDel = (e) => {
+        setDelteImg({
+            ...deleteImg,
+            imgId: e.target.value,
+        })
     }
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
@@ -92,14 +98,14 @@ const ImageCarousel = () => {
             <form className="carousel-delete-img" onSubmit={handleDeleteSubmit}>
                 <div>
                     <label htmlFor="">Eliminar una imagen</label>
-                    <select name="" id="">
+                    <select name="" id="" onChange={(e) => handleChangeDel(e)}>
                         <option selected>Elegi una imagen</option>
+                        {carouselImages?.map((i) => (
+                            <option value={i._id} name={i.name}>
+                                {i.name}
+                            </option>
+                        ))}
                     </select>
-                    {/* {images?.map((img) => (
-                        <option value={img._id} name="imgId">
-                            {img.name}
-                        </option>
-                    ))} */}
                 </div>
                 <button type="submit">Eliminar imagen</button>
             </form>
