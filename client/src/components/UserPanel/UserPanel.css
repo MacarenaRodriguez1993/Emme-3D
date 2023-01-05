@@ -15,7 +15,6 @@
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    margin-left: 20px;
 }
 .user-img {
     border-radius: 999px;
@@ -51,7 +50,7 @@
 }
 .user-edit {
     margin-left: 0;
-    font-size: 16px;
+    font-size: 15px;
 }
 .img-edit-icon {
     position: relative;

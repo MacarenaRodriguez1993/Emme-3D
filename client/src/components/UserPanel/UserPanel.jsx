@@ -27,7 +27,7 @@ const UserPanel = ({ user, logout }) => {
             <p className="user-data">Tus datos</p>
             <p className="user-data-fields">Nombre: </p>
             <p className="user-data-fields">Apellido: </p>
-            <p className="user-data-fields">Telefono: </p>
+            <p className="user-data-fields">Teléfono: </p>
             <p className="user-data-fields">Dirección: </p>
             <p className="user-data-fields">Ciudad: </p>
             <p className="user-data-fields">Provincia: </p>
