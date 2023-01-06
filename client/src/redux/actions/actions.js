@@ -16,6 +16,7 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
+const PUT_USER = 'PUT_USER'
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -99,7 +100,7 @@ export const filterByLikes = (value) => {
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
 //let url_api = "http://localhost:3001"
-let url_api = "https://emme-3d-production-c491.up.railway.app"
+let url_api = "https://emme-3d-back-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -348,6 +349,18 @@ export const emailBienvenido = (user) => {
             dispatch({
                 type: ERROR,
                 payload: err.message,
+            })
+        }
+    }
+}
+export const updateUser = user => {
+    return async dispatch => {
+        try {
+            await axios.put(`${url_api}/users/${user.id}`, user)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
             })
         }
     }
