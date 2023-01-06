@@ -42,6 +42,7 @@ const Products = () => {
                         return (
                             <Product
                                 id={a._id}
+                                key={a._id}
                                 name={a.name}
                                 price={a.price}
                                 image={a.img}
@@ -57,6 +58,7 @@ const Products = () => {
                         return (
                             <Product
                                 id={a._id}
+                                key={a._id}
                                 name={a.name}
                                 price={a.price}
                                 image={a.img}

@@ -1,0 +1,64 @@
+.user-panel-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.welcome-user {
+    font-size: 30px;
+}
+.user-info {
+    display: flex;
+    flex-direction: row nowrap;
+    margin-bottom: 20px;
+}
+.user-name-email {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.user-img {
+    border-radius: 999px;
+    height: 100px;
+    width: 100px;
+}
+.user-logout {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    margin-left: 20px;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+}
+.user-logout:hover {
+    border: 1px solid grey;
+    background-color: white;
+}
+.user-data {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 227, 227, 1) 0%,
+        rgb(255, 255, 255) 100%
+    );
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+.user-data-fields {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.user-edit {
+    margin-left: 0;
+    font-size: 15px;
+}
+.img-edit-icon {
+    position: relative;
+    left: -20px;
+    background-color: #ffe3e3;
+    border: 1px solid white;
+    border-radius: 99px;
+    padding: 3px;
+    font-size: 30px;
+    cursor: pointer;
+}

@@ -21,11 +21,16 @@ export default function Details({ props }) {
   }
 
   const handleReviws = () => {
-    dispatch(postReviews(reviews + id))
-    dispatch(getReviews())
+    dispatch(postReviews({
+        'rating': reviews.rating,
+        'reviws': reviews.opinion,
+        'user_Id': id,
+        'product_id': 'dasfhafkfaf5af'
+      }))
+    d//ispatch(getReviews())
   }
   
-  console.log({
+  console.log('este es el console',{
     'rating': reviews.rating,
     'opinion': reviews.opinion,
     'userId': id
@@ -151,7 +156,7 @@ export default function Details({ props }) {
                 />
                 <span>el mensaje tiene que ser mayor a 5 plabras</span>
                 <div className="btn-valoracion">
-                    <button>Enviar</button>
+                    <button onClick={() => handleReviws()}>Enviar</button>
                 </div>
             </div>
             <Footer />
