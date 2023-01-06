@@ -72,7 +72,18 @@ async function userUpdate(id, user) {
     try {
         const update = await User.findOneAndUpdate(
             { _id: id },
-            { email: user.email, password: user.password }
+            {
+                email: user.email,
+                password: user.password,
+                name: user.name,
+                surname: user.surname,
+                address: user.address,
+                city: user.city,
+                province: user.province,
+                cp: user.cp,
+                phone: user.phone
+
+            }
         )
         if (update) return "El usuario fue actualizado con exito"
     } catch (err) {

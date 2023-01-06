@@ -13,7 +13,7 @@ const DEFAULT_PORT = 3001
 mongoose
     .connect(
         TEST_HOST ||
-            `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority&ssl=true`
+        `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/?retryWrites=true&w=majority&ssl=true`
     )
     .then(() => {
         console.log("DB connection Successfull")
@@ -41,7 +41,7 @@ server.use(morgan("dev")) //agrege morgan
 server.use("/", routes)
 
 // Si no tenemos un puerto especificado por variable global elegirá el puerto 3001 por defecto
-server.listen(PORT, () => {
+server.listen(PORT || DEFAULT_PORT, () => {
     console.log(
         `Backend server is running on port ${PORT ? PORT : DEFAULT_PORT}!`
     )

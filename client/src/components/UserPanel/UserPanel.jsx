@@ -5,26 +5,26 @@ import { useDispatch } from "react-redux"
 import { updateUser } from "../../redux/actions/actions"
 
 const UserPanel = ({ user, logout }) => {
+    let usId = user.uid
     const dispatch = useDispatch()
     const [userData, setUserData] = useState({
-        id: "",
+        //id: "",
         name: "",
         surname: "",
         phone: "",
-        adress: "",
+        address: "",
         city: "",
         province: "",
         cp: "",
     })
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (user) {
             setUserData({
                 id: user.uid,
             })
         }
-    }, [user])
-    console.log(userData)
+    }, [user]) */
     const editInfo = () => {
         document.getElementById("user-data-container").style.display = "none"
         document.getElementById("user-edit").style.display = "contents"
@@ -43,7 +43,8 @@ const UserPanel = ({ user, logout }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(updateUser(userData))
+        dispatch(updateUser(usId, userData))
+        console.log(usId, userData)
     }
     return (
         <div className="user-panel-container">

@@ -29,11 +29,9 @@ export default function Perfil() {
             console.log(err)
         }
     }
-    console.log(user)
     return (
         <div>
             <Navbar />
-
             <UserPanel user={user} logout={logout} />
             <Footer />
         </div>
