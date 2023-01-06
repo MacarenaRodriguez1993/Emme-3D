@@ -102,3 +102,8 @@
     flex-direction: column;
     justify-content: space-between;
 }
+.user-msg {
+    font-style: italic;
+    font-weight: 100;
+    color: rgb(189, 189, 189);
+}

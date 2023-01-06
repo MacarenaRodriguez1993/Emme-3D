@@ -1,11 +1,13 @@
 import "./UserPanel.css"
 import { AiTwotoneEdit } from "react-icons/ai"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { updateUser } from "../../redux/actions/actions"
 
 const UserPanel = ({ user, logout }) => {
     const dispatch = useDispatch()
     const [userData, setUserData] = useState({
+        id: "",
         name: "",
         surname: "",
         phone: "",
@@ -14,6 +16,15 @@ const UserPanel = ({ user, logout }) => {
         province: "",
         cp: "",
     })
+
+    useEffect(() => {
+        if (user) {
+            setUserData({
+                id: user.uid,
+            })
+        }
+    }, [user])
+    console.log(userData)
     const editInfo = () => {
         document.getElementById("user-data-container").style.display = "none"
         document.getElementById("user-edit").style.display = "contents"
@@ -32,7 +43,7 @@ const UserPanel = ({ user, logout }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch()
+        dispatch(updateUser(userData))
     }
     return (
         <div className="user-panel-container">
@@ -47,9 +58,16 @@ const UserPanel = ({ user, logout }) => {
                 </div>
 
                 <div className="user-name-email">
-                    <p className="welcome-user">
-                        ¡Bienvenid@ {user?.displayName}!
-                    </p>
+                    {user?.name && user?.surname ? (
+                        <p className="welcome-user">
+                            ¡Bienvenid@ {user?.name} {user?.surname}!
+                        </p>
+                    ) : (
+                        <p className="welcome-user">
+                            ¡Bienvenid@ {user?.displayName}!
+                        </p>
+                    )}
+
                     <p>{user?.email}</p>
                 </div>
                 <button onClick={() => logout()} className="user-logout">
@@ -58,13 +76,76 @@ const UserPanel = ({ user, logout }) => {
             </div>
             <div className="user-data-container" id="user-data-container">
                 <p className="user-data">Tus datos</p>
-                <p className="user-data-fields">Nombre: </p>
-                <p className="user-data-fields">Apellido: </p>
-                <p className="user-data-fields">Teléfono: </p>
-                <p className="user-data-fields">Dirección: </p>
-                <p className="user-data-fields">Ciudad: </p>
-                <p className="user-data-fields">Provincia: </p>
-                <p className="user-data-fields">Código postal: </p>
+                <p className="user-data-fields">
+                    Nombre:{" "}
+                    {user?.name ? (
+                        user?.name
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
+                <p className="user-data-fields">
+                    Apellido:{" "}
+                    {user?.surname ? (
+                        user?.surname
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
+                <p className="user-data-fields">
+                    Teléfono:{" "}
+                    {user?.phone ? (
+                        user?.phone
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
+                <p className="user-data-fields">
+                    Dirección:{" "}
+                    {user?.address ? (
+                        user?.address
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
+                <p className="user-data-fields">
+                    Ciudad:{" "}
+                    {user?.city ? (
+                        user?.city
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
+                <p className="user-data-fields">
+                    Provincia:{" "}
+                    {user?.province ? (
+                        user?.province
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
+                <p className="user-data-fields">
+                    Código postal:{" "}
+                    {user?.cp ? (
+                        user?.cp
+                    ) : (
+                        <span className="user-msg">
+                            Por favor, completá tu información.
+                        </span>
+                    )}
+                </p>
                 <button
                     className="user-data-fields user-logout user-edit"
                     onClick={editInfo}
