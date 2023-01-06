@@ -396,10 +396,7 @@ export const postReviews = (reviews) => {
     return async (dispatch) => {
         try {
             console.log(reviews)
-            const createReviews = await axios.post(
-                `${url_api}/reviews`,
-                reviews
-            )
+            const createReviews = await axios.post(`${url_api}/reviews`,reviews)
             console.log(createReviews)
         } catch (err) {
             dispatch({

@@ -4,21 +4,25 @@ const Review = require('../models/Review');
 
 
   // Obtiene todas las reseñas
-  async function getReviews (req, res) {
+  async function getReviews () {
     try {
       const reviews = await Review.find();
+      if (reviews.length < 1)
+      throw new Error(`no hay reviews.`)
       return reviews
     } catch (err) {
-      err
+      throw err
     }
   }
 
   // Obtiene una reseña específica
-  async function reviewId (id) {
+  async function reviewId(id) {
     try {
-      const review = await Review.find({
-        _id: ObjectId(id)
-      }).clone
+      const review = await Review.findOne({
+        _id: ObjectId(id),
+      })
+      if (review.length < 1)
+            throw new Error(`No existe review  "${id}".`)
       return review
     } catch (err) {
       err
@@ -32,7 +36,7 @@ const Review = require('../models/Review');
       const newReview = await Review.create(reviews);
       return newReview
     } catch (err) {
-      err
+     throw err
     }
   }
 

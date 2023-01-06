@@ -41,7 +41,7 @@ server.use(morgan("dev")) //agrege morgan
 server.use("/", routes)
 
 // Si no tenemos un puerto especificado por variable global elegirá el puerto 3001 por defecto
-server.listen(PORT, () => {
+server.listen(PORT || DEFAULT_PORT, () => {
     console.log(
         `Backend server is running on port ${PORT ? PORT : DEFAULT_PORT}!`
     )

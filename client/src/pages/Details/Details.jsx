@@ -15,7 +15,7 @@ export default function Details({ props }) {
         rating: 0,
         opinion: ''
     })
-    const id = 'dasfsf6sf46df46sdg'
+    const id = '63b75335fc73e6f7739e7eda'
   const  handleRating=(rate)=>{
     setReviews({...reviews, rating: rate})
   }
@@ -23,11 +23,11 @@ export default function Details({ props }) {
   const handleReviws = () => {
     dispatch(postReviews({
         'rating': reviews.rating,
-        'reviws': reviews.opinion,
-        'user_Id': id,
-        'product_id': 'dasfhafkfaf5af'
+        'review': reviews.opinion,
+        'user_id': id,
+        'product_id': _id
       }))
-    d//ispatch(getReviews())
+    //ispatch(getReviews())
   }
   
   console.log('este es el console',{
