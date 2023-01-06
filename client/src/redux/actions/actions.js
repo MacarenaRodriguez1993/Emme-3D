@@ -103,8 +103,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = "http://localhost:3001"
-let url_api = "https://emme-3d-back-production.up.railway.app"
+let url_api = "http://localhost:3001"
+//let url_api = "https://emme-3d-back-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -398,7 +398,7 @@ export const postReviews = (reviews) => {
             console.log(reviews)
             const createReviews = await axios.post(`${url_api}/reviews`,reviews)
             console.log(createReviews)
-        } catch (error) {
+        } catch (err) {
             dispatch({
                 type: ERROR,
                 payload: err.message,
@@ -411,13 +411,13 @@ export const getReviews = (id) => {
     return async (dispatch) => {
         try {
             console.log(id)
-            const getReviewsById = await axios.get(`${url_api}/reviews/${id}`)
+            const getReviewsById = await axios.get(`${url_api}/reviews?id?${id}`)
             console.log('desde la action',getReviewsById.data)
             dispatch({
                 type: GET_REVIEWS_BY_ID,
                 payload: getReviewsById.data,
             })
-        } catch (error) {
+        } catch (err) {
             dispatch({
                 type: ERROR,
                 payload: err.message,

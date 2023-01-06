@@ -16,17 +16,19 @@ const Review = require('../models/Review');
   }
 
   // Obtiene una reseña específica
-  async function reviewId(id) {
+  async function reviewId(productId) {
     try {
-      const review = await Review.find({
-        product_id:id,
-      })
-      if (review.length < 1)
-            throw new Error(`No existen reviews para este producto  "${id}".`)
-      return review
-    } catch (err) {
-      err
+      const reviews = await Review.find({ product_id: ObjectId(productId )});
+      if (!reviews || reviews.length === 0) {
+        throw new Error(`No reviews found for product with ID ${productId}`);
+      }
+      
+      return reviews;
+    } catch (error) {
+      console.error(error);
+      return error.message;
     }
+  
   }
 
   // Añade una nueva reseña

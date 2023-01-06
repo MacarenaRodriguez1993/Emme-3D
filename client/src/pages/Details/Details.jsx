@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import "./Details.css"
 import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
@@ -11,28 +11,53 @@ import {Rating} from 'react-simple-star-rating'
 export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
-    const ReviewsStore = useSelector(state => state.reviews)
+    const R = useSelector(state => state.reviews)
+    
+        const reviewref = useRef('');
+        const [ratin, setRatin] = useState({
+            rating: 0
+        })
+        
 
-    console.log(ReviewsStore)
-
-    const [reviews, setReviews] = useState({
-        rating: 0,
-        opinion: ''
-    })
+    console.log('que es',R)
+   
+    
+    
     const id = '63b75335fc73e6f7739e7eda'
-  const  handleRating=(rate)=>{
-    setReviews({...reviews, rating: rate})
-  }
+     const  handleRating=(rate)=>{
+        
+         setRatin( {...ratin, rating:rate})
+    } 
+    
+   /*  const filterReviewsById = () => {
+      const reviewsFiltered = R.filter((r) => r.product_id == _id)
+      if(reviewsFiltered.length <= 0){
+        console.log('no tiene reviews este producto')
+      }
+      console.log('esta son las filtradas',reviewsFiltered)
+    } */
 
-  const handleReviws = () => {
-    dispatch(postReviews({
-        'rating': reviews.rating,
-        'review': reviews.opinion,
+    const handleReviws = () => {
+        dispatch(postReviews({
+        'rating': ratin.rating,
+        'review': reviewref.current.value,
         'user_id': id,
         'product_id': _id
       }))
-    dispatch(getReviews(_id))
+      reviewref.current.value = ''
+     
+      
+      setTimeout(function(){
+          dispatch(getReviews(_id))
+        console.log("Hola Mundo");
+    }, 2000);
   }
+  console.log('desde consola', {
+    'rating': ratin.rating,
+    'review': reviewref.current.value,
+    'user_id': id,
+    'product_id': _id
+  })
   
   /* console.log('este es el console',{
     'rating': reviews.rating,
@@ -47,6 +72,7 @@ export default function Details({ props }) {
     useEffect(() => {
         dispatch(getDetails(_id))
         dispatch(getReviews(_id))
+       
     }, [dispatch])
 
     const productDetail = useSelector((state) => state.detail)
@@ -126,13 +152,13 @@ export default function Details({ props }) {
                 <h2>Descripcion:</h2>
                 <p>{p?.map((d) => d.description)}</p>
             </div>
-            /* <div className="container-opiniones">
-                {ReviewsStore.map((r) => {
+             <div className="container-opiniones">
+                {R.map((r) => {
                     return (
-                        <div style={{ marginBottom: 15 }}>
+                        <div style={{ marginBottom: 10 }}>
                             <div className="header-opinion">
                                 {/* <h2>{r.name}</h2> */}
-                                <Rating disableFillHover={true} onPointerEnter={r.rating} readonly initialValue={r.rating} size={15} />
+                                <Rating disableFillHover={true} onPointerEnter={r.rating} readonly initialValue={r.rating} size={18} />
                             </div>
                             <div className="opinion-reviews">
                                 <span>{r.review}</span>
@@ -145,10 +171,13 @@ export default function Details({ props }) {
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
                             <Rating
+                            size={22}
                 onClick={handleRating}
+                initialValue={ratin.rating}
+               
                 /* onPointerEnter={onPointerEnter}
                 onPointerLeave={onPointerLeave} */
-                initialValue={reviews.rating}
+               // initialValue={reviews.rating}
 
                 //onPointerMove={onPointerMove}
                 
@@ -157,7 +186,8 @@ export default function Details({ props }) {
                 <textarea
                     className="input-opinion"
                     placeholder="ingrea una opinion sobre el producto"
-                    onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
+                    ref={reviewref}
+                    //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                 />
                 <span>el mensaje tiene que ser mayor a 5 plabras</span>
                 <div className="btn-valoracion">
