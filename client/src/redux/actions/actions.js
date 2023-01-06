@@ -16,7 +16,8 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
-const PUT_USER = 'PUT_USER'
+const GET_USER_UID = "GET_USER_UID"
+const PUT_USER = "PUT_USER"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -353,10 +354,50 @@ export const emailBienvenido = (user) => {
         }
     }
 }
-export const updateUser = (usId, userData) => {
-    return async dispatch => {
+
+export const postUser = (user) => {
+    return async (dispatch) => {
         try {
-            await axios.put(`${url_api}/users/${usId}`, userData)
+            const usuario = await axios.post(`${url_api}/users`, user)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+export const updateUser = (user) => {
+    return async (dispatch) => {
+        console.log(user.id)
+        console.log(user)
+        try {
+            const user_update = await axios.put(
+                `${url_api}/users/${user.id}`,
+                user
+            )
+            dispatch({
+                type: PUT_USER,
+                payload: user_update.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+export const getUserByUid = (uid) => {
+    return async (dispatch) => {
+        try {
+            console.log(uid)
+            const user_Uid = await axios.get(`${url_api}/users/${uid}`)
+            dispatch({
+                type: GET_USER_UID,
+                payload: user_Uid.data,
+            })
         } catch (error) {
             dispatch({
                 type: ERROR,

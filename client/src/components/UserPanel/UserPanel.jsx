@@ -1,21 +1,25 @@
 import "./UserPanel.css"
 import { AiTwotoneEdit } from "react-icons/ai"
 import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { updateUser } from "../../redux/actions/actions"
+import { getUserByUid } from "../../redux/actions/actions"
 
 const UserPanel = ({ user, logout }) => {
     let usId = user.uid
     const dispatch = useDispatch()
+    const userId = useSelector((state) => state.users)
+    const userDetails = useSelector((state) => state.userByUid)
+
     const [userData, setUserData] = useState({
-        //id: "",
-        name: "",
-        surname: "",
-        phone: "",
-        address: "",
-        city: "",
-        province: "",
-        cp: "",
+        id: userDetails[0] ? userDetails.uid : "",
+        name: userDetails[0] ? userDetails[0].name : "",
+        surname: userDetails[0] ? userDetails[0].surname : "",
+        phone: userDetails[0] ? userDetails[0].phone : "",
+        address: userDetails[0] ? userDetails[0].address : "",
+        city: userDetails[0] ? userDetails[0].city : "",
+        province: userDetails[0] ? userDetails[0].province : "",
+        cp: userDetails[0] ? userDetails[0].cp : "",
     })
 
     /* useEffect(() => {
@@ -25,6 +29,12 @@ const UserPanel = ({ user, logout }) => {
             })
         }
     }, [user]) */
+    useEffect(() => {
+        if (userId !== null) {
+            dispatch(getUserByUid(userId.uid))
+        }
+    }, [user])
+    console.log(userData)
     const editInfo = () => {
         document.getElementById("user-data-container").style.display = "none"
         document.getElementById("user-edit").style.display = "contents"
@@ -78,9 +88,9 @@ const UserPanel = ({ user, logout }) => {
             <div className="user-data-container" id="user-data-container">
                 <p className="user-data">Tus datos</p>
                 <p className="user-data-fields">
-                    Nombre:{" "}
-                    {user?.name ? (
-                        user?.name
+                    Nombre:
+                    {userDetails[0]?.name ? (
+                        userDetails[0]?.name
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -89,8 +99,8 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Apellido:{" "}
-                    {user?.surname ? (
-                        user?.surname
+                    {userDetails[0]?.surname ? (
+                        userDetails[0]?.surname
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -99,8 +109,8 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Teléfono:{" "}
-                    {user?.phone ? (
-                        user?.phone
+                    {userDetails[0]?.phone ? (
+                        userDetails[0]?.phone
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -109,8 +119,8 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Dirección:{" "}
-                    {user?.address ? (
-                        user?.address
+                    {userDetails[0]?.address ? (
+                        userDetails[0]?.address
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -119,8 +129,8 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Ciudad:{" "}
-                    {user?.city ? (
-                        user?.city
+                    {userDetails[0]?.city ? (
+                        userDetails[0]?.city
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -129,8 +139,8 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Provincia:{" "}
-                    {user?.province ? (
-                        user?.province
+                    {userDetails[0]?.province ? (
+                        userDetails[0]?.province
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -139,8 +149,8 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Código postal:{" "}
-                    {user?.cp ? (
-                        user?.cp
+                    {userDetails[0]?.cp ? (
+                        userDetails[0]?.cp
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -177,6 +187,7 @@ const UserPanel = ({ user, logout }) => {
                             id=""
                             className="user-edits"
                             onChange={handleChange}
+                            value={userData.name}
                         />
                         <input
                             type="text"
@@ -184,6 +195,7 @@ const UserPanel = ({ user, logout }) => {
                             id=""
                             className="user-edits"
                             onChange={handleChange}
+                            value={userData.surname}
                         />
                         <input
                             type="text"
@@ -191,6 +203,7 @@ const UserPanel = ({ user, logout }) => {
                             id=""
                             className="user-edits"
                             onChange={handleChange}
+                            value={userData.phone}
                         />
                         <input
                             type="text"
@@ -198,6 +211,7 @@ const UserPanel = ({ user, logout }) => {
                             id=""
                             className="user-edits"
                             onChange={handleChange}
+                            value={userData.address}
                         />
                         <input
                             type="text"
@@ -205,6 +219,7 @@ const UserPanel = ({ user, logout }) => {
                             id=""
                             className="user-edits"
                             onChange={handleChange}
+                            value={userData.city}
                         />
                         <input
                             type="text"
@@ -219,6 +234,7 @@ const UserPanel = ({ user, logout }) => {
                             id=""
                             className="user-edits"
                             onChange={handleChange}
+                            value={userData.cp}
                         />
                     </div>
                 </div>
