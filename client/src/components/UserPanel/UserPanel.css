@@ -15,6 +15,7 @@
 .user-info {
     display: flex;
     flex-direction: row nowrap;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 .user-name-email {
@@ -115,4 +116,7 @@
     font-style: italic;
     font-weight: 100;
     color: rgb(189, 189, 189);
+}
+.user-data-span {
+    border-bottom: 1px solid rgb(187, 187, 187);
 }

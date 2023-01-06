@@ -80,6 +80,12 @@ const UserSchema = new mongoose.Schema(
             // unique: true, Debería ser único?
         },
 
+        // Imagen de perfil
+        img: {
+            type: String,
+            //required: true,
+            // unique: true, Debería ser único?
+        },
         // Control para las cuentas admin
         isAdmin: {
             type: Boolean,
