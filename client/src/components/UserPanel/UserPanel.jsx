@@ -4,37 +4,54 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { updateUser } from "../../redux/actions/actions"
 import { getUserByUid } from "../../redux/actions/actions"
+import userDefaultImg from "../../assets/user.png"
 
 const UserPanel = ({ user, logout }) => {
-    let usId = user.uid
     const dispatch = useDispatch()
     const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)
-
+    /* ******************************************************************* */
     const [userData, setUserData] = useState({
-        id: userDetails[0] ? userDetails.uid : "",
-        name: userDetails[0] ? userDetails[0].name : "",
-        surname: userDetails[0] ? userDetails[0].surname : "",
-        phone: userDetails[0] ? userDetails[0].phone : "",
-        address: userDetails[0] ? userDetails[0].address : "",
-        city: userDetails[0] ? userDetails[0].city : "",
-        province: userDetails[0] ? userDetails[0].province : "",
-        cp: userDetails[0] ? userDetails[0].cp : "",
+        id: "",
+        name: "",
+        surname: "",
+        phone: "",
+        address: "",
+        city: "",
+        province: "",
+        cp: "",
+        img: "",
     })
-
-    /* useEffect(() => {
-        if (user) {
-            setUserData({
-                id: user.uid,
-            })
-        }
-    }, [user]) */
+    console.log(userData)
+    /* ******************************************************************* */
     useEffect(() => {
         if (userId !== null) {
             dispatch(getUserByUid(userId.uid))
         }
     }, [user])
-    console.log(userData)
+    useEffect(async () => {
+        if (user) {
+            setUserData({
+                id: user?.uid,
+            })
+        }
+    }, [user])
+    useEffect(() => {
+        if (userDetails) {
+            setUserData({
+                id: user?.uid,
+                name: userDetails[0] ? userDetails[0].name : "",
+                surname: userDetails[0] ? userDetails[0].surname : "",
+                phone: userDetails[0] ? userDetails[0].phone : "",
+                address: userDetails[0] ? userDetails[0].address : "",
+                city: userDetails[0] ? userDetails[0].city : "",
+                province: userDetails[0] ? userDetails[0].province : "",
+                cp: userDetails[0] ? userDetails[0].cp : "",
+                img: userDetails[0] ? userDetails[0].img : "",
+            })
+        }
+    }, [userDetails])
+    /* ******************************************************************* */
     const editInfo = () => {
         document.getElementById("user-data-container").style.display = "none"
         document.getElementById("user-edit").style.display = "contents"
@@ -45,6 +62,7 @@ const UserPanel = ({ user, logout }) => {
         document.getElementById("user-data-container").style.display =
             "contents"
     }
+    /* ******************************************************************* */
     const handleChange = (e) => {
         setUserData({
             ...userData,
@@ -52,45 +70,83 @@ const UserPanel = ({ user, logout }) => {
         })
     }
     const handleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(updateUser(usId, userData))
-        console.log(usId, userData)
+        dispatch(updateUser(userData))
     }
+    /* ******************************************************************* */
+    const handleOpenWidget = async () => {
+        var myWidget = await window.cloudinary.createUploadWidget(
+            {
+                cloudName: "emme3d",
+                uploadPreset: "igsag6pi",
+            },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log("Done! Here is the image info: ", result.info)
+                    setUserData({
+                        ...userData,
+                        img: result.info.url,
+                    })
+                }
+            }
+        )
+        myWidget.open()
+    }
+    /* ******************************************************************* */
     return (
         <div className="user-panel-container">
+            {/* ******ENCABEZADO DEL PERFIL****** */}
             <div className="user-info">
-                <div className="user-img-cont">
-                    <img
-                        src={user?.photoURL}
-                        alt={user?.photoURL}
-                        className="user-img"
-                    />
-                    <AiTwotoneEdit className="img-edit-icon" />
-                </div>
+                <div className="user-info">
+                    <div className="user-img-cont">
+                        <img
+                            src={
+                                user?.photoURL ||
+                                userDetails[0]?.img ||
+                                userDefaultImg
+                            }
+                            alt={
+                                user?.photoURL ||
+                                userDetails[0]?.img ||
+                                userDefaultImg
+                            }
+                            className="user-img"
+                        />
+                        <AiTwotoneEdit
+                            className="img-edit-icon"
+                            onClick={handleOpenWidget}
+                        />
+                    </div>
 
-                <div className="user-name-email">
-                    {user?.name && user?.surname ? (
-                        <p className="welcome-user">
-                            ¡Bienvenid@ {user?.name} {user?.surname}!
-                        </p>
-                    ) : (
-                        <p className="welcome-user">
-                            ¡Bienvenid@ {user?.displayName}!
-                        </p>
-                    )}
+                    <div className="user-name-email">
+                        {userDetails[0]?.name && userDetails[0]?.surname ? (
+                            <p className="welcome-user">
+                                ¡Bienvenid@ {userDetails[0]?.name}{" "}
+                                {userDetails[0]?.surname}!
+                            </p>
+                        ) : (
+                            <p className="welcome-user">
+                                ¡Bienvenid@ {user?.displayName}!
+                            </p>
+                        )}
 
-                    <p>{user?.email}</p>
+                        <p>{user?.email}</p>
+                    </div>
                 </div>
-                <button onClick={() => logout()} className="user-logout">
-                    Cerrar sesión
-                </button>
+                <div>
+                    <button onClick={() => logout()} className="user-logout">
+                        Cerrar sesión
+                    </button>
+                </div>
             </div>
+            {/* ******DATOS DEL USUARIO****** */}
             <div className="user-data-container" id="user-data-container">
                 <p className="user-data">Tus datos</p>
                 <p className="user-data-fields">
-                    Nombre:
+                    Nombre:{" "}
                     {userDetails[0]?.name ? (
-                        userDetails[0]?.name
+                        <span className="user-data-span">
+                            {userDetails[0]?.name}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -100,7 +156,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data-fields">
                     Apellido:{" "}
                     {userDetails[0]?.surname ? (
-                        userDetails[0]?.surname
+                        <span className="user-data-span">
+                            {userDetails[0]?.surname}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -110,7 +168,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data-fields">
                     Teléfono:{" "}
                     {userDetails[0]?.phone ? (
-                        userDetails[0]?.phone
+                        <span className="user-data-span">
+                            {userDetails[0]?.phone}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -120,7 +180,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data-fields">
                     Dirección:{" "}
                     {userDetails[0]?.address ? (
-                        userDetails[0]?.address
+                        <span className="user-data-span">
+                            {userDetails[0]?.address}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -130,7 +192,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data-fields">
                     Ciudad:{" "}
                     {userDetails[0]?.city ? (
-                        userDetails[0]?.city
+                        <span className="user-data-span">
+                            {userDetails[0]?.city}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -140,7 +204,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data-fields">
                     Provincia:{" "}
                     {userDetails[0]?.province ? (
-                        userDetails[0]?.province
+                        <span className="user-data-span">
+                            {userDetails[0]?.province}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -150,7 +216,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data-fields">
                     Código postal:{" "}
                     {userDetails[0]?.cp ? (
-                        userDetails[0]?.cp
+                        <span className="user-data-span">
+                            {userDetails[0]?.cp}
+                        </span>
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
@@ -164,6 +232,7 @@ const UserPanel = ({ user, logout }) => {
                     Editar mi información
                 </button>
             </div>
+            {/* ******FORMULARIO PARA EDITAR DATOS DE USUARIO****** */}
             <form
                 className="user-data-edit-container"
                 id="user-edit"
@@ -251,6 +320,7 @@ const UserPanel = ({ user, logout }) => {
                     </button>
                 </div>
             </form>
+            {/* ******PEDIDOS REALIZADOS POR EL USUARIO****** */}
             <p className="user-data">Tus pedidos</p>
         </div>
     )

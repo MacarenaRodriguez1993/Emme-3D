@@ -358,7 +358,7 @@ export const emailBienvenido = (user) => {
 export const postUser = (user) => {
     return async (dispatch) => {
         try {
-            await axios.post(`${url_api}/users`, user)
+            const usuario = await axios.post(`${url_api}/users`, user)
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -373,7 +373,7 @@ export const updateUser = (user) => {
         console.log(user.id)
         console.log(user)
         try {
-            await axios.put(
+            const user_update = await axios.put(
                 `${url_api}/users/${user.id}`,
                 user
             )
