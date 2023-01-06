@@ -22,18 +22,10 @@ const UserPanel = ({ user, logout }) => {
         cp: "",
         img: "",
     })
-    console.log(userData)
     /* ******************************************************************* */
     useEffect(() => {
         if (userId !== null) {
             dispatch(getUserByUid(userId.uid))
-        }
-    }, [user])
-    useEffect(async () => {
-        if (user) {
-            setUserData({
-                id: user?.uid,
-            })
         }
     }, [user])
     useEffect(() => {
