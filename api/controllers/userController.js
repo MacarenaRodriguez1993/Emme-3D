@@ -15,8 +15,8 @@ async function getUsers() {
 
 async function usersId(id) {
     try {
-        const userId = await User.find({
-            uid: id
+        const userId = await User.findOne({
+            uid: id,
         }).clone()
 
         if (userId.length < 1)
@@ -28,10 +28,10 @@ async function usersId(id) {
 }
 
 async function createUser(user) {
-    const { email, name, phone, photo, uid  } = user
+    const { email, password } = user
     //Quizas esta validacion esté de mas
     if (!email) throw new Error("Falta email")
-    
+    if (!password) throw new Error("Falta contraseña")
     try {
         // verifico si el usuario ya existe
         const emailExist = await User.findOne({
@@ -48,7 +48,7 @@ async function createUser(user) {
     }
 }
 
-/* async function getUsers() {
+async function getUsers() {
     try {
         const users = await User.find()
         if (users.length < 1)
@@ -57,7 +57,7 @@ async function createUser(user) {
     } catch (err) {
         throw err
     }
-} */
+}
 
 async function deletedUser(id) {
     try {

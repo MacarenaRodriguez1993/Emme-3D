@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { app, db } from "../../components/firebase/firebase"
-import { createUsers, emailBienvenido, getUser } from "../../redux/actions/actions"
+import { createUsers, emailBienvenido, getUsers } from "../../redux/actions/actions"
 import { collection, addDoc, doc } from "firebase/firestore"; 
 import {async} from "@firebase/util"
 
@@ -18,6 +18,8 @@ export default function register() {
     const [user, setUser] = useState({
         email: '',
         password: '',
+        name: '',
+        apellido: '',
     })
 
     const auth = getAuth(app)
@@ -30,27 +32,19 @@ export default function register() {
         .then((userCredential) => {
             // Signed in
             
-            const usua =  userCredential.user
-            
-            console.log({'name': usua.displayName,
-            'uid': usua.uid,
-            'email': user.email,
-            'password': user.password,
-            'photo': usua.photoURL,
-            'phone': usua.phoneNumber})
+            const u = userCredential.user
+            console.log(u)
             dispatch(createUsers({
-                'name': usua.displayName,
-                'id': usua.uid,
-                'email': user.email,
-                'password': user.password,
-                'photo': usua.photoURL,
-                'phone': usua.phoneNumber
-
-
+                'uid': u.uid,
+                'name': user.name,
+                'surname': user.apellido,
+                'email':user.email,
+                'password':user.password,
+                'phone': u.phoneNumber,
+                'photo': u.photoURL
             }))
             navigate("/login")
             dispatch(emailBienvenido(user))
-            dispatch(getUser(usua.uid))
             // ...
         })
         .catch((error) => {
@@ -77,6 +71,28 @@ export default function register() {
                 <form className="formulario-login" onSubmit={register}>
                     <h2 style={{ color: "white", fontSize: 30 }}>Registrate</h2>
                     <div style={{ flexDirection: "column" }}>
+                    <div>
+                            <input
+                                name="name"
+                                type="text"
+                                value={user.name}
+                                required
+                                className="input"
+                                placeholder="name"
+                                onChange={(e) => setUser({...user, name:e.target.value})}
+                            />
+                        </div>
+                    <div>
+                            <input
+                                name="apellido"
+                                type="text"
+                                value={user.apellido}
+                                required
+                                className="input"
+                                placeholder="lastName"
+                                onChange={(e) => setUser({...user, apellido:e.target.value})}
+                            />
+                        </div>
                         <div>
                             <input
                                 name="email"

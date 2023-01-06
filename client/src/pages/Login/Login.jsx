@@ -26,11 +26,11 @@ export default function Login() {
                 const user = userCredential.user
                 console.log(user)
                 navigate("/products")
-                dispatch(createUsers({
+                /* dispatch(createUsers({
                     "email": user.email,
                     "password": password
-                }))
-                dispatch(getUsers(user))
+                })) */
+                dispatch(getUser(user.uid))
                 // ...
             })
             .catch((error) => {

@@ -8,6 +8,11 @@ const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema(
     {
+        uid: {
+            type: String,
+            required: true,
+            unique: true,
+          },
         // Nombre de usuario (nick)
         username: {
             type: String,
