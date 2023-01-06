@@ -57,7 +57,7 @@ async function getUsers() {
 
 async function deletedUser(id) {
     try {
-        const deleteUser = await User.updateOne({ _id: id }, { deleted: true })
+        const deleteUser = await User.updateOne({ uid: id }, { deleted: true })
         return deleteUser
     } catch (err) {
         throw err
@@ -74,7 +74,9 @@ async function userUpdate(uid, user) {
                 name: user.name,
                 surname: user.surname,
                 address: user.address,
+                city: user.city,
                 province: user.province,
+                cp: user.cp,
                 phone: user.phone,
                 img: user.img,
             }

@@ -370,8 +370,17 @@ export const postUser = (user) => {
 
 export const updateUser = (user) => {
     return async (dispatch) => {
+        console.log(user.id)
+        console.log(user)
         try {
-            await axios.put(`${url_api}/users/${user.id}`, user)
+            const user_update = await axios.put(
+                `${url_api}/users/${user.id}`,
+                user
+            )
+            dispatch({
+                type: PUT_USER,
+                payload: user_update.data,
+            })
         } catch (error) {
             dispatch({
                 type: ERROR,

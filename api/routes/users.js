@@ -37,21 +37,21 @@ router.post("/", async (req, res) => {
     }
 })
 // Put editar usuario (Admin todos, usuario solo a si mismo)
-router.put("/:id", async (req, res) => {
-    const { id } = req.params
+router.put("/:uid", async (req, res) => {
+    const { uid } = req.params
     const user = req.body
     try {
-        const updateUser = await updateUsers(id, user)
+        const updateUser = await updateUsers(uid, user)
         res.status(200).json(updateUser)
     } catch (err) {
         res.status(404).send(err.message)
     }
 })
 // Delete usuario (borrado lógico de usuario)
-router.delete("/:id", async (req, res) => {
-    const { id } = req.params
+router.delete("/:uid", async (req, res) => {
+    const { uid } = req.params
     try {
-        const deleted = await deleteUsers(id)
+        const deleted = await deleteUsers(uid)
         res.status(200).json("se hizo el borrado logico: USUARIO INACTIVO")
     } catch (err) {
         res.status(404).json(err.message)
