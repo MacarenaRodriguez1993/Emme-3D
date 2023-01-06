@@ -16,6 +16,8 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
+const GET_USER_UID = "GET_USER_UID"
+import { async } from "@firebase/util"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -348,6 +350,36 @@ export const emailBienvenido = (user) => {
             dispatch({
                 type: ERROR,
                 payload: err.message,
+            })
+        }
+    }
+}
+
+export const postUser = (user) => {
+    return async (dispatch) => {
+        try {
+            const usuario = await axios.post(`${url_api}/users`, user)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+export const getUserByUid = (uid) => {
+    return async (dispatch) => {
+        try {
+            console.log(uid)
+            const user_Uid = await axios.get(`${url_api}/users/${uid}`)
+            dispatch({
+                type: GET_USER_UID,
+                payload: user_Uid.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
             })
         }
     }

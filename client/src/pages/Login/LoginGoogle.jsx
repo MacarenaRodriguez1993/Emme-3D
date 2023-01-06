@@ -9,9 +9,9 @@ import {
 } from "firebase/auth"
 import "./Login.css"
 import { Link, useNavigate } from "react-router-dom"
-import { getUsers } from "../../redux/actions/actions"
+import { getUsers, getUserByUid } from "../../redux/actions/actions"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function LoginGoogle() {
     const navigate = useNavigate()
@@ -19,7 +19,7 @@ export default function LoginGoogle() {
 
     const provider = new GoogleAuthProvider()
     const auth = getAuth(app)
-
+    const userById = useSelector((state) => state.userByUid)
     const loginGoogle = () => {
         try {
             signInWithPopup(auth, provider)
@@ -30,11 +30,16 @@ export default function LoginGoogle() {
                     const token = credential.accessToken
                     // The signed-in user info.
                     const user = result.user
-
-                    console.log(user)
-                    console.log(token)
-                    dispatch(getUsers(user))
-                    navigate("/products")
+                    //Verifico si es la primera vez que se ingresa
+                    dispatch(getUserByUid(user.uid))
+                    if (userById) {
+                        dispatch(getUsers(user))
+                        navigate("/products")
+                    } else {
+                        dispatch(getUsers(user))
+                        dispatch(postUser(user))
+                        navigate("/products")
+                    }
 
                     /* if (user == token) {
                         dispatch(getUsers(user))
