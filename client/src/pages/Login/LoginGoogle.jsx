@@ -32,13 +32,21 @@ export default function LoginGoogle() {
                         GoogleAuthProvider.credentialFromResult(result)
                     const token = credential.accessToken
                     // The signed-in user info.
-                    const user = result.user
+                    const usua = result.user
             
-                   
-                  
+                    dispatch(createUsers({
+                        'name': usua.displayName,
+                        'uid': usua.uid,
+                        'email': usua.email,
+                        //'password': user.password,
+                        'photo': usua.photoURL,
+                        'phone': usua.phoneNumber
+                        
+        
+                    }))
+                    dispatch(getUser(usua.uid))
                     navigate("/products")
-                    createDoc()
-
+                    
                   
                 })
                 .catch((error) => {

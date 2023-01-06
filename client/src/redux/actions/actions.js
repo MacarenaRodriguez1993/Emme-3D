@@ -18,6 +18,7 @@ const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER = "GET_USER"
 const CREATE_USER = "CREATE_USER"
+const PUT_USER = 'PUT_USER'
 import axios from "axios"
 
 
@@ -408,3 +409,15 @@ export const postReviews = (reviews) => {
 }
 
 export const getReviews =() => {}
+export const updateUser = user => {
+    return async dispatch => {
+        try {
+            await axios.put(`${url_api}/users/${user.id}`, user)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { app, db } from "../../components/firebase/firebase"
-import { createUsers, emailBienvenido, getUsers } from "../../redux/actions/actions"
+import { createUsers, emailBienvenido, getUser } from "../../redux/actions/actions"
 import { collection, addDoc, doc } from "firebase/firestore"; 
 import {async} from "@firebase/util"
 
@@ -30,11 +30,27 @@ export default function register() {
         .then((userCredential) => {
             // Signed in
             
+            const usua =  userCredential.user
             
-            console.log(user)
-            dispatch(createUsers(user))
+            console.log({'name': usua.displayName,
+            'uid': usua.uid,
+            'email': user.email,
+            'password': user.password,
+            'photo': usua.photoURL,
+            'phone': usua.phoneNumber})
+            dispatch(createUsers({
+                'name': usua.displayName,
+                'id': usua.uid,
+                'email': user.email,
+                'password': user.password,
+                'photo': usua.photoURL,
+                'phone': usua.phoneNumber
+
+
+            }))
             navigate("/login")
             dispatch(emailBienvenido(user))
+            dispatch(getUser(usua.uid))
             // ...
         })
         .catch((error) => {

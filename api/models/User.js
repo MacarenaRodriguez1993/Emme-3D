@@ -22,10 +22,14 @@ const UserSchema = new mongoose.Schema(
             unique: true,
         },
 
+        // Foto de perfil
+        photo: {
+            type: String,
+        },
+
         // Contraseña, se encripta al recibirla
         password: {
             type: String,
-            required: true,
         },
 
         // Nombre del cliente
@@ -46,8 +50,20 @@ const UserSchema = new mongoose.Schema(
             //required: true,
         },
 
+        // Ciudad del usuario
+        city: {
+            type: String,
+            //required: true,
+        },
+
         // Provincia del usuario
         province: {
+            type: String,
+            //required: true,
+        },
+
+        // Codigo postal del usuario
+        cp: {
             type: String,
             //required: true,
         },

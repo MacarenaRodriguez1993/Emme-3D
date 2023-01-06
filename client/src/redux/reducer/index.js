@@ -13,6 +13,7 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta variable cuando se creen las rutas
 const POST_CAROUSEL = "POST_CAROUSEL"
 const GET_USERS = "GET_USERS"
+const GET_USER = "GET_USER"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
@@ -58,7 +59,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 users: action.payload,
             }
-            case GET_USERS:
+            case GET_USER:
             return {
                 ...state,
                 userInfo: action.payload,
