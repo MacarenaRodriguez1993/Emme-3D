@@ -1,7 +1,13 @@
+.user-data-container {
+    display: contents;
+}
 .user-panel-container {
     display: flex;
     flex-direction: column;
     margin: 20px;
+}
+#user-edit {
+    display: none;
 }
 .welcome-user {
     font-size: 30px;
@@ -61,4 +67,43 @@
     padding: 3px;
     font-size: 30px;
     cursor: pointer;
+}
+.user-edits {
+    border: 1px solid rgb(182, 182, 182);
+    border-radius: 3px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+.u-edit-s {
+    background-color: rgb(128, 255, 96);
+    border: 1px solid green;
+}
+.u-edit-c {
+    margin-left: 10px;
+    background-color: rgb(255, 96, 96);
+    border: 1px solid red;
+}
+.edit-btns {
+    display: flex;
+    flex-direction: row;
+}
+.user-form-container {
+    display: flex;
+    flex-direction: row;
+}
+.user-form-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+.user-form-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.user-msg {
+    font-style: italic;
+    font-weight: 100;
+    color: rgb(189, 189, 189);
 }

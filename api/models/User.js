@@ -46,8 +46,20 @@ const UserSchema = new mongoose.Schema(
             //required: true,
         },
 
+        // Ciudad del usuario
+        city: {
+            type: String,
+            //required: true,
+        },
+
         // Provincia del usuario
         province: {
+            type: String,
+            //required: true,
+        },
+
+        // Codigo postal del usuario
+        cp: {
             type: String,
             //required: true,
         },
