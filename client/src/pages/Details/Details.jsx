@@ -11,6 +11,10 @@ import {Rating} from 'react-simple-star-rating'
 export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
+    const ReviewsStore = useSelector(state => state.reviews)
+
+    console.log(ReviewsStore)
+
     const [reviews, setReviews] = useState({
         rating: 0,
         opinion: ''
@@ -27,14 +31,14 @@ export default function Details({ props }) {
         'user_id': id,
         'product_id': _id
       }))
-    //ispatch(getReviews())
+    dispatch(getReviews(_id))
   }
   
-  console.log('este es el console',{
+  /* console.log('este es el console',{
     'rating': reviews.rating,
     'opinion': reviews.opinion,
     'userId': id
-  })
+  }) */
   //const onPointerEnter = () => console.log('Enter')
   //const onPointerLeave = () => console.log('Leave')
   //const onPointerMove = (value: , index: number) => console.log(value, index)
@@ -42,7 +46,8 @@ export default function Details({ props }) {
 
     useEffect(() => {
         dispatch(getDetails(_id))
-    }, [])
+        dispatch(getReviews(_id))
+    }, [dispatch])
 
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
@@ -121,21 +126,21 @@ export default function Details({ props }) {
                 <h2>Descripcion:</h2>
                 <p>{p?.map((d) => d.description)}</p>
             </div>
-            {/* <div className="container-opiniones">
-                {p.reviews_ids?.map((r) => {
+            /* <div className="container-opiniones">
+                {ReviewsStore.map((r) => {
                     return (
                         <div style={{ marginBottom: 15 }}>
                             <div className="header-opinion">
-                                <h2>{r.name}</h2>
-                                <StarRating value={r.rating} />
+                                {/* <h2>{r.name}</h2> */}
+                                <Rating disableFillHover={true} onPointerEnter={r.rating} readonly initialValue={r.rating} size={15} />
                             </div>
                             <div className="opinion-reviews">
-                                <span>{r.reviews}</span>
+                                <span>{r.review}</span>
                             </div>
                         </div>
                     )
                 })}
-            </div> */}
+            </div> 
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>

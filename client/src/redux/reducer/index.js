@@ -19,12 +19,15 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
+const GET_REVIEWS_BY_ID = 'GET_REVIEWS_BY_ID'
+
 
 const initialState = {
     allProducts: [],
     users: [],
     user: {},
     userInfo: {},
+    reviews: [],
     productsFiltered: [],
     categories: [],
     detail: {},
@@ -55,6 +58,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 detail: action.payload,
+            }
+        case GET_REVIEWS_BY_ID:
+            return {
+                ...state,
+                reviews: action.payload
             }
         case GET_USERS:
             return {

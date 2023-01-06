@@ -18,11 +18,11 @@ const Review = require('../models/Review');
   // Obtiene una reseña específica
   async function reviewId(id) {
     try {
-      const review = await Review.findOne({
-        _id: ObjectId(id),
+      const review = await Review.find({
+        product_id:id,
       })
       if (review.length < 1)
-            throw new Error(`No existe review  "${id}".`)
+            throw new Error(`No existen reviews para este producto  "${id}".`)
       return review
     } catch (err) {
       err

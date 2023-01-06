@@ -6,6 +6,7 @@ import { updateUser } from "../../redux/actions/actions"
 import { getUserByUid } from "../../redux/actions/actions"
 
 const UserPanel = ({ user, logout }) => {
+    let usId = user.uid
     const dispatch = useDispatch()
     const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)
@@ -21,12 +22,14 @@ const UserPanel = ({ user, logout }) => {
         cp: userDetails[0] ? userDetails[0].cp : "",
     })
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (user) {
             setUserData({
                 id: user.uid,
             })
         }
+    }, [user]) */
+    useEffect(() => {
         if (userId !== null) {
             dispatch(getUserByUid(userId.uid))
         }
@@ -50,7 +53,8 @@ const UserPanel = ({ user, logout }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(updateUser(userData))
+        dispatch(updateUser(usId, userData))
+        console.log(usId, userData)
     }
     return (
         <div className="user-panel-container">
@@ -85,8 +89,8 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data">Tus datos</p>
                 <p className="user-data-fields">
                     Nombre:
-                    {userDetails[0].name ? (
-                        userDetails[0].name
+                    {userDetails[0]?.name ? (
+                        userDetails[0]?.name
                     ) : (
                         <span className="user-msg">
                             Por favor, completá tu información.
