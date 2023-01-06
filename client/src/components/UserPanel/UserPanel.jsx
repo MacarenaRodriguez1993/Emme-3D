@@ -85,7 +85,7 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data">Tus datos</p>
                 <p className="user-data-fields">
                     Nombre:
-                    {userDetails[0].name ? (
+                    {userDetails[0]?.name ? (
                         userDetails[0].name
                     ) : (
                         <span className="user-msg">
