@@ -20,8 +20,7 @@ const Products = () => {
     let productos = useSelector((state) => state.productsFiltered)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.users)
-    console.log(user)
+
 
     useEffect(() => {
         dispatch(getProducts())

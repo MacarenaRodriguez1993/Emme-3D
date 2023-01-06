@@ -13,14 +13,21 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta variable cuando se creen las rutas
 const POST_CAROUSEL = "POST_CAROUSEL"
 const GET_USERS = "GET_USERS"
+const GET_USER = "GET_USER"
+const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
+const GET_REVIEWS_BY_ID = 'GET_REVIEWS_BY_ID'
+
 
 const initialState = {
     allProducts: [],
     users: [],
+    user: {},
+    userInfo: {},
+    reviews: [],
     productsFiltered: [],
     categories: [],
     detail: {},
@@ -52,10 +59,25 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload,
             }
+        case GET_REVIEWS_BY_ID:
+            return {
+                ...state,
+                reviews: action.payload
+            }
         case GET_USERS:
             return {
                 ...state,
                 users: action.payload,
+            }
+            case GET_USER:
+            return {
+                ...state,
+                userInfo: action.payload,
+            }
+        case CREATE_USER:
+            return {
+                ...state,
+                user: action.payload
             }
         case GET_ALL_CATEGORIES:
             return {

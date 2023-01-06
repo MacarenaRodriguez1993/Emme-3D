@@ -1,5 +1,5 @@
 import React from "react"
-import { app } from "../../components/firebase/firebase"
+import { app, db } from "../../components/firebase/firebase"
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -24,7 +24,6 @@ export default function LoginGoogle() {
         try {
             signInWithPopup(auth, provider)
                 .then((result) => {
-                    // This gives you a Google Access Token. You can use it to access the Google API.
                     const credential =
                         GoogleAuthProvider.credentialFromResult(result)
                     const token = credential.accessToken
@@ -41,14 +40,7 @@ export default function LoginGoogle() {
                         navigate("/products")
                     }
 
-                    /* if (user == token) {
-                        dispatch(getUsers(user))
-                        console.log(user)
-                        navigate("/products")
-                    } else {
-                        alert("error")
-                    } */
-                    // ...
+                  
                 })
                 .catch((error) => {
                     // Handle Errors here.
@@ -66,6 +58,9 @@ export default function LoginGoogle() {
             errorMessage
         }
     }
+
+      
+    
     return (
         <div>
             <button className="btn-submit" onClick={() => loginGoogle()}>

@@ -18,7 +18,10 @@ const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER_UID = "GET_USER_UID"
 const PUT_USER = "PUT_USER"
+const GET_REVIEWS_BY_ID = 'GET_REVIEWS_BY_ID'
 import axios from "axios"
+
+
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -100,8 +103,8 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
-//let url_api = "http://localhost:3001"
-let url_api = "https://emme-3d-back-production.up.railway.app"
+let url_api = "http://localhost:3001"
+//let url_api = "https://emme-3d-back-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -322,13 +325,43 @@ export const deleteToCart = (name) => {
         })
     }
 }
-export const getUsers = (data) => {
+
+export const getUsers = () => {
     return async (dispatch) => {
         try {
+            const user = await axios.get(url_api + `/users`)
             dispatch({
                 type: GET_USERS,
-                payload: data,
+                payload: user,
             })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+export const getUser = (id) => {
+    return async (dispatch) => {
+        try {
+            const user = await axios.get(url_api + `/users/${id}`)
+            dispatch({
+                type: GET_USER,
+                payload: user,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+export const createUsers = (user) => {
+    return async (dispatch) => {
+        try {
+         await axios.post(url_api + "/users", user);
         } catch (err) {
             dispatch({
                 type: ERROR,
@@ -355,10 +388,56 @@ export const emailBienvenido = (user) => {
     }
 }
 
+
+/*----------GET Y POST DE REVIEWS-------------*/
+
+
+export const postReviews = (reviews) => {
+    return async (dispatch) => {
+        try {
+            console.log(reviews)
+            const createReviews = await axios.post(`${url_api}/reviews`,reviews)
+            console.log(createReviews)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const getReviews = (id) => {
+    return async (dispatch) => {
+        try {
+            console.log(id)
+            const getReviewsById = await axios.get(`${url_api}/reviews?id?${id}`)
+            console.log('desde la action',getReviewsById.data)
+            dispatch({
+                type: GET_REVIEWS_BY_ID,
+                payload: getReviewsById.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 export const postUser = (user) => {
     return async (dispatch) => {
         try {
-            const usuario = await axios.post(`${url_api}/users`, user)
+            await axios.post(`${url_api}/users`, user)
         } catch (error) {
             dispatch({
                 type: ERROR,

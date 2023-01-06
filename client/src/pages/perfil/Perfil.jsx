@@ -9,16 +9,18 @@ import Navbar from "../../components/NavBar/NavBar.jsx"
 import Footer from "../../components/Footer/Footer.jsx"
 
 export default function Perfil() {
-    const user = useSelector((state) => state.users)
+    const user = useSelector((state) => state.userInfo)
+    console.log(user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const auth = getAuth(app)
+    
     const logout = () => {
         try {
             signOut(auth)
                 .then(() => {
                     // Sign-out successful.
-                    dispatch(getUsers(null))
+                    dispatch(createUsers(null))
                     navigate("/login")
                     console.log("sesion cerrada")
                 })

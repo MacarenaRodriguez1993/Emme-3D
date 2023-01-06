@@ -2,45 +2,63 @@ import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { app } from "../../components/firebase/firebase"
-import {
-    emailBienvenido,
-    getUsers,
-    postUser,
-} from "../../redux/actions/actions"
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+import { app, db } from "../../components/firebase/firebase"
+import { createUsers, emailBienvenido, getUsers } from "../../redux/actions/actions"
+import { collection, addDoc, doc } from "firebase/firestore"; 
+import {async} from "@firebase/util"
 
 export default function register() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [rPassword, setRpassword] = useState("")
+    
+   
+
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+        name: '',
+        apellido: '',
+    })
 
     const auth = getAuth(app)
-
-    const register = (e) => {
+   
+    
+    const  register = async (e) => {
         e.preventDefault()
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user
-                console.log(user)
-                dispatch(getUsers(user))
-                dispatch(postUser(user))
-                dispatch(emailBienvenido(user))
-                navigate("/products")
-                // ...
-            })
-            .catch((error) => {
+        
+        createUserWithEmailAndPassword(auth, user.email, user.password)
+        .then((userCredential) => {
+            // Signed in
+            
+            const u = userCredential.user
+            console.log(u)
+            dispatch(createUsers({
+                'uid': u.uid,
+                'name': user.name,
+                'surname': user.apellido,
+                'email':user.email,
+                'password':user.password,
+                'phone': u.phoneNumber,
+                'photo': u.photoURL
+            }))
+            navigate("/login")
+            dispatch(emailBienvenido(user))
+            // ...
+        })
+        .catch((error) => {
                 const errorCode = error.code
                 const errorMessage = error.message
                 // ..
             })
-    }
+        }
 
-    return (
+        
+        
+        
+        
+        return (
         <div className="container-login">
             <div className="container-logo">
                 <img
@@ -53,29 +71,51 @@ export default function register() {
                 <form className="formulario-login" onSubmit={register}>
                     <h2 style={{ color: "white", fontSize: 30 }}>Registrate</h2>
                     <div style={{ flexDirection: "column" }}>
+                    <div>
+                            <input
+                                name="name"
+                                type="text"
+                                value={user.name}
+                                required
+                                className="input"
+                                placeholder="name"
+                                onChange={(e) => setUser({...user, name:e.target.value})}
+                            />
+                        </div>
+                    <div>
+                            <input
+                                name="apellido"
+                                type="text"
+                                value={user.apellido}
+                                required
+                                className="input"
+                                placeholder="lastName"
+                                onChange={(e) => setUser({...user, apellido:e.target.value})}
+                            />
+                        </div>
                         <div>
                             <input
                                 name="email"
                                 type="email"
-                                value={email}
+                                value={user.email}
                                 required
                                 className="input"
                                 placeholder="Email address"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setUser({...user, email:e.target.value})}
                             />
                         </div>
                         <div>
                             <input
                                 name="password"
                                 type="password"
-                                value={password}
+                                value={user.password}
                                 required
                                 className="input"
                                 placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setUser({...user, password: e.target.value})}
                             />
                         </div>
-                        <div>
+                        {/* <div>
                             <input
                                 name="repeatPassword"
                                 type="password"
@@ -85,7 +125,7 @@ export default function register() {
                                 placeholder="Password"
                                 onChange={(e) => setRpassword(e.target.value)}
                             />
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="recuperar-password">
