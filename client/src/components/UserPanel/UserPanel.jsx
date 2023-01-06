@@ -11,7 +11,7 @@ const UserPanel = ({ user, logout }) => {
     const userDetails = useSelector((state) => state.userByUid)
 
     const [userData, setUserData] = useState({
-        id: "",
+        id: userDetails[0] ? userDetails.uid : "",
         name: userDetails[0] ? userDetails[0].name : "",
         surname: userDetails[0] ? userDetails[0].surname : "",
         phone: userDetails[0] ? userDetails[0].phone : "",
@@ -27,7 +27,9 @@ const UserPanel = ({ user, logout }) => {
                 id: user.uid,
             })
         }
-        dispatch(getUserByUid(userId.uid))
+        if (userId !== null) {
+            dispatch(getUserByUid(userId.uid))
+        }
     }, [user])
     console.log(userData)
     const editInfo = () => {
