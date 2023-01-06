@@ -18,6 +18,7 @@ const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
+const GET_USER_UID = "GET_USER_UID"
 
 const initialState = {
     allProducts: [],
@@ -31,6 +32,7 @@ const initialState = {
     inactiveProducts: [],
     carouselImages: [],
     shoppingCart: [],
+    userByUid: {},
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -263,6 +265,11 @@ const rootReducer = (state = initialState, action) => {
                         (p) => p[0].name !== action.payload
                     ),
                 ],
+            }
+        case GET_USER_UID:
+            return {
+                ...state,
+                userByUid: action.payload,
             }
         default:
             return state

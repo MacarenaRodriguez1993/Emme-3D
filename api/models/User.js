@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
         username: {
             type: String,
             //required: true,
-            unique: true,
+            //unique: true,
         },
 
         // Correo electrónico
@@ -104,6 +104,12 @@ const UserSchema = new mongoose.Schema(
         deleted: {
             type: Boolean,
             default: false,
+        },
+        uid: {
+            type: String,
+        },
+        img: {
+            type: String,
         },
     },
     { timestamps: true }

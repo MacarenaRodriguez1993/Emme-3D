@@ -5,7 +5,7 @@ import "./Login.css"
 import { Link, useNavigate } from "react-router-dom"
 import { app } from "../../components/firebase/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { createUsers, getUsers } from "../../redux/actions/actions"
+import { getUserByUid, getUsers } from "../../redux/actions/actions"
 import LoginGoogle from "./LoginGoogle"
 
 export default function Login() {
@@ -15,7 +15,8 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const user = useSelector((state) => state.users)
-    console.log("user store", user)
+    console.log(user)
+    const userById = useSelector((state) => state.userByUid)
 
     const auth = getAuth(app)
     const onSubmit = (e) => {
@@ -24,13 +25,11 @@ export default function Login() {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
-                console.log(user)
-                navigate("/products")
-                /* dispatch(createUsers({
-                    "email": user.email,
-                    "password": password
-                })) */
-                dispatch(getUser(user.uid))
+                dispatch(getUserByUid(user.uid))
+                if (userById) {
+                    dispatch(getUsers(user))
+                    navigate("/products")
+                }
                 // ...
             })
             .catch((error) => {

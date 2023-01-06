@@ -9,10 +9,9 @@ import {
 } from "firebase/auth"
 import "./Login.css"
 import { Link, useNavigate } from "react-router-dom"
-import { createUsers, getUser, getUsers } from "../../redux/actions/actions"
+import { getUsers, getUserByUid } from "../../redux/actions/actions"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { collection, addDoc } from "firebase/firestore"; 
 
 export default function LoginGoogle() {
     const navigate = useNavigate()
@@ -20,10 +19,7 @@ export default function LoginGoogle() {
 
     const provider = new GoogleAuthProvider()
     const auth = getAuth(app)
-    const user = useSelector(state => state.user)
-
-    console.log('user de store',user)
-
+    const userById = useSelector((state) => state.userByUid)
     const loginGoogle = () => {
         try {
             signInWithPopup(auth, provider)
@@ -33,11 +29,16 @@ export default function LoginGoogle() {
                     const token = credential.accessToken
                     // The signed-in user info.
                     const user = result.user
-            
-                   
-                  
-                    navigate("/products")
-                    createDoc()
+                    //Verifico si es la primera vez que se ingresa
+                    dispatch(getUserByUid(user.uid))
+                    if (userById) {
+                        dispatch(getUsers(user))
+                        navigate("/products")
+                    } else {
+                        dispatch(getUsers(user))
+                        dispatch(postUser(user))
+                        navigate("/products")
+                    }
 
                   
                 })
