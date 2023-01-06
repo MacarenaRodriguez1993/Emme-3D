@@ -55,7 +55,7 @@
     margin-bottom: 10px;
 }
 .user-edit {
-    margin-left: 0;
+    margin-left: 10px;
     font-size: 15px;
 }
 .img-edit-icon {
@@ -75,10 +75,19 @@
     margin-bottom: 10px;
 }
 .u-edit-s {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid green;
+}
+.u-edit-s:hover {
     background-color: rgb(128, 255, 96);
     border: 1px solid green;
 }
 .u-edit-c {
+    margin-left: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid red;
+}
+.u-edit-c:hover {
     margin-left: 10px;
     background-color: rgb(255, 96, 96);
     border: 1px solid red;
