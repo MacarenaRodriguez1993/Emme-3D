@@ -53,7 +53,39 @@ async function newUser(name, email) {
     })
     return informacion
 }
+
+async function contacto(data) {
+    console.log(data)
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: GMAIL_ADMIN, // generated ethereal user
+            pass: PASSWORD_ADMIN, // generated ethereal password
+        },
+        tls: {
+            rejectUnauthorized: false,
+        },
+    })
+    let informacion = await transporter.sendMail({
+        from: `"Emme3D-Diseños e impresión en 3D 👾⚒️" <${GMAIL_ADMIN}>`, // sender address
+        to: GMAIL_ADMIN, // list of receivers
+        subject: `Hola , soy ${data.name}`, // Subject line
+        html: `Hola ${GMAIL_ADMIN} <br/> 
+            Mi mail de contacto es <b> ${data.email}  </b> y quisiera hacer ${data.reason}
+            Acontinuacion adjunto  mi consulta  con los datos y mi informacion personal para que podamos mantener contacto <br/>
+            <a href='${data.file}'>ARCHIVO ADJUNTO </a><br/>
+            <a href='${data.link}'>Link directo  </a><br/>
+            Celular = ${data.phone}<br/>
+            Muchas gracias. Espero una pronta respuesta
+            
+        `,
+    })
+    return informacion
+}
 module.exports = {
     pago,
     newUser,
+    contacto,
 }

@@ -354,6 +354,23 @@ export const emailBienvenido = (user) => {
         }
     }
 }
+export const emailContacto = (formulario) => {
+    console.log(formulario)
+    return async (dispatch) => {
+        try {
+            const sendMail = await axios.post(
+                `${url_api}/email/contacto`,
+                formulario
+            )
+            console.log(sendMail)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
 
 export const postUser = (user) => {
     return async (dispatch) => {

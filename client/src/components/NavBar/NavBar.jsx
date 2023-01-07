@@ -26,7 +26,7 @@ const NavBar = () => {
                     <Link to="/about">
                         <h4>Nosotros</h4>
                     </Link>
-                    <Link to="/contact">
+                    <Link to="/contacto">
                         <h4>Contacto</h4>
                     </Link>
                     <button className="buttonLogin login-btn">
