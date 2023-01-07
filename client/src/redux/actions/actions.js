@@ -478,3 +478,29 @@ export const getUserByUid = (uid) => {
         }
     }
 }
+//ACTION PARA EL ENVIO DE MAIL CUANDO LA COMPRA FUE EXITOSA
+export const emailSuccessfulOrder = (user) => {
+    return async (dispatch) => {
+        try {
+            const email = await axios.post(`${url_api}/email/pagado`, user)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+//ACTION PARA ENVIAR ORDER CUANDO EL PAGO FUE EXITOSO
+export const successfulOrder = (order) => {
+    return async (dispatch) => {
+        try {
+            await axios.post(`${url_api}/orders`, order)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
