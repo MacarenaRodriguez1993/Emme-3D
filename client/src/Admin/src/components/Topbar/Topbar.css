@@ -46,3 +46,11 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.panel {
+  display: flex;
+}
+.outlet {
+  flex: 7;
+  margin-top: 10px;
+}

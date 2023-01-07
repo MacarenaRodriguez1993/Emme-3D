@@ -32,7 +32,7 @@ export default function Widgetsm() {
             <span className="widgetsmusertitle">Admin</span>
           </div>
           <button className="widgetsmbutton">
-            <MdVisibility />
+            <MdVisibility className="widgetsmicon" />
             Ver
           </button>
         </li>
@@ -47,7 +47,7 @@ export default function Widgetsm() {
             <span className="widgetsmusertitle">Admin</span>
           </div>
           <button className="widgetsmbutton">
-            <MdVisibility />
+            <MdVisibility className="widgetsmicon" />
             Ver
           </button>
         </li>
@@ -62,7 +62,7 @@ export default function Widgetsm() {
             <span className="widgetsmusertitle">Admin</span>
           </div>
           <button className="widgetsmbutton">
-            <MdVisibility />
+            <MdVisibility className="widgetsmicon" />
             Ver
           </button>
         </li>
@@ -77,7 +77,7 @@ export default function Widgetsm() {
             <span className="widgetsmusertitle">Admin</span>
           </div>
           <button className="widgetsmbutton">
-            <MdVisibility />
+            <MdVisibility className="widgetsmicon" />
             Ver
           </button>
         </li>
