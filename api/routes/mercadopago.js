@@ -9,9 +9,6 @@ mercadoPago.configure({
 })
 
 router.post("/", (req, res) => {
-    // Lo transformamos a un arreglo de objetos producto
-    const productos = req.body.map((producto) => producto[0])
-
     try {
         let preference = {
             items: req.body.map((item) => {
