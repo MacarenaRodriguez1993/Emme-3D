@@ -19,14 +19,12 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
-const GET_REVIEWS_BY_ID = 'GET_REVIEWS_BY_ID'
-
+const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
+const USER_NULL = "USER_NULL"
 
 const initialState = {
     allProducts: [],
     users: [],
-    user: {},
-    userInfo: {},
     reviews: [],
     productsFiltered: [],
     categories: [],
@@ -62,29 +60,30 @@ const rootReducer = (state = initialState, action) => {
         case GET_REVIEWS_BY_ID:
             return {
                 ...state,
-                reviews: action.payload
+                reviews: action.payload,
             }
-        case GET_USERS:
+        /*---------USUSRIOS---------*/
+        case GET_USERS: //LISTA DE TODOS LOS USUARIOS
             return {
                 ...state,
                 users: action.payload,
             }
-            case GET_USER:
+        case GET_USER_UID: //INFORMACION DE USUARIO
             return {
                 ...state,
-                userInfo: action.payload,
+                userByUid: action.payload,
             }
-        case CREATE_USER:
+        case USER_NULL: //CERRAR SESION
             return {
                 ...state,
-                user: action.payload
+                userByUid: action.payload,
             }
+        /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
                 categories: pload,
             }
-        /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_BY_CATEGORY:
             if (pload === "categorias") {
                 return {
@@ -274,11 +273,7 @@ const rootReducer = (state = initialState, action) => {
                     ),
                 ],
             }
-        case GET_USER_UID:
-            return {
-                ...state,
-                userByUid: action.payload,
-            }
+
         default:
             return state
     }

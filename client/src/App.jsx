@@ -16,45 +16,31 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
-import PrivateRoute from "./components/context/PrivateRoutes"
-import PublicRoute from "./components/context/PublicRoutes"
-import { AuthProvider } from "./components/context/AuthContext"
-
-const PRIVATE = "/profile"
-const PUBLIC = "/"
-
-
 function App() {
-
-
     return (
-        
-            <Routes>
-                
-                <Route path="/profile" element={<Perfil />} />
-                
-                <Route path="/updateproduct/:id" element={<CreateProduct />} />
-                <Route path="/crear-producto" element={<CreateProduct />} />
-                <Route
-                    exact
-                    strict
-                    path="/crear-producto"
-                    element={<CrearProducto />}
-                />
-                
-                <Route exact strict path="/" element={<Home />} />
+        <Routes>
+            <Route path="/profile" element={<Perfil />} />
 
-                
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/productos" element={<ProductsContainer />} />
-                
-                <Route exact strict path="/home" element={<Home />} />
-                <Route exact strict path="/products" element={<Productos />} />
-                <Route exact strict path="/login" element={<Login />} />
-                <Route exact strict path="/register" element={<Register />} />
-                <Route path="/details/:_id" element={<Details />} />
-            </Routes>
-        
+            <Route path="/updateproduct/:id" element={<CreateProduct />} />
+            <Route path="/crear-producto" element={<CreateProduct />} />
+            <Route
+                exact
+                strict
+                path="/crear-producto"
+                element={<CrearProducto />}
+            />
+
+            <Route exact strict path="/" element={<Home />} />
+
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/productos" element={<ProductsContainer />} />
+
+            <Route exact strict path="/home" element={<Home />} />
+            <Route exact strict path="/products" element={<Productos />} />
+            <Route exact strict path="/login" element={<Login />} />
+            <Route exact strict path="/register" element={<Register />} />
+            <Route path="/details/:_id" element={<Details />} />
+        </Routes>
     )
 }
 

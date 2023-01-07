@@ -23,8 +23,6 @@ export default function Details({ props }) {
         rating: 0,
     })
 
-    console.log("id de product", _id)
-
     const id = "63b75335fc73e6f7739e7eda"
     const handleRating = (rate) => {
         setRatin({ ...ratin, rating: rate })
@@ -36,29 +34,10 @@ export default function Details({ props }) {
             return (
                 <div className="container-opiniones">
                     <span>no tiene reseñas aun...</span>
-                    {/*  {reviewsFiltered?.map((r) => {
-                    return (
-                        <div style={{ marginBottom: 10 }}>
-                            <div className="header-opinion">
-                                {//<h2>{r.name}</h2> }
-                                <Rating
-                                    disableFillHover={true}
-                                    onPointerEnter={r.rating}
-                                    readonly
-                                    initialValue={r.rating}
-                                    size={18}
-                                />
-                            </div>
-                            <div className="opinion-reviews">
-                                <span>{r.review}</span>
-                            </div>
-                        </div>
-                    )
-                })} */}
                 </div>
             )
         }
-        console.log("esta son las filtradas", reviewsFiltered)
+
         return (
             <div className="container-opiniones">
                 {reviewsFiltered?.map((r) => {
@@ -97,15 +76,8 @@ export default function Details({ props }) {
 
         setTimeout(function () {
             dispatch(getReviews(_id))
-            console.log("Hola Mundo")
         }, 2000)
     }
-    console.log("desde consola", {
-        rating: ratin.rating,
-        review: reviewref.current.value,
-        user_id: id,
-        product_id: _id,
-    })
 
     useEffect(() => {
         dispatch(getDetails(_id))
@@ -114,7 +86,6 @@ export default function Details({ props }) {
 
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
-    console.log(p)
 
     const handleShopCar = (e) => {
         e.preventDefault()

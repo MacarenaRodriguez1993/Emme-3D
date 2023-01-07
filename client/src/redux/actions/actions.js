@@ -17,6 +17,8 @@ const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER_UID = "GET_USER_UID"
+const USER_NULL = "USER_NULL"
+const GET_USER = " GET_USER"
 const PUT_USER = "PUT_USER"
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 import axios from "axios"
@@ -324,50 +326,6 @@ export const deleteToCart = (name) => {
     }
 }
 
-export const getUsers = () => {
-    return async (dispatch) => {
-        try {
-            const user = await axios.get(url_api + `/users`)
-            dispatch({
-                type: GET_USERS,
-                payload: user,
-            })
-        } catch (err) {
-            dispatch({
-                type: ERROR,
-                payload: err.message,
-            })
-        }
-    }
-}
-export const getUser = (id) => {
-    return async (dispatch) => {
-        try {
-            const user = await axios.get(url_api + `/users/${id}`)
-            dispatch({
-                type: GET_USER,
-                payload: user,
-            })
-        } catch (err) {
-            dispatch({
-                type: ERROR,
-                payload: err.message,
-            })
-        }
-    }
-}
-export const createUsers = (user) => {
-    return async (dispatch) => {
-        try {
-            await axios.post(url_api + "/users", user)
-        } catch (err) {
-            dispatch({
-                type: ERROR,
-                payload: err.message,
-            })
-        }
-    }
-}
 export const emailBienvenido = (user) => {
     return async (dispatch) => {
         try {
@@ -385,18 +343,12 @@ export const emailBienvenido = (user) => {
         }
     }
 }
+/*-----ACTION USERS-----*/
 
-/*----------GET Y POST DE REVIEWS-------------*/
-
-export const postReviews = (reviews) => {
+export const createUsers = (user) => {
     return async (dispatch) => {
         try {
-            console.log(reviews)
-            const createReviews = await axios.post(
-                `${url_api}/reviews`,
-                reviews
-            )
-            console.log(createReviews)
+            await axios.post(url_api + "/users", user)
         } catch (err) {
             dispatch({
                 type: ERROR,
@@ -406,17 +358,13 @@ export const postReviews = (reviews) => {
     }
 }
 
-export const getReviews = (id) => {
+export const getUsers = () => {
     return async (dispatch) => {
         try {
-            console.log(id)
-            const getReviewsById = await axios.get(
-                `${url_api}/reviews?id?${id}`
-            )
-            console.log("desde la action", getReviewsById.data)
+            const user = await axios.get(url_api + `/users`)
             dispatch({
-                type: GET_REVIEWS_BY_ID,
-                payload: getReviewsById.data,
+                type: GET_USERS,
+                payload: user,
             })
         } catch (err) {
             dispatch({
@@ -427,10 +375,49 @@ export const getReviews = (id) => {
     }
 }
 
-export const postUser = (user) => {
+export const userNull = () => {
     return async (dispatch) => {
         try {
-            await axios.post(`${url_api}/users`, user)
+            dispatch({
+                type: USER_NULL,
+                payload: null,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+/* export const getUser = (id) => {
+    return async (dispatch) => {
+        try {
+            const user = await axios.get(url_api + `/users/${id}`)
+            console.log("getuser action", user.data[0])
+            dispatch({
+                type: GET_USER,
+                payload: user.data[0],
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+} */
+
+export const getUserByUid = (uid) => {
+    return async (dispatch) => {
+        try {
+            const user_Uid = await axios.get(`${url_api}/users/${uid}`)
+            console.log("desde la action", user_Uid.data[0])
+            dispatch({
+                type: GET_USER_UID,
+                payload: user_Uid.data[0],
+            })
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -461,15 +448,51 @@ export const updateUser = (user) => {
         }
     }
 }
-export const getUserByUid = (uid) => {
+
+/*----------GET Y POST DE REVIEWS-------------*/
+
+export const postReviews = (reviews) => {
     return async (dispatch) => {
         try {
-            console.log(uid)
-            const user_Uid = await axios.get(`${url_api}/users/${uid}`)
+            console.log(reviews)
+            const createReviews = await axios.post(
+                `${url_api}/reviews`,
+                reviews
+            )
+            console.log(createReviews)
+        } catch (err) {
             dispatch({
-                type: GET_USER_UID,
-                payload: user_Uid.data,
+                type: ERROR,
+                payload: err.message,
             })
+        }
+    }
+}
+
+export const getReviews = (id) => {
+    return async (dispatch) => {
+        try {
+            const getReviewsById = await axios.get(
+                `${url_api}/reviews?id?${id}`
+            )
+
+            dispatch({
+                type: GET_REVIEWS_BY_ID,
+                payload: getReviewsById.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+/* export const postUser = (user) => {
+    return async (dispatch) => {
+        try {
+            await axios.post(`${url_api}/users`, user)
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -478,3 +501,13 @@ export const getUserByUid = (uid) => {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+ */

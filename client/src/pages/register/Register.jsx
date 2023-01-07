@@ -35,13 +35,13 @@ export default function register() {
             const u = userCredential.user
             console.log(u)
             dispatch(createUsers({
-                'uid': u.uid,
+                'uid': u?.uid,
                 'name': user.name,
                 'surname': user.apellido,
                 'email':user.email,
                 'password':user.password,
-                'phone': u.phoneNumber,
-                'photo': u.photoURL
+                'phone': u?.phoneNumber,
+                'photo': u?.photoURL
             }))
             navigate("/login")
             dispatch(emailBienvenido(user))
