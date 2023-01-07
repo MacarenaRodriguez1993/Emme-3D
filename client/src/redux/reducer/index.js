@@ -91,12 +91,12 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = state.categories.filter(
-                    (c) => c.categoria.name === action.payload
+                let prod = state.allProducts.filter(
+                    (p) => p.category === action.payload
                 )
                 return {
                     ...state,
-                    productsFiltered: [...cat],
+                    productsFiltered: [...prod],
                 }
             }
         case GET_BY_PRICE:
