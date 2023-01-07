@@ -19,8 +19,7 @@ const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
-const GET_REVIEWS_BY_ID = 'GET_REVIEWS_BY_ID'
-
+const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 
 const initialState = {
     allProducts: [],
@@ -62,14 +61,14 @@ const rootReducer = (state = initialState, action) => {
         case GET_REVIEWS_BY_ID:
             return {
                 ...state,
-                reviews: action.payload
+                reviews: action.payload,
             }
         case GET_USERS:
             return {
                 ...state,
                 users: action.payload,
             }
-            case GET_USER:
+        case GET_USER:
             return {
                 ...state,
                 userInfo: action.payload,
@@ -77,7 +76,7 @@ const rootReducer = (state = initialState, action) => {
         case CREATE_USER:
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
             }
         case GET_ALL_CATEGORIES:
             return {
@@ -92,12 +91,12 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = state.categories.filter(
-                    (c) => c.categoria.name === action.payload
+                let prod = state.allProducts.filter(
+                    (p) => p.category === action.payload
                 )
                 return {
                     ...state,
-                    productsFiltered: [...cat],
+                    productsFiltered: [...prod],
                 }
             }
         case GET_BY_PRICE:
