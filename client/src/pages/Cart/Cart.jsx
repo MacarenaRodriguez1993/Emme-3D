@@ -64,7 +64,7 @@ const Cart = () => {
                                 <input
                                     type="number"
                                     id="cant"
-                                    defaultValue={0}
+                                    defaultValue={1}
                                     onChange={(e) => handlerChange(e, p[0])}
                                 />
                             </div>
