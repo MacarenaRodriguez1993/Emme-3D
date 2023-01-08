@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
+import NotFound from "./components/NotFound/NotFound"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
@@ -27,7 +28,6 @@ function App() {
             <Routes>
                 <Route path="/crear-producto" element={<CreateProduct />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/productos" element={<ProductsContainer />} />
                 <Route
                     exact
                     strict
@@ -42,6 +42,7 @@ function App() {
                 <Route path="/details/:_id" element={<Details />} />
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/updateproduct/:id" element={<CreateProduct />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </>
     )
