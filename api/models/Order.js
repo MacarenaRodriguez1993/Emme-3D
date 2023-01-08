@@ -16,15 +16,29 @@ const OrderSchema = new mongoose.Schema(
         // Detetalles de la orden
         products: [
             {
-                productId: {
+                productName: {
                     type: String,
                 },
-                quantity: {
+
+                productImage: {
+                    type: String,
+                },
+
+                amount: {
                     type: Number,
                     default: 1,
                 },
+
+                productTotal: {
+                    type: Number,
+                },
             },
         ],
+
+        total: {
+            type: Number,
+            required: true,
+        },
 
         // Estado del pedido
         state: {
