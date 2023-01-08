@@ -21,7 +21,7 @@ export default function Perfil() {
                 .then(() => {
                     // Sign-out successful.
                     dispatch(userNull())
-                    navigate("/login")
+                    navigate("/products")
                     console.log("sesion cerrada")
                 })
                 .catch((error) => {
