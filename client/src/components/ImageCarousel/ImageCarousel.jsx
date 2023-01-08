@@ -114,7 +114,7 @@ const ImageCarousel = () => {
                 <select className="create-product-input" onChange={(e) => handleChangeDel(e)}>
                     <option selected>Elegi una imagen</option>
                 {carouselImages?.map((i) => (
-                        <option value={i._id} name="i.name">
+                        <option key={i._id} value={i._id} name="i.name">
                             {i.name}
                         </option>
                     ))}

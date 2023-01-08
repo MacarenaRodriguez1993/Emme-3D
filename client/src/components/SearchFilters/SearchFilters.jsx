@@ -51,7 +51,7 @@ const SearchFilters = () => {
             >
                 <option value="categorias">Categorias</option>
                 {categorias?.map((c) => (
-                    <option value={c?.name}>{c?.name}</option>
+                    <option key={c?.name} value={c?.name}>{c?.name}</option>
                 ))}
             </select>
             {/* filtro de precios */}

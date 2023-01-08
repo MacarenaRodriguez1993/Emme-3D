@@ -49,7 +49,7 @@ const Carousel = () => {
                 <ul className="img-ul">
                     {carouselImages.length &&
                         carouselImages?.map((e) => (
-                            <li className="img-li img-active"></li>
+                            <li key={e.name} className="img-li img-active"></li>
                         ))}
                 </ul>
             </div>
