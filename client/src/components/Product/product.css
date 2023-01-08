@@ -2,12 +2,17 @@
     border-radius: 1em;
     background-color: #2a2f62;
     padding: 0.5em;
+    justify-content: space-between;
     text-align: center;
     color: #ffe3e3;
-}
+    flex-direction: column;
+    display: flex;
+} 
 .imageCard {
     width: 85%;
     border-radius: 1em;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 .contentCard {
     text-align: start;

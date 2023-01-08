@@ -22,8 +22,8 @@ const Product = ({ id, name, price, image }) => {
             <a href={`/details/${id}`}>
                 <img className="imageCard" src={image} alt={name} />
             </a>
+                <h5 style={{ margin: '10px'}}>{name}</h5>
             <div className="contentCard">
-                <h5>{name}</h5>
                 <div className="contenido">
                     <p>$ {price}</p>
                     <div>

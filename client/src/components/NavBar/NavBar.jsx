@@ -40,11 +40,7 @@ const NavBar = () => {
                         <h4>Contacto</h4>
                     </Link>
                     <button className="buttonLogin login-btn">
-                        {user?.email ? (
-                            <Link to="/profile">Perfil </Link>
-                        ) : (
-                            <Link to="/login"> LogIn </Link>
-                        )}
+                        {user?.email ? <Link to="/profile">Perfil </Link> : <Link to="/login"> LogIn </Link>}
                     </button>
                 </div>
             </ul>

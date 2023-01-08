@@ -24,7 +24,6 @@ export default function Details({ props }) {
     const [ratin, setRatin] = useState({
         rating: 0,
     })
-
     const id = "63b75335fc73e6f7739e7eda"
     const handleRating = (rate) => {
         setRatin({ ...ratin, rating: rate })
@@ -77,7 +76,7 @@ export default function Details({ props }) {
                                 <Rating
                                     disableFillHover={true}
                                     onPointerEnter={r.rating}
-                                    readonly
+                                    readonly={true}
                                     initialValue={r.rating}
                                     size={18}
                                 />
