@@ -17,6 +17,8 @@ export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
     const R = useSelector((state) => state.reviews)
+    const u = useSelector((state) => state.userByUid)
+    const [errValoracion, setErrValoracion] = useState('')
 
     const reviewref = useRef("")
     const [ratin, setRatin] = useState({
@@ -28,13 +30,34 @@ export default function Details({ props }) {
         setRatin({ ...ratin, rating: rate })
     }
 
-    /*  const filterReviewsById = () => {
-      const reviewsFiltered = R.filter((r) => r.product_id == _id)
-      if(reviewsFiltered.length <= 0){
-        console.log('no tiene reviews este producto')
-      }
-      console.log('esta son las filtradas',reviewsFiltered)
-    } */
+    const handleReviws = () => {
+        dispatch(
+            postReviews({
+                rating: ratin.rating,
+                review: reviewref.current.value,
+                user_id: id,
+                product_id: _id,
+            })
+        )
+        reviewref.current.value = ""
+
+        setTimeout(function () {
+            dispatch(getReviews(_id))
+        }, 2000)
+    }
+
+    const errReviews =() => {
+        if (reviewref.current.value.length < 10) {
+            setErrValoracion( 'La reseña debe tener almenos 10 caracteres')
+        }
+        else{
+            handleReviws()
+            setErrValoracion('')
+        }
+    }
+
+    console.log(reviewref.current.value?.length)
+
     const filterReviewsById = () => {
         const reviewsFiltered = R.filter((re) => re.product_id === _id)
         if (reviewsFiltered.length <= 0) {
@@ -69,30 +92,7 @@ export default function Details({ props }) {
         )
     }
 
-    const handleReviws = () => {
-        dispatch(
-            postReviews({
-                rating: ratin.rating,
-                review: reviewref.current.value,
-                user_id: id,
-                product_id: _id,
-            })
-        )
-        reviewref.current.value = ""
-
-        setTimeout(function () {
-            dispatch(getReviews(_id))
-        }, 2000)
-    }
-
-    /* console.log('este es el console',{
-    'rating': reviews.rating,
-    'opinion': reviews.opinion,
-    'userId': id
-  }) */
-    //const onPointerEnter = () => console.log('Enter')
-    //const onPointerLeave = () => console.log('Leave')
-    //const onPointerMove = (value: , index: number) => console.log(value, index)
+  
 
     useEffect(() => {
         dispatch(getDetails(_id))
@@ -176,7 +176,41 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {filterReviewsById()}
-            <div className="container-valoracion ">
+            {
+                !u.email  ? (
+                    <div className="container-valoracion ">
+                    <div className="header-valoracion">
+                        <h2>Debes iniciar sesion para enviar tu reseña</h2>
+                        <Rating
+                        readonly={true}
+                        
+                            size={22}
+                            /* onClick={handleRating}
+                            initialValue={ratin.rating} */
+    
+                            /* onPointerEnter={onPointerEnter}
+                    onPointerLeave={onPointerLeave} */
+                            // initialValue={reviews.rating}
+    
+                            //onPointerMove={onPointerMove}
+                        />
+                    </div>
+                    <textarea
+                    readonly="readonly"
+                        className="input-opinion-disabled"
+                        placeholder="Debes iniciar sesion para enviar tu reseña"
+                        ref={reviewref}
+                        //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
+                    />
+                   
+                    <div className="btn-valoracion-disabled">
+                        <button >Enviar</button>
+                    </div>
+                </div>
+                )
+                :
+                (
+                    <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
                     <Rating
@@ -197,11 +231,13 @@ export default function Details({ props }) {
                     ref={reviewref}
                     //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                 />
-                <span>el mensaje tiene que ser mayor a 5 plabras</span>
+                <span style={{color: 'red', fontSize:'18px', fontWeight: 'bold'}} >{errValoracion}</span>
                 <div className="btn-valoracion">
-                    <button onClick={() => handleReviws()}>Enviar</button>
+                    <button onClick={() => errReviews()}>Enviar</button>
                 </div>
             </div>
+                )
+            }
             <Footer />
         </div>
     )
