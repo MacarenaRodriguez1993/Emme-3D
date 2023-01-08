@@ -1,3 +1,7 @@
+.homeadmin {
+    flex: 6;
+}
+
 .homewidgets {
     display: flex;
     margin: 20px;

@@ -16,13 +16,13 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
-import Dashboard from "./Admin/src/App.jsx"
-import User from "./Admin/src/pages/user/User"
-import Userlist from "../src/Admin/src/pages/Userlist/Userlist"
-import Newuser from "../src/Admin/src/pages/newuser/Newuser"
-import Productlist from "../src/Admin/src/pages/productlist/Productlist"
-import Product from "../src/Admin/src/pages/product/Product"
-import NewProduct from "../src/Admin/src/pages/newproduct/Newproduct"
+import Homeadmin from "./Admin/pages/homeadmin/Homeadmin"
+import User from "./Admin/pages/user/User"
+import Userlist from "../src/Admin/pages/Userlist/Userlist"
+import Newuser from "../src/Admin/pages/newuser/Newuser"
+import Productlist from "../src/Admin/pages/productlist/Productlist"
+import Product from "../src/Admin/pages/product/Product"
+import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
 
 function App() {
     const dispatch = useDispatch()
@@ -64,7 +64,7 @@ function App() {
                 <Route path="/details/:_id" element={<Details />} />
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/updateproduct/:id" element={<CreateProduct />} />
-                <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/dashboard" element={<Homeadmin />} />
                 <Route exact path="/dashboard/users" element={<Userlist />} />
                 <Route exact path="/dashboard/user/:id" element={<User />} />
                 <Route exact path="/dashboard/newuser" element={<Newuser />} />
