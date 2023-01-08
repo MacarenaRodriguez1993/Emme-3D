@@ -23,8 +23,6 @@ export default function Details({ props }) {
         rating: 0,
     })
 
-    //console.log("que es", R)
-
     const id = "63b75335fc73e6f7739e7eda"
     const handleRating = (rate) => {
         setRatin({ ...ratin, rating: rate })
@@ -37,6 +35,59 @@ export default function Details({ props }) {
       }
       console.log('esta son las filtradas',reviewsFiltered)
     } */
+    const filterReviewsById = () => {
+        const reviewsFiltered = R.filter((re) => re.product_id === _id)
+        if (reviewsFiltered.length <= 0) {
+            return (
+                <div className="container-opiniones">
+                    <span>no tiene reseñas aun...</span>
+                    {/*  {reviewsFiltered?.map((r) => {
+                    return (
+                        <div style={{ marginBottom: 10 }}>
+                            <div className="header-opinion">
+                                {//<h2>{r.name}</h2> }
+                                <Rating
+                                    disableFillHover={true}
+                                    onPointerEnter={r.rating}
+                                    readonly
+                                    initialValue={r.rating}
+                                    size={18}
+                                />
+                            </div>
+                            <div className="opinion-reviews">
+                                <span>{r.review}</span>
+                            </div>
+                        </div>
+                    )
+                })} */}
+                </div>
+            )
+        }
+        console.log("esta son las filtradas", reviewsFiltered)
+        return (
+            <div className="container-opiniones">
+                {reviewsFiltered?.map((r) => {
+                    return (
+                        <div style={{ marginBottom: 10 }}>
+                            <div className="header-opinion">
+                                {/* <h2>{r.name}</h2> */}
+                                <Rating
+                                    disableFillHover={true}
+                                    onPointerEnter={r.rating}
+                                    readonly
+                                    initialValue={r.rating}
+                                    size={18}
+                                />
+                            </div>
+                            <div className="opinion-reviews">
+                                <span>{r.review}</span>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
 
     const handleReviws = () => {
         dispatch(
@@ -173,6 +224,7 @@ export default function Details({ props }) {
                     )
                 })}
             </div>
+            {filterReviewsById()}
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
