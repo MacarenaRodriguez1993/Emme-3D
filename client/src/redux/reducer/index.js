@@ -69,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 users: action.payload,
             }
-            case GET_USER:
+        case GET_USER:
             return {
                 ...state,
                 userInfo: action.payload,
@@ -92,8 +92,8 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = state.categories.filter(
-                    (c) => c.categoria.name === action.payload
+                let cat = state.allProducts.filter(
+                    (p) => p.category === action.payload
                 )
                 return {
                     ...state,

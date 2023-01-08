@@ -2,34 +2,35 @@ import React, { useState, useEffect, useRef } from "react"
 import "./Details.css"
 import carrito from "../../assets/carrito.png"
 import { useDispatch, useSelector } from "react-redux"
-import { getDetails, addToCart, getReviews, postReviews } from "../../redux/actions/actions"
+import {
+    getDetails,
+    addToCart,
+    getReviews,
+    postReviews,
+} from "../../redux/actions/actions"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
-import {Rating} from 'react-simple-star-rating'
+import { Rating } from "react-simple-star-rating"
 
 export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
-    const R = useSelector(state => state.reviews)
-    
-        const reviewref = useRef('');
-        const [ratin, setRatin] = useState({
-            rating: 0
-        })
-        
+    const R = useSelector((state) => state.reviews)
 
-    console.log('que es',R)
-   
-    
-    
-    const id = '63b75335fc73e6f7739e7eda'
-     const  handleRating=(rate)=>{
-        
-         setRatin( {...ratin, rating:rate})
-    } 
-    
-   /*  const filterReviewsById = () => {
+    const reviewref = useRef("")
+    const [ratin, setRatin] = useState({
+        rating: 0,
+    })
+
+    //console.log("que es", R)
+
+    const id = "63b75335fc73e6f7739e7eda"
+    const handleRating = (rate) => {
+        setRatin({ ...ratin, rating: rate })
+    }
+
+    /*  const filterReviewsById = () => {
       const reviewsFiltered = R.filter((r) => r.product_id == _id)
       if(reviewsFiltered.length <= 0){
         console.log('no tiene reviews este producto')
@@ -38,41 +39,40 @@ export default function Details({ props }) {
     } */
 
     const handleReviws = () => {
-        dispatch(postReviews({
-        'rating': ratin.rating,
-        'review': reviewref.current.value,
-        'user_id': id,
-        'product_id': _id
-      }))
-      reviewref.current.value = ''
-     
-      
-      setTimeout(function(){
-          dispatch(getReviews(_id))
-        console.log("Hola Mundo");
-    }, 2000);
-  }
-  console.log('desde consola', {
-    'rating': ratin.rating,
-    'review': reviewref.current.value,
-    'user_id': id,
-    'product_id': _id
-  })
-  
-  /* console.log('este es el console',{
+        dispatch(
+            postReviews({
+                rating: ratin.rating,
+                review: reviewref.current.value,
+                user_id: id,
+                product_id: _id,
+            })
+        )
+        reviewref.current.value = ""
+
+        setTimeout(function () {
+            dispatch(getReviews(_id))
+            console.log("Hola Mundo")
+        }, 2000)
+    }
+    console.log("desde consola", {
+        rating: ratin.rating,
+        review: reviewref.current.value,
+        user_id: id,
+        product_id: _id,
+    })
+
+    /* console.log('este es el console',{
     'rating': reviews.rating,
     'opinion': reviews.opinion,
     'userId': id
   }) */
-  //const onPointerEnter = () => console.log('Enter')
-  //const onPointerLeave = () => console.log('Leave')
-  //const onPointerMove = (value: , index: number) => console.log(value, index)
-
+    //const onPointerEnter = () => console.log('Enter')
+    //const onPointerLeave = () => console.log('Leave')
+    //const onPointerMove = (value: , index: number) => console.log(value, index)
 
     useEffect(() => {
         dispatch(getDetails(_id))
         dispatch(getReviews(_id))
-       
     }, [dispatch])
 
     const productDetail = useSelector((state) => state.detail)
@@ -152,13 +152,19 @@ export default function Details({ props }) {
                 <h2>Descripcion:</h2>
                 <p>{p?.map((d) => d.description)}</p>
             </div>
-             <div className="container-opiniones">
+            <div className="container-opiniones">
                 {R.map((r) => {
                     return (
                         <div style={{ marginBottom: 10 }}>
                             <div className="header-opinion">
                                 {/* <h2>{r.name}</h2> */}
-                                <Rating disableFillHover={true} onPointerEnter={r.rating} readonly initialValue={r.rating} size={18} />
+                                <Rating
+                                    disableFillHover={true}
+                                    onPointerEnter={r.rating}
+                                    readonly
+                                    initialValue={r.rating}
+                                    size={18}
+                                />
                             </div>
                             <div className="opinion-reviews">
                                 <span>{r.review}</span>
@@ -166,22 +172,21 @@ export default function Details({ props }) {
                         </div>
                     )
                 })}
-            </div> 
+            </div>
             <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
-                            <Rating
-                            size={22}
-                onClick={handleRating}
-                initialValue={ratin.rating}
-               
-                /* onPointerEnter={onPointerEnter}
-                onPointerLeave={onPointerLeave} */
-               // initialValue={reviews.rating}
+                    <Rating
+                        size={22}
+                        onClick={handleRating}
+                        initialValue={ratin.rating}
 
-                //onPointerMove={onPointerMove}
-                
-                  />
+                        /* onPointerEnter={onPointerEnter}
+                onPointerLeave={onPointerLeave} */
+                        // initialValue={reviews.rating}
+
+                        //onPointerMove={onPointerMove}
+                    />
                 </div>
                 <textarea
                     className="input-opinion"
