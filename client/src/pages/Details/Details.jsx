@@ -17,71 +17,16 @@ export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
     const R = useSelector((state) => state.reviews)
+    const u = useSelector((state) => state.userByUid)
+    const [errValoracion, setErrValoracion] = useState('')
 
     const reviewref = useRef("")
     const [ratin, setRatin] = useState({
         rating: 0,
     })
-
-    console.log("id de product", _id)
-
     const id = "63b75335fc73e6f7739e7eda"
     const handleRating = (rate) => {
         setRatin({ ...ratin, rating: rate })
-    }
-
-    const filterReviewsById = () => {
-        const reviewsFiltered = R.filter((re) => re.product_id === _id)
-        if (reviewsFiltered.length <= 0) {
-            return (
-                <div className="container-opiniones">
-                    <span>no tiene reseñas aun...</span>
-                    {/*  {reviewsFiltered?.map((r) => {
-                    return (
-                        <div style={{ marginBottom: 10 }}>
-                            <div className="header-opinion">
-                                {//<h2>{r.name}</h2> }
-                                <Rating
-                                    disableFillHover={true}
-                                    onPointerEnter={r.rating}
-                                    readonly
-                                    initialValue={r.rating}
-                                    size={18}
-                                />
-                            </div>
-                            <div className="opinion-reviews">
-                                <span>{r.review}</span>
-                            </div>
-                        </div>
-                    )
-                })} */}
-                </div>
-            )
-        }
-        console.log("esta son las filtradas", reviewsFiltered)
-        return (
-            <div className="container-opiniones">
-                {reviewsFiltered?.map((r) => {
-                    return (
-                        <div style={{ marginBottom: 10 }}>
-                            <div className="header-opinion">
-                                {/* <h2>{r.name}</h2> */}
-                                <Rating
-                                    disableFillHover={true}
-                                    onPointerEnter={r.rating}
-                                    readonly
-                                    initialValue={r.rating}
-                                    size={18}
-                                />
-                            </div>
-                            <div className="opinion-reviews">
-                                <span>{r.review}</span>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
-        )
     }
 
     const handleReviws = () => {
@@ -97,15 +42,56 @@ export default function Details({ props }) {
 
         setTimeout(function () {
             dispatch(getReviews(_id))
-            console.log("Hola Mundo")
         }, 2000)
     }
-    console.log("desde consola", {
-        rating: ratin.rating,
-        review: reviewref.current.value,
-        user_id: id,
-        product_id: _id,
-    })
+
+    const errReviews =() => {
+        if (reviewref.current.value.length < 10) {
+            setErrValoracion( 'La reseña debe tener almenos 10 caracteres')
+        }
+        else{
+            handleReviws()
+            setErrValoracion('')
+        }
+    }
+
+    console.log(reviewref.current.value?.length)
+
+    const filterReviewsById = () => {
+        const reviewsFiltered = R.filter((re) => re.product_id === _id)
+        if (reviewsFiltered.length <= 0) {
+            return (
+                <div className="container-opiniones">
+                    <span>no tiene reseñas aun...</span>
+                </div>
+            )
+        }
+        return (
+            <div className="container-opiniones">
+                {reviewsFiltered?.map((r) => {
+                    return (
+                        <div style={{ marginBottom: 10 }}>
+                            <div className="header-opinion">
+                                {/* <h2>{r.name}</h2> */}
+                                <Rating
+                                    disableFillHover={true}
+                                    onPointerEnter={r.rating}
+                                    readonly={true}
+                                    initialValue={r.rating}
+                                    size={18}
+                                />
+                            </div>
+                            <div className="opinion-reviews">
+                                <span>{r.review}</span>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+
+  
 
     useEffect(() => {
         dispatch(getDetails(_id))
@@ -114,7 +100,6 @@ export default function Details({ props }) {
 
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
-    console.log(p)
 
     const handleShopCar = (e) => {
         e.preventDefault()
@@ -190,7 +175,41 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {filterReviewsById()}
-            <div className="container-valoracion ">
+            {
+                !u.email  ? (
+                    <div className="container-valoracion ">
+                    <div className="header-valoracion">
+                        <h2>Debes iniciar sesion para enviar tu reseña</h2>
+                        <Rating
+                        readonly={true}
+                        
+                            size={22}
+                            /* onClick={handleRating}
+                            initialValue={ratin.rating} */
+    
+                            /* onPointerEnter={onPointerEnter}
+                    onPointerLeave={onPointerLeave} */
+                            // initialValue={reviews.rating}
+    
+                            //onPointerMove={onPointerMove}
+                        />
+                    </div>
+                    <textarea
+                    readonly="readonly"
+                        className="input-opinion-disabled"
+                        placeholder="Debes iniciar sesion para enviar tu reseña"
+                        ref={reviewref}
+                        //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
+                    />
+                   
+                    <div className="btn-valoracion-disabled">
+                        <button >Enviar</button>
+                    </div>
+                </div>
+                )
+                :
+                (
+                    <div className="container-valoracion ">
                 <div className="header-valoracion">
                     <h2>Ingresa tu valoracion</h2>
                     <Rating
@@ -211,11 +230,13 @@ export default function Details({ props }) {
                     ref={reviewref}
                     //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                 />
-                <span>el mensaje tiene que ser mayor a 5 plabras</span>
+                <span style={{color: 'red', fontSize:'18px', fontWeight: 'bold'}} >{errValoracion}</span>
                 <div className="btn-valoracion">
-                    <button onClick={() => handleReviws()}>Enviar</button>
+                    <button onClick={() => errReviews()}>Enviar</button>
                 </div>
             </div>
+                )
+            }
             <Footer />
         </div>
     )

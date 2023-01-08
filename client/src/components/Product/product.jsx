@@ -7,7 +7,7 @@ import { deleteProduct, getProducts } from "../../redux/actions/actions"
 import { Link } from "react-router-dom"
 const Product = ({ id, name, price, image }) => {
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.user)
+    const user = useSelector((state) => state.userByUid)
     const onClickDelete = (id) => {
         if (
             window.confirm(`¿Estas seguro de querer borrar el producto ${name}`)
@@ -16,18 +16,18 @@ const Product = ({ id, name, price, image }) => {
             dispatch(getProducts())
         }
     }
-    
+
     return (
         <div className="card">
             <a href={`/details/${id}`}>
                 <img className="imageCard" src={image} alt={name} />
             </a>
+                <h5 style={{ margin: '10px'}}>{name}</h5>
             <div className="contentCard">
-                <h5>{name}</h5>
                 <div className="contenido">
                     <p>$ {price}</p>
                     <div>
-                        {user.isAdmin ? (
+                        {user?.isAdmin ? (
                             <>
                                 <Link to={`/updateproduct/${id}`}>
                                     <button className="buttonActions">
@@ -42,7 +42,7 @@ const Product = ({ id, name, price, image }) => {
                                 </button>
                             </>
                         ) : (
-                            ''
+                            ""
                         )}
                         <button className="buttonActions">
                             <AiOutlineHeart size="1.5em" />

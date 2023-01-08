@@ -16,40 +16,61 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
-import PrivateRoute from "./components/context/PrivateRoutes"
-import PublicRoute from "./components/context/PublicRoutes"
-import { AuthProvider } from "./components/context/AuthContext"
+import Homeadmin from "./Admin/pages/homeadmin/Homeadmin"
+import User from "./Admin/pages/user/User"
+import Userlist from "../src/Admin/pages/Userlist/Userlist"
+import Newuser from "../src/Admin/pages/newuser/Newuser"
+import Productlist from "../src/Admin/pages/productlist/Productlist"
+import Product from "../src/Admin/pages/product/Product"
+import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
+import NotFound from "./components/NotFound/NotFound"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
 
 function App() {
     return (
-        <Routes>
-            <Route path="/profile" element={<Perfil />} />
-
-            <Route path="/updateproduct/:id" element={<CreateProduct />} />
-            <Route path="/crear-producto" element={<CreateProduct />} />
-            <Route
-                exact
-                strict
-                path="/crear-producto"
-                element={<CrearProducto />}
-            />
-
-            <Route exact strict path="/" element={<Home />} />
-
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/productos" element={<ProductsContainer />} />
-
-            <Route exact strict path="/home" element={<Home />} />
-            <Route exact strict path="/products" element={<Productos />} />
-            <Route exact strict path="/login" element={<Login />} />
-            <Route exact strict path="/register" element={<Register />} />
-            <Route path="/details/:_id" element={<Details />} />
-            <Route path="/successfulOrder" element={<SuccessfulOrder />} />
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/crear-producto" element={<CreateProduct />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route
+                    exact
+                    strict
+                    path="/crear-producto"
+                    element={<CrearProducto />}
+                />
+                <Route exact strict path="/home" element={<Home />} />
+                <Route exact strict path="/products" element={<Productos />} />
+                <Route exact strict path="/" element={<Landing />} />
+                <Route exact strict path="/login" element={<Login />} />
+                <Route exact strict path="/register" element={<Register />} />
+                <Route path="/details/:_id" element={<Details />} />
+                <Route path="/profile" element={<Perfil />} />
+                <Route path="/updateproduct/:id" element={<CreateProduct />} />
+                <Route exact path="/dashboard" element={<Homeadmin />} />
+                <Route exact path="/dashboard/users" element={<Userlist />} />
+                <Route exact path="/dashboard/user/:id" element={<User />} />
+                <Route exact path="/dashboard/newuser" element={<Newuser />} />
+                <Route
+                    exact
+                    path="/dashboard/products"
+                    element={<Productlist />}
+                />
+                <Route
+                    exact
+                    path="/dashboard/product/:id"
+                    element={<Product />}
+                />
+                <Route
+                    exact
+                    path="/dashboard/newproduct"
+                    element={<NewProduct />}
+                />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </>
     )
 }
 
