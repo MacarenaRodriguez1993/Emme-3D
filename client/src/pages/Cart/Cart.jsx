@@ -8,13 +8,15 @@ import { Navigate, useNavigate } from "react-router-dom"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
-    console.log('cart', user.length)
+    console.log("cart", user.length)
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
-    const url_api = "https://emme-3d-production-c491.up.railway.app/"
+    const url_api = "https://emme-3d-production-c491.up.railway.app"
+    // const url_api = "http://localhost:3001"
+
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {
@@ -31,7 +33,7 @@ const Cart = () => {
                 navigate("/login")
             }, 1000)
         } else {
-            fetch(`${url_api}mercadopago`, {
+            fetch(`${url_api}/mercadopago`, {
                 method: "POST",
                 body: JSON.stringify(productosCart),
                 headers: {
