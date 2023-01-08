@@ -1,0 +1,45 @@
+.contacto {
+    background-color: #262a53;
+    min-height: 100vh;
+    color: #ffe3e3;
+}
+.contenido {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2em;
+}
+.form {
+    width: 50%;
+    text-align: center;
+}
+#formContacto {
+    display: grid;
+    width: 70%;
+    margin: auto;
+}
+input,
+select,
+textarea,
+#button,
+#CargaArchivo {
+    margin: 0.4em;
+    padding: 0.4em;
+}
+#CargaArchivo {
+    height: 150px;
+    background-color: blueviolet;
+}
+#enviarContact {
+    background-color: #a34270;
+    color: #ffe3e3;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 1em;
+}
+.maps {
+    width: 50%;
+    height: 50vh;
+    align-items: center;
+    margin-top: 5em;
+    margin-left: -5em;
+}

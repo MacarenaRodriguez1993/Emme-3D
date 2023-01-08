@@ -16,6 +16,7 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
+import Contacto from "./pages/Contacto/contacto"
 import Homeadmin from "./Admin/pages/homeadmin/Homeadmin"
 import User from "./Admin/pages/user/User"
 import Userlist from "../src/Admin/pages/Userlist/Userlist"
@@ -43,12 +44,13 @@ function App() {
                 />
                 <Route exact strict path="/home" element={<Home />} />
                 <Route exact strict path="/products" element={<Productos />} />
-                <Route exact strict path="/" element={<Landing />} />
+                <Route exact strict path="/" element={<Home />} />
                 <Route exact strict path="/login" element={<Login />} />
                 <Route exact strict path="/register" element={<Register />} />
                 <Route path="/details/:_id" element={<Details />} />
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/updateproduct/:id" element={<CreateProduct />} />
+                <Route path="/contacto" element={<Contacto />} />
                 <Route exact path="/dashboard" element={<Homeadmin />} />
                 <Route exact path="/dashboard/users" element={<Userlist />} />
                 <Route exact path="/dashboard/user/:id" element={<User />} />
