@@ -16,11 +16,9 @@ import Carousel from "../../components/Carousel/Carousel"
 const Products = () => {
     /* Dejo listo el dispatch para cuando temgamos la conexion con el back*/
     /*Aqui tomo el estado global de allProducts*/
-    const allProducts = useSelector((state) => state.allProducts)
     let productos = useSelector((state) => state.productsFiltered)
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
-
 
     useEffect(() => {
         dispatch(getProducts())

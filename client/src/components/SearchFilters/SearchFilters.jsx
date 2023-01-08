@@ -16,13 +16,12 @@ const SearchFilters = () => {
     ESTADO FILTRADO */
     const dispatch = useDispatch()
     const categorias = useSelector((state) => state.categories)
-    let filtrados = useSelector((state) => state.productsFiltered)
+
     /* *************************************************** */
     /* *************************************************** */
     useEffect(() => {
         dispatch(getCategories())
     }, [dispatch])
-    //console.log(`categorias ---> ${categorias.map((e) => e.name)}`)
 
     /* *************************************************** */
     /* *************************************************** */
@@ -52,7 +51,7 @@ const SearchFilters = () => {
             >
                 <option value="categorias">Categorias</option>
                 {categorias?.map((c) => (
-                    <option value={c.name}>{c.name}</option>
+                    <option value={c?.name}>{c?.name}</option>
                 ))}
             </select>
             {/* filtro de precios */}

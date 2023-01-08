@@ -28,6 +28,13 @@ export default function Details({ props }) {
         setRatin({ ...ratin, rating: rate })
     }
 
+    /*  const filterReviewsById = () => {
+      const reviewsFiltered = R.filter((r) => r.product_id == _id)
+      if(reviewsFiltered.length <= 0){
+        console.log('no tiene reviews este producto')
+      }
+      console.log('esta son las filtradas',reviewsFiltered)
+    } */
     const filterReviewsById = () => {
         const reviewsFiltered = R.filter((re) => re.product_id === _id)
         if (reviewsFiltered.length <= 0) {
@@ -78,6 +85,15 @@ export default function Details({ props }) {
             dispatch(getReviews(_id))
         }, 2000)
     }
+
+    /* console.log('este es el console',{
+    'rating': reviews.rating,
+    'opinion': reviews.opinion,
+    'userId': id
+  }) */
+    //const onPointerEnter = () => console.log('Enter')
+    //const onPointerLeave = () => console.log('Leave')
+    //const onPointerMove = (value: , index: number) => console.log(value, index)
 
     useEffect(() => {
         dispatch(getDetails(_id))
@@ -159,6 +175,27 @@ export default function Details({ props }) {
             <div className="container-descripcion">
                 <h2>Descripcion:</h2>
                 <p>{p?.map((d) => d.description)}</p>
+            </div>
+            <div className="container-opiniones">
+                {R.map((r) => {
+                    return (
+                        <div style={{ marginBottom: 10 }}>
+                            <div className="header-opinion">
+                                {/* <h2>{r.name}</h2> */}
+                                <Rating
+                                    disableFillHover={true}
+                                    onPointerEnter={r.rating}
+                                    readonly
+                                    initialValue={r.rating}
+                                    size={18}
+                                />
+                            </div>
+                            <div className="opinion-reviews">
+                                <span>{r.review}</span>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
             {filterReviewsById()}
             <div className="container-valoracion ">
