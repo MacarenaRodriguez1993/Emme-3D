@@ -260,9 +260,12 @@ const rootReducer = (state = initialState, action) => {
                 productsFiltered: [...state.productsFiltered, action.payload],
             }
         case ADD_CART:
+            const productToAdd = action.payload
+            productToAdd[0].quantity = "1"
+            console.log("Product", productToAdd)
             return {
                 ...state,
-                shoppingCart: [...state.shoppingCart, action.payload],
+                shoppingCart: [...state.shoppingCart, productToAdd],
             }
         case DELETE_CART_PRODUCT:
             return {
