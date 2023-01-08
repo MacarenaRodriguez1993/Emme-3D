@@ -10,6 +10,7 @@ import SearchByName from "../../components/SearchByName/searchByName"
 
 import { getProducts } from "../../redux/actions/actions"
 import Carousel from "../../components/Carousel/Carousel"
+import Loading from "../../components/Loading/Loading"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
 
@@ -17,12 +18,23 @@ const Products = () => {
     /* Dejo listo el dispatch para cuando temgamos la conexion con el back*/
     /*Aqui tomo el estado global de allProducts*/
     let productos = useSelector((state) => state.productsFiltered)
+    //let productos
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
+
+    if (!productos) {
+        return (
+            <>
+                <NavBar />
+                <Loading />
+                <Footer />
+            </>
+        )
+    }
     return (
         <div className="productos">
             <NavBar />
@@ -33,6 +45,7 @@ const Products = () => {
                 <SearchByName />
             </div>
             {error}
+
             <h4 className="textTitle">Productos Activos</h4>
             <div className="cardProduct">
                 {productos?.map((a) => {
@@ -71,7 +84,6 @@ const Products = () => {
                     Crear Producto{" "}
                 </button>
             </Link>
-
             {/* AQUI VA LA PAGINACION */}
             <p>Aqui va la paginacion</p>
             <Footer />

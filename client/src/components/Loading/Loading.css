@@ -1,0 +1,194 @@
+@import url(https://fonts.googleapis.com/css?family=Rammetto+One);
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background-color: #5f365f;
+}
+.loading {
+    align-self: center;
+    direction: rtl;
+}
+.loading-title {
+    font-family: "Rammetto One", cursive;
+    margin: 3rem auto -2rem;
+    font-size: 4rem;
+    letter-spacing: -2px;
+    color: #6b566b;
+    text-shadow: 0px 0px 0 #afc7b9, 1px 1px 0 #afc7b9, -2px -2px 0 #afc7b9,
+        -3px -3px 0 #afc7b9, -4px -4px 0 #afc7b9, -5px -5px 0 #fca89d,
+        -6px -6px 0 #fca89d, -7px -7px 0 #fca89d, -8px -8px 0 #fac7b4,
+        -9px -9px 0 #fac7b4, -10px -10px 0 #fac7b4, -11px -11px 0 #fac7b4,
+        -12px -12px 0 #ffe1c9, -13px -13px 0 #ffe1c9, -14px -14px 0 #ffe1c9,
+        10px -10px 0 rgba(0, 0, 0, 0.08), 0 8px 8px rgba(0, 0, 0, 0.15);
+}
+.c1 {
+    display: inline-block;
+    position: relative;
+    height: 3.125em;
+}
+.c1:before {
+    content: "";
+    display: block;
+    width: 100%;
+    border-radius: 50%;
+    height: 1.563em;
+    background: rgba(0, 0, 0, 0.1);
+    display: block;
+    position: absolute;
+    bottom: -0.1em;
+    transform: scale(0.5);
+    animation: shadow 1s linear infinite 0s;
+}
+.c1:after {
+    content: "";
+    display: block;
+    width: 3.125em;
+    height: 3.125em;
+    background: #afc7b9;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(45deg);
+    top: -2.5em;
+    margin: 0 0.446em;
+    animation: jellijump 1s linear infinite 0s;
+}
+.c2 {
+    display: inline-block;
+    position: relative;
+    height: 2.5em;
+}
+.c2:before {
+    content: "";
+    display: block;
+    width: 100%;
+    border-radius: 50%;
+    height: 1.25em;
+    background: rgba(0, 0, 0, 0.1);
+    display: block;
+    position: absolute;
+    bottom: -0.1em;
+    transform: scale(0.5);
+    animation: shadow 1s linear infinite 0.2s;
+}
+.c2:after {
+    content: "";
+    display: block;
+    width: 2.5em;
+    height: 2.5em;
+    background: #fca89d;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(45deg);
+    top: -2.5em;
+    margin: 0 0.357em;
+    animation: jellijump 1s linear infinite 0.2s;
+}
+.c3 {
+    display: inline-block;
+    position: relative;
+    height: 1.875em;
+}
+.c3:before {
+    content: "";
+    display: block;
+    width: 100%;
+    border-radius: 50%;
+    height: 0.938em;
+    background: rgba(0, 0, 0, 0.1);
+    display: block;
+    position: absolute;
+    bottom: -0.1em;
+    transform: scale(0.5);
+    animation: shadow 1s linear infinite 0.4s;
+}
+.c3:after {
+    content: "";
+    display: block;
+    width: 1.875em;
+    height: 1.875em;
+    background: #fac7b4;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(45deg);
+    top: -2.5em;
+    margin: 0 0.268em;
+    animation: jellijump 1s linear infinite 0.4s;
+}
+.c4 {
+    display: inline-block;
+    position: relative;
+    height: 1.25em;
+}
+.c4:before {
+    content: "";
+    display: block;
+    width: 100%;
+    border-radius: 50%;
+    height: 0.625em;
+    background: rgba(0, 0, 0, 0.1);
+    display: block;
+    position: absolute;
+    bottom: -0.1em;
+    transform: scale(0.5);
+    animation: shadow 1s linear infinite 0.6s;
+}
+.c4:after {
+    content: "";
+    display: block;
+    width: 1.25em;
+    height: 1.25em;
+    background: #ffe1c9;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(45deg);
+    top: -2.5em;
+    margin: 0 0.179em;
+    animation: jellijump 1s linear infinite 0.6s;
+}
+@keyframes jellijump {
+    5% {
+        top: -2.5em;
+    }
+    20% {
+        top: -1.875em;
+    }
+    40% {
+        top: -0.625em;
+        border-radius: 50%;
+    }
+    45% {
+        border-radius: 60% 40% 60% 40%;
+    }
+    50% {
+        top: 0em;
+        border-radius: 70% 40% 80% 40%;
+    }
+    60% {
+        top: -0.625em;
+        border-radius: 90% 40% 90% 40%;
+    }
+    80% {
+        top: -1.875em;
+        border-radius: 40% 80% 40% 70%;
+    }
+    90% {
+        border-radius: 60% 40% 60% 40%;
+    }
+    95% {
+        top: -2.5em;
+        border-radius: 50%;
+    }
+}
+@keyframes shadow {
+    0% {
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.5);
+    }
+}
