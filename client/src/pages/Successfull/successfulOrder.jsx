@@ -7,11 +7,12 @@ import {
     emailSuccessfulOrder,
     successfulOrder,
 } from "../../redux/actions/actions"
+
 const SuccessfulOrder = () => {
     const dispatch = useDispatch()
     /* De los estados globales traigo USER - SHOPPINGCART*/
     /*FALTARIA VER CUANDO NICO HAGA SU CAMBIO SI SIGUE SIENDO USER EL ESTADO DONDE VAN LOS DATOS DEL USUARIO*/
-    const user = useSelector((state) => state.user)
+    const user = useSelector((state) => state.userByUid)
     const order = useSelector((state) => state.shoppingCart)
     //VARIABLE PARA EL TOTAL
     let sum = 0
@@ -19,6 +20,12 @@ const SuccessfulOrder = () => {
     useEffect(() => {
         //DISPACHO AL BACK EL EMAIL DE ORDEN PAGADA CON EXITO
         dispatch(emailSuccessfulOrder(user))
+        let total = 0
+        order.map(
+            (product) => (total += product.price * parseInt(product.quantity))
+        )
+        order.total = total
+        order.user_id = user._id
         dispatch(successfulOrder(order))
     })
 
