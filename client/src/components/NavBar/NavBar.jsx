@@ -36,11 +36,15 @@ const NavBar = () => {
                     <Link to="/about" className="linkk">
                         <h4>Nosotros</h4>
                     </Link>
-                    <Link to="/contact" className="linkk">
+                    <Link to="/contacto" className="linkk">
                         <h4>Contacto</h4>
                     </Link>
                     <button className="buttonLogin login-btn">
-                        {user?.email ? <Link to="/profile">Perfil </Link> : <Link to="/login"> LogIn </Link>}
+                        {user?.email ? (
+                            <Link to="/profile">Perfil </Link>
+                        ) : (
+                            <Link to="/login"> LogIn </Link>
+                        )}
                     </button>
                 </div>
             </ul>
