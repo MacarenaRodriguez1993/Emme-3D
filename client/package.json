@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mui/material": "^5.11.3",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/styled-engine": "^5.11.0",
     "@mui/x-data-grid": "^5.17.18",
+    "@mui/material": "^5.11.3",
     "axios": "^1.2.1",
     "cloudinary": "^1.32.0",
     "dotenv": "^16.0.3",
