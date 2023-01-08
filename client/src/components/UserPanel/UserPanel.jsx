@@ -8,8 +8,10 @@ import userDefaultImg from "../../assets/user.png"
 
 const UserPanel = ({ user, logout }) => {
     const dispatch = useDispatch()
-    const userId = useSelector((state) => state.users)
+    //const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)
+    console.log("este es el user de props", user)
+    console.log("este es el userDetails", userDetails)
     /* ******************************************************************* */
     const [userData, setUserData] = useState({
         id: "",
@@ -24,25 +26,25 @@ const UserPanel = ({ user, logout }) => {
     })
     /* ******************************************************************* */
     useEffect(() => {
-        if (userId !== null) {
-            dispatch(getUserByUid(userId.uid))
+        if (user.uid !== null) {
+            dispatch(getUserByUid(user.uid))
         }
-    }, [user])
+    }, [])
     useEffect(() => {
         if (userDetails) {
             setUserData({
                 id: user?.uid,
-                name: userDetails[0] ? userDetails[0].name : "",
-                surname: userDetails[0] ? userDetails[0].surname : "",
-                phone: userDetails[0] ? userDetails[0].phone : "",
-                address: userDetails[0] ? userDetails[0].address : "",
-                city: userDetails[0] ? userDetails[0].city : "",
-                province: userDetails[0] ? userDetails[0].province : "",
-                cp: userDetails[0] ? userDetails[0].cp : "",
-                img: userDetails[0] ? userDetails[0].img : "",
+                name: userDetails ? userDetails.name : "",
+                surname: userDetails ? userDetails.surname : "",
+                phone: userDetails ? userDetails.phone : "",
+                address: userDetails ? userDetails.address : "",
+                city: userDetails ? userDetails.city : "",
+                province: userDetails ? userDetails.province : "",
+                cp: userDetails ? userDetails.cp : "",
+                img: userDetails ? userDetails.img : "",
             })
         }
-    }, [userDetails])
+    }, [])
     /* ******************************************************************* */
     const editInfo = () => {
         document.getElementById("user-data-container").style.display = "none"
@@ -93,12 +95,12 @@ const UserPanel = ({ user, logout }) => {
                         <img
                             src={
                                 user?.photoURL ||
-                                userDetails[0]?.img ||
+                                userDetails?.img ||
                                 userDefaultImg
                             }
                             alt={
                                 user?.photoURL ||
-                                userDetails[0]?.img ||
+                                userDetails?.img ||
                                 userDefaultImg
                             }
                             className="user-img"
@@ -110,10 +112,10 @@ const UserPanel = ({ user, logout }) => {
                     </div>
 
                     <div className="user-name-email">
-                        {userDetails[0]?.name && userDetails[0]?.surname ? (
+                        {userDetails?.name && userDetails?.surname ? (
                             <p className="welcome-user">
-                                ¡Bienvenid@ {userDetails[0]?.name}{" "}
-                                {userDetails[0]?.surname}!
+                                ¡Bienvenid@ {userDetails?.name}{" "}
+                                {userDetails?.surname}!
                             </p>
                         ) : (
                             <p className="welcome-user">
@@ -135,9 +137,9 @@ const UserPanel = ({ user, logout }) => {
                 <p className="user-data">Tus datos</p>
                 <p className="user-data-fields">
                     Nombre:{" "}
-                    {userDetails[0]?.name ? (
+                    {userDetails?.name ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.name}
+                            {userDetails?.name}
                         </span>
                     ) : (
                         <span className="user-msg">
@@ -147,9 +149,9 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Apellido:{" "}
-                    {userDetails[0]?.surname ? (
+                    {userDetails?.surname ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.surname}
+                            {userDetails?.surname}
                         </span>
                     ) : (
                         <span className="user-msg">
@@ -159,9 +161,9 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Teléfono:{" "}
-                    {userDetails[0]?.phone ? (
+                    {userDetails?.phone ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.phone}
+                            {userDetails?.phone}
                         </span>
                     ) : (
                         <span className="user-msg">
@@ -171,9 +173,9 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Dirección:{" "}
-                    {userDetails[0]?.address ? (
+                    {userDetails?.address ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.address}
+                            {userDetails?.address}
                         </span>
                     ) : (
                         <span className="user-msg">
@@ -183,9 +185,9 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Ciudad:{" "}
-                    {userDetails[0]?.city ? (
+                    {userDetails?.city ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.city}
+                            {userDetails?.city}
                         </span>
                     ) : (
                         <span className="user-msg">
@@ -195,9 +197,9 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Provincia:{" "}
-                    {userDetails[0]?.province ? (
+                    {userDetails?.province ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.province}
+                            {userDetails?.province}
                         </span>
                     ) : (
                         <span className="user-msg">
@@ -207,9 +209,9 @@ const UserPanel = ({ user, logout }) => {
                 </p>
                 <p className="user-data-fields">
                     Código postal:{" "}
-                    {userDetails[0]?.cp ? (
+                    {userDetails?.cp ? (
                         <span className="user-data-span">
-                            {userDetails[0]?.cp}
+                            {userDetails?.cp}
                         </span>
                     ) : (
                         <span className="user-msg">
