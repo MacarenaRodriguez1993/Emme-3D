@@ -26,6 +26,7 @@ import Product from "../src/Admin/pages/product/Product"
 import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
 import NotFound from "./components/NotFound/NotFound"
+import About from "./pages/About/about"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
@@ -71,6 +72,7 @@ function App() {
                     element={<NewProduct />}
                 />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/about" element={<About />} />
             </Routes>
         </>
     )
