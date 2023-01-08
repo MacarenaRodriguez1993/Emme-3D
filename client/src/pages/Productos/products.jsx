@@ -18,6 +18,7 @@ const Products = () => {
     /* Dejo listo el dispatch para cuando temgamos la conexion con el back*/
     /*Aqui tomo el estado global de allProducts*/
     let productos = useSelector((state) => state.productsFiltered)
+    //para probar la animacion de carga descomentar la linea de abajo y comentar la de arriba
     //let productos
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()

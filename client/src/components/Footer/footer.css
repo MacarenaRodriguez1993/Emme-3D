@@ -10,6 +10,11 @@
 .redes {
     display: flex;
 }
+.redes a {
+    text-decoration: none;
+    color: #262a53;
+    cursor: pointer;
+}
 .whatsapp {
     position: fixed;
     display: block;
@@ -25,7 +30,8 @@
 }
 .whatsapp a {
     display: block;
-    margin-top: 5px;
+    margin-top: 2px;
     margin-left: 2px;
     margin-right: 2px;
+    margin-bottom: -5px;
 }
