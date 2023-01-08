@@ -16,6 +16,11 @@ import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
+import SuccessfulOrder from "./pages/Successfull/successfulOrder"
+
+const PRIVATE = "/profile"
+const PUBLIC = "/"
+
 function App() {
     return (
         <Routes>
@@ -40,6 +45,7 @@ function App() {
             <Route exact strict path="/login" element={<Login />} />
             <Route exact strict path="/register" element={<Register />} />
             <Route path="/details/:_id" element={<Details />} />
+            <Route path="/successfulOrder" element={<SuccessfulOrder />} />
         </Routes>
     )
 }
