@@ -15,7 +15,7 @@ const Footer = () => {
                     target="_blanck"
                     href="https://api.whatsapp.com/send?phone=3865323371"
                 >
-                    <AiOutlineWhatsApp color="#075e54" size="1.5rem" />
+                    <AiOutlineWhatsApp color="#075e54" size="1.8rem" />
                 </a>
             </div>
             <div className="footer">

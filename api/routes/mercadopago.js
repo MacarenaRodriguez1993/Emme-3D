@@ -20,9 +20,9 @@ router.post("/", (req, res) => {
                 }
             }),
             back_urls: {
-                success: "http://127.0.0.1:5173/products",
-                failure: "http://www.failure.com",
-                pending: "http://www.pending.com",
+                success: "https://m3dfront.onrender.com/successfulOrder",
+                failure: "https://m3dfront.onrender.com/products",
+                pending: "https://m3dfront.onrender.com/products",
             },
         }
         mercadoPago.preferences.create(preference).then(function (response) {

@@ -3,19 +3,25 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAuth, signOut } from "firebase/auth"
 import { app } from "../../components/firebase/firebase"
 import { useNavigate } from "react-router-dom"
-import { getUsers } from "../../redux/actions/actions"
+import { getUserByUid, userNull } from "../../redux/actions/actions"
+import UserPanel from "../../components/UserPanel/UserPanel"
+import Navbar from "../../components/NavBar/NavBar.jsx"
+import Footer from "../../components/Footer/Footer.jsx"
+
 export default function Perfil() {
-    const user = useSelector((state) => state.users)
+    const user = useSelector((state) => state.userByUid)
+    console.log("este es del perfil", user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const auth = getAuth(app)
+
     const logout = () => {
         try {
             signOut(auth)
                 .then(() => {
                     // Sign-out successful.
-                    dispatch(getUsers(null))
-                    navigate("/login")
+                    dispatch(userNull())
+                    navigate("/products")
                     console.log("sesion cerrada")
                 })
                 .catch((error) => {
@@ -25,12 +31,11 @@ export default function Perfil() {
             console.log(err)
         }
     }
-    console.log(user)
     return (
         <div>
-            Perfil
-            <h2>{user?.displayName} </h2>
-            <button onClick={() => logout()}>cerrar sesion </button>
+            <Navbar />
+            <UserPanel user={user} logout={logout} />
+            <Footer />
         </div>
     )
 }

@@ -6,19 +6,22 @@ const GET_BY_PRICE_RANGE = "GET_BY_PRICE_RANGE"
 const GET_BY_SALES = "GET_BY_SALES"
 const GET_BY_LIKES = "GET_BY_LIKES"
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
-const GET_CAROUSEL = 'GET_CAROUSEL'
+const GET_CAROUSEL = "GET_CAROUSEL"
 const ERROR = "ERROR"
 const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta const cuando se creen las rutas
-const POST_CAROUSEL = 'POST_CAROUSEL'
+const POST_CAROUSEL = "POST_CAROUSEL"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
+const GET_USER_UID = "GET_USER_UID"
+const USER_NULL = "USER_NULL"
+const GET_USER = " GET_USER"
+const PUT_USER = "PUT_USER"
+const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 import axios from "axios"
-
-
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
 export const filterByCategories = (value) => {
@@ -101,8 +104,7 @@ export const filterByLikes = (value) => {
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
 //let url_api = "http://localhost:3001"
-let url_api = "https://emme-3d-backend-production.up.railway.app"
-
+let url_api = "https://emme-3d-back-production.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -131,10 +133,11 @@ export const postCategory = (category) => {
     }
 }
 
-export const carouselUpload = image => {
-    return dispatch => {
+export const carouselUpload = (image) => {
+    return async (dispatch) => {
         try {
-            //axios.post(url_api + "/carousel", image)
+            const img = await axios.post(url_api + "/carousel", image)
+            console.log(img)
             dispatch({
                 type: POST_CAROUSEL,
                 payload: image,
@@ -234,11 +237,9 @@ export const searchByName = (name) => {
 }
 
 export const getCarouselImgs = () => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
-            const carouselImgs = await axios.get(
-                `${url_api}/carousel`
-            )
+            const carouselImgs = await axios.get(`${url_api}/carousel`)
             dispatch({
                 type: GET_CAROUSEL,
                 payload: carouselImgs.data,
@@ -273,12 +274,10 @@ export const deleteProduct = (id) => {
     }
 }
 
-export const carouselDelete = image => {
-    return dispatch => {
+export const carouselDelete = (image) => {
+    return (dispatch) => {
         try {
-            axios.delete(
-                `${url_api}/carousel/${image}`
-            )
+            axios.delete(`${url_api}/carousel/${image}`)
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -326,21 +325,7 @@ export const deleteToCart = (name) => {
         })
     }
 }
-export const getUsers = (data) => {
-    return async (dispatch) => {
-        try {
-            dispatch({
-                type: GET_USERS,
-                payload: data,
-            })
-        } catch (err) {
-            dispatch({
-                type: ERROR,
-                payload: err.message,
-            })
-        }
-    }
-}
+
 export const emailBienvenido = (user) => {
     return async (dispatch) => {
         try {
@@ -350,6 +335,179 @@ export const emailBienvenido = (user) => {
                 user
             )
             console.log(statusMail)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+/*-----ACTION USERS-----*/
+
+export const createUsers = (user) => {
+    return async (dispatch) => {
+        try {
+            await axios.post(url_api + "/users", user)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const getUsers = () => {
+    return async (dispatch) => {
+        try {
+            const user = await axios.get(url_api + `/users`)
+            dispatch({
+                type: GET_USERS,
+                payload: user,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const userNull = () => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: USER_NULL,
+                payload: null,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+/* export const getUser = (id) => {
+    return async (dispatch) => {
+        try {
+            const user = await axios.get(url_api + `/users/${id}`)
+            console.log("getuser action", user.data[0])
+            dispatch({
+                type: GET_USER,
+                payload: user.data[0],
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+} */
+
+export const getUserByUid = (uid) => {
+    return async (dispatch) => {
+        try {
+            const user_Uid = await axios.get(`${url_api}/users/${uid}`)
+            console.log("desde la action", user_Uid.data[0])
+            dispatch({
+                type: GET_USER_UID,
+                payload: user_Uid.data[0],
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+export const updateUser = (user) => {
+    return async (dispatch) => {
+        console.log(user.id)
+        console.log(user)
+        try {
+            const user_update = await axios.put(
+                `${url_api}/users/${user.id}`,
+                user
+            )
+            dispatch({
+                type: PUT_USER,
+                payload: user_update.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+/*----------GET Y POST DE REVIEWS-------------*/
+
+export const postReviews = (reviews) => {
+    return async (dispatch) => {
+        try {
+            console.log(reviews)
+            const createReviews = await axios.post(
+                `${url_api}/reviews`,
+                reviews
+            )
+            console.log(createReviews)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+export const getReviews = (id) => {
+    return async (dispatch) => {
+        try {
+            const getReviewsById = await axios.get(
+                `${url_api}/reviews?id?${id}`
+            )
+
+            dispatch({
+                type: GET_REVIEWS_BY_ID,
+                payload: getReviewsById.data,
+            })
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+
+
+//ACTION PARA EL ENVIO DE MAIL CUANDO LA COMPRA FUE EXITOSA
+export const emailSuccessfulOrder = (user) => {
+    return async (dispatch) => {
+        try {
+            const email = await axios.post(`${url_api}/email/pagado`, user)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
+//ACTION PARA ENVIAR ORDER CUANDO EL PAGO FUE EXITOSO
+export const successfulOrder = (order) => {
+    return async (dispatch) => {
+        try {
+            await axios.post(`${url_api}/orders`, order)
         } catch (err) {
             dispatch({
                 type: ERROR,

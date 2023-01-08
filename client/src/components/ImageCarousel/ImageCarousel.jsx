@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {
     getCarouselImgs,
     carouselUpload,
@@ -10,7 +10,7 @@ import "./ImageCarousel.css"
 
 const ImageCarousel = () => {
     const dispatch = useDispatch()
-
+    const carouselImages = useSelector((state) => state.carouselImages)
     useEffect(() => {
         dispatch(getCarouselImgs())
     }, [dispatch])
@@ -36,7 +36,13 @@ const ImageCarousel = () => {
     }
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
-        dispatch(carouselDelete(deleteImg))
+        dispatch(carouselDelete(deleteImg.imgId))
+    }
+    const handleChangeDel = (e) => {
+        setDelteImg({
+            ...deleteImg,
+            imgId: e.target.value,
+        })
     }
     /****************************************************/
     /* ---------- INICIO DE LA FUNCION DE CLOUDINARY ---------- */
@@ -61,47 +67,64 @@ const ImageCarousel = () => {
     /* ---------- FIN DE LA FUNCION DE CLOUDINARY ---------- */
     /****************************************************/
     return (
-        <div>
+        <div className="form-carrusel-container">
             <form
                 className="carousel-upload-img"
                 onSubmit={(e) => handleUploadSubmit(e)}
             >
-                <label>Carga una nueva imagen en el carrusel</label>
-                <label htmlFor="nombre">Nombre</label>
+                <label className="carrusel-p carr-title">
+                    Carga una nueva imagen en el carrusel
+                </label>
+                <label htmlFor="nombre" className="carrusel-p carr-labels">
+                    Nombre
+                </label>
 
                 <input
                     type="text"
                     name="name"
                     id=""
                     onChange={(e) => handleChange(e)}
+                    className="create-product-input carr-labels"
                 />
-                <label htmlFor="imagen">Imagen</label>
+                <label htmlFor="imagen" className="carrusel-p carr-labels">
+                    Imagen
+                </label>
                 <button
                     id="upload_widget"
                     type="button"
                     name="img"
                     onClick={() => handleOpenWidget()}
+                    className="create-product-input createpr"
                 >
                     Cargar imagen
                 </button>
-                <label>
+                <label className="carrusel-p carr-labels">
                     La resolucion maxima de las imagenes es de 1280px de ancho.
                 </label>
-                <button type="submit">Subir imagen</button>
+                <button type="submit" className="create-product-input createpr">
+                    Subir imagen al carrusel
+                </button>
             </form>
+            <hr />
             <form className="carousel-delete-img" onSubmit={handleDeleteSubmit}>
-                <div>
-                    <label htmlFor="">Eliminar una imagen</label>
-                    <select name="" id="">
-                        <option selected>Elegi una imagen</option>
-                    </select>
-                    {/* {images?.map((img) => (
-                        <option value={img._id} name="imgId">
-                            {img.name}
+
+                <label htmlFor="" className="carrusel-p carr-labels carr-title">
+                    Eliminar una imagen
+                </label>
+                <select className="create-product-input" onChange={(e) => handleChangeDel(e)}>
+                    <option selected>Elegi una imagen</option>
+                {carouselImages?.map((i) => (
+                        <option value={i._id} name="i.name">
+                            {i.name}
                         </option>
-                    ))} */}
-                </div>
-                <button type="submit">Eliminar imagen</button>
+                    ))}
+
+                </select>
+                
+                <button type="submit" className="create-product-input createpr">
+                    Eliminar imagen
+                </button>
+
             </form>
         </div>
     )

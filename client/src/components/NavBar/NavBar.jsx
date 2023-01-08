@@ -2,11 +2,21 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
 import { FaShoppingCart } from "react-icons/fa"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
 
 const NavBar = () => {
-    const user = useSelector((state) => state.users)
+    //const dispatch = useDispatch()
+    const user = useSelector((state) => state.userByUid)
+    console.log("usernav", user?.email)
     let productosCart = useSelector((state) => state.shoppingCart)
+
+    /* useEffect(() => {
+        if (user.length === 0) {
+            dispatch()
+        }
+    }) */
+
     return (
         <div className="navBar">
             <ul className="ulelement">
@@ -34,6 +44,8 @@ const NavBar = () => {
                             <Link to="/profile" className="linkk">
                                 Perfil{" "}
                             </Link>
+                        {user?.email ? (
+                            <Link to="/profile">Perfil </Link>
                         ) : (
                             <Link to="/login" className="linkk">
                                 {" "}

@@ -23,33 +23,18 @@ import Newuser from "../src/Admin/pages/newuser/Newuser"
 import Productlist from "../src/Admin/pages/productlist/Productlist"
 import Product from "../src/Admin/pages/product/Product"
 import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
+import SuccessfulOrder from "./pages/Successfull/successfulOrder"
+import NotFound from "./components/NotFound/NotFound"
+
+const PRIVATE = "/profile"
+const PUBLIC = "/"
 
 function App() {
-    const dispatch = useDispatch()
-
-    const auth = getAuth(app)
-    /*  onAuthStateChanged(auth, (user) => {
-        if (user) {
-            dispatch(getUsers(user))
-            const uid = user.uid
-
-            // ...
-        } else {
-            // User is signed out
-            // ...
-        }
-    })
-
-    useEffect(() => {
-        onAuthStateChanged()
-    }, []) */
-
     return (
         <>
             <Routes>
                 <Route path="/crear-producto" element={<CreateProduct />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/productos" element={<ProductsContainer />} />
                 <Route
                     exact
                     strict
@@ -83,6 +68,7 @@ function App() {
                     path="/dashboard/newproduct"
                     element={<NewProduct />}
                 />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </>
     )

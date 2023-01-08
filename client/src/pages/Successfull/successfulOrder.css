@@ -1,0 +1,32 @@
+.successfulOrder {
+    background-color: #262a53;
+    min-height: 100vh;
+    color: #ffe3e3;
+}
+table,
+tr,
+th,
+td {
+    border: 1px solid #ffe3e3;
+}
+th,
+td {
+    padding: 1.5em;
+}
+table {
+    width: 80%;
+    margin: 1em auto;
+    text-align: center;
+}
+td img {
+    width: 22%;
+    border-radius: 1em;
+}
+#goback {
+    background-color: rgb(37, 142, 29);
+    border: none;
+    border-radius: 1em;
+    color: #ffe3e3;
+    padding: 0.5em 1.5em;
+    margin: 0.5em 10em;
+}

@@ -157,6 +157,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 40px;
+    margin-bottom: 80px;
     display: flex;
     width: 90%;
 
@@ -166,16 +167,28 @@
     resize: none;
     border-radius: 5px;
     background: #c8cad6;
-    height: 200px;
+    min-height: 120px;
+    height: min-content;
+    padding: 20px;
+    width: 100%;
+}
+.input-opinion-disabled {
+    resize: none;
+    cursor: not-allowed;
+    border-radius: 5px;
+    background: #c8cad627;
+    min-height: 120px;
+    height: min-content;
     padding: 20px;
     width: 100%;
 }
 .header-valoracion {
-    margin-bottom: 10px;
+    padding: 10px;
     display: flex;
     color: white;
     width: 100%;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: space-between;
 }
 .btn-valoracion {
     padding: 10px;
@@ -193,6 +206,24 @@
     font-weight: bold;
     border-radius: 10px;
     color: white;
+}
+
+.btn-valoracion-disabled {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.btn-valoracion-disabled button {
+    width: 80px;
+    cursor: not-allowed;
+    border: none;
+    background: #c688a5;
+    padding: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
 }
 
 ::-webkit-scrollbar {

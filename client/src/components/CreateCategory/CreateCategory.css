@@ -1,4 +1,11 @@
+.create-category-container {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .form-create-category {
     display: flex;
     flex-direction: column;
+    width: 60%;
 }
