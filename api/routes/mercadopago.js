@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
                 }
             }),
             back_urls: {
-                success: "https://m3dfront.onrender.com/products",
+                success: "https://m3dfront.onrender.com/successfulOrder",
                 failure: "https://m3dfront.onrender.com/products",
                 pending: "https://m3dfront.onrender.com/products",
             },

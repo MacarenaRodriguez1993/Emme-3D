@@ -8,6 +8,11 @@ const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema(
     {
+        uid: {
+            type: String,
+            required: true,
+            unique: true,
+          },
         // Nombre de usuario (nick)
         username: {
             type: String,
@@ -22,10 +27,14 @@ const UserSchema = new mongoose.Schema(
             unique: true,
         },
 
+        // Foto de perfil
+        photo: {
+            type: String,
+        },
+
         // Contraseña, se encripta al recibirla
         password: {
             type: String,
-            //required: true,
         },
 
         // Nombre del cliente
@@ -71,6 +80,12 @@ const UserSchema = new mongoose.Schema(
             // unique: true, Debería ser único?
         },
 
+        // Imagen de perfil
+        img: {
+            type: String,
+            //required: true,
+            // unique: true, Debería ser único?
+        },
         // Control para las cuentas admin
         isAdmin: {
             type: Boolean,

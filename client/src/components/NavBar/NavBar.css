@@ -6,7 +6,7 @@
     padding: 0.5em;
 }
 
-ul {
+.ulelement {
     margin: 0;
     display: flex;
     justify-content: space-between;
@@ -16,7 +16,7 @@ ul {
     display: flex;
     align-items: center;
 }
-a {
+.linkk {
     text-decoration: none;
     color: #262a53;
     font-size: medium;

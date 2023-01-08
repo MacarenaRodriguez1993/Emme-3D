@@ -13,14 +13,19 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta variable cuando se creen las rutas
 const POST_CAROUSEL = "POST_CAROUSEL"
 const GET_USERS = "GET_USERS"
+const GET_USER = "GET_USER"
+const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
+const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
+const USER_NULL = "USER_NULL"
 
 const initialState = {
     allProducts: [],
     users: [],
+    reviews: [],
     productsFiltered: [],
     categories: [],
     detail: {},
@@ -52,17 +57,33 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload,
             }
-        case GET_USERS:
+        case GET_REVIEWS_BY_ID:
+            return {
+                ...state,
+                reviews: action.payload,
+            }
+        /*---------USUSRIOS---------*/
+        case GET_USERS: //LISTA DE TODOS LOS USUARIOS
             return {
                 ...state,
                 users: action.payload,
             }
+        case GET_USER_UID: //INFORMACION DE USUARIO
+            return {
+                ...state,
+                userByUid: action.payload,
+            }
+        case USER_NULL: //CERRAR SESION
+            return {
+                ...state,
+                userByUid: action.payload,
+            }
+        /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
                 categories: pload,
             }
-        /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_BY_CATEGORY:
             if (pload === "categorias") {
                 return {
@@ -70,12 +91,12 @@ const rootReducer = (state = initialState, action) => {
                     productsFiltered: all,
                 }
             } else {
-                let cat = state.categories.filter(
-                    (c) => c.categoria.name === action.payload
+                let prod = state.allProducts.filter(
+                    (p) => p.category === action.payload
                 )
                 return {
                     ...state,
-                    productsFiltered: [...cat],
+                    productsFiltered: [...prod],
                 }
             }
         case GET_BY_PRICE:
@@ -252,11 +273,7 @@ const rootReducer = (state = initialState, action) => {
                     ),
                 ],
             }
-        case GET_USER_UID:
-            return {
-                ...state,
-                userByUid: action.payload,
-            }
+
         default:
             return state
     }
