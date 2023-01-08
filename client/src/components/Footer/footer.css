@@ -12,11 +12,20 @@
 }
 .whatsapp {
     position: fixed;
+    display: block;
     background-color: #25d366;
     border-radius: 100%;
     right: 0;
     bottom: 4em;
     padding: 0.3em;
+    padding-top: 5px;
     margin-top: -4em;
     margin-right: 1em;
+    margin-bottom: 0;
+}
+.whatsapp a {
+    display: block;
+    margin-top: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
