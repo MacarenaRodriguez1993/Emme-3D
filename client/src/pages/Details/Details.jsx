@@ -44,7 +44,6 @@ export default function Details({ props }) {
                 </div>
             )
         }
-
         return (
             <div className="container-opiniones">
                 {reviewsFiltered?.map((r) => {
@@ -175,27 +174,6 @@ export default function Details({ props }) {
             <div className="container-descripcion">
                 <h2>Descripcion:</h2>
                 <p>{p?.map((d) => d.description)}</p>
-            </div>
-            <div className="container-opiniones">
-                {R.map((r) => {
-                    return (
-                        <div style={{ marginBottom: 10 }}>
-                            <div className="header-opinion">
-                                {/* <h2>{r.name}</h2> */}
-                                <Rating
-                                    disableFillHover={true}
-                                    onPointerEnter={r.rating}
-                                    readonly
-                                    initialValue={r.rating}
-                                    size={18}
-                                />
-                            </div>
-                            <div className="opinion-reviews">
-                                <span>{r.review}</span>
-                            </div>
-                        </div>
-                    )
-                })}
             </div>
             {filterReviewsById()}
             <div className="container-valoracion ">
