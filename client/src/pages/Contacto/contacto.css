@@ -29,9 +29,17 @@ textarea,
     height: 150px;
     background-color: blueviolet;
 }
+#enviarContact {
+    background-color: #a34270;
+    color: #ffe3e3;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 1em;
+}
 .maps {
     width: 50%;
     height: 50vh;
-    margin-top: 2em;
-    margin-left: -3em;
+    align-items: center;
+    margin-top: 5em;
+    margin-left: -5em;
 }

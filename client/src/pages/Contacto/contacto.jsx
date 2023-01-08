@@ -4,21 +4,31 @@ import NavBar from "../../components/NavBar/NavBar"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
 import { emailContacto } from "../../redux/actions/actions"
-import tt from "@tomtom-international/web-sdk-maps"
-import { useEffect } from "react"
+//import GoogleMap from "google-map-react"
+import GoogleMapReact from "google-map-react"
+import { FaMapMarkerAlt } from "react-icons/fa"
+import {
+    AiOutlineGlobal,
+    AiOutlineInstagram,
+    AiOutlineFacebook,
+    AiOutlineMail,
+    AiOutlineWhatsApp,
+    AiOutlineCheckCircle,
+    AiOutlineCloseCircle,
+} from "react-icons/ai"
+
 const Contacto = () => {
-    const API_KEY = "Ah89ndJiYp454Z1mibMySdzm7zGSCRDQ"
-    const EMME3D = [-65.591013, -27.340748]
+    console.log(import.meta.env.VITE_KEY_MAP)
+    const EMME3D = [-27.340748, -65.591013]
     const dispatch = useDispatch()
-    const refe = useRef()
-    useEffect(() => {
-        tt.map({
-            key: API_KEY,
-            container: refe.current,
-            center: EMME3D,
-            zoom: 15,
+    const renderMarkers = (map, maps) => {
+        let marker = new maps.Marker({
+            position: { lat: EMME3D[0], lng: EMME3D[1] },
+            map,
+            title: "EMME 3D",
         })
-    })
+        return marker
+    }
     const [contact, setContact] = useState({
         name: "",
         surname: "",
@@ -33,6 +43,12 @@ const Contacto = () => {
         setContact({
             ...contact,
             [e.target.name]: e.target.value,
+        })
+    }
+    const deleteFile = () => {
+        setContact({
+            ...contact,
+            file: "",
         })
     }
     const handleOpenWidget = async () => {
@@ -57,7 +73,7 @@ const Contacto = () => {
         e.preventDefault()
         dispatch(emailContacto(contact))
     }
-    const maps = () => {}
+
     return (
         <div className="contacto">
             <NavBar />
@@ -72,9 +88,9 @@ const Contacto = () => {
             </h1>
             <div className="contenido">
                 <div className="form">
-                    <h4>¿Tenes alguna duda sobre impresión 3D ?</h4>
-                    <h4>¿Queres solicitar servicio tecnico ?</h4>
-                    <h4>¿Queres cotizar un pedido personalizado ?</h4>
+                    <h3>¿Tenes alguna duda sobre impresión 3D ?</h3>
+                    <h3>¿Queres solicitar servicio tecnico ?</h3>
+                    <h3>¿Queres cotizar un pedido personalizado ?</h3>
                     <form id="formContacto" onSubmit={(e) => handleSubmit(e)}>
                         <input
                             type="text"
@@ -145,7 +161,28 @@ const Contacto = () => {
                             onChange={(e) => handleChange(e)}
                             value={contact.description}
                         ></textarea>
-                        <div>
+                        <div
+                            style={{
+                                display: "flex",
+                                justifyContent: "space-around",
+                            }}
+                        >
+                            <div>
+                                {contact.file && (
+                                    <>
+                                        <AiOutlineCheckCircle
+                                            size="2em"
+                                            color="green"
+                                        />
+                                        <AiOutlineCloseCircle
+                                            size="2em"
+                                            color="red"
+                                            onClick={deleteFile}
+                                        />
+                                        <h2>Archivo Cargado</h2>
+                                    </>
+                                )}
+                            </div>
                             <button
                                 id="button"
                                 type="button"
@@ -155,10 +192,99 @@ const Contacto = () => {
                                 cargar archivo jpeg-stl
                             </button>
                         </div>
-                        <button type="submit">Enviar</button>
+                        <button id="enviarContact" type="submit">
+                            Enviar
+                        </button>
                     </form>
                 </div>
-                <div ref={refe} className="maps"></div>
+                <div className="maps">
+                    <GoogleMapReact
+                        bootstrapURLKeys={{
+                            key: import.meta.env.VITE_KEY_MAP,
+                            language: "en",
+                            region: "US",
+                        }}
+                        defaultCenter={{ lat: EMME3D[0], lng: EMME3D[1] }}
+                        defaultZoom={15}
+                        onGoogleApiLoaded={({ map, maps }) =>
+                            renderMarkers(map, maps)
+                        }
+                    ></GoogleMapReact>
+                    <div
+                        style={{
+                            display: "flex",
+                            margin: " 1.5em auto",
+                        }}
+                    >
+                        <FaMapMarkerAlt size="1.2em" />
+                        <p style={{ marginLeft: "0.5em" }}>
+                            Ubicacion : 25 de mayo 474 dpto 2B - Concepcion -
+                            Tucuman
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: " 5em 4em",
+                }}
+            >
+                <div>
+                    <h2>WEBS PARA ENCONTRAR DISEÑOS</h2>
+                    <div>
+                        <AiOutlineGlobal size="1.3em" />
+                        <a
+                            href="https://cults3d.com/es/usuarios/jmaximilianovallejo"
+                            target="_blank"
+                            style={{ color: "#ffe3e3", fontSize: "larger" }}
+                        >
+                            Cults
+                        </a>
+                    </div>
+                    <div>
+                        <AiOutlineGlobal size="1.3em" />
+                        <a
+                            href="https://www.thingiverse.com/"
+                            target="_blank"
+                            style={{ color: "#ffe3e3", fontSize: "larger" }}
+                        >
+                            Thingiverse
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h2>REDES</h2>
+                    <div>
+                        <AiOutlineInstagram size="1.5rem" />
+                        <a
+                            href="http://www.instagram.com/emme.3d"
+                            target="_blank"
+                            style={{ color: "#ffe3e3", fontSize: "larger" }}
+                        >
+                            Instagram
+                        </a>
+                    </div>
+                    <div>
+                        <AiOutlineFacebook size="1.5rem" />
+                        <a
+                            href="ttp://www.facebook.com/emme3d"
+                            target="_blank"
+                            style={{ color: "#ffe3e3", fontSize: "larger" }}
+                        >
+                            Facebook
+                        </a>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                        <AiOutlineMail size="1.5em" />
+                        <h4>emme.impresiones3d@gmail.com</h4>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                        <AiOutlineWhatsApp size="1.5em" />
+                        <h4>3865323371</h4>
+                    </div>
+                </div>
             </div>
         </div>
     )
