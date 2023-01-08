@@ -7,7 +7,8 @@ import { AiOutlineHeart } from "react-icons/ai"
 import { Navigate, useNavigate } from "react-router-dom"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
-    let user = useSelector((state) => state.users)
+    let user = useSelector((state) => state.userByUid)
+    console.log('cart', user.length)
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
