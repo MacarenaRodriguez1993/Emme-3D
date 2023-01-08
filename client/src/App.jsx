@@ -23,33 +23,32 @@ import SuccessfulOrder from "./pages/Successfull/successfulOrder"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
+import Dashboard from "./Admin/src/App.jsx"
 
 function App() {
     return (
-        <Routes>
-            <Route path="/profile" element={<Perfil />} />
-
-            <Route path="/updateproduct/:id" element={<CreateProduct />} />
-            <Route path="/crear-producto" element={<CreateProduct />} />
-            <Route
-                exact
-                strict
-                path="/crear-producto"
-                element={<CrearProducto />}
-            />
-
-            <Route exact strict path="/" element={<Home />} />
-
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/productos" element={<ProductsContainer />} />
-
-            <Route exact strict path="/home" element={<Home />} />
-            <Route exact strict path="/products" element={<Productos />} />
-            <Route exact strict path="/login" element={<Login />} />
-            <Route exact strict path="/register" element={<Register />} />
-            <Route path="/details/:_id" element={<Details />} />
-            <Route path="/successfulOrder" element={<SuccessfulOrder />} />
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/crear-producto" element={<CreateProduct />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/productos" element={<ProductsContainer />} />
+                <Route
+                    exact
+                    strict
+                    path="/crear-producto"
+                    element={<CrearProducto />}
+                />
+                <Route exact strict path="/home" element={<Home />} />
+                <Route exact strict path="/products" element={<Productos />} />
+                <Route exact strict path="/" element={<Landing />} />
+                <Route exact strict path="/login" element={<Login />} />
+                <Route exact strict path="/register" element={<Register />} />
+                <Route path="/details/:_id" element={<Details />} />
+                <Route path="/profile" element={<Perfil />} />
+                <Route path="/updateproduct/:id" element={<CreateProduct />} />
+                <Route exact path="/dashboard" element={<Dashboard />} />
+            </Routes>
+        </>
     )
 }
 

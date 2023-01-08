@@ -1,0 +1,59 @@
+.widgetlg {
+  flex: 2;
+  -webkit-box-shadow: 0px 0px 11px -1px #000000;
+  box-shadow: 0px 0px 11px -1px #000000;
+}
+
+.widgetlgtitle {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.widgetlgimg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.widgetlgbutton {
+  padding: 5px 7px;
+  border: none;
+  border-radius: 10px;
+}
+
+.widgetlgbutton.Aprobado {
+  background-color: lightgreen;
+  color: darkgreen;
+}
+
+.widgetlgbutton.Rechazado {
+  background-color: red;
+  color: darkred;
+}
+
+.widgetlgbutton.Pending {
+  background-color: lightgray;
+  color: darkgray;
+}
+
+.widgetlgtable {
+  width: 100%;
+  border-spacing: 20px;
+}
+
+.widgetlgth {
+  text-align: left;
+}
+
+.widgetlguser {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.widgetlgdate,
+.widgetlgamount {
+  font-weight: 300;
+}
