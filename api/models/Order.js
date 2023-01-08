@@ -43,7 +43,7 @@ const OrderSchema = new mongoose.Schema(
         // Estado del pedido
         state: {
             type: String,
-            required: true,
+            default: "Recibida",
         },
     },
     { timestamps: true }
