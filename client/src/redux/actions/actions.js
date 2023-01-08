@@ -343,6 +343,24 @@ export const emailBienvenido = (user) => {
         }
     }
 }
+
+export const emailContacto = (formulario) => {
+    console.log(formulario)
+    return async (dispatch) => {
+        try {
+            const sendMail = await axios.post(
+                `${url_api}/email/contacto`,
+                formulario
+            )
+            console.log(sendMail)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
 /*-----ACTION USERS-----*/
 
 export const createUsers = (user) => {
@@ -488,7 +506,6 @@ export const getReviews = (id) => {
         }
     }
 }
-
 
 //ACTION PARA EL ENVIO DE MAIL CUANDO LA COMPRA FUE EXITOSA
 export const emailSuccessfulOrder = (user) => {
