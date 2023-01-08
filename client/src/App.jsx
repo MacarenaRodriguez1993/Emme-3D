@@ -17,6 +17,12 @@ import { useDispatch } from "react-redux"
 import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
 import Dashboard from "./Admin/src/App.jsx"
+import User from "./Admin/src/pages/user/User"
+import Userlist from "../src/Admin/src/pages/Userlist/Userlist"
+import Newuser from "../src/Admin/src/pages/newuser/Newuser"
+import Productlist from "../src/Admin/src/pages/productlist/Productlist"
+import Product from "../src/Admin/src/pages/product/Product"
+import NewProduct from "../src/Admin/src/pages/newproduct/Newproduct"
 
 function App() {
     const dispatch = useDispatch()
@@ -59,6 +65,24 @@ function App() {
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/updateproduct/:id" element={<CreateProduct />} />
                 <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/dashboard/users" element={<Userlist />} />
+                <Route exact path="/dashboard/user/:id" element={<User />} />
+                <Route exact path="/dashboard/newuser" element={<Newuser />} />
+                <Route
+                    exact
+                    path="/dashboard/products"
+                    element={<Productlist />}
+                />
+                <Route
+                    exact
+                    path="/dashboard/product/:id"
+                    element={<Product />}
+                />
+                <Route
+                    exact
+                    path="/dashboard/newproduct"
+                    element={<NewProduct />}
+                />
             </Routes>
         </>
     )

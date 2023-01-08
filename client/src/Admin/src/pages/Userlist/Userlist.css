@@ -1,23 +1,32 @@
 .userlist {
-  flex: 7;
+    flex: 7;
 }
 
 .avatar {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
 }
 
 .userlistedit {
-  border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
-  background-color: #3bb077;
-  color: white;
-  cursor: pointer;
-  margin-right: 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
 }
 
 .userlistdelete {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    margin-top: 10px;
+}
+
+.griduser {
+    flex: 6;
 }
