@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { app, db } from "../../components/firebase/firebase"
-import { createUsers, emailBienvenido, getUsers } from "../../redux/actions/actions"
+import { createUsers, emailBienvenido } from "../../redux/actions/actions"
 import { collection, addDoc, doc } from "firebase/firestore"; 
 import {async} from "@firebase/util"
 

@@ -27,9 +27,10 @@ export default function Login() {
                 const user = userCredential.user
                 dispatch(getUserByUid(user.uid))
                
+                if (userById){
                         navigate("/products")
                         console.log("userLogin", userById)
-              
+              }
                 // ...
             })
             .catch((error) => {

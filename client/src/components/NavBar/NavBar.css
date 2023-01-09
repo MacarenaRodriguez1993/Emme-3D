@@ -53,6 +53,7 @@
 }
 .img-profile {
     position: absolute;
+    border-radius: 100%;
     height: 50px;
     width: 50px;
     right: 6px;

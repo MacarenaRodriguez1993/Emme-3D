@@ -21,6 +21,7 @@ const Products = () => {
     //let productos
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.userByUid)
 
     useEffect(() => {
         dispatch(getProducts())
@@ -78,12 +79,14 @@ const Products = () => {
                     }
                 })}
             </div>
-            <Link to="/crear-producto">
-                <button className="addButton product-btn">
-                    {" "}
-                    Crear Producto{" "}
-                </button>
-            </Link>
+            {user?.isAdmin && (
+                <Link to="/crear-producto">
+                    <button className="addButton product-btn">
+                        {" "}
+                        Crear Producto{" "}
+                    </button>
+                </Link>
+            )}
             {/* AQUI VA LA PAGINACION */}
             <p>Aqui va la paginacion</p>
             <Footer />

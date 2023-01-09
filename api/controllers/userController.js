@@ -13,12 +13,12 @@ async function getUsers() {
     }
 }
 
-async function usersId(id) {
+async function usersId(uid) {
+    console.log('uid back', uid)
     try {
-        const userId = await User.find({
-            uid: id,
-        }).clone()
-        return userId
+        const userId = await User.findOne({uid:uid}).exec()
+            return userId
+        
     } catch (err) {
         throw err
     }
@@ -51,16 +51,7 @@ async function createUser(user) {
         throw err
     }
 }
-async function getUsers() {
-    try {
-        const users = await User.find()
-        if (users.length < 1)
-            throw new Error("NO HAY USUARIOS EN LA BASE DE DATOS")
-        return users
-    } catch (err) {
-        throw err
-    }
-}
+
 
 async function deletedUser(id) {
     try {

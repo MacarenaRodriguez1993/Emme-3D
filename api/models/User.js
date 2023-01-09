@@ -111,9 +111,6 @@ const UserSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        uid: {
-            type: String,
-        },
         img: {
             type: String,
         },

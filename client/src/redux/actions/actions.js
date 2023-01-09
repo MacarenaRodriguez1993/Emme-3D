@@ -343,6 +343,24 @@ export const emailBienvenido = (user) => {
         }
     }
 }
+
+export const emailContacto = (formulario) => {
+    console.log(formulario)
+    return async (dispatch) => {
+        try {
+            const sendMail = await axios.post(
+                `${url_api}/email/contacto`,
+                formulario
+            )
+            console.log(sendMail)
+        } catch (err) {
+            dispatch({
+                type: ERROR,
+                payload: err.message,
+            })
+        }
+    }
+}
 /*-----ACTION USERS-----*/
 
 export const createUsers = (users) => {
@@ -361,7 +379,7 @@ export const createUsers = (users) => {
 export const getUsers = () => {
     return async (dispatch) => {
         try {
-            const user = await axios.get(url_api + `/users`)
+            const user = await axios.get(url_api+`/users`)
             dispatch({
                 type: GET_USERS,
                 payload: user,
@@ -391,32 +409,17 @@ export const userNull = () => {
     }
 }
 
-/* export const getUser = (id) => {
-    return async (dispatch) => {
-        try {
-            const user = await axios.get(url_api + `/users/${id}`)
-            console.log("getuser action", user.data[0])
-            dispatch({
-                type: GET_USER,
-                payload: user.data[0],
-            })
-        } catch (err) {
-            dispatch({
-                type: ERROR,
-                payload: err.message,
-            })
-        }
-    }
-} */
 
 export const getUserByUid = (uid) => {
     return async (dispatch) => {
         try {
-            const user_Uid = await axios.get(`${url_api}/users/`,uid)
-            console.log("desde la action", user_Uid.data[0])
+            const user_Uid = await axios.get(url_api + '/users/' + uid)
+            console.log("desde la action", user_Uid.data)
+            console.log("desde la action uid", uid)
+
             dispatch({
                 type: GET_USER_UID,
-                payload: user_Uid.data[0],
+                payload: user_Uid.data,
             })
         } catch (error) {
             dispatch({
@@ -488,7 +491,6 @@ export const getReviews = (id) => {
         }
     }
 }
-
 
 //ACTION PARA EL ENVIO DE MAIL CUANDO LA COMPRA FUE EXITOSA
 export const emailSuccessfulOrder = (user) => {
