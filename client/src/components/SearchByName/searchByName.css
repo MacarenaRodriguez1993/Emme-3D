@@ -6,8 +6,6 @@
 }
 
 .buttonSearch {
-    width: 10%;
-    padding: 0;
     margin: 2%;
     border-radius: 10px;
 }
@@ -15,15 +13,23 @@
 .input {
     color: #ffe3e3;
     font-size: 0.9rem;
+    font-weight: bolder;
     background-color: transparent;
     width: 100%;
     box-sizing: border-box;
     padding-inline: 0.5em;
     padding-block: 0.7em;
-    border: none;
+    border-top: none;
+    border-left: 1px solid #ffe3e3;
+    border-right: 1px solid #ffe3e3;
     border-bottom: 3px solid #a34270;
+
+    box-shadow: 0px 5px 5px -6px black;
 }
 
-input:hover {
-    background: rgba(189, 77, 129, 0.253)
+.input:hover {
+    background: rgba(189, 77, 129, 0.253);
+}
+.input:focus {
+    outline: 0;
 }
