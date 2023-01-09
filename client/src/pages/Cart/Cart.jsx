@@ -14,8 +14,8 @@ const Cart = () => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
-    const url_api = "https://emme-3d-production-c491.up.railway.app"
-    // const url_api = "http://localhost:3001"
+    // const url_api = "https://emme-3d-production-c491.up.railway.app"
+    const url_api = "http://localhost:3001"
 
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
