@@ -14,18 +14,13 @@ const SuccessfulOrder = () => {
     /*FALTARIA VER CUANDO NICO HAGA SU CAMBIO SI SIGUE SIENDO USER EL ESTADO DONDE VAN LOS DATOS DEL USUARIO*/
     const user = useSelector((state) => state.userByUid)
     const order = useSelector((state) => state.shoppingCart)
+
     //VARIABLE PARA EL TOTAL
     let sum = 0
 
     useEffect(() => {
         //DISPACHO AL BACK EL EMAIL DE ORDEN PAGADA CON EXITO
         dispatch(emailSuccessfulOrder(user))
-        let total = 0
-        order.map(
-            (product) => (total += product.price * parseInt(product.quantity))
-        )
-        order.total = total
-        order.user_id = user._id
         dispatch(successfulOrder(order))
     })
 
@@ -43,15 +38,17 @@ const SuccessfulOrder = () => {
                         <th>Precio</th>
                     </tr>
                     {order?.map((o) => {
-                        sum = sum + o[0].price * parseInt(o[0].quantity)
+                        sum =
+                            sum +
+                            o[0].productPrice * parseInt(o[0].productAmount)
                         return (
                             <tr>
-                                <td>{o[0].name}</td>
+                                <td>{o[0].productName}</td>
                                 <td>
-                                    <img src={o[0].img} alt="" />
+                                    <img src={o[0].productImage} alt="" />
                                 </td>
-                                <td>{o[0].quantity}</td>
-                                <td>{o[0].price}</td>
+                                <td>{o[0].productAmount}</td>
+                                <td>{o[0].productPrice}</td>
                             </tr>
                         )
                     })}
