@@ -17,8 +17,8 @@ router.post("/", (req, res) => {
                 return {
                     ...item,
                     currency_id: "ARS",
-                    quantity: parseInt(item.quantity),
-                    unit_price: item.price,
+                    quantity: parseInt(item.productAmount),
+                    unit_price: item.productPrice,
                 }
             }),
             back_urls: {

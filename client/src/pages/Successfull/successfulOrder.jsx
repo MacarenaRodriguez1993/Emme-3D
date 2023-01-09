@@ -20,8 +20,10 @@ const SuccessfulOrder = () => {
 
     useEffect(() => {
         //DISPACHO AL BACK EL EMAIL DE ORDEN PAGADA CON EXITO
+        const newOrder = order
+        newOrder.user_id = user._id
         dispatch(emailSuccessfulOrder(user))
-        dispatch(successfulOrder(order))
+        dispatch(successfulOrder(newOrder))
     })
 
     return (
