@@ -106,7 +106,11 @@ const Contacto = () => {
             </h1>
             <div className="contenido">
                 <div className="form">
-                    <ToastContainer position="top-right" autoClose={4000} />
+                    <ToastContainer
+                        theme="dark"
+                        position="top-right"
+                        autoClose={4000}
+                    />
                     <h3>¿Tenes alguna duda sobre impresión 3D ?</h3>
                     <h3>¿Queres solicitar servicio tecnico ?</h3>
                     <h3>¿Queres cotizar un pedido personalizado ?</h3>
