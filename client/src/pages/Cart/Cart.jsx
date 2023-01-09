@@ -14,8 +14,8 @@ const Cart = () => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
-    // const url_api = "https://emme-3d-production-c491.up.railway.app"
-    const url_api = "http://localhost:3001"
+    const url_api = "https://emme-3d-production-c491.up.railway.app"
+    // const url_api = "http://localhost:3001"
 
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
@@ -54,8 +54,9 @@ const Cart = () => {
                 <div className="p-container">
                     {productosCart.map((p) => (
                         <div className="product">
+                            {console.log("p", p)}
                             <div>
-                                <img src={p[0].img} id="pr-img" />
+                                <img src={p[0].productImage[0]} id="pr-img" />
                             </div>
                             <div id="contenidoCart">
                                 <p>{p[0].productName}</p>
