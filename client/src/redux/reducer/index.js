@@ -265,16 +265,27 @@ const rootReducer = (state = initialState, action) => {
                 productsFiltered: [...state.productsFiltered, action.payload],
             }
         case ADD_CART:
+            const productsToAdd = action.payload.map((product) => {
+                return {
+                    productName: product.name,
+                    productImage: product.img,
+                    productPrice: product.price,
+                    productAmount: 1,
+                    productTotal: product.price,
+                }
+            })
+            console.log("Products", productsToAdd)
+
             return {
                 ...state,
-                shoppingCart: [...state.shoppingCart, action.payload],
+                shoppingCart: [...state.shoppingCart, productsToAdd],
             }
         case DELETE_CART_PRODUCT:
             return {
                 ...state,
                 shoppingCart: [
                     ...state.shoppingCart.filter(
-                        (p) => p[0].name !== action.payload
+                        (p) => p[0].productName !== action.payload
                     ),
                 ],
             }

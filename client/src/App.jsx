@@ -71,6 +71,7 @@ function App() {
                     element={<NewProduct />}
                 />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/successfulOrder" element={<SuccessfulOrder />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </>

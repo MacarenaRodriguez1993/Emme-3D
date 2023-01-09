@@ -8,17 +8,19 @@ import { Navigate, useNavigate } from "react-router-dom"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
-    console.log('cart', user.length)
+
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
-    const url_api = "https://emme-3d-production-c491.up.railway.app/"
+    // const url_api = "https://emme-3d-production-c491.up.railway.app"
+    const url_api = "http://localhost:3001"
+
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {
-                p[0].quantity = e.target.value
+                p[0].productAmount = e.target.value
             }
         })
     }
@@ -31,7 +33,7 @@ const Cart = () => {
                 navigate("/login")
             }, 1000)
         } else {
-            fetch(`${url_api}mercadopago`, {
+            fetch(`${url_api}/mercadopago`, {
                 method: "POST",
                 body: JSON.stringify(productosCart),
                 headers: {
@@ -53,11 +55,11 @@ const Cart = () => {
                     {productosCart.map((p) => (
                         <div className="product">
                             <div>
-                                <img src={p[0].img[0]} id="pr-img" />
+                                <img src={p[0].img} id="pr-img" />
                             </div>
                             <div id="contenidoCart">
-                                <p>{p[0].name}</p>
-                                <p>$ {p[0].price}</p>
+                                <p>{p[0].productName}</p>
+                                <p>$ {p[0].productPrice}</p>
                                 <p>{p[0].description}</p>
                             </div>
                             <div id="cantidad">
@@ -73,7 +75,7 @@ const Cart = () => {
                                 <button
                                     id="deleteCart"
                                     onClick={() => {
-                                        deleteCart(p[0].name)
+                                        deleteCart(p[0].productName)
                                     }}
                                 >
                                     x
