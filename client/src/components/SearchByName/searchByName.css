@@ -3,10 +3,10 @@
     position: relative;
     justify-content: end;
     width: 25%;
+    margin-left: 130px;
 }
 
 .buttonSearch {
-    margin: 2%;
     border-radius: 10px;
 }
 
