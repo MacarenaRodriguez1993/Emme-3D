@@ -62,6 +62,7 @@ const UserPanel = ({ user, logout }) => {
             ...userData,
             [e.target.name]: e.target.value,
         })
+        console.log(userData)
     }
     const handleSubmit = (e) => {
         dispatch(updateUser(userData))

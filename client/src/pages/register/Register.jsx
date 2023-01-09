@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import { app, db } from "../../components/firebase/firebase"
-import { createUsers, emailBienvenido, getUsers } from "../../redux/actions/actions"
+import { createUsers, emailBienvenido } from "../../redux/actions/actions"
 import { collection, addDoc, doc } from "firebase/firestore"; 
 import {async} from "@firebase/util"
 
@@ -16,10 +16,10 @@ export default function register() {
    
 
     const [user, setUser] = useState({
-        email: '',
-        password: '',
-        name: '',
-        apellido: '',
+        email: "",
+        password: "",
+        name: "",
+        apellido: "",
     })
 
     const auth = getAuth(app)
@@ -34,17 +34,36 @@ export default function register() {
             
             const u = userCredential.user
             console.log(u)
-            dispatch(createUsers({
-                'uid': u?.uid,
-                'name': user.name,
-                'surname': user.apellido,
-                'email':user.email,
-                'password':user.password,
-                'phone': u?.phoneNumber,
-                'photo': u?.photoURL
-            }))
-            navigate("/login")
-            dispatch(emailBienvenido(user))
+            setTimeout(() => {
+                const users = {
+                    "uid": u.uid,
+                    "name": user.name || "",
+                    "surname":user?.apellido || "",
+                    "email": user?.email || "",
+                    //password: user.password,
+                    "phone": u?.phoneNumber ||"",
+                    "img": u?.photoURL || "",
+                    "city": "",
+                    "province": "",
+                    "address": "",
+                }
+                console.log("userRegister", users)
+                dispatch(createUsers({
+                    "uid": u?.uid || "",
+                    "name": user?.name || "",
+                    "surname":user?.apellido || "",
+                    "email": user?.email || "",
+                    //password: user.password,
+                    "phone": u?.phoneNumber ||"",
+                    "img": u?.photoURL || "",
+                    "city": "",
+                    "province": "",
+                    "address": "",
+                }))
+                navigate("/login")
+                dispatch(emailBienvenido(user))
+            }, 1000);
+            
             // ...
         })
         .catch((error) => {
