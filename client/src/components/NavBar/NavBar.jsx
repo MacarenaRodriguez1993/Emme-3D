@@ -4,6 +4,7 @@ import "./NavBar.css"
 import { FaShoppingCart } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
+import userPng from '../../assets/user.png'
 
 const NavBar = () => {
     //const dispatch = useDispatch()
@@ -39,9 +40,15 @@ const NavBar = () => {
                     <Link to="/contact" className="linkk">
                         <h4>Contacto</h4>
                     </Link>
-                    <button className="buttonLogin login-btn">
-                        {user?.email ? <Link to="/profile">Perfil </Link> : <Link to="/login"> LogIn </Link>}
+                    {
+                        user?.email ?  <button className=" login-btn">
+                         <Link className="btn-profile" to="/profile">Perfil <img className="img-profile" src={user?.img ? user?.img : userPng} /> </Link> 
                     </button>
+                    :  <button className="buttonLogin ">
+                   <Link  to="/login"> LogIn </Link>
+                </button>
+                    }
+                   
                 </div>
             </ul>
         </div>

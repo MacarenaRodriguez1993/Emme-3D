@@ -32,8 +32,31 @@
     border: none;
     border-radius: 1em;
     padding: 0.5em;
+    padding-right: 55px;
     width: 50%;
+}
+.buttonLogin {
+    background-color: #a34270;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em;
+    width: 50%; 
+}
+.buttonLogin a {
     color: #ffe3e3;
+    
+}
+.btn-profile {
+    
+    color: #ffe3e3 !important;
+    font-weight: bolder;
+}
+.img-profile {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    right: 6px;
+    top: 2px;
 }
 .cart {
     display: flex;

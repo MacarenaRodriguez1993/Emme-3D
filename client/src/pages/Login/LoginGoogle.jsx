@@ -30,36 +30,38 @@ export default function LoginGoogle() {
                     const token = credential.accessToken
                     // The signed-in user info.
                     const u = result.user
-                    //Verifico si es la primera vez que se ingresa
-                    console.log(u?.uid)
                     dispatch(getUserByUid(u?.uid))
-                    setTimeout(() => {
-                        
+                    //Verifico si es la primera vez que se ingresa
+                    console.log('uid logingoogle',u?.uid)
+               
                         if (userById?.email) {
                             navigate("/products")
                         } else {
-                            
                                 dispatch(
                                     createUsers({
-                                        'uid': u?.uid,
-                                        'name': u?.name,
-                                        //surname: u.apellido,
-                                        'email': u?.email,
-                                        //password: user.password,
-                                        'phone': u?.phoneNumber,
-                                        'photo': u?.photoURL,
+                                        "uid": u?.uid,
+                                        "name": u?.name || '',
+                                        "surname": "",
+                                        "email": u?.email,
+                                        "phone": u?.phoneNumber || '',
+                                        "img": u?.photoURL || "",
+                                        "city": "",
+                                        "province": "",
+                                        "address": "",
                                     })
                                 )
+                                dispatch(getUserByUid(u?.uid))
                                 navigate("/products")
+                                
                            
-                        }
-                    }, 1000);
+                            }
+                     
                 })
                 .catch((error) => {
                     // Handle Errors here.
                     const errorCode = error.code
                     const errorMessage = error.message
-                    // The email of the user's account used.
+                    // The email of the user"s account used.
                     const email = error.reloadUserInfo
                     console.log("errores", error.reloadUserInfo)
                     // The AuthCredential type that was used.
@@ -70,6 +72,7 @@ export default function LoginGoogle() {
                 })
         } catch (error) {
             errorMessage
+            alert(errorMessage)
         }
     }
 
