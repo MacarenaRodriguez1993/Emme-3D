@@ -56,7 +56,7 @@ const Cart = () => {
                         <div className="product">
                             {console.log("p", p)}
                             <div>
-                                <img src={p[0].productImage[0]} id="pr-img" />
+                                <img src={p[0].img[0]} id="pr-img" />
                             </div>
                             <div id="contenidoCart">
                                 <p>{p[0].productName}</p>
