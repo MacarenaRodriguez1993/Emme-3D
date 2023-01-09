@@ -3,3 +3,34 @@
     color: #ffe3e3;
     min-height: 100vh;
 }
+.titleAbout {
+    text-align: center;
+    padding: 1em;
+}
+.pAbout {
+    font-size: x-large;
+    text-align: justify;
+    padding: 0.5em 2em;
+}
+.containCardAbout {
+    width: 100%;
+    margin: 0.5em auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 400px);
+    gap: 1em;
+    justify-content: center;
+}
+.cardAbout {
+    text-align: center;
+}
+.imageAbout {
+    width: 90%;
+    border-radius: 4em;
+}
+.linkAbout {
+    color: #ffe3e3;
+    margin-left: 0.5em;
+}
+.linkRedes {
+    text-align: center;
+}
