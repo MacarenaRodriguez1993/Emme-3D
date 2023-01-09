@@ -14,7 +14,6 @@ import Perfil from "./pages/perfil/Perfil"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from "./components/firebase/firebase"
 import { useDispatch } from "react-redux"
-import { getUsers } from "./redux/actions/actions"
 import { useEffect } from "react"
 import Contacto from "./pages/Contacto/contacto"
 import Homeadmin from "./Admin/pages/homeadmin/Homeadmin"
@@ -26,6 +25,7 @@ import Product from "../src/Admin/pages/product/Product"
 import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
 import NotFound from "./components/NotFound/NotFound"
+import About from "./pages/About/about"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
@@ -71,6 +71,8 @@ function App() {
                     element={<NewProduct />}
                 />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/successfulOrder" element={<SuccessfulOrder />} />
+                <Route path="/about" element={<About />} />
             </Routes>
         </>
     )

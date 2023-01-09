@@ -16,9 +16,9 @@ async function getAllUsers() {
     }
 }
 
-async function getUsersById(id) {
+async function getUsersById(uid) {
     try {
-        const user = await usersId(id)
+        const user = await usersId(uid)
         return user
     } catch (err) {
         throw err

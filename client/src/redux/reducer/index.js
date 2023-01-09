@@ -13,7 +13,7 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 //eliminar esta variable cuando se creen las rutas
 const POST_CAROUSEL = "POST_CAROUSEL"
 const GET_USERS = "GET_USERS"
-const GET_USER = "GET_USER"
+const PUT_USER = "PUT_USER"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
@@ -77,6 +77,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userByUid: action.payload,
+            }
+        case PUT_USER:
+            return {
+                ...state,
+                userByUid: action.payload
             }
         /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_ALL_CATEGORIES:
@@ -260,16 +265,27 @@ const rootReducer = (state = initialState, action) => {
                 productsFiltered: [...state.productsFiltered, action.payload],
             }
         case ADD_CART:
+            const productsToAdd = action.payload.map((product) => {
+                return {
+                    productName: product.name,
+                    productImage: product.img,
+                    productPrice: product.price,
+                    productAmount: 1,
+                    productTotal: product.price,
+                }
+            })
+            console.log("Products", productsToAdd)
+
             return {
                 ...state,
-                shoppingCart: [...state.shoppingCart, action.payload],
+                shoppingCart: [...state.shoppingCart, productsToAdd],
             }
         case DELETE_CART_PRODUCT:
             return {
                 ...state,
                 shoppingCart: [
                     ...state.shoppingCart.filter(
-                        (p) => p[0].name !== action.payload
+                        (p) => p[0].productName !== action.payload
                     ),
                 ],
             }
