@@ -12,12 +12,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-          },
+        },
         // Nombre de usuario (nick)
         username: {
             type: String,
-            //required: true,
-            //unique: true,
         },
 
         // Correo electrónico
@@ -40,52 +38,48 @@ const UserSchema = new mongoose.Schema(
         // Nombre del cliente
         name: {
             type: String,
-            //required: true,
         },
 
         // Apellido/s del cliente
         surname: {
             type: String,
-            //required: true,
         },
 
         // Dirección de envío
         address: {
             type: String,
-            //required: true,
         },
 
         // Ciudad del usuario
         city: {
             type: String,
-            //required: true,
         },
 
         // Provincia del usuario
         province: {
             type: String,
-            //required: true,
         },
 
         // Codigo postal del usuario
         cp: {
             type: String,
-            //required: true,
         },
 
         // Número de teléfono
         phone: {
             type: String,
-            //required: true,
-            // unique: true, Debería ser único?
         },
 
         // Imagen de perfil
         img: {
             type: String,
-            //required: true,
-            // unique: true, Debería ser único?
         },
+
+        // Carrito del usuario de perfil
+        cart: {
+            type: Object,
+        },
+
         // Control para las cuentas admin
         isAdmin: {
             type: Boolean,

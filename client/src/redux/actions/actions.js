@@ -20,6 +20,7 @@ const GET_USER_UID = "GET_USER_UID"
 const USER_NULL = "USER_NULL"
 const GET_USER = " GET_USER"
 const PUT_USER = "PUT_USER"
+const PUT_USER_CART = 'PUT_USER_CART'
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 import axios from "axios"
 
@@ -441,6 +442,28 @@ export const updateUser = (user) => {
             dispatch({
                 type: PUT_USER,
                 payload: user_update.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+export const updateUserCart = (user) => {
+    return async (dispatch) => {
+        console.log(user.id)
+        console.log(user)
+        try {
+            const user_cart_update = await axios.put(
+                `${url_api}/users/${user.id}`,
+                user
+            )
+            dispatch({
+                type: PUT_USER_CART,
+                payload: user_cart_update.data,
             })
         } catch (error) {
             dispatch({

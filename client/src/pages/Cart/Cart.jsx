@@ -1,21 +1,29 @@
-import React from "react"
+import { useState } from "react"
 import NavBar from "../../components/NavBar/NavBar"
 import "./Cart.css"
 import { useSelector, useDispatch } from "react-redux"
-import { deleteToCart } from "../../redux/actions/actions"
+import { deleteToCart, updateUserCart } from "../../redux/actions/actions"
 import { AiOutlineHeart } from "react-icons/ai"
 import { Navigate, useNavigate } from "react-router-dom"
+import Footer from "../../components/Footer/Footer"
+
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
-
+    /* let [userCart, setUserCart] = useState({
+        cart: "",
+    }) */
     const dispatch = useDispatch()
     const deleteCart = (name) => {
+        /* setUserCart({
+            cart: "",
+        }) */
         dispatch(deleteToCart(name))
+        //dispatch(updateUserCart(userCart))
     }
     const navigate = useNavigate()
-    const url_api = "https://emme-3d-production-c491.up.railway.app"
-    // const url_api = "http://localhost:3001"
+    //const url_api = "https://emme-3d-production-c491.up.railway.app"
+    const url_api = "http://localhost:3001"
 
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
@@ -60,7 +68,7 @@ const Cart = () => {
                             </div>
                             <div id="contenidoCart">
                                 <p>{p[0]?.productName}</p>
-                                <p>$ {p[0]?.productPrice}</p>
+                                <p>Precio por unidad ${p[0]?.productPrice}</p>
                                 <p>{p[0]?.description}</p>
                             </div>
                             <div id="cantidad">
@@ -97,6 +105,7 @@ const Cart = () => {
                     </button>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
