@@ -7,7 +7,7 @@ import { app } from "../../components/firebase/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { getUserByUid } from "../../redux/actions/actions"
 import LoginGoogle from "./LoginGoogle"
-
+import swal from "sweetalert"
 export default function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -26,11 +26,12 @@ export default function Login() {
                 // Signed in
                 const user = userCredential.user
                 dispatch(getUserByUid(user.uid))
-               
-                if (userById){
-                        navigate("/products")
-                        console.log("userLogin", userById)
-              }
+
+                if (userById) {
+                    swal("Perfecto!", "Sesion iniciada con éxito", "success")
+                    navigate("/products")
+                    console.log("userLogin", userById)
+                }
                 // ...
             })
             .catch((error) => {

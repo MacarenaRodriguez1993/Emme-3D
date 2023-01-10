@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { getUserByUid, createUsers } from "../../redux/actions/actions"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
+import swal from "sweetalert"
 export default function LoginGoogle() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -32,30 +32,32 @@ export default function LoginGoogle() {
                     const u = result.user
                     dispatch(getUserByUid(u?.uid))
                     //Verifico si es la primera vez que se ingresa
-                    console.log('uid logingoogle',u?.uid)
-               
-                        if (userById?.email) {
-                            navigate("/products")
-                        } else {
-                                dispatch(
-                                    createUsers({
-                                        "uid": u?.uid,
-                                        "name": u?.name || '',
-                                        "surname": "",
-                                        "email": u?.email,
-                                        "phone": u?.phoneNumber || '',
-                                        "img": u?.photoURL || "",
-                                        "city": "",
-                                        "province": "",
-                                        "address": "",
-                                    })
-                                )
-                                dispatch(getUserByUid(u?.uid))
-                                navigate("/products")
-                                
-                           
-                            }
-                     
+                    console.log("uid logingoogle", u?.uid)
+
+                    if (userById?.email) {
+                        swal(
+                            "Perfecto!",
+                            "Sesion iniciada con éxito",
+                            "success"
+                        )
+                        navigate("/products")
+                    } else {
+                        dispatch(
+                            createUsers({
+                                uid: u?.uid,
+                                name: u?.name || "",
+                                surname: "",
+                                email: u?.email,
+                                phone: u?.phoneNumber || "",
+                                img: u?.photoURL || "",
+                                city: "",
+                                province: "",
+                                address: "",
+                            })
+                        )
+                        dispatch(getUserByUid(u?.uid))
+                        navigate("/products")
+                    }
                 })
                 .catch((error) => {
                     // Handle Errors here.

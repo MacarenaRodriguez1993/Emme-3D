@@ -7,7 +7,7 @@ import { getUserByUid, userNull } from "../../redux/actions/actions"
 import UserPanel from "../../components/UserPanel/UserPanel"
 import Navbar from "../../components/NavBar/NavBar.jsx"
 import Footer from "../../components/Footer/Footer.jsx"
-
+import swal from "sweetalert"
 export default function Perfil() {
     const user = useSelector((state) => state.userByUid)
     console.log("este es del perfil", user)
@@ -17,16 +17,28 @@ export default function Perfil() {
 
     const logout = () => {
         try {
-            signOut(auth)
-                .then(() => {
-                    // Sign-out successful.
-                    dispatch(userNull())
-                    navigate("/products")
-                    console.log("sesion cerrada")
-                })
-                .catch((error) => {
-                    // An error happened.
-                })
+            swal({
+                title: "¿Quieres cerrar sesion?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    swal("Sesion cerrada", {
+                        icon: "success",
+                    })
+                    signOut(auth)
+                        .then(() => {
+                            // Sign-out successful.
+                            dispatch(userNull())
+                            navigate("/products")
+                            console.log("sesion cerrada")
+                        })
+                        .catch((error) => {
+                            // An error happened.
+                        })
+                }
+            })
         } catch (err) {
             console.log(err)
         }
