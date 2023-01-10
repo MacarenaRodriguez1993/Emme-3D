@@ -57,6 +57,21 @@ const OrderSchema = new mongoose.Schema(
             },
         },
 
+        payment_id: {
+            type: String,
+            required: true,
+        },
+
+        status: {
+            type: String,
+            required: true,
+        },
+
+        merchant_order_id: {
+            type: String,
+            required: true,
+        },
+
         // Estado del pedido
         state: {
             type: String,

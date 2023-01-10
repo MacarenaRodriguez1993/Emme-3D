@@ -9,8 +9,7 @@ const {
 // Post crear nueva orden
 router.post("/", async (req, res) => {
     // Lo transformamos a un arreglo de objetos producto
-    const order = req.body.map((producto) => producto[0])
-
+    const order = req.body
     try {
         const newOrder = await createOrders(order)
         res.status(200).json(newOrder)

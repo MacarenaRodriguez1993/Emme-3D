@@ -31,7 +31,6 @@ router.get("/", async (req, res) => {
     } catch (err) {
         res.status(402).send(err.message)
     }
-    // }
 })
 
 // Get producto por param id (Detalles producto)
