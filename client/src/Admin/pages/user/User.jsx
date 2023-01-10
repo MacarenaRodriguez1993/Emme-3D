@@ -13,7 +13,7 @@ import Topbar from "../../components/Topbar/Topbar"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getUserByUid } from "../../../redux/actions/actions"
-import validationsuser from "./validationsuser"
+import { validationsuser } from "./validationsuser"
 import { updateUser } from "../../../redux/actions/actions"
 import { AiFillDelete } from "react-icons/ai"
 
@@ -27,21 +27,51 @@ export default function User() {
     }, [dispatch])
     const [userData, setUserData] = useState({
         id: id,
-        username: "", //user.username,xxx
-        email: "", //user.email,xxx
-        name: "", //user.name,xxx
-        surname: "", //user.surname,
-        address: "", //user.address,
-        city: "", //user.city,
-        province: "", //user.province,
-        cp: "", //user.cp,
-        phone: "", //user.phone,
-        img: "", //user.img,
+        username: "",
+        email: "",
+        name: "",
+        surname: "",
+        address: "",
+        city: "",
+        province: "",
+        cp: "",
+        phone: "",
+        img: "",
         isAdmin: "",
     })
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch(updateUser(userData))
+        userData.username = userData.username.trim()
+        userData.email = userData.email.trim()
+        userData.name = userData.name.trim()
+        userData.surname = userData.surname.trim()
+        userData.address = userData.address.trim()
+        userData.city = userData.city.trim()
+        userData.province = userData.province.trim()
+        userData.cp = userData.cp.trim()
+        userData.phone = userData.phone.trim()
+        userData.img = userData.img.trim()
+        userData.isAdmin = userData.isAdmin.trim()
+        if (
+            userData.username ||
+            userData.email ||
+            userData.name ||
+            userData.surname ||
+            userData.address ||
+            userData.city ||
+            userData.province ||
+            userData.cp ||
+            userData.phone ||
+            userData.img ||
+            userData.isAdmin
+        ) {
+            const isValid = await validationsuser.isValid(userData)
+            if (isValid) {
+                dispatch(updateUser(userData))
+            }
+        } else {
+            console.log("no se dispatcheo la orden")
+        }
     }
     const handleChange = (e) => {
         if (userData.isAdmin === "true") {
