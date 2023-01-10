@@ -1,6 +1,7 @@
 .user {
-    flex: 7;
+    flex: 6;
     padding: 20px;
+    margin-top: 50px !important;
 }
 
 .usertitlecontainer {

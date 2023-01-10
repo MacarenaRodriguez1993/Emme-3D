@@ -1,8 +1,4 @@
-.userlist {
-    flex: 7;
-}
-
-.avatar {
+.img {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -29,4 +25,5 @@
 
 .griduser {
     flex: 6;
+    margin-top: 50px !important;
 }

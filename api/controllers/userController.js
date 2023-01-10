@@ -25,7 +25,9 @@ async function usersId(uid) {
 }
 
 async function createUser(user) {
+
     const { uid, name, email, img, phone, surname, city, province, address } = user
+
     try {
         // verifico si el usuario ya existe
         const emailExist = await User.findOne({
@@ -34,6 +36,7 @@ async function createUser(user) {
         if (emailExist)
             return false
         const createdUser = await User.create({
+
            uid: uid, 
            email:email, 
            img: img, 
@@ -43,6 +46,7 @@ async function createUser(user) {
            province: province, 
            address: address , 
            name: name
+
         })
         return createdUser
     } catch (err) {
@@ -75,6 +79,7 @@ async function userUpdate(uid, user) {
                 cp: user.cp,
                 phone: user.phone,
                 img: user.img,
+                isAdmin: user.isAdmin,
             }
         )
         if (update) return update

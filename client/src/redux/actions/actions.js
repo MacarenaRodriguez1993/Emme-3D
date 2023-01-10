@@ -21,6 +21,7 @@ const USER_NULL = "USER_NULL"
 const GET_USER = " GET_USER"
 const PUT_USER = "PUT_USER"
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
+const DELETE_USER = "DELETE_USER"
 import axios from "axios"
 
 /*--------- INICIO DE SECCION DE FILTROS DE BUSQUEDA -------------*/
@@ -103,9 +104,11 @@ export const filterByLikes = (value) => {
 
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
+
 //let url_api = "http://localhost:3001"
 //let url_api = "https://emme-3d-production-c491.up.railway.app"
 let url_api = "https://emme-3d-production-5ffc.up.railway.app"
+
 //Action para postear productos
 export const postProduct = (product) => {
     return (dispatch) => {
