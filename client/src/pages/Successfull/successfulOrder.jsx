@@ -17,9 +17,11 @@ const SuccessfulOrder = () => {
 
     //VARIABLE PARA EL TOTAL
     let sum = 0
-    const newOrder = order
+    const newOrder = {}
     useEffect(() => {
+        console.log(order)
         //DISPACHO AL BACK EL EMAIL DE ORDEN PAGADA CON EXITO
+        newOrder.productos = order
         newOrder.user_id = user._id
         const pay = window.location.search.split("&")[2]
         const stat = window.location.search.split("&")[3]
@@ -29,7 +31,7 @@ const SuccessfulOrder = () => {
         newOrder.merchant_order_id = merch.split("=")[1]
         dispatch(emailSuccessfulOrder(user))
         dispatch(successfulOrder(newOrder))
-    })
+    }, [])
 
     return (
         <div className="successfulOrder">
