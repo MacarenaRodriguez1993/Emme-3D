@@ -188,7 +188,7 @@ export default function Details({ props }) {
             </div>
             {filterReviewsById()}
             {
-                !u.email  ? (
+                !u?.email  ? (
                     <div className="container-valoracion ">
                     <div className="header-valoracion">
                         <h2>Debes iniciar sesion para enviar tu reseña</h2>

@@ -32,9 +32,7 @@ async function createUser(user) {
             email,
         }).exec()
         if (emailExist)
-            throw new Error(
-                `Ya existe un usuario registrado con este email ${email}, por favor ingresa otro`
-            )
+            return false
         const createdUser = await User.create({
            uid: uid, 
            email:email, 

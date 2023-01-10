@@ -7,41 +7,21 @@ import { app } from "../../components/firebase/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { getUserByUid } from "../../redux/actions/actions"
 import LoginGoogle from "./LoginGoogle"
-import swal from "sweetalert"
+import { useAuth } from "../../components/context/AuthContext"
+import {async} from "@firebase/util"
+
 export default function Login() {
+    const {login} = useAuth()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const user = useSelector((state) => state.users)
-    const userById = useSelector((state) => state.userByUid)
-    console.log(userById)
 
-    const auth = getAuth(app)
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user
-                dispatch(getUserByUid(user.uid))
-
-                if (userById) {
-                    swal("Perfecto!", "Sesion iniciada con éxito", "success")
-                    navigate("/products")
-                    console.log("userLogin", userById)
-                }
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                if (errorCode === "auth/user-not-found") {
-                    alert("Usuario no encontrado o no existe")
-                }
-                console.error(`Error ${errorCode}`)
-            })
+        await login(email, password)
+       
     }
 
     return (

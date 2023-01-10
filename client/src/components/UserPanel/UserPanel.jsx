@@ -27,8 +27,8 @@ const UserPanel = ({ user, logout }) => {
     })
     /* ******************************************************************* */
     useEffect(() => {
-        if (user.uid !== null) {
-            dispatch(getUserByUid(user.uid))
+        if (user?.uid !== null) {
+            dispatch(getUserByUid(user?.uid))
         }
     }, [])
     useEffect(() => {
@@ -134,7 +134,7 @@ const UserPanel = ({ user, logout }) => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={() => logout()} className="user-logout">
+                    <button onClick={logouth} className="user-logout">
                         Cerrar sesión
                     </button>
                 </div>
