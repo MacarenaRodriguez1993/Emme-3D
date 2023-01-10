@@ -28,6 +28,7 @@ import NotFound from "./components/NotFound/NotFound"
 import { PrivateRoutes, AdminRoutes } from "./components/context/PrivateRoutes"
 
 import { AuthProvider } from "./components/context/AuthContext"
+import About from "./pages/About/about"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
@@ -56,24 +57,26 @@ function App() {
                 <Route path="/contacto" element={<Contacto />} />
                 <Route exact path="/dashboard" element={<AdminRoutes><Homeadmin /></AdminRoutes>} />
                 <Route exact path="/dashboard/users" element={<AdminRoutes><Userlist /> </AdminRoutes>} />
-                <Route exact path="/dashboard/user/:id" element={<User />} />
-                <Route exact path="/dashboard/newuser" element={<Newuser />} />
+                <Route exact path="/dashboard/user/:id" element={<AdminRoutes><User /></AdminRoutes>} />
+                <Route exact path="/dashboard/newuser" element={<AdminRoutes><Newuser /></AdminRoutes>} />
                 <Route
                     exact
                     path="/dashboard/products"
-                    element={<Productlist />}
+                    element={<AdminRoutes><Productlist /></AdminRoutes>}
                 />
                 <Route
                     exact
                     path="/dashboard/product/:id"
-                    element={<Product />}
+                    element={<AdminRoutes><Product /></AdminRoutes>}
                 />
                 <Route
                     exact
                     path="/dashboard/newproduct"
-                    element={<NewProduct />}
+                    element={<AdminRoutes><NewProduct /></AdminRoutes>}
                 />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/successfulOrder" element={<SuccessfulOrder />} />
+                <Route path="/about" element={<About />} />
             </Routes>
             </AuthProvider>
         </>

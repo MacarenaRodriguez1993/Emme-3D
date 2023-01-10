@@ -9,18 +9,21 @@ mercadoPago.configure({
 })
 
 router.post("/", (req, res) => {
+    const order = req.body.map((producto) => producto[0])
+
     try {
         let preference = {
-            items: req.body.map((item) => {
+            items: order.map((item) => {
                 return {
                     ...item,
                     currency_id: "ARS",
-                    quantity: parseInt(item[0].quantity),
-                    unit_price: item[0].price,
+                    quantity: parseInt(item.productAmount),
+                    unit_price: item.productPrice,
                 }
             }),
             back_urls: {
                 success: "https://m3dfront.onrender.com/successfulOrder",
+                // success: "http://localhost:5173/successfulOrder",
                 failure: "https://m3dfront.onrender.com/products",
                 pending: "https://m3dfront.onrender.com/products",
             },

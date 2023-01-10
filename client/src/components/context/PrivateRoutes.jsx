@@ -35,7 +35,7 @@ export function AdminRoutes({ children }) {
 
   if (loading) return <Loading/>
   if (!user) return navigate('/login')
-  if (suer && user.isAdmin === false ){
+  if (user.isAdmin === true ){
     return <>{children}</>
   }
   else {
