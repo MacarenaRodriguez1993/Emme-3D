@@ -10,15 +10,15 @@ import ModalLogin from "../../components/LoginModal/ModalLogin"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
-    const {isOpen, open, close} = useModal(false)
+    const {isOpen, open, close} = useModal()
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
-    const url_api = "https://emme-3d-production-c491.up.railway.app"
+    //const url_api = "https://emme-3d-production-c491.up.railway.app"
     // const url_api = "http://localhost:3001"
-
+    let url_api = "https://emme-3d-production-5ffc.up.railway.app"
     const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {

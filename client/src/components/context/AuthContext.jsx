@@ -13,7 +13,7 @@ import { auth } from "../firebase/firebase";
 import {useSelector, useStore} from "react-redux";
 import { getUserByUid, createUsers, userNull,emailBienvenido } from "../../redux/actions/actions"
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../LoginModal/useModal";
+
 
 const authContext = createContext();
 
@@ -26,7 +26,7 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
   const [userByUid, setUserByUid] = useState(null);
   const [loading, setLoading] = useState(true);
-  const {close} = useModal()
+  
   const u = useSelector((state) => state.userByUid)
   const rtActual = window.location.pathname
   const navigate  = useNavigate()
@@ -87,8 +87,8 @@ export function AuthProvider({ children }) {
                 console.log(rtActual)
                         if(rtActual === '/cart')
                         {
+                          
                           navigate('/cart')
-                          close()
                         }
                         else navigate("/products")
 
@@ -120,10 +120,10 @@ export function AuthProvider({ children }) {
                    
                
                     if (userByUid?.email) {
-                      if(rtActual === 'cart')
+                      if(rtActual === '/cart')
                         {
+                         
                           navigate('/cart')
-                          close()
                         }
                         else navigate("/products")
                   } else {

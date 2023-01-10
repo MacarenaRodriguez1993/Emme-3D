@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
 import { useDispatch, useSelector } from "react-redux"
-
 import { Link, useNavigate } from "react-router-dom"
-import { app } from "../../components/firebase/firebase"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { getUserByUid } from "../../redux/actions/actions"
 import LoginGoogle from "../../pages/Login/LoginGoogle"
 import { useAuth } from "../../components/context/AuthContext"
-import {async} from "@firebase/util"
-
-
 import './ModalLogin.css'
+
 
 
 export default function ModalLogin({isOpen, open, close}) {
@@ -22,6 +16,7 @@ export default function ModalLogin({isOpen, open, close}) {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const u = useSelector(state => state.userByUid)
 
     const onSubmit = async(e) => {
         e.preventDefault()
@@ -29,9 +24,11 @@ export default function ModalLogin({isOpen, open, close}) {
        
     }
 
+    if(u) return close()
+
     return (
     <div className={`modal-container ${isOpen && 'is-open'}`}>
-        <button onClick={ close}>X</button>
+
         <div className="container-login">
             <div className="container-logo">
                 <img
