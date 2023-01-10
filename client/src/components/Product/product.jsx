@@ -5,16 +5,26 @@ import { AiFillEdit, AiFillDelete, AiOutlineHeart } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteProduct, getProducts } from "../../redux/actions/actions"
 import { Link } from "react-router-dom"
+import swal from "sweetalert"
 const Product = ({ id, name, price, image }) => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
     const onClickDelete = (id) => {
-        if (
-            window.confirm(`¿Estas seguro de querer borrar el producto ${name}`)
-        ) {
-            dispatch(deleteProduct(id))
-            dispatch(getProducts())
-        }
+        swal({
+            title: "¿Estas seguro?",
+            text: "Una vez inhabilitado el producto no aparecera en la tienda",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal("Producto inhabilitado con exito", {
+                    icon: "success",
+                })
+                dispatch(deleteProduct(id))
+                dispatch(getProducts())
+            }
+        })
     }
 
     return (
