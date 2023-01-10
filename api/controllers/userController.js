@@ -32,9 +32,7 @@ async function createUser(user) {
             email,
         }).exec()
         if (emailExist)
-            throw new Error(
-                `Ya existe un usuario registrado con este email ${email}, por favor ingresa otro`
-            )
+            return false
         const createdUser = await User.create({
            uid: uid, 
            email:email, 
@@ -79,7 +77,7 @@ async function userUpdate(uid, user) {
                 img: user.img,
             }
         )
-        if (update) return "El usuario fue actualizado con exito"
+        if (update) return update
     } catch (err) {
         throw err
     }

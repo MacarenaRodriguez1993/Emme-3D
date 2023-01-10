@@ -2,14 +2,13 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
 import { FaShoppingCart } from "react-icons/fa"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useSelector } from "react-redux"
+
 import userPng from '../../assets/user.png'
 
 const NavBar = () => {
     //const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-    console.log("usernav", user?.email)
     let productosCart = useSelector((state) => state.shoppingCart)
 
     /* useEffect(() => {
