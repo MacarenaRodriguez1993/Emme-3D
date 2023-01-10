@@ -6,7 +6,7 @@ import { updateUser } from "../../redux/actions/actions"
 import { getUserByUid } from "../../redux/actions/actions"
 import userDefaultImg from "../../assets/user.png"
 
-const UserPanel = ({ user, logout }) => {
+const UserPanel = ({ user, logouth }) => {
     const dispatch = useDispatch()
     //const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)
@@ -26,8 +26,8 @@ const UserPanel = ({ user, logout }) => {
     })
     /* ******************************************************************* */
     useEffect(() => {
-        if (user.uid !== null) {
-            dispatch(getUserByUid(user.uid))
+        if (user?.uid !== null) {
+            dispatch(getUserByUid(user?.uid))
         }
     }, [])
     useEffect(() => {
@@ -128,7 +128,7 @@ const UserPanel = ({ user, logout }) => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={() => logout()} className="user-logout">
+                    <button onClick={logouth} className="user-logout">
                         Cerrar sesión
                     </button>
                 </div>

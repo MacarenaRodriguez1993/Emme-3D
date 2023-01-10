@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
-import { useDispatch, useSelector } from "react-redux"
+import { useAuth } from "../../components/context/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
-import { app, db } from "../../components/firebase/firebase"
-import { createUsers, emailBienvenido } from "../../redux/actions/actions"
-import { collection, addDoc, doc } from "firebase/firestore"; 
-import {async} from "@firebase/util"
 
 export default function register() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
-    
-   
-
+    const {signup} = useAuth()
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -22,13 +12,15 @@ export default function register() {
         apellido: "",
     })
 
-    const auth = getAuth(app)
+    console.log(user)
    
     
     const  register = async (e) => {
         e.preventDefault()
+
+            await signup(user)
         
-        createUserWithEmailAndPassword(auth, user.email, user.password)
+        /* createUserWithEmailAndPassword(auth, user.email, user.password)
         .then((userCredential) => {
             // Signed in
             
@@ -70,7 +62,7 @@ export default function register() {
                 const errorCode = error.code
                 const errorMessage = error.message
                 // ..
-            })
+            }) */
         }
 
         

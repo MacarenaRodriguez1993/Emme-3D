@@ -25,6 +25,9 @@ import Product from "../src/Admin/pages/product/Product"
 import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
 import NotFound from "./components/NotFound/NotFound"
+import { PrivateRoutes, AdminRoutes } from "./components/context/PrivateRoutes"
+
+import { AuthProvider } from "./components/context/AuthContext"
 
 const PRIVATE = "/profile"
 const PUBLIC = "/"
@@ -32,6 +35,7 @@ const PUBLIC = "/"
 function App() {
     return (
         <>
+        <AuthProvider>
             <Routes>
                 <Route path="/crear-producto" element={<CreateProduct />} />
                 <Route path="/cart" element={<Cart />} />
@@ -47,11 +51,11 @@ function App() {
                 <Route exact strict path="/login" element={<Login />} />
                 <Route exact strict path="/register" element={<Register />} />
                 <Route path="/details/:_id" element={<Details />} />
-                <Route path="/profile" element={<Perfil />} />
-                <Route path="/updateproduct/:id" element={<CreateProduct />} />
+                <Route path="/profile" element={<PrivateRoutes><Perfil /></PrivateRoutes>} />
+                <Route path="/updateproduct/:id" element={<AdminRoutes> <CreateProduct /> </AdminRoutes> } />
                 <Route path="/contacto" element={<Contacto />} />
-                <Route exact path="/dashboard" element={<Homeadmin />} />
-                <Route exact path="/dashboard/users" element={<Userlist />} />
+                <Route exact path="/dashboard" element={<AdminRoutes><Homeadmin /></AdminRoutes>} />
+                <Route exact path="/dashboard/users" element={<AdminRoutes><Userlist /> </AdminRoutes>} />
                 <Route exact path="/dashboard/user/:id" element={<User />} />
                 <Route exact path="/dashboard/newuser" element={<Newuser />} />
                 <Route
@@ -71,6 +75,7 @@ function App() {
                 />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            </AuthProvider>
         </>
     )
 }

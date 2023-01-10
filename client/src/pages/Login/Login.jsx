@@ -7,8 +7,11 @@ import { app } from "../../components/firebase/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { getUserByUid } from "../../redux/actions/actions"
 import LoginGoogle from "./LoginGoogle"
+import { useAuth } from "../../components/context/AuthContext"
+import {async} from "@firebase/util"
 
 export default function Login() {
+    const {login} = useAuth()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
@@ -16,12 +19,13 @@ export default function Login() {
     const [password, setPassword] = useState("")
     // const user = useSelector((state) => state.users)
     const userById = useSelector((state) => state.userByUid)
-    console.log(userById)
+    console.log(email, password)
 
     const auth = getAuth(app)
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
+        await login(email, password)
+        /* signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
@@ -40,7 +44,7 @@ export default function Login() {
                     alert("Usuario no encontrado o no existe")
                 }
                 console.error(`Error ${errorCode}`)
-            })
+            }) */
     }
 
     return (

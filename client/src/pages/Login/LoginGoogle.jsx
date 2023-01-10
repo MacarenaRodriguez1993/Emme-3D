@@ -12,6 +12,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { getUserByUid, createUsers } from "../../redux/actions/actions"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useAuth } from "../../components/context/AuthContext"
+import {async} from "@firebase/util"
 
 export default function LoginGoogle() {
     const navigate = useNavigate()
@@ -19,9 +21,16 @@ export default function LoginGoogle() {
 
     const provider = new GoogleAuthProvider()
     const auth = getAuth(app)
+    const {loginWithGoogle} = useAuth()
     const userById = useSelector((state) => state.userByUid)
+    const errors = useSelector((state) => state.error)
+    console.log(errors)
     console.log(userById)
-    const loginGoogle = () => {
+
+    const loginGoogle = async() => {
+
+        await loginWithGoogle()
+       /*  
         try {
             signInWithPopup(auth, provider)
                 .then((result) => {
@@ -71,14 +80,14 @@ export default function LoginGoogle() {
                     // ...
                 })
         } catch (error) {
-            errorMessage
+            console.log(errorMessage)
             alert(errorMessage)
-        }
+        } */
     }
 
     return (
         <div>
-            <button className="btn-submit" onClick={() => loginGoogle()}>
+            <button className="btn-submit" onClick={loginGoogle}>
                 Login Google
             </button>
         </div>
