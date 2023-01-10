@@ -7,7 +7,7 @@ import { getUserByUid } from "../../redux/actions/actions"
 import userDefaultImg from "../../assets/user.png"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-const UserPanel = ({ user, logout }) => {
+const UserPanel = ({ user, logouth }) => {
     const dispatch = useDispatch()
     //const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)

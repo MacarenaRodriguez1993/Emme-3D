@@ -29,7 +29,7 @@ import { PrivateRoutes, AdminRoutes } from "./components/context/PrivateRoutes"
 
 import { AuthProvider } from "./components/context/AuthContext"
 import About from "./pages/About/about"
-import ModalLogin from "./pages/Login/ModalLogin"
+import ModalLogin from "./components/LoginModal/ModalLogin"
 
 
 function App() {
