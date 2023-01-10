@@ -39,15 +39,29 @@ const NavBar = () => {
                     <Link to="/contacto" className="linkk">
                         <h4>Contacto</h4>
                     </Link>
-                    {
-                        user?.email ?  <button className=" login-btn">
-                         <Link className="btn-profile" to="/profile">Perfil <img className="img-profile" src={user?.img ? user?.img : userPng} /> </Link> 
-                    </button>
-                    :  <button className="buttonLogin ">
-                   <Link  to="/login"> LogIn </Link>
-                </button>
-                    }
-                   
+                    {user?.isAdmin && (
+                        <button className=" login-btn">
+                            <Link className="btn-profile" to="/dashboard">
+                                {" "}
+                                ADMIN{" "}
+                            </Link>
+                        </button>
+                    )}
+                    {user?.email ? (
+                        <button className=" login-btn">
+                            <Link className="btn-profile" to="/profile">
+                                Perfil{" "}
+                                <img
+                                    className="img-profile"
+                                    src={user?.img ? user?.img : userPng}
+                                />{" "}
+                            </Link>
+                        </button>
+                    ) : (
+                        <button className="buttonLogin ">
+                            <Link to="/login"> LogIn </Link>
+                        </button>
+                    )}
                 </div>
             </ul>
         </div>

@@ -1,4 +1,5 @@
 import { MdNotifications, MdSettings } from "react-icons/md"
+import { Link } from "react-router-dom"
 import "./Topbar.css"
 
 export default function Topbar() {
@@ -7,7 +8,11 @@ export default function Topbar() {
             <div className="topbaradmin">
                 <div className="topbarWrapper">
                     <div className="topleft">
-                        <span className="logo">Emme3D</span>
+                        <span className="logo">
+                            <Link className="linkHomeAdmin" to={"/home"}>
+                                Emme3D
+                            </Link>
+                        </span>
                     </div>
                     <div className="topright">
                         <div className="topbaricons">

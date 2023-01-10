@@ -7,7 +7,7 @@ import {
     carouselDelete,
 } from "../../redux/actions/actions"
 import "./ImageCarousel.css"
-
+import swal from "sweetalert"
 const ImageCarousel = () => {
     const dispatch = useDispatch()
     const carouselImages = useSelector((state) => state.carouselImages)
@@ -36,7 +36,23 @@ const ImageCarousel = () => {
     }
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
-        dispatch(carouselDelete(deleteImg.imgId))
+        setImages({
+            name: "",
+            img: "",
+        })
+        swal({
+            title: "¿Estas seguro de eliminar esta imagen del carousel?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal("imagen eliminada", {
+                    icon: "success",
+                })
+                dispatch(carouselDelete(deleteImg.imgId))
+            }
+        })
     }
     const handleChangeDel = (e) => {
         setDelteImg({
