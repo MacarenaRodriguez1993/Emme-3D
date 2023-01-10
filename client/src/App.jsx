@@ -75,7 +75,7 @@ function App() {
                     element={<AdminRoutes><NewProduct /></AdminRoutes>}
                 />
                 <Route path="*" element={<NotFound />} />
-                <Route path="/successfulOrder" element={<SuccessfulOrder />} />
+                <Route path="/successfulOrder" element={<PrivateRoutes><SuccessfulOrder /></PrivateRoutes>} />
                 <Route path="/about" element={<About />} />
             </Routes>
             </AuthProvider>

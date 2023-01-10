@@ -18,10 +18,10 @@ export default function LoginGoogle() {
     }
 
     return (
-        <div>
+        
             <button className="btn-submit" onClick={loginGoogle}>
                 Login Google
             </button>
-        </div>
+        
     )
 }
