@@ -18,7 +18,7 @@ export default function Details({ props }) {
     const dispatch = useDispatch()
     const R = useSelector((state) => state.reviews)
     const u = useSelector((state) => state.userByUid)
-    const [errValoracion, setErrValoracion] = useState('')
+    const [errValoracion, setErrValoracion] = useState("")
 
     const reviewref = useRef("")
     const [ratin, setRatin] = useState({
@@ -45,13 +45,12 @@ export default function Details({ props }) {
         }, 2000)
     }
 
-    const errReviews =() => {
+    const errReviews = () => {
         if (reviewref.current.value.length < 10) {
-            setErrValoracion( 'La reseña debe tener almenos 10 caracteres')
-        }
-        else{
+            setErrValoracion("La reseña debe tener almenos 10 caracteres")
+        } else {
             handleReviws()
-            setErrValoracion('')
+            setErrValoracion("")
         }
     }
 
@@ -91,8 +90,6 @@ export default function Details({ props }) {
         )
     }
 
-  
-
     useEffect(() => {
         dispatch(getDetails(_id))
         dispatch(getReviews(_id))
@@ -102,8 +99,22 @@ export default function Details({ props }) {
     let p = productDetail?.data
 
     const handleShopCar = (e) => {
-        e.preventDefault()
-        dispatch(addToCart(p))
+        // e.preventDefault()
+        // dispatch(addToCart(p))
+        try {
+            const arrayString = localStorage.getItem("shoppingCart")
+            let array
+            if (arrayString) {
+                array = JSON.parse(arrayString)
+            } else {
+                array = []
+            }
+            array.push(prCart)
+            const arrayModificadoString = JSON.stringify(array)
+            localStorage.setItem("shoppingCart", arrayModificadoString)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <div className="container-details">
@@ -175,68 +186,71 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {filterReviewsById()}
-            {
-                !u.email  ? (
-                    <div className="container-valoracion ">
+            {!u.email ? (
+                <div className="container-valoracion ">
                     <div className="header-valoracion">
                         <h2>Debes iniciar sesion para enviar tu reseña</h2>
                         <Rating
-                        readonly={true}
-                        
+                            readonly={true}
                             size={22}
                             /* onClick={handleRating}
                             initialValue={ratin.rating} */
-    
+
                             /* onPointerEnter={onPointerEnter}
                     onPointerLeave={onPointerLeave} */
                             // initialValue={reviews.rating}
-    
+
                             //onPointerMove={onPointerMove}
                         />
                     </div>
                     <textarea
-                    readonly="readonly"
+                        readonly="readonly"
                         className="input-opinion-disabled"
                         placeholder="Debes iniciar sesion para enviar tu reseña"
                         ref={reviewref}
                         //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                     />
-                   
+
                     <div className="btn-valoracion-disabled">
-                        <button >Enviar</button>
+                        <button>Enviar</button>
                     </div>
                 </div>
-                )
-                :
-                (
-                    <div className="container-valoracion ">
-                <div className="header-valoracion">
-                    <h2>Ingresa tu valoracion</h2>
-                    <Rating
-                        size={22}
-                        onClick={handleRating}
-                        initialValue={ratin.rating}
+            ) : (
+                <div className="container-valoracion ">
+                    <div className="header-valoracion">
+                        <h2>Ingresa tu valoracion</h2>
+                        <Rating
+                            size={22}
+                            onClick={handleRating}
+                            initialValue={ratin.rating}
 
-                        /* onPointerEnter={onPointerEnter}
+                            /* onPointerEnter={onPointerEnter}
                 onPointerLeave={onPointerLeave} */
-                        // initialValue={reviews.rating}
+                            // initialValue={reviews.rating}
 
-                        //onPointerMove={onPointerMove}
+                            //onPointerMove={onPointerMove}
+                        />
+                    </div>
+                    <textarea
+                        className="input-opinion"
+                        placeholder="ingrea una opinion sobre el producto"
+                        ref={reviewref}
+                        //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                     />
+                    <span
+                        style={{
+                            color: "red",
+                            fontSize: "18px",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        {errValoracion}
+                    </span>
+                    <div className="btn-valoracion">
+                        <button onClick={() => errReviews()}>Enviar</button>
+                    </div>
                 </div>
-                <textarea
-                    className="input-opinion"
-                    placeholder="ingrea una opinion sobre el producto"
-                    ref={reviewref}
-                    //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
-                />
-                <span style={{color: 'red', fontSize:'18px', fontWeight: 'bold'}} >{errValoracion}</span>
-                <div className="btn-valoracion">
-                    <button onClick={() => errReviews()}>Enviar</button>
-                </div>
-            </div>
-                )
-            }
+            )}
             <Footer />
         </div>
     )
