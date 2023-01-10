@@ -27,8 +27,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    padding: 10px;
+    height: 90vh;
+    padding: 30px;
+    border-radius: 8px;
 }
 .container-logo{
     height: 200px;
