@@ -1,57 +1,23 @@
 import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
-import { useDispatch, useSelector } from "react-redux"
+import { useAuth } from "../../components/context/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
-import { app, db } from "../../components/firebase/firebase"
-import { createUsers, emailBienvenido, getUsers } from "../../redux/actions/actions"
-import { collection, addDoc, doc } from "firebase/firestore"; 
-import {async} from "@firebase/util"
 
 export default function register() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
-    
-   
-
+    const {signup} = useAuth()
     const [user, setUser] = useState({
-        email: '',
-        password: '',
-        name: '',
-        apellido: '',
+        email: "",
+        password: "",
+        name: "",
+        apellido: "",
     })
-
-    const auth = getAuth(app)
    
     
     const  register = async (e) => {
         e.preventDefault()
-        
-        createUserWithEmailAndPassword(auth, user.email, user.password)
-        .then((userCredential) => {
-            // Signed in
-            
-            const u = userCredential.user
-            console.log(u)
-            dispatch(createUsers({
-                'uid': u?.uid,
-                'name': user.name,
-                'surname': user.apellido,
-                'email':user.email,
-                'password':user.password,
-                'phone': u?.phoneNumber,
-                'photo': u?.photoURL
-            }))
-            navigate("/login")
-            dispatch(emailBienvenido(user))
-            // ...
-        })
-        .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                // ..
-            })
+
+            await signup(user)
+       
         }
 
         

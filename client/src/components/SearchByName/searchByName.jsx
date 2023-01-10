@@ -36,10 +36,13 @@ const SearchByName = () => {
                     value={state.search}
                     onChange={(event) => handleChange(event)}
                 />
-                <button type="submit" className="buttonSearch">
+                <button
+                    type="submit"
+                    className="buttonSearch select-filters sbn"
+                >
                     <AiOutlineSearch size="1.3em" />
                 </button>
-                <button className="buttonSearch" onClick={click}>
+                <button className="buttonSearch select-filters" onClick={click}>
                     X
                 </button>
             </form>

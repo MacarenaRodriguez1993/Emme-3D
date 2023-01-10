@@ -13,55 +13,47 @@ async function getUsers() {
     }
 }
 
-async function usersId(id) {
+async function usersId(uid) {
+    console.log('uid back', uid)
     try {
-        const userId = await User.find({
-            uid: id,
-        }).clone()
-        return userId
+        const userId = await User.findOne({uid:uid}).exec()
+            return userId
+        
     } catch (err) {
         throw err
     }
 }
 
 async function createUser(user) {
-    const { uid, name, email, img, phone, surname, city, province, address } =
-        user
+
+    const { uid, name, email, img, phone, surname, city, province, address } = user
+
     try {
         // verifico si el usuario ya existe
         const emailExist = await User.findOne({
             email,
         }).exec()
         if (emailExist)
-            throw new Error(
-                `Ya existe un usuario registrado con este email ${email}, por favor ingresa otro`
-            )
+            return false
         const createdUser = await User.create({
-            uid: uid,
-            email: email,
-            img: img,
-            phone: phone,
-            surname: surname,
-            city: city,
-            province: province,
-            address: address,
-            name: name,
+
+           uid: uid, 
+           email:email, 
+           img: img, 
+           phone: phone, 
+           surname: surname, 
+           city: city, 
+           province: province, 
+           address: address , 
+           name: name
+
         })
         return createdUser
     } catch (err) {
         throw err
     }
 }
-async function getUsers() {
-    try {
-        const users = await User.find()
-        if (users.length < 1)
-            throw new Error("NO HAY USUARIOS EN LA BASE DE DATOS")
-        return users
-    } catch (err) {
-        throw err
-    }
-}
+
 
 async function deletedUser(id) {
     try {
@@ -90,7 +82,7 @@ async function userUpdate(uid, user) {
                 isAdmin: user.isAdmin,
             }
         )
-        if (update) return "El usuario fue actualizado con exito"
+        if (update) return update
     } catch (err) {
         throw err
     }

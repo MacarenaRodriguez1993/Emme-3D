@@ -9,6 +9,7 @@ import {
     filterByLikes,
     getCategories,
 } from "../../redux/actions/actions"
+import SearchByName from "../SearchByName/searchByName"
 
 const SearchFilters = () => {
     /* ESTE COMPONENTE FUNCIONA SETEANDO EL ESTADO GLOBAL PRODUCTSFILTERED
@@ -51,7 +52,9 @@ const SearchFilters = () => {
             >
                 <option value="categorias">Categorias</option>
                 {categorias?.map((c) => (
-                    <option value={c?.name}>{c?.name}</option>
+                    <option key={c?.name} value={c?.name}>
+                        {c?.name}
+                    </option>
                 ))}
             </select>
             {/* filtro de precios */}
@@ -95,6 +98,7 @@ const SearchFilters = () => {
                 <option value="mayorValoracion">Mayor valoracion</option>
                 <option value="menorValoracion">Menor valoracion</option>
             </select>
+            <SearchByName />
         </div>
     )
 }

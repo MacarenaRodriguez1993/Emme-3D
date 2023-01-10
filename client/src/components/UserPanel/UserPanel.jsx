@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateUser } from "../../redux/actions/actions"
 import { getUserByUid } from "../../redux/actions/actions"
 import userDefaultImg from "../../assets/user.png"
-
-const UserPanel = ({ user, logout }) => {
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+const UserPanel = ({ user, logouth }) => {
     const dispatch = useDispatch()
     //const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)
@@ -26,8 +27,8 @@ const UserPanel = ({ user, logout }) => {
     })
     /* ******************************************************************* */
     useEffect(() => {
-        if (user.uid !== null) {
-            dispatch(getUserByUid(user.uid))
+        if (user?.uid !== null) {
+            dispatch(getUserByUid(user?.uid))
         }
     }, [])
     useEffect(() => {
@@ -62,9 +63,15 @@ const UserPanel = ({ user, logout }) => {
             ...userData,
             [e.target.name]: e.target.value,
         })
+        console.log(userData)
+    }
+    const notify = () => {
+        toast("Usuario editado")
     }
     const handleSubmit = (e) => {
+        e.preventDefault()
         dispatch(updateUser(userData))
+        notify()
     }
     /* ******************************************************************* */
     const handleOpenWidget = async () => {
@@ -127,7 +134,7 @@ const UserPanel = ({ user, logout }) => {
                     </div>
                 </div>
                 <div>
-                    <button onClick={() => logout()} className="user-logout">
+                    <button onClick={logouth} className="user-logout">
                         Cerrar sesión
                     </button>
                 </div>
@@ -232,6 +239,12 @@ const UserPanel = ({ user, logout }) => {
                 id="user-edit"
                 onSubmit={handleSubmit}
             >
+                <ToastContainer
+                    theme="dark"
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                />
                 <p className="user-data">Modifica tus datos</p>
                 <div className="user-form-container">
                     <div className="user-form-labels">
@@ -301,7 +314,6 @@ const UserPanel = ({ user, logout }) => {
                         />
                     </div>
                 </div>
-
                 <div className="edit-btns">
                     <button className="user-data-fields user-logout user-edit u-edit-s">
                         Enviar

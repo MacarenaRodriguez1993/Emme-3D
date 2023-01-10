@@ -12,19 +12,20 @@ import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
 import Footer from "../../components/Footer/Footer"
 import { Rating } from "react-simple-star-rating"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export default function Details({ props }) {
     let { _id } = useParams()
     const dispatch = useDispatch()
     const R = useSelector((state) => state.reviews)
     const u = useSelector((state) => state.userByUid)
-    const [errValoracion, setErrValoracion] = useState('')
+    const [errValoracion, setErrValoracion] = useState("")
 
     const reviewref = useRef("")
     const [ratin, setRatin] = useState({
         rating: 0,
     })
-
     const id = "63b75335fc73e6f7739e7eda"
     const handleRating = (rate) => {
         setRatin({ ...ratin, rating: rate })
@@ -77,7 +78,7 @@ export default function Details({ props }) {
                                 <Rating
                                     disableFillHover={true}
                                     onPointerEnter={r.rating}
-                                    readonly
+                                    readonly={true}
                                     initialValue={r.rating}
                                     size={18}
                                 />
@@ -102,13 +103,23 @@ export default function Details({ props }) {
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
 
+    const notify = () => {
+        toast("Nuevo producto agragado al carrito")
+    }
     const handleShopCar = (e) => {
         e.preventDefault()
         dispatch(addToCart(p))
+        notify()
     }
     return (
         <div className="container-details">
             <NavBar />
+            {/* ESTO ES PARA MOSTRAR MENSAJE CUANDO SE AGREGA UN PRODUCTO AL CARRITO */}
+            <ToastContainer
+                theme="dark"
+                position="top-right"
+                autoClose={4000}
+            />
             <div className="container-header">
                 <div className="conatainer-header-left">
                     <img
@@ -177,7 +188,7 @@ export default function Details({ props }) {
             </div>
             {filterReviewsById()}
             {
-                !u.email  ? (
+                !u?.email  ? (
                     <div className="container-valoracion ">
                     <div className="header-valoracion">
                         <h2>Debes iniciar sesion para enviar tu reseña</h2>

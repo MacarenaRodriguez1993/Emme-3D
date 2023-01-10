@@ -16,20 +16,66 @@ const OrderSchema = new mongoose.Schema(
         // Detetalles de la orden
         products: [
             {
-                productId: {
+                productName: {
                     type: String,
+                    required: true,
                 },
-                quantity: {
+
+                productImage: [
+                    {
+                        type: String,
+                        required: true,
+                        minItems: 1,
+                    },
+                ],
+
+                productPrice: {
+                    type: Number,
+                    required: true,
+                },
+
+                productAmount: {
                     type: Number,
                     default: 1,
+                },
+
+                productTotal: {
+                    type: Number,
+                    default: function () {
+                        return this.productPrice * this.productAmount
+                    },
                 },
             },
         ],
 
+        total: {
+            type: Number,
+            default: function () {
+                let sum = 0
+                this.products.map((p) => (sum += p.productTotal))
+                return sum
+            },
+        },
+
+        payment_id: {
+            type: String,
+            required: true,
+        },
+
+        status: {
+            type: String,
+            required: true,
+        },
+
+        merchant_order_id: {
+            type: String,
+            required: true,
+        },
+
         // Estado del pedido
         state: {
             type: String,
-            required: true,
+            default: "Recibida",
         },
     },
     { timestamps: true }

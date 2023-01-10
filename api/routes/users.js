@@ -17,10 +17,10 @@ router.get("/", async (req, res) => {
     }
 })
 // Get detalles del usuario /:id
-router.get("/:id", async (req, res) => {
-    const { id } = req.params
+router.get("/:uid", async (req, res) => {
+    const { uid } = req.params
     try {
-        const userId = await getUsersById(id)
+        const userId = await getUsersById(uid)
         res.status(200).json(userId)
     } catch (err) {
         res.status(404).send(err.message)
