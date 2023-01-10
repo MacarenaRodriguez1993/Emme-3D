@@ -6,8 +6,6 @@ import Product from "../../components/Product/product"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
-import SearchByName from "../../components/SearchByName/searchByName"
-
 import { getProducts } from "../../redux/actions/actions"
 import Carousel from "../../components/Carousel/Carousel"
 import Loading from "../../components/Loading/Loading"
@@ -18,6 +16,7 @@ const Products = () => {
     /* Dejo listo el dispatch para cuando temgamos la conexion con el back*/
     /*Aqui tomo el estado global de allProducts*/
     let productos = useSelector((state) => state.productsFiltered)
+    //para probar la animacion de carga descomentar la linea de abajo y comentar la de arriba
     //let productos
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
@@ -43,7 +42,6 @@ const Products = () => {
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <div className="barContainer">
                 <SearchFilters />
-                <SearchByName />
             </div>
             {error}
 

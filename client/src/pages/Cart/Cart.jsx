@@ -52,16 +52,16 @@ const Cart = () => {
             <div className="products-container">
                 <h2 className="titleCart">Carrito de Compras 🔖</h2>
                 <div className="p-container">
-                    {productosCart.map((p) => (
+                    {productosCart?.map((p) => (
                         <div className="product">
                             {console.log("p", p)}
                             <div>
-                                <img src={p[0].productImage[0]} id="pr-img" />
+                                <img src={p[0]?.productImage[0]} id="pr-img" />
                             </div>
                             <div id="contenidoCart">
-                                <p>{p[0].productName}</p>
-                                <p>$ {p[0].productPrice}</p>
-                                <p>{p[0].description}</p>
+                                <p>{p[0]?.productName}</p>
+                                <p>$ {p[0]?.productPrice}</p>
+                                <p>{p[0]?.description}</p>
                             </div>
                             <div id="cantidad">
                                 <span>Cantidad</span>
@@ -76,7 +76,7 @@ const Cart = () => {
                                 <button
                                     id="deleteCart"
                                     onClick={() => {
-                                        deleteCart(p[0].productName)
+                                        deleteCart(p[0]?.productName)
                                     }}
                                 >
                                     x
