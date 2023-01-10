@@ -10,16 +10,10 @@ import Footer from "../../components/Footer/Footer"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
-    /* let [userCart, setUserCart] = useState({
-        cart: "",
-    }) */
     const dispatch = useDispatch()
     const deleteCart = (name) => {
-        /* setUserCart({
-            cart: "",
-        }) */
         dispatch(deleteToCart(name))
-        //dispatch(updateUserCart(userCart))
+        dispatch(updateUserCart(userCart))
     }
     const navigate = useNavigate()
     //const url_api = "https://emme-3d-production-c491.up.railway.app"
@@ -68,10 +62,14 @@ const Cart = () => {
                             </div>
                             <div id="contenidoCart">
                                 <p>{p[0]?.productName}</p>
-                                <p>Precio por unidad ${p[0]?.productPrice}</p>
                                 <p>{p[0]?.description}</p>
+                                <p>Precio por unidad ${p[0]?.productPrice}</p>
+                                <p>
+                                    Precio por {p[0]?.productAmount}u. $
+                                    {p[0]?.productPrice * p[0]?.productAmount}
+                                </p>
                             </div>
-                            {/* <div id="cantidad">
+                            <div id="cantidad">
                                 <span>Cantidad</span>
                                 <input
                                     type="number"
@@ -79,7 +77,7 @@ const Cart = () => {
                                     defaultValue={1}
                                     onChange={(e) => handlerChange(e, p[0])}
                                 />
-                            </div> */}
+                            </div>
                             <p className="botonesCart">
                                 <button
                                     id="deleteCart"

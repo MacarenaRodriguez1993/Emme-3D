@@ -104,20 +104,8 @@ export default function Details({ props }) {
         toast("Nuevo producto agragado al carrito")
     }
     const handleShopCar = (e) => {
-        try {
-            const arrayString = localStorage.getItem("shoppingCart")
-            let array
-            if (arrayString) {
-                array = JSON.parse(arrayString)
-            } else {
-                array = []
-            }
-            array.push(p)
-            const arrayModificadoString = JSON.stringify(array)
-            localStorage.setItem("shoppingCart", arrayModificadoString)
-        } catch (error) {
-            console.log(error)
-        }
+        e.preventDefault()
+        dispatch(addToCart(p))
         notify()
     }
     return (
@@ -196,7 +184,7 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {filterReviewsById()}
-            {!u?.email ? (
+            {!u.email ? (
                 <div className="container-valoracion ">
                     <div className="header-valoracion">
                         <h2>Debes iniciar sesion para enviar tu reseña</h2>
