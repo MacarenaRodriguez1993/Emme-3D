@@ -36,7 +36,6 @@ export function AuthProvider({ children }) {
       // Signed in
       
       const u = userCredential.user
-      console.log(u)
       setTimeout(() => {
           const users = {
               "uid": u.uid,
@@ -50,7 +49,7 @@ export function AuthProvider({ children }) {
               "province": "",
               "address": "",
           }
-          console.log("userRegister", users)
+         
           store.dispatch(createUsers({
               "uid": u?.uid || "",
               "name": name || "",
@@ -85,7 +84,7 @@ export function AuthProvider({ children }) {
                
                 
                         navigate("/products")
-                        console.log("userLogin", u)
+                       
               
                 // ...
             })
@@ -110,7 +109,7 @@ export function AuthProvider({ children }) {
                     const u = result.user
                     store.dispatch(getUserByUid(u?.uid))
                     //Verifico si es la primera vez que se ingresa
-                    console.log('uid logingoogle',u?.uid)
+                   
                
                     if (userByUid?.email) {
                       navigate("/products")
@@ -141,7 +140,7 @@ export function AuthProvider({ children }) {
                     const errorMessage = error.message
                     // The email of the user"s account used.
                     const email = error.reloadUserInfo
-                    console.log("errores", error.reloadUserInfo)
+                    
                     // The AuthCredential type that was used.
 
                     const credential =
@@ -157,7 +156,7 @@ export function AuthProvider({ children }) {
                 // Sign-out successful.
                 store.dispatch(userNull())
                 navigate("/products")
-                console.log("sesion cerrada")
+               
             })
             .catch((error) => {
                 // An error happened.
@@ -170,7 +169,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log( currentUser );
+    
       if (currentUser?.email === u?.email)
       {
         

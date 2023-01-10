@@ -11,58 +11,13 @@ export default function register() {
         name: "",
         apellido: "",
     })
-
-    console.log(user)
    
     
     const  register = async (e) => {
         e.preventDefault()
 
             await signup(user)
-        
-        /* createUserWithEmailAndPassword(auth, user.email, user.password)
-        .then((userCredential) => {
-            // Signed in
-            
-            const u = userCredential.user
-            console.log(u)
-            setTimeout(() => {
-                const users = {
-                    "uid": u.uid,
-                    "name": user.name || "",
-                    "surname":user?.apellido || "",
-                    "email": user?.email || "",
-                    //password: user.password,
-                    "phone": u?.phoneNumber ||"",
-                    "img": u?.photoURL || "",
-                    "city": "",
-                    "province": "",
-                    "address": "",
-                }
-                console.log("userRegister", users)
-                dispatch(createUsers({
-                    "uid": u?.uid || "",
-                    "name": user?.name || "",
-                    "surname":user?.apellido || "",
-                    "email": user?.email || "",
-                    //password: user.password,
-                    "phone": u?.phoneNumber ||"",
-                    "img": u?.photoURL || "",
-                    "city": "",
-                    "province": "",
-                    "address": "",
-                }))
-                navigate("/login")
-                dispatch(emailBienvenido(user))
-            }, 1000);
-            
-            // ...
-        })
-        .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                // ..
-            }) */
+       
         }
 
         

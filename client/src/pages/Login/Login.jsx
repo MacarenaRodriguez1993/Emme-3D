@@ -17,34 +17,11 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const user = useSelector((state) => state.users)
-    const userById = useSelector((state) => state.userByUid)
-    console.log(email, password)
 
-    const auth = getAuth(app)
     const onSubmit = async(e) => {
         e.preventDefault()
         await login(email, password)
-        /* signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user
-                dispatch(getUserByUid(user.uid))
-               
-                if (userById){
-                        navigate("/products")
-                        console.log("userLogin", userById)
-              }
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                if (errorCode === "auth/user-not-found") {
-                    alert("Usuario no encontrado o no existe")
-                }
-                console.error(`Error ${errorCode}`)
-            }) */
+       
     }
 
     return (

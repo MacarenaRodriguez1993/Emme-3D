@@ -7,9 +7,8 @@ import { useSelector } from "react-redux";
 export function PrivateRoutes({ children }) {
   const { userByUid, loading } = useAuth();
   const user = useSelector(state => state.userByUid)
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
-  console.log(user)
  
   if (loading) return <Loading/>
   if (user === null) return navigate('/login')

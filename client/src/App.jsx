@@ -30,21 +30,19 @@ import { PrivateRoutes, AdminRoutes } from "./components/context/PrivateRoutes"
 import { AuthProvider } from "./components/context/AuthContext"
 import About from "./pages/About/about"
 
-const PRIVATE = "/profile"
-const PUBLIC = "/"
 
 function App() {
     return (
         <>
         <AuthProvider>
             <Routes>
-                <Route path="/crear-producto" element={<CreateProduct />} />
+                <Route path="/crear-producto" element={<AdminRoutes><CreateProduct /></AdminRoutes>} />
                 <Route path="/cart" element={<Cart />} />
                 <Route
                     exact
                     strict
                     path="/crear-producto"
-                    element={<CrearProducto />}
+                    element={<AdminRoutes><CrearProducto /></AdminRoutes>}
                 />
                 <Route exact strict path="/home" element={<Home />} />
                 <Route exact strict path="/products" element={<Productos />} />
