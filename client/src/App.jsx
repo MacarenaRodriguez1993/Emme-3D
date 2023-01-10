@@ -29,6 +29,7 @@ import { PrivateRoutes, AdminRoutes } from "./components/context/PrivateRoutes"
 
 import { AuthProvider } from "./components/context/AuthContext"
 import About from "./pages/About/about"
+import ModalLogin from "./pages/Login/ModalLogin"
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
                     path="/crear-producto"
                     element={<AdminRoutes><CrearProducto /></AdminRoutes>}
                 />
+                <Route path="/modal" element={<ModalLogin/>} />
                 <Route exact strict path="/home" element={<Home />} />
                 <Route exact strict path="/products" element={<Productos />} />
                 <Route exact strict path="/" element={<Home />} />

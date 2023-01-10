@@ -77,7 +77,7 @@ async function userUpdate(uid, user) {
                 img: user.img,
             }
         )
-        if (update) return "El usuario fue actualizado con exito"
+        if (update) return update
     } catch (err) {
         throw err
     }
