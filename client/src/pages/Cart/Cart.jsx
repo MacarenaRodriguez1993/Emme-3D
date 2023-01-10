@@ -71,7 +71,7 @@ const Cart = () => {
                                 <p>Precio por unidad ${p[0]?.productPrice}</p>
                                 <p>{p[0]?.description}</p>
                             </div>
-                            <div id="cantidad">
+                            {/* <div id="cantidad">
                                 <span>Cantidad</span>
                                 <input
                                     type="number"
@@ -79,7 +79,7 @@ const Cart = () => {
                                     defaultValue={1}
                                     onChange={(e) => handlerChange(e, p[0])}
                                 />
-                            </div>
+                            </div> */}
                             <p className="botonesCart">
                                 <button
                                     id="deleteCart"

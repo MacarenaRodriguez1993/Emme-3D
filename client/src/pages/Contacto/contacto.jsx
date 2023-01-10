@@ -16,7 +16,8 @@ import {
     AiOutlineCheckCircle,
     AiOutlineCloseCircle,
 } from "react-icons/ai"
-
+import { toast, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 const Contacto = () => {
     console.log(import.meta.env.VITE_KEY_MAP)
     const EMME3D = [-27.340748, -65.591013]
@@ -69,9 +70,26 @@ const Contacto = () => {
         )
         myWidget.open()
     }
+    const notify = () => {
+        toast(
+            "Formulario enviado correctamente, en breve recibira una respuesta"
+        )
+    }
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(emailContacto(contact))
+        notify()
+        setContact({
+            ...contact,
+            name: "",
+            surname: "",
+            email: "",
+            reason: "",
+            phone: "",
+            link: "",
+            description: "",
+            file: "",
+        })
     }
 
     return (
@@ -88,6 +106,11 @@ const Contacto = () => {
             </h1>
             <div className="contenido">
                 <div className="form">
+                    <ToastContainer
+                        theme="dark"
+                        position="top-right"
+                        autoClose={4000}
+                    />
                     <h3>¿Tenes alguna duda sobre impresión 3D ?</h3>
                     <h3>¿Queres solicitar servicio tecnico ?</h3>
                     <h3>¿Queres cotizar un pedido personalizado ?</h3>

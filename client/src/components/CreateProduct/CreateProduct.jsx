@@ -13,7 +13,8 @@ import CreateCategory from "../CreateCategory/CreateCategory"
 import ImageCarousel from "../ImageCarousel/ImageCarousel"
 import { useNavigate, useParams } from "react-router-dom"
 import { updateProducto } from "../../redux/actions/actions"
-
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 const CreateProduct = () => {
     const dispatch = useDispatch()
     const update_ID = useParams()
@@ -57,10 +58,18 @@ const CreateProduct = () => {
             categories_ids: [e.target.value],
         })
     }
+    const notify = () => {
+        if (updateProduct) {
+            toast("Producto editado con exito")
+        } else {
+            toast("Nuevo producto creado con exito")
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault()
         if (updateProduct) {
             dispatch(updateProducto(update_ID.id, producto))
+            notify()
             setUpdate(true)
             setTimeout(() => {
                 setUpdate(false)
@@ -69,6 +78,7 @@ const CreateProduct = () => {
         } else {
             console.log("estoy en crear")
             dispatch(postProduct(producto))
+            notify()
             setCreated(true)
             setTimeout(() => {
                 setCreated(false)
@@ -111,6 +121,7 @@ const CreateProduct = () => {
     return (
         <>
             <NavBar />
+            <ToastContainer position="top-right" autoClose={4000} />
             <div className="general-box-ctr">
                 {updateProduct ? (
                     <p className="create-product-title">Editar un producto</p>
