@@ -17,11 +17,16 @@ const SuccessfulOrder = () => {
 
     //VARIABLE PARA EL TOTAL
     let sum = 0
-
+    const newOrder = order
     useEffect(() => {
         //DISPACHO AL BACK EL EMAIL DE ORDEN PAGADA CON EXITO
-        const newOrder = order
         newOrder.user_id = user._id
+        const pay = window.location.search.split("&")[2]
+        const stat = window.location.search.split("&")[3]
+        const merch = window.location.search.split("&")[6]
+        newOrder.payment_id = pay.split("=")[1]
+        newOrder.status = stat.split("=")[1]
+        newOrder.merchant_order_id = merch.split("=")[1]
         dispatch(emailSuccessfulOrder(user))
         dispatch(successfulOrder(newOrder))
     })
@@ -31,6 +36,9 @@ const SuccessfulOrder = () => {
             <h1 style={{ textAlign: "center", paddingTop: "1em" }}>
                 {user.name} SU COMPRA FUE EXITOSA{" "}
             </h1>
+            <h3 style={{ textAlign: "center" }}>
+                Transaccion n°: {newOrder.payment_id}
+            </h3>
             <div className="tabla">
                 <table>
                     <tr>
