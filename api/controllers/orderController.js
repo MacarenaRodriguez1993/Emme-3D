@@ -7,15 +7,17 @@ async function createOrder(order) {
         const newOrder = {}
         // order.user_id = ObjectId("123456789012345678901234")
         newOrder.user_id = ObjectId(order.user_id)
-        newOrder.products = order.map((product) => {
+        newOrder.payment_id = order.payment_id
+        newOrder.status = order.status
+        newOrder.merchant_order_id = order.merchant_order_id
+        newOrder.products = order.productos.map((product) => {
             return {
-                productName: product.productName,
-                productImage: product.productImage,
-                productAmount: product.productAmount,
-                productPrice: product.productPrice,
+                productName: product[0].productName,
+                productImage: product[0].productImage,
+                productAmount: product[0].productAmount,
+                productPrice: product[0].productPrice,
             }
         })
-
         const createdOrder = await Order.create(newOrder)
         return createdOrder
     } catch (error) {
