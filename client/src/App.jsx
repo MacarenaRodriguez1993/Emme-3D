@@ -19,10 +19,6 @@ import { useEffect } from "react"
 import Homeadmin from "./Admin/pages/homeadmin/Homeadmin"
 import User from "./Admin/pages/user/User"
 import Userlist from "../src/Admin/pages/Userlist/Userlist"
-import Newuser from "../src/Admin/pages/newuser/Newuser"
-import Productlist from "../src/Admin/pages/productlist/Productlist"
-import Product from "../src/Admin/pages/product/Product"
-import NewProduct from "../src/Admin/pages/newproduct/Newproduct"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
 import NotFound from "./components/NotFound/NotFound"
 
@@ -52,22 +48,6 @@ function App() {
                 <Route exact path="/dashboard" element={<Homeadmin />} />
                 <Route exact path="/dashboard/users" element={<Userlist />} />
                 <Route exact path="/dashboard/user/:id" element={<User />} />
-                <Route exact path="/dashboard/newuser" element={<Newuser />} />
-                <Route
-                    exact
-                    path="/dashboard/products"
-                    element={<Productlist />}
-                />
-                <Route
-                    exact
-                    path="/dashboard/product/:id"
-                    element={<Product />}
-                />
-                <Route
-                    exact
-                    path="/dashboard/newproduct"
-                    element={<NewProduct />}
-                />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

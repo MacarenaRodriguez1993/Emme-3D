@@ -2,13 +2,13 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
 import { FaShoppingCart } from "react-icons/fa"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useSelector } from "react-redux"
+
+import userPng from "../../assets/user.png"
 
 const NavBar = () => {
     //const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-    console.log("usernav", user?.email)
     let productosCart = useSelector((state) => state.shoppingCart)
 
     /* useEffect(() => {
@@ -36,23 +36,24 @@ const NavBar = () => {
                     <Link to="/about" className="linkk">
                         <h4>Nosotros</h4>
                     </Link>
-                    <Link to="/contact" className="linkk">
+                    <Link to="/contacto" className="linkk">
                         <h4>Contacto</h4>
                     </Link>
-                    <button className="buttonLogin login-btn">
-                        {user ? (
-                            <Link to="/profile" className="linkk">
+                    {user?.email ? (
+                        <button className=" login-btn">
+                            <Link className="btn-profile" to="/profile">
                                 Perfil{" "}
+                                <img
+                                    className="img-profile"
+                                    src={user?.img ? user?.img : userPng}
+                                />{" "}
                             </Link>
-                        {user?.email ? (
-                            <Link to="/profile">Perfil </Link>
-                        ) : (
-                            <Link to="/login" className="linkk">
-                                {" "}
-                                LogIn{" "}
-                            </Link>
-                        )}
-                    </button>
+                        </button>
+                    ) : (
+                        <button className="buttonLogin ">
+                            <Link to="/login"> LogIn </Link>
+                        </button>
+                    )}
                 </div>
             </ul>
         </div>
