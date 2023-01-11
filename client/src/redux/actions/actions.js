@@ -14,6 +14,8 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 const POST_CAROUSEL = "POST_CAROUSEL"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
+const CART_LOGOUT = 'CART_LOGOUT'
+const CART_LOGIN = 'CART_LOGIN'
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER_UID = "GET_USER_UID"
@@ -106,8 +108,8 @@ export const filterByLikes = (value) => {
 //Aqui va la url base del back
 
 //let url_api = "http://localhost:3001"
-//let url_api = "https://emme-3d-production-c491.up.railway.app"
-let url_api = "https://emme-3d-production-5ffc.up.railway.app"
+let url_api = "https://emme-3d-production-c491.up.railway.app"
+//let url_api = "https://emme-3d-production-5ffc.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -313,10 +315,19 @@ export const updateProducto = (product_id, producto) => {
 
 export const addToCart = (product) => {
     return async (dispatch) => {
-        dispatch({
-            type: ADD_CART,
-            payload: product,
-        })
+        try {
+
+            dispatch({
+                type: ADD_CART,
+                payload: product,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+
     }
 }
 
@@ -327,6 +338,39 @@ export const deleteToCart = (name) => {
             payload: name,
         })
     }
+}
+
+export const cartLogOut = () => {
+    return async dispatch => {
+        try {
+            dispatch({
+                type: CART_LOGOUT,
+                payload: []
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+
+}
+export const cartLogIn = (cart) => {
+    return async dispatch => {
+        try {
+            dispatch({
+                type: CART_LOGIN,
+                payload: cart
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+
 }
 
 export const emailBienvenido = (user) => {
@@ -369,7 +413,7 @@ export const emailContacto = (formulario) => {
 export const createUsers = (users) => {
     return async (dispatch) => {
         try {
-            await axios.post(`${url_api}/users`,users)
+            await axios.post(`${url_api}/users`, users)
         } catch (err) {
             dispatch({
                 type: ERROR,
@@ -382,7 +426,7 @@ export const createUsers = (users) => {
 export const getUsers = () => {
     return async (dispatch) => {
         try {
-            const user = await axios.get(url_api+`/users`)
+            const user = await axios.get(url_api + `/users`)
             dispatch({
                 type: GET_USERS,
                 payload: user,
@@ -417,7 +461,7 @@ export const getUserByUid = (uid) => {
     return async (dispatch) => {
         try {
             const user_Uid = await axios.get(url_api + '/users/' + uid)
-        
+
 
             dispatch({
                 type: GET_USER_UID,

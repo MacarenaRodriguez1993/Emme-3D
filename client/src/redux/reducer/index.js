@@ -17,6 +17,8 @@ const PUT_USER = "PUT_USER"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
+const CART_LOGOUT = 'CART_LOGOUT'
+const CART_LOGIN = 'CART_LOGIN'
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
@@ -265,27 +267,45 @@ const rootReducer = (state = initialState, action) => {
                 productsFiltered: [...state.productsFiltered, action.payload],
             }
         case ADD_CART:
-            const productsToAdd = action.payload.map((product) => {
+            /* const productsToAdd = action.payload.map((product) => {
                 return {
-                    productName: product.name,
+                    productName: action.payload.name,
+                    productDescription: product.description,
                     productImage: product.img,
                     productPrice: product.price,
-                    productAmount: 1,
-                    productTotal: product.price,
+                    productUnits: product.units,
+                    productTotal: product.price * product.units,
                 }
             })
-            console.log("Products", productsToAdd)
-
+            console.log("Products", productsToAdd) */
+            let pload = action.payload
+            let productCart = {
+                name: pload.name,
+                description: pload.description,
+                img: pload.img,
+                price: pload.price,
+                units: pload.units
+            }
             return {
                 ...state,
-                shoppingCart: [...state.shoppingCart, productsToAdd],
+                shoppingCart: [...state.shoppingCart, productCart],
+            }
+        case CART_LOGOUT:
+            return {
+                ...state,
+                shoppingCart: action.payload,
+            }
+        case CART_LOGIN:
+            return {
+                ...state,
+                shoppingCart: [...action.payload]
             }
         case DELETE_CART_PRODUCT:
             return {
                 ...state,
                 shoppingCart: [
                     ...state.shoppingCart.filter(
-                        (p) => p[0].productName !== action.payload
+                        (p) => p.name !== action.payload
                     ),
                 ],
             }
