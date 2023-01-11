@@ -40,7 +40,7 @@ export default function Perfil() {
     const logouth = async () => {
         await logout()
         try {
-            dispatch(updateUser(userCart))
+            //dispatch(updateUser(userCart))
             dispatch(cartLogOut())
             setUserCart({
                 id: "",
