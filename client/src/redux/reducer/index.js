@@ -293,7 +293,7 @@ const rootReducer = (state = initialState, action) => {
         case CART_LOGOUT:
             return {
                 ...state,
-                shoppingCart: [],
+                shoppingCart: action.payload,
             }
         case CART_LOGIN:
             return {
