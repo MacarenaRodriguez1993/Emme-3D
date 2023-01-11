@@ -91,13 +91,13 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                categories: pload,
+                categories: action.payload,
             }
         case GET_BY_CATEGORY:
-            if (pload === "categorias") {
+            if (action.payload === "categorias") {
                 return {
                     ...state,
-                    productsFiltered: all,
+                    productsFiltered: state.allProducts,
                 }
             } else {
                 let prod = state.allProducts.filter(
@@ -109,7 +109,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
         case GET_BY_PRICE:
-            if (pload === "menor") {
+            if (action.payload === "menor") {
                 let menor = res.sort((p1, p2) => {
                     if (p1.price < p2.price) {
                         return 1
@@ -120,7 +120,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     productsFiltered: [...menor],
                 }
-            } else if (pload === "mayor") {
+            } else if (action.payload === "mayor") {
                 let mayor = res.sort((p1, p2) => {
                     if (p1.price > p2.price) {
                         return 1
