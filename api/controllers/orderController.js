@@ -12,10 +12,10 @@ async function createOrder(order) {
         newOrder.merchant_order_id = order.merchant_order_id
         newOrder.products = order.productos.map((product) => {
             return {
-                productName: product[0].productName,
-                productImage: product[0].productImage,
-                productAmount: product[0].productAmount,
-                productPrice: product[0].productPrice,
+                productName: product.name,
+                productImage: product.img,
+                productAmount: product.units,
+                productPrice: product.price,
             }
         })
         const createdOrder = await Order.create(newOrder)

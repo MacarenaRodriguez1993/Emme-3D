@@ -31,6 +31,18 @@
     padding: 30px;
     border-radius: 8px;
 }
+.btn-close-modal{
+    display: flex;
+    left: 200px;
+    position: relative;
+}
+.btn-close-modal button {
+    color: #262a53;
+    font-weight: bolder;
+    border-radius: 5px;
+    padding: 5px;
+    background: #fe78cc;
+}
 .container-modal-logo{
     height: 200px;
     width: 200px;

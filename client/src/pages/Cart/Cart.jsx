@@ -35,8 +35,8 @@ const Cart = () => {
     }
     const navigate = useNavigate()
 
-    //const url_api = "https://emme-3d-production-c491.up.railway.app"
-    const url_api = "http://localhost:3001"
+    const url_api = "https://emme-3d-production-c491.up.railway.app"
+    //const url_api = "http://localhost:3001"
     //let url_api = "https://emme-3d-production-5ffc.up.railway.app"
 
     const buy = () => {

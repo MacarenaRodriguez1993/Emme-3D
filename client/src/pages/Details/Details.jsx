@@ -22,7 +22,15 @@ export default function Details({ props }) {
     const u = useSelector((state) => state.userByUid)
 
     const [errValoracion, setErrValoracion] = useState("")
+    const p = useSelector((state) => state.detail)
+    useEffect(() => {
+        dispatch(getDetails(_id))
+        dispatch(getReviews(_id))
+    }, [dispatch])
 
+    
+
+    
     const reviewref = useRef("")
     const [ratin, setRatin] = useState({
         rating: 0,
@@ -37,7 +45,7 @@ export default function Details({ props }) {
             postReviews({
                 rating: ratin.rating,
                 review: reviewref.current.value,
-                user_id: id,
+                useruid: u.uid,
                 product_id: _id,
             })
         )
@@ -60,8 +68,9 @@ export default function Details({ props }) {
     console.log(reviewref.current.value?.length)
 
     const filterReviewsById = () => {
-        const reviewsFiltered = R.filter((re) => re.product_id === _id)
-        if (reviewsFiltered.length <= 0) {
+        
+        const sortedReviews = R?.sort((a, b) => b.userData[0]?.createdAt - a.userData[0]?.createdAt)
+        if (sortedReviews?.length === 0) {
             return (
                 <div className="container-opiniones">
                     <span>no tiene reseñas aun...</span>
@@ -70,11 +79,13 @@ export default function Details({ props }) {
         }
         return (
             <div className="container-opiniones">
-                {reviewsFiltered?.map((r) => {
+                {R?.map((r) => {
                     return (
-                        <div style={{ marginBottom: 10 }}>
+                        <div className="opinion-user">
                             <div className="header-opinion">
-                                {/* <h2>{r.name}</h2> */}
+                                <img src={r.userData[0]?.img} alt={r.userData[0]?.name} style={{width:'50px',height:'50px', borderRadius:'100%'}} />
+                                <div className="header-opinion-rating">
+                                 <h2>{r.userData[0]?.name}</h2>
                                 <Rating
                                     disableFillHover={true}
                                     onPointerEnter={r.rating}
@@ -82,6 +93,7 @@ export default function Details({ props }) {
                                     initialValue={r.rating}
                                     size={18}
                                 />
+                                </div>
                             </div>
                             <div className="opinion-reviews">
                                 <span>{r.review}</span>
@@ -93,15 +105,10 @@ export default function Details({ props }) {
         )
     }
 
-    useEffect(() => {
-        dispatch(getDetails(_id))
-        dispatch(getReviews(_id))
-    }, [dispatch])
-    const productDetail = useSelector((state) => state.detail)
-    let p = productDetail?.data
-    if (p) {
-        console.log(p[0].name)
-    }
+  
+
+   
+
     const notify = () => {
         toast("Nuevo producto agragado al carrito")
     }
@@ -116,10 +123,10 @@ export default function Details({ props }) {
         if (p) {
             setProduct({
                 ...product,
-                name: p[0].name,
-                description: p[0].description,
-                img: p[0].img,
-                price: p[0].price,
+                name: p?.name,
+                description: p?.description,
+                img: p?.img,
+                price: p?.price,
             })
         }
     }, [p])
@@ -150,20 +157,20 @@ export default function Details({ props }) {
                 <div className="conatainer-header-left">
                     <img
                         className="img-details"
-                        src={p?.map((a) => a.img)}
-                        alt={p?.map((a) => a.img)}
+                        src={p?.img}
+                        alt={p?.img}
                     />
                 </div>
                 <div className="conatainer-header-right">
                     <div className="title-detail">
-                        <h2>{p?.map((n) => n.name)}</h2>
+                        <h2>{p?.name}</h2>
                     </div>
                     <div className="container-info-detail">
                         <div className="info-detail buttons-details">
                             <div>
                                 Precio
                                 <span className="valor-info">
-                                    ${p?.map((p) => p.price)}
+                                    ${p?.price}
                                 </span>
                             </div>
                         </div>
@@ -171,11 +178,12 @@ export default function Details({ props }) {
                             <span>
                                 Categoria
                                 <span className="valor-info">
-                                    {p?.map((c) => c.category)}
+                                    {p?.category}
                                 </span>
                             </span>
                         </div>
-                    </div>
+                                           
+                          </div>
                     <div className="container-btn-detail">
                         <button className="btn-detail buttons-details">
                             Seleccionar color
@@ -215,7 +223,7 @@ export default function Details({ props }) {
             </div>
             <div className="container-descripcion">
                 <h2>Descripcion:</h2>
-                <p>{p?.map((d) => d.description)}</p>
+                <p>{p?.description}</p>
             </div>
             {filterReviewsById()}
             {!u?.email ? (

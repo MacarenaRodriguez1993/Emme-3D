@@ -108,8 +108,8 @@ export const filterByLikes = (value) => {
 //Aqui va la url base del back
 
 //let url_api = "http://localhost:3001"
-let url_api = "https://emme-3d-production-c491.up.railway.app"
-//let url_api = "https://emme-3d-production-5ffc.up.railway.app"
+//let url_api = "https://emme-3d-production-c491.up.railway.app"
+let url_api = "https://emme-3d-production-5ffc.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -201,7 +201,7 @@ export const getDetails = (id) => {
         try {
             dispatch({
                 type: GET_DETAILS,
-                payload: detalle,
+                payload: detalle.data[0],
             })
         } catch (err) {
             dispatch({
@@ -522,7 +522,7 @@ export const getReviews = (id) => {
     return async (dispatch) => {
         try {
             const getReviewsById = await axios.get(
-                `${url_api}/reviews?id?${id}`
+                url_api+`/reviews/`+id
             )
 
             dispatch({
