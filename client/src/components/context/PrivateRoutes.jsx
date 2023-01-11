@@ -41,3 +41,17 @@ export function AdminRoutes({ children }) {
       return navigate('*')
   }
 }
+
+
+
+export function PublicRoutes({ children }) {
+  const {userByUid, loading} = useAuth();
+  
+
+  if (loading) return <Loading/>
+  
+ 
+    return <>{children}</>
+  
+
+}

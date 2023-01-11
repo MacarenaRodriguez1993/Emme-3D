@@ -21,7 +21,7 @@ import User from "./Admin/pages/user/User"
 import Userlist from "../src/Admin/pages/Userlist/Userlist"
 import SuccessfulOrder from "./pages/Successfull/successfulOrder"
 import NotFound from "./components/NotFound/NotFound"
-import { PrivateRoutes, AdminRoutes } from "./components/context/PrivateRoutes"
+import { PrivateRoutes, AdminRoutes, PublicRoutes } from "./components/context/PrivateRoutes"
 
 import { AuthProvider } from "./components/context/AuthContext"
 import About from "./pages/About/about"
@@ -42,21 +42,23 @@ function App() {
                     element={<AdminRoutes><CrearProducto /></AdminRoutes>}
                 />
                 <Route path="/modal" element={<ModalLogin/>} />
-                <Route exact strict path="/home" element={<Home />} />
-                <Route exact strict path="/products" element={<Productos />} />
-                <Route exact strict path="/" element={<Home />} />
-                <Route exact strict path="/login" element={<Login />} />
-                <Route exact strict path="/register" element={<Register />} />
-                <Route path="/details/:_id" element={<Details />} />
-                <Route path="/profile" element={<Perfil />} />
-                <Route path="/updateproduct/:id" element={<CreateProduct />} />
-                <Route exact path="/dashboard" element={<Homeadmin />} />
-                <Route exact path="/dashboard/users" element={<Userlist />} />
-                <Route exact path="/dashboard/user/:id" element={<User />} />
-
+                <Route exact strict path="/home" element={<PublicRoutes> <Home /></PublicRoutes>} />
+                <Route exact strict path="/products" element={<PublicRoutes><Productos /></PublicRoutes>} />
+                <Route exact strict path="/" element={<PublicRoutes><Home /></PublicRoutes>} />
+                <Route exact strict path="/login" element={<PublicRoutes><Login /></PublicRoutes>} />
+                <Route exact strict path="/register" element={<PublicRoutes><Register /></PublicRoutes>} />
+                <Route path="/details/:_id" element={<PublicRoutes><Details /></PublicRoutes>} />
+                <Route path="/profile" element={<PrivateRoutes><Perfil /></PrivateRoutes>} />
+                <Route path="/updateproduct/:id" element={<AdminRoutes> <CreateProduct /> </AdminRoutes> } />
+                <Route path="/contacto" element={<PublicRoutes><Contacto /></PublicRoutes>} />
+                <Route exact path="/dashboard" element={<AdminRoutes><Homeadmin /></AdminRoutes>} />
+                <Route exact path="/dashboard/users" element={<AdminRoutes><Userlist /> </AdminRoutes>} />
+                <Route exact path="/dashboard/user/:id" element={<AdminRoutes><User /></AdminRoutes>} />
+                {/* <Route exact path="/dashboard/newuser" element={<AdminRoutes><Newuser /></AdminRoutes>} /> */}
+                
                 <Route path="*" element={<NotFound />} />
                 <Route path="/successfulOrder" element={<PrivateRoutes><SuccessfulOrder /></PrivateRoutes>} />
-                <Route path="/about" element={<About />} />
+                <Route path="/about" element={<PublicRoutes><About /></PublicRoutes>} />
             </Routes>
             </AuthProvider>
         </>
