@@ -68,8 +68,8 @@ export default function Details({ props }) {
     console.log(reviewref.current.value?.length)
 
     const filterReviewsById = () => {
-        const reviewsFiltered = R.filter((re) => re.product_id === _id)
-        const sortedReviews = R.sort((a, b) => b.userData[0]?.createdAt - a.userData[0]?.createdAt)
+        
+        const sortedReviews = R?.sort((a, b) => b.userData[0]?.createdAt - a.userData[0]?.createdAt)
         if (sortedReviews?.length === 0) {
             return (
                 <div className="container-opiniones">
