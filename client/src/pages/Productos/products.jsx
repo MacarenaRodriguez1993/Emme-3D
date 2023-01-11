@@ -21,11 +21,11 @@ const Products = () => {
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-    setTimeout(() => {
+    useEffect(() => {
         if (user && user.cart.length > 0) {
             dispatch(cartLogIn(user.cart))
         }
-    }, 1000)
+    }, [user])
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
