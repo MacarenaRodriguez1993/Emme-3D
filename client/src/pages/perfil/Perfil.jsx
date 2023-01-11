@@ -39,9 +39,9 @@ export default function Perfil() {
     console.log("usercart", userCart)
     const logouth = async () => {
         try {
+            await logout()
             dispatch(updateUser(userCart))
             dispatch(cartLogOut())
-            await logout()
         } catch (error) {
             console.log(error)
         }
