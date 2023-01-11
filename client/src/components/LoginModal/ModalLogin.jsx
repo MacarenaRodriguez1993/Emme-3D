@@ -30,6 +30,9 @@ export default function ModalLogin({isOpen, open, close}) {
     <div className={`modal-container ${isOpen && 'is-open'}`}>
 
         <div className="container-modal-login">
+            <div className="btn-close-modal">
+            <button  onClick={close}>X</button>
+            </div>
             <div className="container-modal-logo">
                 <img
                   className="container-modal-logo"
