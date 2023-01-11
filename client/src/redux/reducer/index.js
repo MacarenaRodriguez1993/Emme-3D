@@ -17,6 +17,7 @@ const PUT_USER = "PUT_USER"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
+const CART_LOGOUT = 'CART_LOGOUT'
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
@@ -287,6 +288,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shoppingCart: [...state.shoppingCart, productCart],
+            }
+        case CART_LOGOUT:
+            return {
+                ...state,
+                shoppingCart: [],
             }
         case DELETE_CART_PRODUCT:
             return {

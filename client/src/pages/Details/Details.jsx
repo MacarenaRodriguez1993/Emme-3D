@@ -195,6 +195,7 @@ export default function Details({ props }) {
                             min="1"
                             className="btn-detail buttons-details units-input"
                             onChange={(e) => changeUnits(e)}
+                            placeholder="1"
                         />
                         <button
                             className="btn-agregar-carro buttons-details"

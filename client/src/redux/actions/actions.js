@@ -14,6 +14,7 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 const POST_CAROUSEL = "POST_CAROUSEL"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
+const CART_LOGOUT = 'CART_LOGOUT'
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER_UID = "GET_USER_UID"
@@ -336,6 +337,20 @@ export const deleteToCart = (name) => {
             payload: name,
         })
     }
+}
+
+export const cartLogOut = () => {
+    return async dispatch => {
+        try {
+            dispatch({
+                type: CART_LOGOUT,
+                payload: {}
+            })
+        } catch (error) {
+
+        }
+    }
+
 }
 
 export const emailBienvenido = (user) => {
