@@ -123,10 +123,10 @@ export default function Details({ props }) {
         if (p) {
             setProduct({
                 ...product,
-                name: p[0].name,
-                description: p[0].description,
-                img: p[0].img,
-                price: p[0].price,
+                name: p?.name,
+                description: p?.description,
+                img: p?.img,
+                price: p?.price,
             })
         }
     }, [p])
