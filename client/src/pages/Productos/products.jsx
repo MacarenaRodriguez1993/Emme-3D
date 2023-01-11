@@ -43,7 +43,7 @@ const Products = () => {
             </div>
             {error}
 
-            <h4 className="textTitle">Productos Activos</h4>
+            {user?.isAdmin && <h4 className="textTitle">Productos Activos</h4>}
             <div className="cardProduct">
                 {productos?.map((a) => {
                     if (a.deleted === false) {

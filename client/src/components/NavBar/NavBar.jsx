@@ -41,7 +41,6 @@ const NavBar = () => {
                     <Link to="/contacto" className="linkk">
                         <h4>Contacto</h4>
                     </Link>
-<<<<<<< HEAD
                     {user?.isAdmin && (
                         <button className=" login-btn">
                             <Link className="btn-profile" to="/dashboard">
@@ -65,19 +64,6 @@ const NavBar = () => {
                             <Link to="/login"> LogIn </Link>
                         </button>
                     )}
-=======
-
-                    {
-                        user?.email ?  <button className=" login-btn">
-                         <Link className="btn-profile" to="/profile">Perfil <img className="img-profile" src={user?.img ? user?.img : userPng} /> </Link> 
-                    </button>
-                    :  <button className="buttonLogin ">
-                   <Link  to="/login"> LogIn </Link>
-                </button>
-                    }
-                   
-
->>>>>>> c22c8370d15e22b869a89b0aec5cfc4e52834530
                 </div>
             </ul>
         </div>

@@ -8,7 +8,6 @@ export default function Topbar() {
             <div className="topbaradminmarcos">
                 <div className="topbarWrapper">
                     <div className="topleft">
-<<<<<<< HEAD
                         <span className="logo">
                             <Link className="linkHomeAdmin" to={"/home"}>
                                 Emme3D
@@ -28,11 +27,6 @@ export default function Topbar() {
                             alt="admin"
                             className="adminavatar"
                         />
-=======
-                        <Link className="link" to="/">
-                            <span className="logo">Emme3D</span>
-                        </Link>
->>>>>>> c22c8370d15e22b869a89b0aec5cfc4e52834530
                     </div>
                 </div>
             </div>

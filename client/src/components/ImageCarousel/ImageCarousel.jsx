@@ -8,8 +8,10 @@ import {
 } from "../../redux/actions/actions"
 import "./ImageCarousel.css"
 import swal from "sweetalert"
+import { useNavigate } from "react-router-dom"
 const ImageCarousel = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const carouselImages = useSelector((state) => state.carouselImages)
     useEffect(() => {
         dispatch(getCarouselImgs())
@@ -31,8 +33,13 @@ const ImageCarousel = () => {
     }
     const handleUploadSubmit = (e) => {
         e.preventDefault()
-        console.log(images)
+        setImages({
+            name: "",
+            img: "",
+        })
         dispatch(carouselUpload(images))
+        swal("Perfecto", "Imagen cargada con exito", "success")
+        navigate("/home")
     }
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
