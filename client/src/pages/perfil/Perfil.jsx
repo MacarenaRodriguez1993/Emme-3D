@@ -35,13 +35,17 @@ export default function Perfil() {
                 cart: ucart,
             })
         }
-    }, [user, ucart])
+    }, [ ucart])
     console.log("usercart", userCart)
     const logouth = async () => {
+        await logout()
         try {
-            await logout()
             dispatch(updateUser(userCart))
             dispatch(cartLogOut())
+            setUserCart({
+                id: "",
+                cart: {}
+            })
         } catch (error) {
             console.log(error)
         }

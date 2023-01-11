@@ -12,7 +12,7 @@ const NavBar = () => {
     //const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
     let productosCart = useSelector((state) => state.shoppingCart)
-
+console.log('user nav', user)
     /* useEffect(() => {
         if (user.length === 0) {
             dispatch()

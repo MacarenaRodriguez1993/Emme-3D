@@ -202,13 +202,14 @@ export function AuthProvider({ children }) {
             .then(() => {
                 // Sign-out successful.
                 store.dispatch(userNull())
-                navigate("/products")
-               
+                navigate("/login")
+                
+                
+                console.log('sesion cerrada')
             })
             .catch((error) => {
                 // An error happened.
             })
-            store.dispatch(userNull())
           }
 
 
@@ -217,12 +218,12 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
     
-      if (currentUser?.email === u?.email)
+      /* if (currentUser?.email === u?.email)
       {
         
         setUserByUid(u);
        
-      }
+      } */
       if(!currentUser){
         store.dispatch(userNull())
       }
