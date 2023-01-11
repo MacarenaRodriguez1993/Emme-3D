@@ -55,7 +55,7 @@ function App() {
                 <Route exact path="/dashboard/user/:id" element={<User />} />
 
                 <Route path="*" element={<NotFound />} />
-                <Route path="/successfulOrder" element={<SuccessfulOrder />} />
+                <Route path="/successfulOrder" element={<PrivateRoutes><SuccessfulOrder /></PrivateRoutes>} />
                 <Route path="/about" element={<About />} />
             </Routes>
             </AuthProvider>

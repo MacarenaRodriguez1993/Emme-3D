@@ -18,10 +18,12 @@ export default function LoginGoogle() {
     }
 
     return (
-        <div>
+            <div style={{display:'flex',justifyContent:'center'}}>
+
             <button className="btn-submit" onClick={loginGoogle}>
                 Login Google
             </button>
-        </div>
+            </div>
+        
     )
 }

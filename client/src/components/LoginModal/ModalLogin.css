@@ -1,8 +1,8 @@
 .modal-container {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-    position : 'fixed';
+    position : fixed;
     top: '50%';
     left: '50%';
     transform : 'translate(-50%,-50%)';
@@ -11,5 +11,73 @@
     z-index: 1000;
     width: 100vw;
     height: 100vh;
-    display: none;
+    
+}
+
+.modal-container.is-open {
+    display: flex;
+    
+
+}
+
+
+.container-modal-login {
+    background: #262a53;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+    padding: 30px;
+    border-radius: 8px;
+}
+.container-modal-logo{
+    height: 200px;
+    width: 200px;
+}
+.container-modal-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.formulario-modal-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input {
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 250px;
+}
+.btn-submit {
+    border: 1px solid #fe78cc;
+    margin: 10px;
+    background: #fe78cc;
+    color: #262a53;
+    padding: 10px;
+    width: 250px;
+    border-radius: 10px;
+    font-size: larger;
+}
+
+.btn-submit:hover {
+    border: 1px solid #fe78cc;
+    background: #262a53;
+    color: #fe78cc;
+    border-radius: 10px;
+}
+.forgot-password {
+    text-decoration: none;
+    color: #f2989b;
+}
+.link-registro {
+    color: white;
+    font-size: large;
+    padding: 10px;
 }

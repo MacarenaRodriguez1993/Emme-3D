@@ -369,7 +369,7 @@ export const emailContacto = (formulario) => {
 export const createUsers = (users) => {
     return async (dispatch) => {
         try {
-            await axios.post(`${url_api}/users`, users)
+            await axios.post(`${url_api}/users`,users)
         } catch (err) {
             dispatch({
                 type: ERROR,
@@ -382,7 +382,7 @@ export const createUsers = (users) => {
 export const getUsers = () => {
     return async (dispatch) => {
         try {
-            const user = await axios.get(url_api + `/users`)
+            const user = await axios.get(url_api+`/users`)
             dispatch({
                 type: GET_USERS,
                 payload: user,
@@ -412,12 +412,12 @@ export const userNull = () => {
     }
 }
 
+
 export const getUserByUid = (uid) => {
     return async (dispatch) => {
         try {
-            const user_Uid = await axios.get(url_api + "/users/" + uid)
-            console.log("desde la action", user_Uid.data)
-            console.log("desde la action uid", uid)
+            const user_Uid = await axios.get(url_api + '/users/' + uid)
+        
 
             dispatch({
                 type: GET_USER_UID,
