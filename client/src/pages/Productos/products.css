@@ -11,9 +11,9 @@
 
 .cardProduct {
     width: 100%;
-    margin: 0.5em auto;
+    margin: 1.5em auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, 300px);
     gap: 1em;
     justify-content: center;
 }

@@ -7,9 +7,11 @@ import {
     carouselDelete,
 } from "../../redux/actions/actions"
 import "./ImageCarousel.css"
-
+import swal from "sweetalert"
+import { useNavigate } from "react-router-dom"
 const ImageCarousel = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const carouselImages = useSelector((state) => state.carouselImages)
     useEffect(() => {
         dispatch(getCarouselImgs())
@@ -31,12 +33,33 @@ const ImageCarousel = () => {
     }
     const handleUploadSubmit = (e) => {
         e.preventDefault()
-        console.log(images)
+        setImages({
+            name: "",
+            img: "",
+        })
         dispatch(carouselUpload(images))
+        swal("Perfecto", "Imagen cargada con exito", "success")
+        navigate("/home")
     }
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
-        dispatch(carouselDelete(deleteImg.imgId))
+        setImages({
+            name: "",
+            img: "",
+        })
+        swal({
+            title: "¿Estas seguro de eliminar esta imagen del carousel?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal("imagen eliminada", {
+                    icon: "success",
+                })
+                dispatch(carouselDelete(deleteImg.imgId))
+            }
+        })
     }
     const handleChangeDel = (e) => {
         setDelteImg({
