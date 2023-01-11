@@ -455,12 +455,12 @@ export const userNull = () => {
     }
 }
 
+
 export const getUserByUid = (uid) => {
     return async (dispatch) => {
         try {
-            const user_Uid = await axios.get(url_api + "/users/" + uid)
-            console.log("desde la action", user_Uid.data)
-            console.log("desde la action uid", uid)
+            const user_Uid = await axios.get(url_api + '/users/' + uid)
+
 
             dispatch({
                 type: GET_USER_UID,
@@ -488,19 +488,6 @@ export const updateUser = (user) => {
                 type: PUT_USER,
                 payload: user_update.data,
             })
-        } catch (error) {
-            dispatch({
-                type: ERROR,
-                payload: error.message,
-            })
-        }
-    }
-}
-
-export const deleteUser = (uid) => {
-    return async (dispatch) => {
-        try {
-            const userDelete = await axios.delete(`${url_api}/users/${uid}`)
         } catch (error) {
             dispatch({
                 type: ERROR,
@@ -572,6 +559,19 @@ export const successfulOrder = (order) => {
             dispatch({
                 type: ERROR,
                 payload: err.message,
+            })
+        }
+    }
+}
+//ELIMINAR UN USUARIO
+export const deleteUser = (uid) => {
+    return async (dispatch) => {
+        try {
+            const userDelete = await axios.delete(`${url_api}/users/${uid}`)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
             })
         }
     }

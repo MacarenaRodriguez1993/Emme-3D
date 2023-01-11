@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import logo from "../../assets/logo1.png"
 import { useAuth } from "../../components/context/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import "../Login/Login.css"
 
 export default function register() {
     const {signup} = useAuth()
@@ -122,6 +123,12 @@ export default function register() {
                         </button>
                     </div>
                 </form>
+                <span className="link-registro">
+                    Volver al{" "}
+                    <Link to="/login" className="forgot-password">
+                        Login
+                    </Link>
+                </span>
             </div>
         </div>
     )

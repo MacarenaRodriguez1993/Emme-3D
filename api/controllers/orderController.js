@@ -27,16 +27,34 @@ async function createOrder(order) {
 
 async function getOrders() {
     try {
-        const orders = Order.find()
+        const orders = await Order.find()
         return orders
     } catch (error) {
         throw error
     }
 }
 
-async function getUserOrders(id) {}
+async function getUserOrders(id) {
+    try {
+        const orders = await Order.find({ user_id: ObjectId(id) })
+        return orders
+    } catch (error) {
+        throw error
+    }
+}
 
-async function updateOrder(id, order) {}
+async function updateOrder(id, order) {
+    try {
+        const updatedOrder = await Order.findOneAndUpdate({ uid }, { order })
+        if (updatedOrder) {
+            return updatedOrder
+        } else {
+            throw new Error(`No hay ningún pedido con id: ${id}`)
+        }
+    } catch (err) {
+        throw err
+    }
+}
 
 module.exports = {
     createOrder,

@@ -5,9 +5,12 @@ import { useSelector, useDispatch } from "react-redux"
 import { deleteToCart } from "../../redux/actions/actions"
 import { AiOutlineHeart } from "react-icons/ai"
 import { Navigate, useNavigate } from "react-router-dom"
+import { useModal } from "../../components/LoginModal/useModal"
+import ModalLogin from "../../components/LoginModal/ModalLogin"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
+    const { isOpen, open, close } = useModal()
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
@@ -25,13 +28,17 @@ const Cart = () => {
         })
     } */
     const buy = () => {
-        if (user.length === 0) {
+        if (user === null) {
+            console.log("open", open)
+            return open()
+            /* 
             alert(
                 "Para poder comprar debe iniciar sesion o registrarse. Te redirigimos a Login"
-            )
+                )
+
             setTimeout(() => {
                 navigate("/login")
-            }, 1000)
+            }, 1000) */
         } else {
             fetch(`${url_api}/mercadopago`, {
                 method: "POST",
@@ -53,6 +60,7 @@ const Cart = () => {
     let totalPrice = sum?.length !== 0 ? sum.reduce((a, b) => a + b) : 0
     return (
         <div>
+            <ModalLogin isOpen={isOpen} open={open} close={close} />
             <NavBar />
             <div className="products-container">
                 <h2 className="titleCart">Carrito de Compras 🔖</h2>

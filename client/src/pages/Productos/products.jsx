@@ -47,13 +47,12 @@ const Products = () => {
     return (
         <div className="productos">
             <NavBar />
-            <Carousel className="carrusel" />
             {/* AQUI TIENEN QUE IR LOS FILTROS Y ORDENAMIENTOS */}
             <div className="barContainer">
                 <SearchFilters />
             </div>
 
-            <h4 className="textTitle">Productos Activos</h4>
+            {user?.isAdmin && <h4 className="textTitle">Productos Activos</h4>}
             <div className="cardProduct">
                 {productos?.map((a) => {
                     if (a.deleted === false) {
@@ -69,22 +68,26 @@ const Products = () => {
                     }
                 })}
             </div>
-            <h4 className="textTitle">Productos inactivos</h4>
-            <div className="cardProduct">
-                {productos?.map((a) => {
-                    if (a.deleted === true) {
-                        return (
-                            <Product
-                                id={a._id}
-                                key={a._id}
-                                name={a.name}
-                                price={a.price}
-                                image={a.img}
-                            />
-                        )
-                    }
-                })}
-            </div>
+            {user?.isAdmin && (
+                <>
+                    <h4 className="textTitle">Productos inactivos</h4>
+                    <div className="cardProduct">
+                        {productos?.map((a) => {
+                            if (a.deleted === true) {
+                                return (
+                                    <Product
+                                        id={a._id}
+                                        key={a._id}
+                                        name={a.name}
+                                        price={a.price}
+                                        image={a.img}
+                                    />
+                                )
+                            }
+                        })}
+                    </div>
+                </>
+            )}
             {user?.isAdmin && (
                 <Link to="/crear-producto">
                     <button className="addButton product-btn">
