@@ -21,7 +21,7 @@
 }
 
 
-.container-login {
+.container-modal-login {
     background: #262a53;
     display: flex;
     justify-content: center;
@@ -31,18 +31,18 @@
     padding: 30px;
     border-radius: 8px;
 }
-.container-logo{
+.container-modal-logo{
     height: 200px;
     width: 200px;
 }
-.container-form{
+.container-modal-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
 }
-.formulario-login {
+.formulario-modal-login {
     display: flex;
     flex-direction: column;
     justify-content: center;

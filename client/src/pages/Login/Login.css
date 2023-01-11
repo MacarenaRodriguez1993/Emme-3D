@@ -6,6 +6,11 @@
     flex-direction: row-reverse;
     height: 100vh;
 }
+.container-logo{
+    width: 400px;
+    height: 400px;
+    margin-left: 50px;
+}
 
 .formulario-login {
     display: flex;
@@ -21,7 +26,7 @@
     width: 250px;
 }
 .btn-submit {
-    border: 1px solid #fe78cc;
+     border: 1px solid #fe78cc;
     margin: 10px;
     background: #fe78cc;
     color: #262a53;

@@ -29,16 +29,16 @@ export default function ModalLogin({isOpen, open, close}) {
     return (
     <div className={`modal-container ${isOpen && 'is-open'}`}>
 
-        <div className="container-login">
-            <div className="container-logo">
+        <div className="container-modal-login">
+            <div className="container-modal-logo">
                 <img
-                  className="container-logo"
+                  className="container-modal-logo"
                    // style={{ marginLeft: 50, height: 500, width: 500 }}
                     src={logo}
                     alt="emme3d"
                 />
             </div>
-            <div className="container-form">
+            <div className="container-modal-form">
                 <form className="formulario-login" onSubmit={onSubmit}>
                     <h2 style={{ color: "white", fontSize: 30 }}>
                         Inicia sesion en tu cuenta

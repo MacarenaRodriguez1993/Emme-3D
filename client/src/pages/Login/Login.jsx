@@ -28,7 +28,8 @@ export default function Login() {
         <div className="container-login">
             <div className="container-logo">
                 <img
-                    style={{ marginLeft: 50, height: 500, width: 500 }}
+                className="container-logo"
+                    //style={{ marginLeft: 50, height: 500, width: 500 }}
                     src={logo}
                     alt="emme3d"
                 />
@@ -93,6 +94,7 @@ export default function Login() {
                         </button>
                     </div>
                 </form>
+              
                 <LoginGoogle />
                 <span className="link-registro">
                     No tienes una cuenta?{" "}
@@ -100,6 +102,7 @@ export default function Login() {
                         Registrate
                     </Link>
                 </span>
+                
             </div>
         </div>
     )
