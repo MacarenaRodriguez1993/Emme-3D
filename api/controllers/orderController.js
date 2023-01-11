@@ -43,7 +43,18 @@ async function getUserOrders(id) {
     }
 }
 
-async function updateOrder(id, order) {}
+async function updateOrder(id, order) {
+    try {
+        const updatedOrder = await Order.findOneAndUpdate({ uid }, { order })
+        if (updatedOrder) {
+            return updatedOrder
+        } else {
+            throw new Error(`No hay ningún pedido con id: ${id}`)
+        }
+    } catch (err) {
+        throw err
+    }
+}
 
 module.exports = {
     createOrder,
