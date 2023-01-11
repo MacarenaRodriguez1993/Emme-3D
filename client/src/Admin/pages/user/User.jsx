@@ -23,7 +23,7 @@ export default function User() {
     const user = useSelector((state) => state.userByUid)
     useEffect(() => {
         dispatch(getUserByUid(id))
-    }, [dispatch])
+    }, [user])
     const [userData, setUserData] = useState({
         id: id,
     })
@@ -31,6 +31,7 @@ export default function User() {
         e.preventDefault()
         console.log(userData)
         dispatch(updateUser(userData))
+        dispatch(getUserByUid(id))
     }
     const handleChange = (e) => {
         if (userData.isAdmin === "true") {
