@@ -7,6 +7,7 @@ import Topbar from "../../components/Topbar/Topbar"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteUser, getUsers } from "../../../redux/actions/actions"
+import Loading from "../../../components/Loading/Loading"
 
 export default function Userlist() {
     const dispatch = useDispatch()
@@ -14,7 +15,9 @@ export default function Userlist() {
         dispatch(getUsers())
     }, [dispatch])
     const users = useSelector((state) => state.users.data)
-    users.forEach((userobj) => (userobj.id = userobj._id))
+    if (users) {
+        users.forEach((userobj) => (userobj.id = userobj._id))
+    }
     const [data, setData] = useState(users)
 
     const columns = [
@@ -87,14 +90,18 @@ export default function Userlist() {
                     style={{ height: "84vh", width: "100%" }}
                     className="griduser"
                 >
-                    <DataGrid
-                        rows={data}
-                        columns={columns}
-                        pageSize={8}
-                        rowsPerPageOptions={[8]}
-                        checkboxSelection
-                        disableSelectionOnClick
-                    />
+                    {users ? (
+                        <DataGrid
+                            rows={users}
+                            columns={columns}
+                            pageSize={8}
+                            rowsPerPageOptions={[8]}
+                            checkboxSelection
+                            disableSelectionOnClick
+                        />
+                    ) : (
+                        <Loading />
+                    )}
                 </div>
             </div>
         </div>
