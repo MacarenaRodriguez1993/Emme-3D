@@ -5,31 +5,32 @@ import { useSelector, useDispatch } from "react-redux"
 import { deleteToCart } from "../../redux/actions/actions"
 import { AiOutlineHeart } from "react-icons/ai"
 import { Navigate, useNavigate } from "react-router-dom"
-import {useModal} from "../../components/LoginModal/useModal"
+import { useModal } from "../../components/LoginModal/useModal"
 import ModalLogin from "../../components/LoginModal/ModalLogin"
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
-    const {isOpen, open, close} = useModal()
+    const { isOpen, open, close } = useModal()
     const dispatch = useDispatch()
     const deleteCart = (name) => {
         dispatch(deleteToCart(name))
     }
     const navigate = useNavigate()
     //const url_api = "https://emme-3d-production-c491.up.railway.app"
-    // const url_api = "http://localhost:3001"
-    let url_api = "https://emme-3d-production-5ffc.up.railway.app"
-    const handlerChange = (e, product) => {
+    const url_api = "http://localhost:3001"
+    //let url_api = "https://emme-3d-production-5ffc.up.railway.app"
+    console.log(productosCart)
+    /* const handlerChange = (e, product) => {
         productosCart.map((p) => {
             if (p[0]._id === product._id) {
                 p[0].productAmount = e.target.value
             }
         })
-    }
+    } */
     const buy = () => {
         if (user === null) {
-            console.log('open',open)
-           return open()
+            console.log("open", open)
+            return open()
             /* 
             alert(
                 "Para poder comprar debe iniciar sesion o registrarse. Te redirigimos a Login"
@@ -52,14 +53,19 @@ const Cart = () => {
                 })
         }
     }
+
+    let sum = productosCart
+        ?.filter((pr) => !isNaN(pr.price) && !isNaN(parseInt(pr.units)))
+        .map((pr) => pr.price * pr.units)
+    let totalPrice = sum?.length !== 0 ? sum.reduce((a, b) => a + b) : 0
     return (
         <div>
-                <ModalLogin isOpen={isOpen} open={open} close={close} />
+            <ModalLogin isOpen={isOpen} open={open} close={close} />
             <NavBar />
             <div className="products-container">
                 <h2 className="titleCart">Carrito de Compras 🔖</h2>
                 <div className="p-container">
-                    {productosCart?.map((p) => (
+                    {/* {productosCart?.map((p) => (
                         <div className="product">
                             {console.log("p", p)}
                             <div>
@@ -67,8 +73,15 @@ const Cart = () => {
                             </div>
                             <div id="contenidoCart">
                                 <p>{p[0]?.productName}</p>
-                                <p>$ {p[0]?.productPrice}</p>
                                 <p>{p[0]?.description}</p>
+                                <p>Precio por unidad ${p[0]?.productPrice}</p>
+                                {p[0]?.productAmount > 1 && (
+                                    <p>
+                                        Precio por {p[0]?.productAmount}u. $
+                                        {p[0]?.productPrice *
+                                            p[0]?.productAmount}
+                                    </p>
+                                )}
                             </div>
                             <div id="cantidad">
                                 <span>Cantidad</span>
@@ -91,6 +104,39 @@ const Cart = () => {
                                 <AiOutlineHeart size="1.5em" />
                             </p>
                         </div>
+                    ))} */}
+                    {productosCart?.map((p) => (
+                        <div className="product">
+                            {console.log("p", p)}
+                            <div>
+                                <img src={p?.img} id="pr-img" />
+                            </div>
+                            <div id="contenidoCart">
+                                <p className="pr-title">{p?.name}</p>
+                                <p className="pr-description">
+                                    {p?.description}
+                                </p>
+                                <p>Precio por unidad ${p?.price}</p>
+                                {parseInt(p?.units) > 1 && (
+                                    <p>
+                                        Precio por {parseInt(p?.units)}u.
+                                        <span className="pr-values">
+                                            ${p?.price * parseInt(p?.units)}
+                                        </span>
+                                    </p>
+                                )}
+                            </div>
+                            <p className="botonesCart">
+                                <button
+                                    id="deleteCart"
+                                    onClick={() => {
+                                        deleteCart(p?.name)
+                                    }}
+                                >
+                                    x
+                                </button>
+                            </p>
+                        </div>
                     ))}
                 </div>
                 <div>
@@ -100,7 +146,7 @@ const Cart = () => {
                             buy()
                         }}
                     >
-                        Comprar
+                        Pagar ${totalPrice ? totalPrice : 0}
                     </button>
                 </div>
             </div>

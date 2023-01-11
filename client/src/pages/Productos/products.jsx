@@ -6,7 +6,8 @@ import Product from "../../components/Product/product"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import SearchFilters from "../../components/SearchFilters/SearchFilters"
-import { getProducts } from "../../redux/actions/actions"
+import { getProducts, addToCart, cartLogIn } from "../../redux/actions/actions"
+import Carousel from "../../components/Carousel/Carousel"
 import Loading from "../../components/Loading/Loading"
 
 /* Esta es la pagina de productos  se podra renderizar en cards un listado de productos con paginacion */
@@ -20,10 +21,19 @@ const Products = () => {
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-
+    setTimeout(() => {
+        if (user && user.cart.length > 0) {
+            dispatch(cartLogIn(user.cart))
+        }
+    }, 1000)
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
+    /* useEffect(() => {
+        if (user && user.cart.length > 0) {
+            dispatch(addToCart(user.cart))
+        }
+    }, [user]) */
 
     if (!productos) {
         return (
@@ -41,7 +51,6 @@ const Products = () => {
             <div className="barContainer">
                 <SearchFilters />
             </div>
-            {error}
 
             {user?.isAdmin && <h4 className="textTitle">Productos Activos</h4>}
             <div className="cardProduct">

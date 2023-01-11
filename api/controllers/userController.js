@@ -16,9 +16,9 @@ async function getUsers() {
 async function usersId(uid) {
     console.log('uid back', uid)
     try {
-        const userId = await User.findOne({uid:uid}).exec()
-            return userId
-        
+        const userId = await User.findOne({ uid: uid }).exec()
+        return userId
+
     } catch (err) {
         throw err
     }
@@ -37,15 +37,15 @@ async function createUser(user) {
             return false
         const createdUser = await User.create({
 
-           uid: uid, 
-           email:email, 
-           img: img, 
-           phone: phone, 
-           surname: surname, 
-           city: city, 
-           province: province, 
-           address: address , 
-           name: name
+            uid: uid,
+            email: email,
+            img: img,
+            phone: phone,
+            surname: surname,
+            city: city,
+            province: province,
+            address: address,
+            name: name
 
         })
         return createdUser
@@ -79,6 +79,7 @@ async function userUpdate(uid, user) {
                 cp: user.cp,
                 phone: user.phone,
                 img: user.img,
+                cart: user.cart,
                 isAdmin: user.isAdmin,
             }
         )

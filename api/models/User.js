@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-          },
+        },
         // Nombre de usuario (nick)
         username: {
             type: String,
@@ -86,6 +86,30 @@ const UserSchema = new mongoose.Schema(
             //required: true,
             // unique: true, Debería ser único?
         },
+
+        // Carrito
+        cart: [
+            {
+                name: {
+                    type: String,
+                },
+                description: {
+                    type: String,
+                },
+                img: [
+                    {
+                        type: String,
+                    }
+                ],
+                price: {
+                    type: Number,
+                },
+                units: {
+                    type: Number,
+                },
+            },
+        ],
+
         // Control para las cuentas admin
         isAdmin: {
             type: Boolean,
