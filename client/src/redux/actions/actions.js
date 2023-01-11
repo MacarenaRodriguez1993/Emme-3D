@@ -520,3 +520,16 @@ export const successfulOrder = (order) => {
         }
     }
 }
+//ELIMINAR UN USUARIO
+export const deleteUser = (uid) => {
+    return async (dispatch) => {
+        try {
+            const userDelete = await axios.delete(`${url_api}/users/${uid}`)
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
