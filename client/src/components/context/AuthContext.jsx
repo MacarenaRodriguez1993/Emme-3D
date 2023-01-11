@@ -81,6 +81,15 @@ export function AuthProvider({ children }) {
   .catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
+          if (errorCode === "auth/email-already-in-use") {
+            swal({
+              title:`Existe una cuenta con ese correo`,
+              icon: "error",
+              button: "OK"
+    
+            })
+        }
+        console.error(`Error ${errorCode}`)
           // ..
       })
   };
@@ -119,7 +128,12 @@ export function AuthProvider({ children }) {
                 const errorCode = error.code
                 const errorMessage = error.message
                 if (errorCode === "auth/user-not-found") {
-                    alert("Usuario no encontrado o no existe")
+                  swal({
+                    title:`No existe ninguna cuenta con ese correo`,
+                    icon: "error",
+                    button: "OK"
+          
+                  })
                 }
                 console.error(`Error ${errorCode}`)
             })
