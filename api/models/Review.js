@@ -14,11 +14,13 @@ const ReviewSchema = new mongoose.Schema(
         },
 
         // Usuario que crea la valoración
-        user_id: {
-            type: mongoose.Types.ObjectId,
+        useruid: {
+            type: String,
             required: true,
+            ref: 'User',
+            foreignField:'uid' 
         },
-
+        
         // Texto de la valoración
         review: {
             type: String,

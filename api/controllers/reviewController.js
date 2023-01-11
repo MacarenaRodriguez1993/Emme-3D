@@ -14,17 +14,29 @@ async function getReviews() {
 }
 
 // Obtiene una reseña específica
-async function reviewId(productId) {
+async function reviewId(id) {
+    console.log(id)
     try {
-        const reviews = await Review.find({ product_id: ObjectId(productId) })
-        if (!reviews || reviews.length === 0) {
-            throw new Error(`No reviews found for product with ID ${productId}`)
-        }
-
-        return reviews
-    } catch (error) {
-        console.error(error)
-        return error.message
+        
+        const reviews = await Review.aggregate([
+            {
+                $match: {
+                    product_id: mongoose.Types.ObjectId(id)
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "useruid",
+                    foreignField: "uid",
+                    as: "userData"
+                }
+            }
+        ]);
+            return reviews;
+    
+    } catch (err) {
+        throw err;
     }
 }
 

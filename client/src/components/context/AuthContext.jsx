@@ -13,7 +13,7 @@ import { auth } from "../firebase/firebase";
 import {useSelector, useStore} from "react-redux";
 import { getUserByUid, createUsers, userNull,emailBienvenido } from "../../redux/actions/actions"
 import { useNavigate } from "react-router-dom";
-
+import swal from 'sweetalert'
 
 const authContext = createContext();
 
@@ -52,6 +52,13 @@ export function AuthProvider({ children }) {
               "province": "",
               "address": "",
           }
+          swal({
+            title:`Registrado con exito`,
+            icon: "success",
+            button: "OK"
+  
+          })
+          
          
           store.dispatch(createUsers({
               "uid": u?.uid || "",
@@ -79,22 +86,34 @@ export function AuthProvider({ children }) {
   };
 
   const login = async(email, password) => {
+    
     return signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
                 store.dispatch(getUserByUid(user.uid))
-                console.log(rtActual)
-                        if(rtActual === '/cart')
-                        {
-                          
-                          navigate('/cart')
-                        }
-                        else navigate("/products")
-
-                       
+                
+               
+                setTimeout(() => {
+                  swal({
+                    title:`Bienvenido ${u.name}`,
+                    icon: "success",
+                    button: "OK"
               
-                // ...
+                  })
+                  
+                }, 1000);
+               
+                
+                  if(rtActual === '/cart')
+                  {
+                    
+                    navigate('/cart')
+                  }
+                  else navigate("/products")
+
+                
+              
             })
             .catch((error) => {
                 const errorCode = error.code
@@ -104,6 +123,7 @@ export function AuthProvider({ children }) {
                 }
                 console.error(`Error ${errorCode}`)
             })
+            
   };
 
   const loginWithGoogle = () => {
@@ -187,6 +207,7 @@ export function AuthProvider({ children }) {
       {
         
         setUserByUid(u);
+       
       }
       if(!currentUser){
         store.dispatch(userNull())

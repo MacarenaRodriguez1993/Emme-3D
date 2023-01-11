@@ -199,7 +199,7 @@ export const getDetails = (id) => {
         try {
             dispatch({
                 type: GET_DETAILS,
-                payload: detalle,
+                payload: detalle.data[0],
             })
         } catch (err) {
             dispatch({
@@ -478,7 +478,7 @@ export const getReviews = (id) => {
     return async (dispatch) => {
         try {
             const getReviewsById = await axios.get(
-                `${url_api}/reviews?id?${id}`
+                url_api+`/reviews/`+id
             )
 
             dispatch({
