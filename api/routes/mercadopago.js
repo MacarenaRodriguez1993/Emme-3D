@@ -9,16 +9,16 @@ mercadoPago.configure({
 })
 
 router.post("/", (req, res) => {
-    const order = req.body.map((producto) => producto[0])
-
+    const order = req.body
+    console.log(req.body)
     try {
         let preference = {
             items: order.map((item) => {
                 return {
                     ...item,
                     currency_id: "ARS",
-                    quantity: parseInt(item.productAmount),
-                    unit_price: item.productPrice,
+                    quantity: parseInt(item.units),
+                    unit_price: item.price,
                 }
             }),
             back_urls: {
