@@ -3,7 +3,7 @@ import { AiTwotoneEdit } from "react-icons/ai"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { updateUser } from "../../redux/actions/actions"
-import { getUserByUid } from "../../redux/actions/actions"
+import { getUserByUid, getOrders } from "../../redux/actions/actions"
 import userDefaultImg from "../../assets/user.png"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -11,8 +11,10 @@ const UserPanel = ({ user, logouth }) => {
     const dispatch = useDispatch()
     //const userId = useSelector((state) => state.users)
     const userDetails = useSelector((state) => state.userByUid)
-    console.log("este es el user de props", user)
-    console.log("este es el userDetails", userDetails)
+    const orders = useSelector((state) => state.allOrders)
+    let userOrders = orders.filter((o) => o.user_id === userDetails._id)
+    console.log("compras", orders)
+    console.log("user orders", userOrders)
     /* ******************************************************************* */
     const [userData, setUserData] = useState({
         id: "",
@@ -45,6 +47,9 @@ const UserPanel = ({ user, logouth }) => {
                 img: userDetails ? userDetails.img : "",
             })
         }
+    }, [])
+    useEffect(() => {
+        dispatch(getOrders())
     }, [])
     /* ******************************************************************* */
     const editInfo = () => {
@@ -328,6 +333,63 @@ const UserPanel = ({ user, logouth }) => {
             </form>
             {/* ******PEDIDOS REALIZADOS POR EL USUARIO****** */}
             <p className="user-data">Tus pedidos</p>
+            {userOrders &&
+                userOrders?.map((o) => (
+                    <div className="u-order-container">
+                        <p className="u-order-label">
+                            Número de orden:{" "}
+                            <span className="u-orders-d">
+                                {o.merchant_order_id}
+                            </span>
+                        </p>
+                        <p className="u-order-label">
+                            Número de referencia de pago:{" "}
+                            <span className="u-orders-d">{o.payment_id}</span>
+                        </p>
+                        <p className="u-order-label">
+                            Estado del pago:{" "}
+                            {o.status === "approved" ? (
+                                <span className="u-order-approved">
+                                    Aprobado
+                                </span>
+                            ) : (
+                                <span>{o.status}</span>
+                            )}
+                        </p>
+                        <p className="u-order-label">
+                            Pagaste:{" "}
+                            <span className="u-orders-d">${o.total}</span>
+                        </p>
+                        <p className="u-order-label">
+                            Compra realizada el día:{" "}
+                            <span className="u-orders-d">
+                                {o.createdAt.slice(0, 10)}
+                            </span>
+                        </p>
+                        <p className="u-order-label compraste">Compraste:</p>
+                        {o.products &&
+                            o.products.map((p) => (
+                                <div className="u-orders-p-cont">
+                                    <img
+                                        className="p-order-img"
+                                        src={p.productImage}
+                                        alt={p.productImage}
+                                    />
+                                    <div className="u-orders-p-d">
+                                        <p className="u-order-label order-product-name">
+                                            {p.productName}
+                                        </p>
+                                        <p className="u-order-label ">
+                                            Cantidad:{" "}
+                                            <span className="order-product-units">
+                                                {p.productAmount}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+                ))}
         </div>
     )
 }

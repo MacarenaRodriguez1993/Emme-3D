@@ -120,3 +120,48 @@
 .user-data-span {
     border-bottom: 1px solid rgb(187, 187, 187);
 }
+.p-order-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+}
+.u-order-container {
+    background-color: rgba(0, 4, 255, 0.15);
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+.u-order-label {
+    margin-bottom: 10px;
+}
+.u-order-approved {
+    padding: 3px;
+    background-color: rgba(0, 128, 0, 0.75);
+    border-radius: 3px;
+}
+.u-orders-d {
+    padding: 3px;
+    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 3px;
+}
+.u-orders-p-cont {
+    display: flex;
+    flex-direction: row;
+}
+.u-orders-p-d {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.order-product-name {
+    font-weight: bolder;
+}
+.order-product-units {
+    padding: 3px;
+    border-radius: 3px;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+.compraste {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    width: fit-content;
+}

@@ -2,7 +2,11 @@ import { useEffect } from "react"
 import NavBar from "../../components/NavBar/NavBar"
 import "./Cart.css"
 import { useSelector, useDispatch } from "react-redux"
-import { deleteToCart, updateUser } from "../../redux/actions/actions"
+import {
+    deleteToCart,
+    updateUser,
+    cartLogOut,
+} from "../../redux/actions/actions"
 import { AiOutlineHeart } from "react-icons/ai"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useModal } from "../../components/LoginModal/useModal"
@@ -13,12 +17,17 @@ const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
     const { isOpen, open, close } = useModal()
-
     const [userCart, setuserCart] = useState({
         id: "",
         cart: [],
     })
-
+    console.log(user)
+    const deleteCart = (name) => {
+        if (productosCart.length === 0) {
+            dispatch(cartLogOut())
+        } else dispatch(deleteToCart(name))
+        dispatch(updateUser(userCart))
+    }
     useEffect(() => {
         setuserCart({
             ...userCart,
@@ -29,10 +38,6 @@ const Cart = () => {
 
     const dispatch = useDispatch()
 
-    const deleteCart = (name) => {
-        dispatch(deleteToCart(name))
-        dispatch(updateUser(userCart))
-    }
     const navigate = useNavigate()
 
     const url_api = "https://emme-3d-production-c491.up.railway.app"

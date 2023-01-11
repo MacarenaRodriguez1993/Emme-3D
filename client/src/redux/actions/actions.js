@@ -22,6 +22,7 @@ const GET_USER_UID = "GET_USER_UID"
 const USER_NULL = "USER_NULL"
 const GET_USER = " GET_USER"
 const PUT_USER = "PUT_USER"
+const GET_ORDERS = 'GET_ORDERS'
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 const DELETE_USER = "DELETE_USER"
 import axios from "axios"
@@ -373,6 +374,24 @@ export const cartLogIn = (cart) => {
 
 }
 
+
+export const getOrders = () => {
+    return async dispatch => {
+        try {
+            let allOrders = await axios.get(`${url_api}/orders`)
+            dispatch({
+                type: GET_ORDERS,
+                payload: allOrders.data
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
 export const emailBienvenido = (user) => {
     return async (dispatch) => {
         try {
@@ -522,7 +541,7 @@ export const getReviews = (id) => {
     return async (dispatch) => {
         try {
             const getReviewsById = await axios.get(
-                url_api+`/reviews/`+id
+                url_api + `/reviews/` + id
             )
 
             dispatch({

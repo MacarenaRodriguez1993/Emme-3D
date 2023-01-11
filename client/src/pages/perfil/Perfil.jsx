@@ -9,6 +9,7 @@ import {
     userNull,
     cartLogOut,
     updateUser,
+    getOrders,
 } from "../../redux/actions/actions"
 import UserPanel from "../../components/UserPanel/UserPanel"
 import Navbar from "../../components/NavBar/NavBar.jsx"
@@ -21,8 +22,7 @@ export default function Perfil() {
     const user = useSelector((state) => state.userByUid)
     const ucart = useSelector((state) => state.shoppingCart)
     const dispatch = useDispatch()
-    console.log("este es del perfil", user)
-    console.log(ucart)
+
     const { logout } = useAuth()
     const [userCart, setUserCart] = useState({
         id: "",
@@ -36,6 +36,7 @@ export default function Perfil() {
             })
         }
     }, [user, ucart])
+
     console.log("usercart", userCart)
     const logouth = async () => {
         try {
