@@ -232,3 +232,9 @@
 .buttons-details {
     margin-bottom: 10px;
 }
+.units-label {
+    cursor: auto;
+}
+.units-input {
+    margin-left: 0;
+}

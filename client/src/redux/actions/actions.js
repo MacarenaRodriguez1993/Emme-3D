@@ -105,9 +105,9 @@ export const filterByLikes = (value) => {
 /*--------- ACTIONS POST -------------*/
 //Aqui va la url base del back
 
-//let url_api = "http://localhost:3001"
+let url_api = "http://localhost:3001"
 //let url_api = "https://emme-3d-production-c491.up.railway.app"
-let url_api = "https://emme-3d-production-5ffc.up.railway.app"
+//let url_api = "https://emme-3d-production-5ffc.up.railway.app"
 
 //Action para postear productos
 export const postProduct = (product) => {
@@ -313,10 +313,19 @@ export const updateProducto = (product_id, producto) => {
 
 export const addToCart = (product) => {
     return async (dispatch) => {
-        dispatch({
-            type: ADD_CART,
-            payload: product,
-        })
+        try {
+
+            dispatch({
+                type: ADD_CART,
+                payload: product,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+
     }
 }
 
@@ -445,6 +454,19 @@ export const updateUser = (user) => {
                 type: PUT_USER,
                 payload: user_update.data,
             })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+export const deleteUser = (uid) => {
+    return async (dispatch) => {
+        try {
+            const userDelete = await axios.delete(`${url_api}/users/${uid}`)
         } catch (error) {
             dispatch({
                 type: ERROR,

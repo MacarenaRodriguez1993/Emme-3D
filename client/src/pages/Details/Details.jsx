@@ -20,6 +20,7 @@ export default function Details({ props }) {
     const dispatch = useDispatch()
     const R = useSelector((state) => state.reviews)
     const u = useSelector((state) => state.userByUid)
+
     const [errValoracion, setErrValoracion] = useState("")
 
     const reviewref = useRef("")
@@ -47,13 +48,12 @@ export default function Details({ props }) {
         }, 2000)
     }
 
-    const errReviews =() => {
+    const errReviews = () => {
         if (reviewref.current.value.length < 10) {
-            setErrValoracion( 'La reseña debe tener almenos 10 caracteres')
-        }
-        else{
+            setErrValoracion("La reseña debe tener almenos 10 caracteres")
+        } else {
             handleReviws()
-            setErrValoracion('')
+            setErrValoracion("")
         }
     }
 
@@ -93,22 +93,48 @@ export default function Details({ props }) {
         )
     }
 
-  
-
     useEffect(() => {
         dispatch(getDetails(_id))
         dispatch(getReviews(_id))
     }, [dispatch])
-
     const productDetail = useSelector((state) => state.detail)
     let p = productDetail?.data
-
+    if (p) {
+        console.log(p[0].name)
+    }
     const notify = () => {
         toast("Nuevo producto agragado al carrito")
     }
+    const [product, setProduct] = useState({
+        name: "",
+        description: "",
+        img: "",
+        price: 0,
+        units: 1,
+    })
+    useEffect(() => {
+        if (p) {
+            setProduct({
+                ...product,
+                name: p[0].name,
+                description: p[0].description,
+                img: p[0].img,
+                price: p[0].price,
+            })
+        }
+    }, [p])
+    console.log(product)
+    const changeUnits = (e) => {
+        setProduct({
+            ...product,
+            units: e.target.value,
+        })
+        console.log(product)
+    }
     const handleShopCar = (e) => {
         e.preventDefault()
-        dispatch(addToCart(p))
+        dispatch(addToCart(product))
+        console.log("ENVIADO", product)
         notify()
     }
     return (
@@ -149,15 +175,6 @@ export default function Details({ props }) {
                                 </span>
                             </span>
                         </div>
-                        <div className="info-detail buttons-details">
-                            <div>
-                                Stock
-                                <span className="valor-info">
-                                    {" "}
-                                    {p?.map((s) => s.stock)} unidades
-                                </span>
-                            </div>
-                        </div>
                     </div>
                     <div className="container-btn-detail">
                         <button className="btn-detail buttons-details">
@@ -166,6 +183,19 @@ export default function Details({ props }) {
                         <button className="btn-detail buttons-details">
                             Ver medios de pagos
                         </button>
+                        <label
+                            htmlFor="units"
+                            className="btn-compra buttons-details units-label"
+                        >
+                            Cantidad a comprar:
+                        </label>
+                        <input
+                            type="number"
+                            name="units"
+                            min="1"
+                            className="btn-detail buttons-details units-input"
+                            onChange={(e) => changeUnits(e)}
+                        />
                         <button
                             className="btn-agregar-carro buttons-details"
                             onClick={handleShopCar}
@@ -187,68 +217,71 @@ export default function Details({ props }) {
                 <p>{p?.map((d) => d.description)}</p>
             </div>
             {filterReviewsById()}
-            {
-                !u?.email  ? (
-                    <div className="container-valoracion ">
+            {!u?.email ? (
+                <div className="container-valoracion ">
                     <div className="header-valoracion">
                         <h2>Debes iniciar sesion para enviar tu reseña</h2>
                         <Rating
-                        readonly={true}
-                        
+                            readOnly={true}
                             size={22}
                             /* onClick={handleRating}
                             initialValue={ratin.rating} */
-    
+
                             /* onPointerEnter={onPointerEnter}
                     onPointerLeave={onPointerLeave} */
                             // initialValue={reviews.rating}
-    
+
                             //onPointerMove={onPointerMove}
                         />
                     </div>
                     <textarea
-                    readonly="readonly"
+                        readonly="readonly"
                         className="input-opinion-disabled"
                         placeholder="Debes iniciar sesion para enviar tu reseña"
                         ref={reviewref}
                         //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                     />
-                   
+
                     <div className="btn-valoracion-disabled">
-                        <button >Enviar</button>
+                        <button>Enviar</button>
                     </div>
                 </div>
-                )
-                :
-                (
-                    <div className="container-valoracion ">
-                <div className="header-valoracion">
-                    <h2>Ingresa tu valoracion</h2>
-                    <Rating
-                        size={22}
-                        onClick={handleRating}
-                        initialValue={ratin.rating}
+            ) : (
+                <div className="container-valoracion ">
+                    <div className="header-valoracion">
+                        <h2>Ingresa tu valoracion</h2>
+                        <Rating
+                            size={22}
+                            onClick={handleRating}
+                            initialValue={ratin.rating}
 
-                        /* onPointerEnter={onPointerEnter}
+                            /* onPointerEnter={onPointerEnter}
                 onPointerLeave={onPointerLeave} */
-                        // initialValue={reviews.rating}
+                            // initialValue={reviews.rating}
 
-                        //onPointerMove={onPointerMove}
+                            //onPointerMove={onPointerMove}
+                        />
+                    </div>
+                    <textarea
+                        className="input-opinion"
+                        placeholder="ingrea una opinion sobre el producto"
+                        ref={reviewref}
+                        //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
                     />
+                    <span
+                        style={{
+                            color: "red",
+                            fontSize: "18px",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        {errValoracion}
+                    </span>
+                    <div className="btn-valoracion">
+                        <button onClick={() => errReviews()}>Enviar</button>
+                    </div>
                 </div>
-                <textarea
-                    className="input-opinion"
-                    placeholder="ingrea una opinion sobre el producto"
-                    ref={reviewref}
-                    //onChange={(e) => setReviews({...reviews, opinion: e.target.value})}
-                />
-                <span style={{color: 'red', fontSize:'18px', fontWeight: 'bold'}} >{errValoracion}</span>
-                <div className="btn-valoracion">
-                    <button onClick={() => errReviews()}>Enviar</button>
-                </div>
-            </div>
-                )
-            }
+            )}
             <Footer />
         </div>
     )
