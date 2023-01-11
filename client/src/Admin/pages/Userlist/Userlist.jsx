@@ -1,67 +1,73 @@
 import "./Userlist.css"
 import { DataGrid } from "@mui/x-data-grid"
-import { rows } from "../../hardcodeddata"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MdDelete } from "react-icons/md"
 import { Link } from "react-router-dom"
 import Topbar from "../../components/Topbar/Topbar"
 import Sidebar from "../../components/Sidebar/Sidebar"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteUser, getUsers } from "../../../redux/actions/actions"
 
 export default function Userlist() {
-    const [data, setData] = useState(rows)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getUsers())
+    }, [dispatch])
+    const users = useSelector((state) => state.users.data)
+    users.forEach((userobj) => (userobj.id = userobj._id))
+    const [data, setData] = useState(users)
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
-        { field: "username", headerName: "username", width: 200 },
+        { field: "_id", headerName: "ID", flex: 0.1 },
+        { field: "address", headerName: "Direccion", flex: 0.1 },
+        { field: "city", headerName: "Ciudad", flex: 0.1 },
+        { field: "cp", headerName: "CP", flex: 0.1 },
+        { field: "createdAt", headerName: "Creado el", flex: 0.1 },
+        { field: "deleted", headerName: "Borrado?", flex: 0.1 },
+        { field: "email", headerName: "Email", flex: 0.1 },
+        { field: "isAdmin", headerName: "esAdmin?", flex: 0.1 },
+        { field: "name", headerName: "Nombre", flex: 0.1 },
+        { field: "orders_ids", headerName: "orders_ids", flex: 0.1 },
+        { field: "phone", headerName: "Telefono", flex: 0.1 },
+        { field: "province", headerName: "Provincia", flex: 0.1 },
+        { field: "reviews_ids", headerName: "reviews_ids", flex: 0.1 },
+        { field: "surname", headerName: "Apellido", flex: 0.1 },
+        { field: "uid", headerName: "UID", flex: 0.1 },
+        { field: "updatedAt", headerName: "Actualizado el", flex: 0.1 },
+        { field: "_v", headerName: "_v", flex: 0.1 },
         {
-            field: "avatar",
-            headerName: "avatar",
-            width: 200,
+            field: "img",
+            headerName: "img",
+            flex: 0.2,
             renderCell: (params) => {
                 return (
-                    <div className="avatar">
+                    <div className="img">
                         <img
-                            src={params.row.avatar}
-                            alt="avatar"
-                            className="avatar"
+                            src={params.row.img}
+                            alt="imgnodisponible"
+                            className="img"
                         />
                     </div>
                 )
             },
         },
         {
-            field: "email",
-            headerName: "email",
-            width: 90,
-        },
-        {
-            field: "status",
-            headerName: "status",
-            width: 160,
-        },
-        {
-            field: "transaction",
-            headerName: "transacion",
-            type: "number",
-            width: 160,
-        },
-        {
             field: "action",
-            headerName: "accion",
+            headerName: "Accion",
             type: "number",
-            width: 150,
+            width: 110,
             renderCell: (params) => {
                 return (
                     <div>
                         <Link
-                            to={`/dashboard/user/${params.row.id}`}
+                            to={`/dashboard/user/${params.row.uid}`}
                             className="link"
                         >
                             <button className="userlistedit">Editar</button>
                         </Link>
                         <MdDelete
                             className="userlistdelete"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row.uid)}
                         />
                     </div>
                 )
@@ -69,8 +75,8 @@ export default function Userlist() {
         },
     ]
 
-    const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id))
+    const handleDelete = async (uid) => {
+        dispatch(deleteUser(uid))
     }
     return (
         <div>
@@ -85,7 +91,7 @@ export default function Userlist() {
                         rows={data}
                         columns={columns}
                         pageSize={8}
-                        rowsPerPageOptions={[5]}
+                        rowsPerPageOptions={[8]}
                         checkboxSelection
                         disableSelectionOnClick
                     />
