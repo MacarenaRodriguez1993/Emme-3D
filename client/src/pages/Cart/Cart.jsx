@@ -51,7 +51,6 @@ const Cart = () => {
         ?.filter((pr) => !isNaN(pr.price) && !isNaN(parseInt(pr.units)))
         .map((pr) => pr.price * pr.units)
     let totalPrice = sum?.length !== 0 ? sum.reduce((a, b) => a + b) : 0
-
     return (
         <div>
             <NavBar />

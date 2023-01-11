@@ -15,6 +15,7 @@ import Navbar from "../../components/NavBar/NavBar.jsx"
 import Footer from "../../components/Footer/Footer.jsx"
 import { useAuth } from "../../components/context/AuthContext"
 import { useEffect } from "react"
+import { persistor } from "../../redux/store/store"
 
 export default function Perfil() {
     const user = useSelector((state) => state.userByUid)

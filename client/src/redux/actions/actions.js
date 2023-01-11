@@ -15,6 +15,7 @@ const POST_CAROUSEL = "POST_CAROUSEL"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
 const CART_LOGOUT = 'CART_LOGOUT'
+const CART_LOGIN = 'CART_LOGIN'
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER_UID = "GET_USER_UID"
@@ -344,10 +345,28 @@ export const cartLogOut = () => {
         try {
             dispatch({
                 type: CART_LOGOUT,
-                payload: {}
             })
         } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
 
+}
+export const cartLogIn = (cart) => {
+    return async dispatch => {
+        try {
+            dispatch({
+                type: CART_LOGIN,
+                payload: cart
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
         }
     }
 
