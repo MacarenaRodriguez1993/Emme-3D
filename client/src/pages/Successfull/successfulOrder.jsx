@@ -50,17 +50,15 @@ const SuccessfulOrder = () => {
                         <th>Precio</th>
                     </tr>
                     {order?.map((o) => {
-                        sum =
-                            sum +
-                            o[0].productPrice * parseInt(o[0].productAmount)
+                        sum = sum + o.price * parseInt(o.units)
                         return (
                             <tr>
-                                <td>{o[0].productName}</td>
+                                <td>{o.name}</td>
                                 <td>
-                                    <img src={o[0].productImage} alt="" />
+                                    <img src={o.img} alt="" />
                                 </td>
-                                <td>{o[0].productAmount}</td>
-                                <td>{o[0].productPrice}</td>
+                                <td>{o.units}</td>
+                                <td>{o.price}</td>
                             </tr>
                         )
                     })}
