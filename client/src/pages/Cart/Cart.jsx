@@ -1,32 +1,49 @@
-import React from "react"
+import { useEffect } from "react"
 import NavBar from "../../components/NavBar/NavBar"
 import "./Cart.css"
 import { useSelector, useDispatch } from "react-redux"
-import { deleteToCart } from "../../redux/actions/actions"
+import {
+    deleteToCart,
+    updateUser,
+    cartLogOut,
+} from "../../redux/actions/actions"
 import { AiOutlineHeart } from "react-icons/ai"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useModal } from "../../components/LoginModal/useModal"
 import ModalLogin from "../../components/LoginModal/ModalLogin"
+import { useState } from "react"
+
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
     let user = useSelector((state) => state.userByUid)
     const { isOpen, open, close } = useModal()
-    const dispatch = useDispatch()
+    const [userCart, setuserCart] = useState({
+        id: "",
+        cart: [],
+    })
+    console.log(user)
     const deleteCart = (name) => {
-        dispatch(deleteToCart(name))
+        if (productosCart.length === 0) {
+            dispatch(cartLogOut())
+        } else dispatch(deleteToCart(name))
+        dispatch(updateUser(userCart))
     }
-    const navigate = useNavigate()
-    //const url_api = "https://emme-3d-production-c491.up.railway.app"
-    //const url_api = "http://localhost:3001"
-    let url_api = "https://emme-3d-production-5ffc.up.railway.app"
-    console.log(productosCart)
-    /* const handlerChange = (e, product) => {
-        productosCart.map((p) => {
-            if (p[0]._id === product._id) {
-                p[0].productAmount = e.target.value
-            }
+    useEffect(() => {
+        setuserCart({
+            ...userCart,
+            id: user?.uid,
+            cart: productosCart,
         })
-    } */
+    }, [productosCart, user])
+
+    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+
+    const url_api = "https://emme-3d-production-c491.up.railway.app"
+    //const url_api = "http://localhost:3001"
+    //let url_api = "https://emme-3d-production-5ffc.up.railway.app"
+
     const buy = () => {
         if (user === null) {
             console.log("open", open)
@@ -107,7 +124,6 @@ const Cart = () => {
                     ))} */}
                     {productosCart?.map((p) => (
                         <div className="product">
-                            {console.log("p", p)}
                             <div>
                                 <img src={p?.img} id="pr-img" />
                             </div>

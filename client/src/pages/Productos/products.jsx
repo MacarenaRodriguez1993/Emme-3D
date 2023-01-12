@@ -21,11 +21,12 @@ const Products = () => {
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-    setTimeout(() => {
+    /* console.log(user)
+    useEffect(() => {
         if (user && user.cart.length > 0) {
             dispatch(cartLogIn(user.cart))
         }
-    }, 1000)
+    }, [user]) */
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
@@ -97,7 +98,7 @@ const Products = () => {
                 </Link>
             )}
             {/* AQUI VA LA PAGINACION */}
-            <p>Aqui va la paginacion</p>
+            {/* <p>Aqui va la paginacion</p> */}
             <Footer />
         </div>
     )

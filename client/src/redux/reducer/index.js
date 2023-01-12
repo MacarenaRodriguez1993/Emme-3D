@@ -21,6 +21,7 @@ const CART_LOGOUT = 'CART_LOGOUT'
 const CART_LOGIN = 'CART_LOGIN'
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
+const GET_ORDERS = 'GET_ORDERS'
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 const USER_NULL = "USER_NULL"
 
@@ -36,6 +37,7 @@ const initialState = {
     carouselImages: [],
     shoppingCart: [],
     userByUid: {},
+    allOrders: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -89,13 +91,13 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                categories: pload,
+                categories: action.payload,
             }
         case GET_BY_CATEGORY:
-            if (pload === "categorias") {
+            if (action.payload === "categorias") {
                 return {
                     ...state,
-                    productsFiltered: all,
+                    productsFiltered: state.allProducts,
                 }
             } else {
                 let prod = state.allProducts.filter(
@@ -107,7 +109,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
         case GET_BY_PRICE:
-            if (pload === "menor") {
+            if (action.payload === "menor") {
                 let menor = res.sort((p1, p2) => {
                     if (p1.price < p2.price) {
                         return 1
@@ -118,7 +120,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     productsFiltered: [...menor],
                 }
-            } else if (pload === "mayor") {
+            } else if (action.payload === "mayor") {
                 let mayor = res.sort((p1, p2) => {
                     if (p1.price > p2.price) {
                         return 1
@@ -298,7 +300,7 @@ const rootReducer = (state = initialState, action) => {
         case CART_LOGIN:
             return {
                 ...state,
-                shoppingCart: [...action.payload]
+                shoppingCart: [...action.payload, ...shoppingCart]
             }
         case DELETE_CART_PRODUCT:
             return {
@@ -308,6 +310,11 @@ const rootReducer = (state = initialState, action) => {
                         (p) => p.name !== action.payload
                     ),
                 ],
+            }
+        case GET_ORDERS:
+            return {
+                ...state,
+                allOrders: action.payload
             }
 
         default:
