@@ -12,7 +12,7 @@ import Sidebar from "../../components/Sidebar/Sidebar"
 import Topbar from "../../components/Topbar/Topbar"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getUserByUid } from "../../../redux/actions/actions"
+import { getUserByUidAdmin } from "../../../redux/actions/actions"
 import { updateUser } from "../../../redux/actions/actions"
 import { AiFillDelete } from "react-icons/ai"
 import Loading from "../../../components/Loading/Loading"
@@ -24,9 +24,9 @@ export default function User() {
     const users = useSelector((state) => state.users)
     const userEdit = users.data.find((u) => u.uid === id)
     console.log(userEdit)
-    // useEffect(() => {
-    // dispatch(getUserByUid(id))
-    // }, [userEdit])
+    useEffect(() => {
+        dispatch(getUserByUidAdmin(id))
+    }, [userEdit])
     const [userData, setUserData] = useState({
         address: userEdit.address,
         city: userEdit.city,
