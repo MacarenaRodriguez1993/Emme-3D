@@ -42,7 +42,7 @@ console.log('user',userCart)
 
   let mounted = true;
 useEffect(() => {
-    if(mounted && u?.uid && ucart?.length > 0 ){
+    if(mounted && u?.uid && ucart?.length > 0 && u.cart.length >0 ){
     setUserCart({
       ...userCart,
       id: u?.uid,
@@ -53,13 +53,14 @@ useEffect(() => {
   return () => {
     mounted = false;
   }
-},[u])
+},[u,ucart])
 
 useEffect(() => {
   if(u && u?.cart?.length > 0) {
-     
   }
 }, [u])
+
+
 
   const signup = async (user) => {
     const {name, apellido, email, password}  = user
@@ -145,13 +146,13 @@ useEffect(() => {
                     
                     navigate('/cart')
                   }
-                  else navigate("/products")
+                  else{
+                   
+                    navigate("/products")
+
+                  } 
                   
-                  /* 
-                  if(u && u?.cart?.length >0){
-                    store.dispatch(cartLogIn(u?.cart))
-                    console.log(u.cart)
-                  } */
+                  
                    
                     
                     
@@ -277,11 +278,13 @@ useEffect(() => {
       { 
         setUserByUid(u); 
 
-        if (u && u?.cart?.length > 0) {
-          store.dispatch(cartLogIn(u.cart))
+        
+      
+      
+      if(u && u?.cart?.length >0){
+        store.dispatch(cartLogIn(u?.cart))
+        console.log(u.cart)
       } 
-      else store.dispatch(cartLogOut([]))
- 
         
 
       } 
@@ -291,7 +294,7 @@ useEffect(() => {
       setLoading(false);
     });
     return () => unsubuscribe();
-  }, []);
+  }, [u]);
 
 
 

@@ -21,14 +21,31 @@ const Products = () => {
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-    
-    
-         if (user && user?.cart?.length > 0) {
-            dispatch(cartLogIn(user.cart))
-        }  
    
-    useEffect(() => {
-        dispatch(getProducts())
+    
+    
+ 
+
+let load = true;
+useEffect(() => {
+    if(load &&  user?.cart?.length > 0 ){
+   /*  setUserCart({
+      ...userCart,
+      id: u?.uid,
+      cart: ucart
+    }) */
+    dispatch(cartLogIn(user.cart))
+  }
+  return () => {
+    load = false;
+  }
+},[])
+/* if (user && user?.cart?.length > 0) {
+   dispatch(cartLogIn(user.cart))
+}  */  
+
+useEffect(() => {
+    dispatch(getProducts())
     }, [dispatch])
     /* useEffect(() => {
         if (user && user.cart.length > 0) {

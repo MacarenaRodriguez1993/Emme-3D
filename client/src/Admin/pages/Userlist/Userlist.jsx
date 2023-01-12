@@ -11,9 +11,9 @@ import Loading from "../../../components/Loading/Loading"
 
 export default function Userlist() {
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getUsers())
-    }, [dispatch])
+    // useEffect(() => {
+    // dispatch(getUsers())
+    // }, [dispatch])
     const users = useSelector((state) => state.users.data)
     if (users) {
         users.forEach((userobj) => (userobj.id = userobj._id))

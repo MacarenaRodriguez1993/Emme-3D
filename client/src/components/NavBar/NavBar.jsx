@@ -29,7 +29,7 @@ const NavBar = () => {
                     <Link to="/cart" className="linkk">
                         <div className="cart">
                             <FaShoppingCart />
-                            <p id="indexCart"> { productosCart.length }</p>
+                            <p id="indexCart"> {productosCart.length }</p>
                         </div>
                     </Link>
                     <Link to="/products" className="linkk">

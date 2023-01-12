@@ -16,7 +16,7 @@
     width: 100%;
     margin: 0.5em auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 400px);
+    grid-template-columns: repeat(auto-fill, 500px);
     gap: 1em;
     justify-content: center;
 }
@@ -24,7 +24,7 @@
     text-align: center;
 }
 .imageAbout {
-    width: 90%;
+    width: 60%;
     border-radius: 4em;
 }
 .linkAbout {
