@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import {
     emailSuccessfulOrder,
     successfulOrder,
+    updateUser,
 } from "../../redux/actions/actions"
 
 const SuccessfulOrder = () => {
@@ -31,6 +32,8 @@ const SuccessfulOrder = () => {
         newOrder.merchant_order_id = merch.split("=")[1]
         dispatch(emailSuccessfulOrder(user))
         dispatch(successfulOrder(newOrder))
+        user.cart = []
+        dispatch(updateUser(user))
     }, [])
 
     return (
