@@ -17,7 +17,7 @@ const SearchFilters = () => {
     ESTADO FILTRADO */
     const dispatch = useDispatch()
     const categorias = useSelector((state) => state.categories)
-    console.log("categorias filtros", categorias)
+   
     /* *************************************************** */
     /* *************************************************** */
     useEffect(() => {

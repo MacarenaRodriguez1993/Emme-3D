@@ -65,6 +65,7 @@ async function deletedUser(id) {
 }
 
 async function userUpdate(uid, user) {
+    console.log(user, uid)
     try {
         const update = await User.findOneAndUpdate(
             { uid },
@@ -84,6 +85,7 @@ async function userUpdate(uid, user) {
             }
         )
         if (update) return update
+        console.log(update)
     } catch (err) {
         throw err
     }

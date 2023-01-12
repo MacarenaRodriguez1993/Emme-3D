@@ -5,7 +5,7 @@ import "./Login.css"
 import { Link, useNavigate } from "react-router-dom"
 import { app } from "../../components/firebase/firebase"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { getUserByUid } from "../../redux/actions/actions"
+import { cartLogOut, getUserByUid, userNull } from "../../redux/actions/actions"
 import LoginGoogle from "./LoginGoogle"
 import { useAuth } from "../../components/context/AuthContext"
 import {async} from "@firebase/util"
@@ -23,6 +23,14 @@ export default function Login() {
         await login(email, password)
        
     }
+    useEffect(() => {
+        
+
+          //location.reload()
+     /*      
+        dispatch(cartLogOut())
+        dispatch(userNull()) */
+    })
 
     return (
         <div className="container-login">

@@ -305,13 +305,22 @@ const rootReducer = (state = initialState, action) => {
                 shoppingCart: [...action.payload, ...shoppingCart],
             }
         case DELETE_CART_PRODUCT:
-            return {
-                ...state,
-                shoppingCart: [
-                    ...state.shoppingCart.filter(
-                        (p) => p.name !== action.payload
-                    ),
-                ],
+            const index = action.payload;
+            if (index !== -1) {
+                // crea una copia del carrito
+                const newCart = [...state.shoppingCart];
+                const productToRemove = newCart[index];
+                if (productToRemove.quantity > 1) {
+                    productToRemove.quantity -= 1;
+                } else {
+                    // elimina el producto del carrito
+                    newCart.splice(index, 1);
+                }
+                // retorna un nuevo estado con el carrito actualizado
+                return {
+                    ...state,
+                    shoppingCart: newCart,
+                }
             }
         case GET_ORDERS:
             return {

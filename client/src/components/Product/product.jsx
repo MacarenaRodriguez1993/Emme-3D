@@ -29,9 +29,9 @@ const Product = ({ id, name, price, image }) => {
 
     return (
         <div className="card">
-            <a href={`/details/${id}`}>
+            <Link to={`/details/${id}`}>
                 <img className="imageCard" src={image} alt={name} />
-            </a>
+            </Link>
                 <h5 style={{ margin: '10px'}}>{name}</h5>
             <div className="contentCard">
                 <div className="contenido">

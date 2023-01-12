@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import {useSelector, useStore} from "react-redux";
-import { getUserByUid, createUsers, userNull,emailBienvenido } from "../../redux/actions/actions"
+import { getUserByUid, createUsers, userNull,emailBienvenido, updateUser , cartLogOut, cartLogIn} from "../../redux/actions/actions"
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert'
 
@@ -26,11 +26,41 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
   const [userByUid, setUserByUid] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+  const ucart = useSelector((state)=> state.shoppingCart)
   const u = useSelector((state) => state.userByUid)
   const rtActual = window.location.pathname
   const navigate  = useNavigate()
   const store = useStore()
+  const[userCart, setUserCart] = useState({
+    
+    id: u?.uid,
+    cart: ucart
+  })
+console.log(ucart)
+console.log('user',userCart)
+
+
+  let mounted = true;
+useEffect(() => {
+    if(mounted && u?.uid && ucart?.length > 0 && u.cart.length >0 ){
+    setUserCart({
+      ...userCart,
+      id: u?.uid,
+      cart: ucart
+    })
+    store.dispatch(cartLogIn(u.cart))
+  }
+  return () => {
+    mounted = false;
+  }
+},[u,ucart])
+
+useEffect(() => {
+  if(u && u?.cart?.length > 0) {
+  }
+}, [u])
+
+
 
   const signup = async (user) => {
     const {name, apellido, email, password}  = user
@@ -97,30 +127,35 @@ export function AuthProvider({ children }) {
   const login = async(email, password) => {
     
     return signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
+    .then((userCredential) => {
+      // Signed in
                 const user = userCredential.user
                 store.dispatch(getUserByUid(user.uid))
                 
                
                 setTimeout(() => {
                   swal({
-                    title:`Bienvenido ${u.name}`,
+                    title:`Bienvenido ${user?.email}`,
                     icon: "success",
                     button: "OK"
               
                   })
-                  
                 }, 1000);
-               
-                
-                  if(rtActual === '/cart')
-                  {
+                if(rtActual === '/cart')
+                {
                     
                     navigate('/cart')
                   }
-                  else navigate("/products")
+                  else{
+                   
+                    navigate("/products")
 
+                  } 
+                  
+                  
+                   
+                    
+                    
                 
               
             })
@@ -198,14 +233,35 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
+    console.log('cart Logout', userCart)
+    if (u?.uid && ucart.length > 0) {
+      store.dispatch(updateUser(userCart))
+      
+      }
+      if (u?.uid && ucart.length === 0) 
+      {
+        store.dispatch(updateUser(userCart))
+        store.dispatch(cartLogOut())
+        
+       
+      }
     signOut(auth)
             .then(() => {
                 // Sign-out successful.
-                store.dispatch(userNull())
-                navigate("/products")
+
                 
                 
-                console.log('sesion cerrada')
+                setTimeout(() => {
+                  store.dispatch(cartLogOut())
+                  store.dispatch(userNull())
+                  navigate("/products")
+                  console.log('sesion cerrada')
+                  
+                  useEffect(()=> {
+                    
+                  },[userCart])
+                }, 1000);
+                    
             })
             .catch((error) => {
                 // An error happened.
@@ -219,18 +275,31 @@ export function AuthProvider({ children }) {
     const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
     
        if (currentUser?.email === u?.email)
-      {
+      { 
+        setUserByUid(u); 
+
         
-        setUserByUid(u);
-       
+      
+      
+      if(u && u?.cart?.length >0){
+        store.dispatch(cartLogIn(u?.cart))
+        console.log(u.cart)
       } 
-      if(!currentUser){
+        
+
+      } 
+      /* if(!currentUser){
         store.dispatch(userNull())
-      }
+      } */
       setLoading(false);
     });
     return () => unsubuscribe();
-  }, []);
+  }, [u]);
+
+
+
+  
+
 
   return (
     <authContext.Provider
