@@ -153,6 +153,7 @@
 .u-orders-p-cont {
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
 }
 .u-orders-p-d {
     display: flex;
