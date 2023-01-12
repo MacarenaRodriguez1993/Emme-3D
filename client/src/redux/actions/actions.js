@@ -516,10 +516,6 @@ export const updateUser = (user) => {
                 `${url_api}/users/${user.uid}`,
                 user
             )
-            dispatch({
-                type: PUT_USER,
-                payload: user_update.data,
-            })
         } catch (error) {
             dispatch({
                 type: ERROR,
