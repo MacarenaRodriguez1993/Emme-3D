@@ -21,12 +21,12 @@ const Products = () => {
     const error = useSelector((state) => state.error)
     const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
-    /* console.log(user)
-    useEffect(() => {
-        if (user && user.cart.length > 0) {
+    
+    
+         if (user && user?.cart?.length > 0) {
             dispatch(cartLogIn(user.cart))
-        }
-    }, [user]) */
+        }  
+   
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])

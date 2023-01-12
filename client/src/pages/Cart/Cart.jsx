@@ -18,15 +18,15 @@ const Cart = () => {
     let user = useSelector((state) => state.userByUid)
     const { isOpen, open, close } = useModal()
     const [userCart, setuserCart] = useState({
-        id: "",
+        id: user?.uid,
         cart: [],
     })
     console.log(user)
-    const deleteCart = (name) => {
+    const deleteCart = (index) => {
         if (productosCart.length === 0) {
             dispatch(cartLogOut())
-        } else dispatch(deleteToCart(name))
-        dispatch(updateUser(userCart))
+        } else dispatch(deleteToCart(index))
+        updat()
     }
     useEffect(() => {
         setuserCart({
@@ -35,7 +35,11 @@ const Cart = () => {
             cart: productosCart,
         })
     }, [productosCart, user])
+    console.log(userCart)
+    const updat = () =>{
+        dispatch(updateUser(userCart))
 
+    }
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
@@ -122,8 +126,8 @@ const Cart = () => {
                             </p>
                         </div>
                     ))} */}
-                    {productosCart?.map((p) => (
-                        <div className="product">
+                    {productosCart?.map((p, index) => (
+                        <div className="product" key={index}>
                             <div>
                                 <img src={p?.img} id="pr-img" />
                             </div>
@@ -146,7 +150,7 @@ const Cart = () => {
                                 <button
                                     id="deleteCart"
                                     onClick={() => {
-                                        deleteCart(p?.name)
+                                        deleteCart(index)
                                     }}
                                 >
                                     x

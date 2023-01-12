@@ -12,13 +12,13 @@ const NavBar = () => {
     //const dispatch = useDispatch()
     const user = useSelector((state) => state.userByUid)
     let productosCart = useSelector((state) => state.shoppingCart)
-console.log('user nav', user)
+
     /* useEffect(() => {
         if (user.length === 0) {
             dispatch()
         }
     }) */
-
+    
     return (
         <div className="navBar">
             <ul className="ulelement">
@@ -29,7 +29,7 @@ console.log('user nav', user)
                     <Link to="/cart" className="linkk">
                         <div className="cart">
                             <FaShoppingCart />
-                            <p id="indexCart"> {productosCart.length}</p>
+                            <p id="indexCart"> { productosCart.length }</p>
                         </div>
                     </Link>
                     <Link to="/products" className="linkk">
