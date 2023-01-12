@@ -3,6 +3,11 @@ import Footer from "../../components/Footer/Footer"
 import NavBar from "../../components/NavBar/NavBar"
 import "./about.css"
 import image from "../../assets/person.jpg"
+import imageCris from "../../assets/Cristian.jpg"
+import imageMarcos from "../../assets/Marcos.jpg"
+import imagePau from "../../assets/Pau.jpg"
+import imageMaca from "../../assets/Mca.jpg"
+import imageNico from "../../assets/Nico.jpg"
 import { AiOutlineGithub, AiOutlineLinkedin } from "react-icons/ai"
 const About = () => {
     return (
@@ -42,7 +47,7 @@ const About = () => {
             <h2 className="titleAbout">Ingregrantes</h2>
             <div className="containCardAbout">
                 <div className="cardAbout">
-                    <img className="imageAbout" src={image} alt="" />
+                    <img className="imageAbout" src={imagePau} alt="" />
                     <h3>Pau Marin</h3>
                     <div>
                         <a
@@ -62,7 +67,7 @@ const About = () => {
                     </div>
                 </div>
                 <div className="cardAbout">
-                    <img className="imageAbout" src={image} alt="" />
+                    <img className="imageAbout" src={imageCris} alt="" />
                     <h3>Cristian Lo Giudice</h3>
                     <div>
                         <a
@@ -82,7 +87,7 @@ const About = () => {
                     </div>
                 </div>
                 <div className="cardAbout">
-                    <img className="imageAbout" src={image} alt="" />
+                    <img className="imageAbout" src={imageNico} alt="" />
                     <h3>Nicolas Lo Giudice</h3>
                     <div>
                         <a
@@ -93,7 +98,7 @@ const About = () => {
                             <AiOutlineGithub size="2em" />
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/cristian-lg/"
+                            href="https://www.linkedin.com/in/nicolas-lo-giudice-54a4a0229"
                             target="_blank"
                             className="linkAbout"
                         >
@@ -102,7 +107,7 @@ const About = () => {
                     </div>
                 </div>
                 <div className="cardAbout">
-                    <img className="imageAbout" src={image} alt="" />
+                    <img className="imageAbout" src={imageMarcos} alt="" />
                     <h3>Marcos Cuadrado</h3>
                     <div>
                         <a
@@ -142,7 +147,7 @@ const About = () => {
                     </div>
                 </div>
                 <div className="cardAbout">
-                    <img className="imageAbout" src={image} alt="" />
+                    <img className="imageAbout" src={imageMaca} alt="" />
                     <h3>Macarena Rodriguez</h3>
                     <div>
                         <a
