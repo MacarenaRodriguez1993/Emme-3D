@@ -333,63 +333,71 @@ const UserPanel = ({ user, logouth }) => {
             </form>
             {/* ******PEDIDOS REALIZADOS POR EL USUARIO****** */}
             <p className="user-data">Tus pedidos</p>
-            {userOrders &&
-                userOrders?.map((o) => (
-                    <div className="u-order-container">
-                        <p className="u-order-label">
-                            Número de orden:{" "}
-                            <span className="u-orders-d">
-                                {o.merchant_order_id}
-                            </span>
-                        </p>
-                        <p className="u-order-label">
-                            Número de referencia de pago:{" "}
-                            <span className="u-orders-d">{o.payment_id}</span>
-                        </p>
-                        <p className="u-order-label">
-                            Estado del pago:{" "}
-                            {o.status === "approved" ? (
-                                <span className="u-order-approved">
-                                    Aprobado
+            <div className="u-order-container-ppal">
+                {userOrders &&
+                    userOrders?.map((o) => (
+                        <div className="u-order-container">
+                            <p className="u-order-label">
+                                Número de orden:{" "}
+                                <span className="u-orders-d">
+                                    {o.merchant_order_id}
                                 </span>
-                            ) : (
-                                <span>{o.status}</span>
-                            )}
-                        </p>
-                        <p className="u-order-label">
-                            Pagaste:{" "}
-                            <span className="u-orders-d">${o.total}</span>
-                        </p>
-                        <p className="u-order-label">
-                            Compra realizada el día:{" "}
-                            <span className="u-orders-d">
-                                {o.createdAt.slice(0, 10)}
-                            </span>
-                        </p>
-                        <p className="u-order-label compraste">Compraste:</p>
-                        {o.products &&
-                            o.products.map((p) => (
-                                <div className="u-orders-p-cont">
-                                    <img
-                                        className="p-order-img"
-                                        src={p.productImage}
-                                        alt={p.productImage}
-                                    />
-                                    <div className="u-orders-p-d">
-                                        <p className="u-order-label order-product-name">
-                                            {p.productName}
-                                        </p>
-                                        <p className="u-order-label ">
-                                            Cantidad:{" "}
-                                            <span className="order-product-units">
-                                                {p.productAmount}
-                                            </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                    </div>
-                ))}
+                            </p>
+                            <p className="u-order-label">
+                                Número de referencia de pago:{" "}
+                                <span className="u-orders-d">
+                                    {o.payment_id}
+                                </span>
+                            </p>
+                            <p className="u-order-label">
+                                Estado del pago:{" "}
+                                {o.status === "approved" ? (
+                                    <span className="u-order-approved">
+                                        Aprobado
+                                    </span>
+                                ) : (
+                                    <span>{o.status}</span>
+                                )}
+                            </p>
+                            <p className="u-order-label">
+                                Pagaste:{" "}
+                                <span className="u-orders-d">${o.total}</span>
+                            </p>
+                            <p className="u-order-label">
+                                Compra realizada el día:{" "}
+                                <span className="u-orders-d">
+                                    {o.createdAt.slice(0, 10)}
+                                </span>
+                            </p>
+                            <p className="u-order-label compraste">
+                                Compraste:
+                            </p>
+                            <div className="compraste-pr">
+                                {o.products &&
+                                    o.products.map((p) => (
+                                        <div className="u-orders-p-cont">
+                                            <img
+                                                className="p-order-img"
+                                                src={p.productImage}
+                                                alt={p.productImage}
+                                            />
+                                            <div className="u-orders-p-d">
+                                                <p className="u-order-label order-product-name">
+                                                    {p.productName}
+                                                </p>
+                                                <p className="u-order-label ">
+                                                    Cantidad:{" "}
+                                                    <span className="order-product-units">
+                                                        {p.productAmount}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                    ))}
+            </div>
         </div>
     )
 }
