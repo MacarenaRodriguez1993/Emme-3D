@@ -242,7 +242,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_CAROUSEL:
             return {
                 ...state,
-                carouselImages: pload,
+                carouselImages: action.payload,
             }
         case POST_CAROUSEL:
             return {

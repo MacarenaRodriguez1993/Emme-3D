@@ -7,6 +7,7 @@ import {
     addToCart,
     getReviews,
     postReviews,
+    updateUser,
 } from "../../redux/actions/actions"
 import { useParams } from "react-router-dom"
 import NavBar from "../../components/NavBar/NavBar"
@@ -20,7 +21,7 @@ export default function Details({ props }) {
     const dispatch = useDispatch()
     const R = useSelector((state) => state.reviews)
     const u = useSelector((state) => state.userByUid)
-
+    const carrito = useSelector((state) => state.shoppingCart)
     const [errValoracion, setErrValoracion] = useState("")
     const p = useSelector((state) => state.detail)
     useEffect(() => {
@@ -141,6 +142,11 @@ export default function Details({ props }) {
     const handleShopCar = (e) => {
         e.preventDefault()
         dispatch(addToCart(product))
+        if (u) {
+            u.cart = [...carrito, product]
+            dispatch(updateUser(u))
+            console.log(u)
+        }
         console.log("ENVIADO", product)
         notify()
     }

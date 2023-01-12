@@ -478,11 +478,11 @@ export const getUserByUid = (uid) => {
 
 export const updateUser = (user) => {
     return async (dispatch) => {
-        console.log(user.id)
+        console.log(user.uid)
         console.log(user)
         try {
             const user_update = await axios.put(
-                `${url_api}/users/${user.id}`,
+                `${url_api}/users/${user.uid}`,
                 user
             )
             dispatch({
