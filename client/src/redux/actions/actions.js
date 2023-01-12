@@ -14,15 +14,16 @@ const DELETE_PRODUCT = "DELETE_PRODUCT"
 const POST_CAROUSEL = "POST_CAROUSEL"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
-const CART_LOGOUT = 'CART_LOGOUT'
-const CART_LOGIN = 'CART_LOGIN'
+const CART_LOGOUT = "CART_LOGOUT"
+const CART_LOGIN = "CART_LOGIN"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USERS = "GET_USERS"
 const GET_USER_UID = "GET_USER_UID"
+const GET_USER_UID_ADMIN = "GET_USER_UID_ADMIN"
 const USER_NULL = "USER_NULL"
 const GET_USER = " GET_USER"
 const PUT_USER = "PUT_USER"
-const GET_ORDERS = 'GET_ORDERS'
+const GET_ORDERS = "GET_ORDERS"
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 const DELETE_USER = "DELETE_USER"
 import axios from "axios"
@@ -317,7 +318,6 @@ export const updateProducto = (product_id, producto) => {
 export const addToCart = (product) => {
     return async (dispatch) => {
         try {
-
             dispatch({
                 type: ADD_CART,
                 payload: product,
@@ -328,7 +328,6 @@ export const addToCart = (product) => {
                 payload: error.message,
             })
         }
-
     }
 }
 
@@ -342,11 +341,11 @@ export const deleteToCart = (name) => {
 }
 
 export const cartLogOut = () => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
             dispatch({
                 type: CART_LOGOUT,
-                payload: []
+                payload: [],
             })
         } catch (error) {
             dispatch({
@@ -355,14 +354,13 @@ export const cartLogOut = () => {
             })
         }
     }
-
 }
 export const cartLogIn = (cart) => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
             dispatch({
                 type: CART_LOGIN,
-                payload: cart
+                payload: cart,
             })
         } catch (error) {
             dispatch({
@@ -371,17 +369,15 @@ export const cartLogIn = (cart) => {
             })
         }
     }
-
 }
 
-
 export const getOrders = () => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
             let allOrders = await axios.get(`${url_api}/orders`)
             dispatch({
                 type: GET_ORDERS,
-                payload: allOrders.data
+                payload: allOrders.data,
             })
         } catch (error) {
             dispatch({
@@ -475,15 +471,31 @@ export const userNull = () => {
     }
 }
 
-
 export const getUserByUid = (uid) => {
     return async (dispatch) => {
         try {
-            const user_Uid = await axios.get(url_api + '/users/' + uid)
-
+            const user_Uid = await axios.get(url_api + "/users/" + uid)
 
             dispatch({
                 type: GET_USER_UID,
+                payload: user_Uid.data,
+            })
+        } catch (error) {
+            dispatch({
+                type: ERROR,
+                payload: error.message,
+            })
+        }
+    }
+}
+
+export const getUserByUidAdmin = (uid) => {
+    return async (dispatch) => {
+        try {
+            const user_Uid = await axios.get(url_api + "/users/" + uid)
+
+            dispatch({
+                type: GET_USER_UID_ADMIN,
                 payload: user_Uid.data,
             })
         } catch (error) {
@@ -540,9 +552,7 @@ export const postReviews = (reviews) => {
 export const getReviews = (id) => {
     return async (dispatch) => {
         try {
-            const getReviewsById = await axios.get(
-                url_api + `/reviews/` + id
-            )
+            const getReviewsById = await axios.get(url_api + `/reviews/` + id)
 
             dispatch({
                 type: GET_REVIEWS_BY_ID,

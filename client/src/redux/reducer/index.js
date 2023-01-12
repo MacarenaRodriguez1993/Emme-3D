@@ -17,11 +17,12 @@ const PUT_USER = "PUT_USER"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_PRODUCTO = "UPDATE_PRODUCTO"
 const ADD_CART = "ADD_CART"
-const CART_LOGOUT = 'CART_LOGOUT'
-const CART_LOGIN = 'CART_LOGIN'
+const CART_LOGOUT = "CART_LOGOUT"
+const CART_LOGIN = "CART_LOGIN"
 const DELETE_CART_PRODUCT = "DELETE_CART_PRODUCT"
 const GET_USER_UID = "GET_USER_UID"
-const GET_ORDERS = 'GET_ORDERS'
+const GET_USER_UID_ADMIN = "GET_USER_UID_ADMIN"
+const GET_ORDERS = "GET_ORDERS"
 const GET_REVIEWS_BY_ID = "GET_REVIEWS_BY_ID"
 const USER_NULL = "USER_NULL"
 
@@ -37,7 +38,8 @@ const initialState = {
     carouselImages: [],
     shoppingCart: [],
     userByUid: {},
-    allOrders: []
+    allOrders: [],
+    usersDashboard: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -77,6 +79,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 userByUid: action.payload,
             }
+        case GET_USER_UID_ADMIN: //INFORMACION DE USUARIO
+            return {
+                ...state,
+                usersDashboard: action.payload,
+            }
         case USER_NULL: //CERRAR SESION
             return {
                 ...state,
@@ -85,7 +92,7 @@ const rootReducer = (state = initialState, action) => {
         case PUT_USER:
             return {
                 ...state,
-                userByUid: action.payload
+                userByUid: action.payload,
             }
         /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_ALL_CATEGORIES:
@@ -286,7 +293,7 @@ const rootReducer = (state = initialState, action) => {
                 description: pload.description,
                 img: pload.img,
                 price: pload.price,
-                units: pload.units
+                units: pload.units,
             }
             return {
                 ...state,
@@ -300,7 +307,7 @@ const rootReducer = (state = initialState, action) => {
         case CART_LOGIN:
             return {
                 ...state,
-                shoppingCart: [...action.payload, ...shoppingCart]
+                shoppingCart: [...action.payload, ...shoppingCart],
             }
         case DELETE_CART_PRODUCT:
             return {
@@ -314,7 +321,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_ORDERS:
             return {
                 ...state,
-                allOrders: action.payload
+                allOrders: action.payload,
             }
 
         default:
