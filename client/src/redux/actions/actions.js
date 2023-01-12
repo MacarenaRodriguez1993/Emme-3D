@@ -515,10 +515,6 @@ export const updateUser = (user) => {
             const user_update = await axios.put(
                 `${url_api}/users/`+user.id,user
             )
-            dispatch({
-                type: PUT_USER,
-                payload: user_update.data,
-            })
         } catch (error) {
             dispatch({
                 type: ERROR,

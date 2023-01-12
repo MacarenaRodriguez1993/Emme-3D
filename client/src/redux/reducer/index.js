@@ -89,11 +89,6 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 userByUid: action.payload,
             }
-        case PUT_USER:
-            return {
-                ...state,
-                userByUid: action.payload,
-            }
         /*----------- INICIO FILTROS DE BUSQUEDA -----------*/
         case GET_ALL_CATEGORIES:
             return {
