@@ -7,7 +7,7 @@ import {
     MdLocationPin,
     MdUpload,
 } from "react-icons/md"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Topbar from "../../components/Topbar/Topbar"
 import { useEffect, useState } from "react"
@@ -20,18 +20,33 @@ import Loading from "../../../components/Loading/Loading"
 export default function User() {
     let { id } = useParams()
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.userByUid)
-    useEffect(() => {
-        dispatch(getUserByUid(id))
-    }, [user])
+    const navigate = useNavigate()
+    const users = useSelector((state) => state.users)
+    const userEdit = users.data.find((u) => u.uid === id)
+    console.log(userEdit)
+    // useEffect(() => {
+    // dispatch(getUserByUid(id))
+    // }, [userEdit])
     const [userData, setUserData] = useState({
-        id: id,
+        address: userEdit.address,
+        city: userEdit.city,
+        cp: userEdit.cp,
+        deleted: userEdit.deleted,
+        email: userEdit.email,
+        isAdmin: userEdit.isAdmin,
+        name: userEdit.name,
+        orders_ids: userEdit.orders_ids,
+        phone: userEdit.phone,
+        province: userEdit.province,
+        reviews_ids: userEdit.reviews_ids,
+        surname: userEdit.surname,
+        uid: userEdit.uid,
     })
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(userData)
         dispatch(updateUser(userData))
-        dispatch(getUserByUid(id))
+        navigate("/home")
     }
     const handleChange = (e) => {
         if (userData.isAdmin === "true") {
@@ -69,7 +84,7 @@ export default function User() {
             <Topbar />
             <div className="container">
                 <Sidebar />
-                {user ? (
+                {userEdit ? (
                     <div className="user">
                         <div className="usertitlecontainer">
                             <h1 className="usertitle">Editar Usuario</h1>
@@ -81,16 +96,18 @@ export default function User() {
                             <div className="usershow">
                                 <div className="usershowtop">
                                     <img
-                                        src={user.img}
+                                        src={userEdit.img}
                                         alt="avatar"
                                         className="usershowimg"
                                     />
                                     <div className="usershowtoptitle">
                                         <span className="usershowusername">
-                                            {`${user.name} ${user.surname}`}
+                                            {`${userEdit.name} ${userEdit.surname}`}
                                         </span>
                                         <span className="usershowusertitle">
-                                            {user.isAdmin ? "Admin" : "Usuario"}
+                                            {userEdit.isAdmin
+                                                ? "Admin"
+                                                : "Usuario"}
                                         </span>
                                     </div>
                                 </div>
@@ -101,15 +118,17 @@ export default function User() {
                                     <div className="usershowinfo">
                                         <MdPermIdentity className="usershowicon" />
                                         <span className="usershowinfotitle">
-                                            {user.username
-                                                ? user.username
-                                                : `${user.name} ${user.surname}`}
+                                            {userEdit.username
+                                                ? userEdit.username
+                                                : `${userEdit.name} ${userEdit.surname}`}
                                         </span>
                                     </div>
                                     <div className="usershowinfo">
                                         <AiFillDelete className="usershowicon" />
                                         <span className="usershowinfotitle">
-                                            {user.deleted ? "true" : "false"}
+                                            {userEdit.deleted
+                                                ? "true"
+                                                : "false"}
                                         </span>
                                     </div>
                                     <span className="usershowtitle">
@@ -118,19 +137,19 @@ export default function User() {
                                     <div className="usershowinfo">
                                         <MdPhone className="usershowicon" />
                                         <span className="usershowinfotitle">
-                                            {user.phone}
+                                            {userEdit.phone}
                                         </span>
                                     </div>
                                     <div className="usershowinfo">
                                         <MdEmail className="usershowicon" />
                                         <span className="usershowinfotitle">
-                                            {user.email}
+                                            {userEdit.email}
                                         </span>
                                     </div>
                                     <div className="usershowinfo">
                                         <MdLocationPin className="usershowicon" />
                                         <span className="usershowinfotitle">
-                                            {`${user.address}, ${user.city}, ${user.province}, ${user.cp}`}
+                                            {`${userEdit.address}, ${userEdit.city}, ${userEdit.province}, ${userEdit.cp}`}
                                         </span>
                                     </div>
                                 </div>
@@ -147,9 +166,9 @@ export default function User() {
                                             <input
                                                 type="text"
                                                 placeholder={
-                                                    user.username
-                                                        ? user.username
-                                                        : `${user.name} ${user.surname}`
+                                                    userEdit.username
+                                                        ? userEdit.username
+                                                        : `${userEdit.name} ${userEdit.surname}`
                                                 }
                                                 name="username"
                                                 id=""
@@ -163,7 +182,7 @@ export default function User() {
                                             <label>Nombre</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.name}
+                                                placeholder={userEdit.name}
                                                 name="name"
                                                 id=""
                                                 className="userupdateinput"
@@ -176,7 +195,7 @@ export default function User() {
                                             <label>Apellido</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.surname}
+                                                placeholder={userEdit.surname}
                                                 name="surname"
                                                 id=""
                                                 className="userupdateinput"
@@ -189,7 +208,7 @@ export default function User() {
                                             <label>Email</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.email}
+                                                placeholder={userEdit.email}
                                                 name="email"
                                                 id=""
                                                 className="userupdateinput"
@@ -202,7 +221,7 @@ export default function User() {
                                             <label>Telefono</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.phone}
+                                                placeholder={userEdit.phone}
                                                 name="phone"
                                                 id=""
                                                 className="userupdateinput"
@@ -215,7 +234,7 @@ export default function User() {
                                             <label>Direccion</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.address}
+                                                placeholder={userEdit.address}
                                                 name="address"
                                                 id=""
                                                 className="userupdateinput"
@@ -228,7 +247,7 @@ export default function User() {
                                             <label>Ciudad</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.city}
+                                                placeholder={userEdit.city}
                                                 name="city"
                                                 id=""
                                                 className="userupdateinput"
@@ -241,7 +260,7 @@ export default function User() {
                                             <label>Provincia</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.province}
+                                                placeholder={userEdit.province}
                                                 name="province"
                                                 id=""
                                                 className="userupdateinput"
@@ -254,7 +273,7 @@ export default function User() {
                                             <label>Codigo postal</label>
                                             <input
                                                 type="text"
-                                                placeholder={user.cp}
+                                                placeholder={userEdit.cp}
                                                 name="cp"
                                                 id=""
                                                 className="userupdateinput"
@@ -272,7 +291,9 @@ export default function User() {
                                                 name="isAdmin"
                                                 id="isAdmin"
                                             >
-                                                <option value={user.isAdmin}>
+                                                <option
+                                                    value={userEdit.isAdmin}
+                                                >
                                                     Seleccione Opcion
                                                 </option>
                                                 <option value={true}>Si</option>
@@ -288,7 +309,7 @@ export default function User() {
                                                 src={
                                                     userData.img
                                                         ? userData.img
-                                                        : user.img
+                                                        : userEdit.img
                                                 }
                                                 alt="userupdateimg"
                                                 className="userupdateimg"
