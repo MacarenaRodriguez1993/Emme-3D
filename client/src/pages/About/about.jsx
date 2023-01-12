@@ -112,13 +112,13 @@ const About = () => {
                     <div>
                         <a
                             className="linkAbout"
-                            href="https://github.com/oversightdolores"
+                            href="https://github.com/mcsmsxfm56"
                             target="_blank"
                         >
                             <AiOutlineGithub size="2em" />
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/cristian-lg/"
+                            href="https://www.linkedin.com/in/marcos-cuadrado-984791261/"
                             target="_blank"
                             className="linkAbout"
                         >
