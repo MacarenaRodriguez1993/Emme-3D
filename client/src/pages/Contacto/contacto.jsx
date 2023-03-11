@@ -223,9 +223,8 @@ const Contacto = () => {
                 <div className="maps">
                     <GoogleMapReact
                         bootstrapURLKeys={{
-                            key: import.meta.env.VITE_KEY_MAP,
+                            key: "AIzaSyAMZ8eJg5zy2baGFvOMAK2sT0Cl89P5CGU",
                             language: "en",
-                            region: "US",
                         }}
                         defaultCenter={{ lat: EMME3D[0], lng: EMME3D[1] }}
                         defaultZoom={15}

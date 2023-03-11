@@ -510,10 +510,11 @@ export const getUserByUidAdmin = (uid) => {
 export const updateUser = (user) => {
     return async (dispatch) => {
         console.log(user.id)
-        console.log('desdeAction',user)
+        console.log("desdeAction", user)
         try {
             const user_update = await axios.put(
-                `${url_api}/users/`+user.id,user
+                `${url_api}/users/` + user.id,
+                user
             )
         } catch (error) {
             dispatch({
