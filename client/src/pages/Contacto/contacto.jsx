@@ -223,7 +223,6 @@ const Contacto = () => {
                 <div className="maps">
                     <GoogleMapReact
                         bootstrapURLKeys={{
-                            key: "AIzaSyAMZ8eJg5zy2baGFvOMAK2sT0Cl89P5CGU",
                             language: "en",
                         }}
                         defaultCenter={{ lat: EMME3D[0], lng: EMME3D[1] }}
