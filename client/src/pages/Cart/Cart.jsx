@@ -12,6 +12,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { useModal } from "../../components/LoginModal/useModal"
 import ModalLogin from "../../components/LoginModal/ModalLogin"
 import { useState } from "react"
+import swal from "sweetalert"
 
 const Cart = () => {
     let productosCart = useSelector((state) => state.shoppingCart)
@@ -61,9 +62,12 @@ const Cart = () => {
                     window.location.href = data
                 })
         } else {
-            alert(
-                "Para poder comprar debe iniciar sesion o registrarse. Te redirigimos a Login"
-            )
+            swal({
+                title: "Debes iniciar sesion !",
+                text: "Para poder comprar debes iniciar una sesion!",
+                icon: "warning",
+                button: "redirect!",
+            })
             setTimeout(() => {
                 navigate("/login")
             }, 1000)
