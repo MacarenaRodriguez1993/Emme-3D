@@ -35,10 +35,9 @@ const Cart = () => {
             cart: productosCart,
         })
     }, [productosCart, user])
-    console.log(userCart)
-    const updat = () =>{
-        dispatch(updateUser(userCart))
 
+    const updat = () => {
+        dispatch(updateUser(userCart))
     }
     const dispatch = useDispatch()
 
@@ -49,18 +48,7 @@ const Cart = () => {
     let url_api = "https://emme-3d-production-5ffc.up.railway.app"
 
     const buy = () => {
-        if (user === null) {
-            console.log("open", open)
-            return open()
-            /* 
-            alert(
-                "Para poder comprar debe iniciar sesion o registrarse. Te redirigimos a Login"
-                )
-
-            setTimeout(() => {
-                navigate("/login")
-            }, 1000) */
-        } else {
+        if (user.email) {
             fetch(`${url_api}/mercadopago`, {
                 method: "POST",
                 body: JSON.stringify(productosCart),
@@ -72,6 +60,13 @@ const Cart = () => {
                 .then((data) => {
                     window.location.href = data
                 })
+        } else {
+            alert(
+                "Para poder comprar debe iniciar sesion o registrarse. Te redirigimos a Login"
+            )
+            setTimeout(() => {
+                navigate("/login")
+            }, 1000)
         }
     }
 
