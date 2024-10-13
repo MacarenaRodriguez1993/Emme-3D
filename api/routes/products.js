@@ -8,6 +8,10 @@ const {
     getProducByQuery,
 } = require("../middleware/middlewareProducts")
 
+router.get("/:prueba", async (req, res) => {
+   console.log('TEST-PRUEBA')
+})
+
 // Get producto por query
 router.get("/", async (req, res, next) => {
     const { name } = req.query
